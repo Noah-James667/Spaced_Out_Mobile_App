@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "437158415244",
+    "project_id": "task-nova",
+    "storage_bucket": "task-nova.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437158415244:android:f18af15542e11f7820e4a9",
+        "android_client_info": {
+          "package_name": "com.mycompany.tasknova"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZeJySRuH0bfez8oRt_pfU2dT0UelPGxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
