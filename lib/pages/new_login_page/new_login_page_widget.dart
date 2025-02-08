@@ -1,5 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -31,19 +30,19 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
-    _model.emailTextController ??= TextEditingController();
+    _model.emailTextController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.passwordTextController ??= TextEditingController();
+    _model.passwordTextController1 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.confirmPasswordTextController ??= TextEditingController();
+    _model.confirmPasswordTextController0 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.emailTextController2 ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.passwordTextController2 ??= TextEditingController();
     _model.textFieldFocusNode5 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -76,7 +75,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                 children: [
                   Flexible(
                     child: Container(
-                      height: 255.0,
+                      height: 300.0,
                       decoration: const BoxDecoration(),
                       child: Column(
                         children: [
@@ -121,6 +120,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                               children: [
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -129,7 +129,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         width: 300.0,
                                         child: TextFormField(
                                           controller:
-                                              _model.emailTextController,
+                                              _model.emailTextController1,
                                           focusNode: _model.textFieldFocusNode1,
                                           autofocus: false,
                                           obscureText: false,
@@ -202,7 +202,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
-                                              .emailTextControllerValidator
+                                              .emailTextController1Validator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -214,7 +214,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         width: 300.0,
                                         child: TextFormField(
                                           controller:
-                                              _model.passwordTextController,
+                                              _model.passwordTextController1,
                                           focusNode: _model.textFieldFocusNode2,
                                           autofocus: false,
                                           textInputAction: TextInputAction.next,
@@ -305,7 +305,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
-                                              .passwordTextControllerValidator
+                                              .passwordTextController1Validator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -317,7 +317,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         width: 300.0,
                                         child: TextFormField(
                                           controller: _model
-                                              .confirmPasswordTextController,
+                                              .confirmPasswordTextController0,
                                           focusNode: _model.textFieldFocusNode3,
                                           autofocus: false,
                                           textInputAction: TextInputAction.next,
@@ -408,9 +408,67 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
-                                              .confirmPasswordTextControllerValidator
+                                              .confirmPasswordTextController0Validator
                                               .asValidator(context),
                                         ),
+                                      ),
+                                    ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        if (_model
+                                                .passwordTextController1.text !=
+                                            _model
+                                                .confirmPasswordTextController0
+                                                .text) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Passwords don\'t match!',
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
+
+                                        final user = await authManager
+                                            .createAccountWithEmail(
+                                          context,
+                                          _model.emailTextController1.text,
+                                          _model.passwordTextController1.text,
+                                        );
+                                        if (user == null) {
+                                          return;
+                                        }
+
+                                        context.pushNamedAuth(
+                                            'onboardingPage', context.mounted);
+                                      },
+                                      text: 'Sign Up',
+                                      options: FFButtonOptions(
+                                        width: 300.0,
+                                        height: 50.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: const Color(0xFF7657D5),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Inter Tight',
+                                              color: Colors.black,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.black,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
                                     ),
                                   ],
@@ -424,7 +482,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                       child: SizedBox(
                                         width: 300.0,
                                         child: TextFormField(
-                                          controller: _model.textController2,
+                                          controller:
+                                              _model.emailTextController2,
                                           focusNode: _model.textFieldFocusNode4,
                                           autofocus: false,
                                           obscureText: false,
@@ -497,7 +556,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
-                                              .textController2Validator
+                                              .emailTextController2Validator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -508,10 +567,12 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                       child: SizedBox(
                                         width: 300.0,
                                         child: TextFormField(
-                                          controller: _model.textController3,
+                                          controller:
+                                              _model.passwordTextController2,
                                           focusNode: _model.textFieldFocusNode5,
                                           autofocus: false,
-                                          obscureText: false,
+                                          obscureText:
+                                              !_model.passwordVisibility3,
                                           decoration: InputDecoration(
                                             isDense: true,
                                             labelStyle:
@@ -570,6 +631,22 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                             fillColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondaryBackground,
+                                            suffixIcon: InkWell(
+                                              onTap: () => safeSetState(
+                                                () => _model
+                                                        .passwordVisibility3 =
+                                                    !_model.passwordVisibility3,
+                                              ),
+                                              focusNode: FocusNode(
+                                                  skipTraversal: true),
+                                              child: Icon(
+                                                _model.passwordVisibility3
+                                                    ? Icons.visibility_outlined
+                                                    : Icons
+                                                        .visibility_off_outlined,
+                                                size: 22,
+                                              ),
+                                            ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
@@ -581,9 +658,52 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
-                                              .textController3Validator
+                                              .passwordTextController2Validator
                                               .asValidator(context),
                                         ),
+                                      ),
+                                    ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+
+                                        final user =
+                                            await authManager.signInWithEmail(
+                                          context,
+                                          _model.emailTextController2.text,
+                                          _model.passwordTextController2.text,
+                                        );
+                                        if (user == null) {
+                                          return;
+                                        }
+
+                                        context.pushNamedAuth(
+                                            'tasks', context.mounted);
+                                      },
+                                      text: 'Login',
+                                      options: FFButtonOptions(
+                                        width: 300.0,
+                                        height: 50.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: const Color(0xFF7657D5),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Inter Tight',
+                                              color: Colors.black,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.black,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
                                     ),
                                   ],
@@ -619,7 +739,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                           return;
                         }
 
-                        context.goNamedAuth('taskList', context.mounted);
+                        context.goNamedAuth('tasks', context.mounted);
                       },
                       text: 'Continue with Google',
                       icon: const FaIcon(
@@ -650,105 +770,6 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                             FlutterFlowTheme.of(context).primaryBackground,
                       ),
                     ),
-                  ),
-                  Stack(
-                    children: [
-                      FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed('taskList');
-                        },
-                        text: 'Continue',
-                        options: FFButtonOptions(
-                          width: 300.0,
-                          height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: const Color(0xFF7657D5),
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.black,
-                                    letterSpacing: 0.0,
-                                  ),
-                          elevation: 0.0,
-                          borderSide: const BorderSide(
-                            color: Colors.black,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          GoRouter.of(context).prepareAuthEvent();
-                          if (_model.passwordTextController.text !=
-                              _model.confirmPasswordTextController.text) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'Passwords don\'t match!',
-                                ),
-                              ),
-                            );
-                            return;
-                          }
-
-                          final user =
-                              await authManager.createAccountWithEmail(
-                            context,
-                            _model.emailTextController.text,
-                            _model.passwordTextController.text,
-                          );
-                          if (user == null) {
-                            return;
-                          }
-
-                          await AccountRecord.collection
-                              .doc(user.uid)
-                              .update({
-                            ...createAccountRecordData(
-                              email: '',
-                              phoneNumber: '',
-                              displayName: '',
-                            ),
-                            ...mapToFirestore(
-                              {
-                                'dateCreated': FieldValue.serverTimestamp(),
-                                'lastLogon': FieldValue.serverTimestamp(),
-                              },
-                            ),
-                          });
-
-                          context.pushNamedAuth(
-                              'onboardingPage', context.mounted);
-                        },
-                        text: 'Continue',
-                        options: FFButtonOptions(
-                          width: 300.0,
-                          height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: const Color(0xFF7657D5),
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Inter Tight',
-                                color: Colors.black,
-                                letterSpacing: 0.0,
-                              ),
-                          elevation: 0.0,
-                          borderSide: const BorderSide(
-                            color: Colors.black,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

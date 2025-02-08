@@ -71,33 +71,39 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
                         ),
                       ),
                       Stack(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         children: [
-                          Container(
-                            width: 68.0,
-                            height: 68.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(68.0),
-                              border: Border.all(
-                                width: 1.0,
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Container(
+                              width: 68.0,
+                              height: 68.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(32.0),
+                                border: Border.all(
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                           ),
-                          FlutterFlowIconButton(
-                            borderColor: Colors.black,
-                            borderRadius: 21.0,
-                            borderWidth: 1.0,
-                            buttonSize: 40.0,
-                            fillColor: Colors.white,
-                            icon: const Icon(
-                              Icons.add_circle_outline,
-                              color: Colors.black,
-                              size: 21.0,
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 32.0,
+                              borderWidth: 0.0,
+                              buttonSize: 30.0,
+                              fillColor: Colors.white,
+                              icon: const Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 15.0,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
                           ),
                         ],
                       ),
@@ -307,8 +313,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget> {
                           children: [
                             Flexible(
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  context.pushNamed('tasks');
                                 },
                                 text: 'Create Profile',
                                 options: FFButtonOptions(

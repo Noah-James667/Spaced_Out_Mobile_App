@@ -90,28 +90,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const NewLoginPageWidget(),
         ),
         FFRoute(
-          name: 'taskList',
-          path: '/taskList',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'taskList')
-              : const TaskListWidget(),
-        ),
-        FFRoute(
-          name: 'shopTest',
-          path: '/shopTest',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'shopTest')
-              : const ShopTestWidget(),
-        ),
-        FFRoute(
           name: 'onboardingPage',
           path: '/onboardingPage',
           builder: (context, params) => const OnboardingPageWidget(),
         ),
         FFRoute(
-          name: 'newTask',
-          path: '/newTaskTest',
-          builder: (context, params) => const NewTaskWidget(),
+          name: 'shop',
+          path: '/shop',
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'shop') : const ShopWidget(),
+        ),
+        FFRoute(
+          name: 'tasks',
+          path: '/tasks',
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'tasks') : const TasksWidget(),
         ),
         FFRoute(
           name: 'calendar',
@@ -119,21 +112,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'calendar')
               : const CalendarWidget(),
-        ),
-        FFRoute(
-          name: 'mainNavBar',
-          path: '/mainNavBar',
-          builder: (context, params) => const MainNavBarWidget(),
-        ),
-        FFRoute(
-          name: 'navBarExample1',
-          path: '/navBarExample1',
-          builder: (context, params) => const NavBarExample1Widget(),
-        ),
-        FFRoute(
-          name: 'homePageView',
-          path: '/homePageView',
-          builder: (context, params) => const HomePageViewWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

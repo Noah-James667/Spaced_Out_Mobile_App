@@ -12,50 +12,52 @@ class NewLoginPageModel extends FlutterFlowModel<NewLoginPageWidget> {
 
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
-  TextEditingController? emailTextController;
-  String? Function(BuildContext, String?)? emailTextControllerValidator;
+  TextEditingController? emailTextController1;
+  String? Function(BuildContext, String?)? emailTextController1Validator;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
-  TextEditingController? passwordTextController;
+  TextEditingController? passwordTextController1;
   late bool passwordVisibility1;
-  String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  String? Function(BuildContext, String?)? passwordTextController1Validator;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode3;
-  TextEditingController? confirmPasswordTextController;
+  TextEditingController? confirmPasswordTextController0;
   late bool passwordVisibility2;
   String? Function(BuildContext, String?)?
-      confirmPasswordTextControllerValidator;
+      confirmPasswordTextController0Validator;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode4;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  TextEditingController? emailTextController2;
+  String? Function(BuildContext, String?)? emailTextController2Validator;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode5;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
+  TextEditingController? passwordTextController2;
+  late bool passwordVisibility3;
+  String? Function(BuildContext, String?)? passwordTextController2Validator;
 
   @override
   void initState(BuildContext context) {
     passwordVisibility1 = false;
     passwordVisibility2 = false;
+    passwordVisibility3 = false;
   }
 
   @override
   void dispose() {
     tabBarController?.dispose();
     textFieldFocusNode1?.dispose();
-    emailTextController?.dispose();
+    emailTextController1?.dispose();
 
     textFieldFocusNode2?.dispose();
-    passwordTextController?.dispose();
+    passwordTextController1?.dispose();
 
     textFieldFocusNode3?.dispose();
-    confirmPasswordTextController?.dispose();
+    confirmPasswordTextController0?.dispose();
 
     textFieldFocusNode4?.dispose();
-    textController2?.dispose();
+    emailTextController2?.dispose();
 
     textFieldFocusNode5?.dispose();
-    textController3?.dispose();
+    passwordTextController2?.dispose();
   }
 }

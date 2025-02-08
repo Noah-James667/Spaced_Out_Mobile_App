@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'shop_test_widget.dart' show ShopTestWidget;
+import 'shop_widget.dart' show ShopWidget;
 import 'package:flutter/material.dart';
 
-class ShopTestModel extends FlutterFlowModel<ShopTestWidget> {
+class ShopModel extends FlutterFlowModel<ShopWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Carousel widget.
@@ -17,6 +17,10 @@ class ShopTestModel extends FlutterFlowModel<ShopTestWidget> {
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController3;
   int carouselCurrentIndex3 = 1;
+
+  // State field(s) for Carousel widget.
+  CarouselSliderController? carouselController4;
+  int carouselCurrentIndex4 = 1;
 
   @override
   void initState(BuildContext context) {}

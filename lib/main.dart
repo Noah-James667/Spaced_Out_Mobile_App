@@ -49,8 +49,6 @@ class _MyAppState extends State<MyApp> {
 
   late Stream<BaseAuthUser> userStream;
 
-  final authUserSub = authenticatedUserStream.listen((_) {});
-
   @override
   void initState() {
     super.initState();
@@ -66,13 +64,6 @@ class _MyAppState extends State<MyApp> {
       const Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
-  }
-
-  @override
-  void dispose() {
-    authUserSub.cancel();
-
-    super.dispose();
   }
 
   void setThemeMode(ThemeMode mode) => safeSetState(() {
@@ -116,7 +107,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'taskList';
+  String _currentPageName = 'tasks';
   late Widget? _currentPage;
 
   @override
@@ -129,8 +120,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'shopTest': const ShopTestWidget(),
-      'taskList': const TaskListWidget(),
+      'shop': const ShopWidget(),
+      'tasks': const TasksWidget(),
       'calendar': const CalendarWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -155,23 +146,23 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.shopping_cart,
               size: 32.0,
             ),
-            label: 'shop',
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
+              Icons.home_outlined,
               size: 32.0,
             ),
-            label: 'tasks',
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.calendar_today_sharp,
+              Icons.calendar_today,
               size: 32.0,
             ),
-            label: 'calendar',
+            label: 'Home',
             tooltip: '',
           )
         ],

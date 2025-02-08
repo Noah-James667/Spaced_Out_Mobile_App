@@ -1,9 +1,9 @@
 import '/components/task_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'task_list_widget.dart' show TaskListWidget;
+import 'tasks_widget.dart' show TasksWidget;
 import 'package:flutter/material.dart';
 
-class TaskListModel extends FlutterFlowModel<TaskListWidget> {
+class TasksModel extends FlutterFlowModel<TasksWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for task component.
