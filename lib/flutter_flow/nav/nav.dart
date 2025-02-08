@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -74,17 +75,65 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn ? () : (),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? const NavBarPage() : const NewLoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn ? () : (),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const NavBarPage() : const NewLoginPageWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: 'newLoginPage',
+          path: '/newLoginPage',
+          builder: (context, params) => const NewLoginPageWidget(),
+        ),
+        FFRoute(
+          name: 'taskList',
+          path: '/taskList',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'taskList')
+              : const TaskListWidget(),
+        ),
+        FFRoute(
+          name: 'shopTest',
+          path: '/shopTest',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'shopTest')
+              : const ShopTestWidget(),
+        ),
+        FFRoute(
+          name: 'onboardingPage',
+          path: '/onboardingPage',
+          builder: (context, params) => const OnboardingPageWidget(),
+        ),
+        FFRoute(
+          name: 'newTask',
+          path: '/newTaskTest',
+          builder: (context, params) => const NewTaskWidget(),
+        ),
+        FFRoute(
+          name: 'calendar',
+          path: '/calendar',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'calendar')
+              : const CalendarWidget(),
+        ),
+        FFRoute(
+          name: 'mainNavBar',
+          path: '/mainNavBar',
+          builder: (context, params) => const MainNavBarWidget(),
+        ),
+        FFRoute(
+          name: 'navBarExample1',
+          path: '/navBarExample1',
+          builder: (context, params) => const NavBarExample1Widget(),
+        ),
+        FFRoute(
+          name: 'homePageView',
+          path: '/homePageView',
+          builder: (context, params) => const HomePageViewWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -203,6 +252,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    List<String>? collectionNamePath,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -220,6 +270,7 @@ class FFParameters {
       param,
       type,
       isList,
+      collectionNamePath: collectionNamePath,
     );
   }
 }
@@ -253,7 +304,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/';
+            return '/newLoginPage';
           }
           return null;
         },
