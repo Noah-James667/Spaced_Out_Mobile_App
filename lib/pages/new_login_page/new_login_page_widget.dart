@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'new_login_page_model.dart';
 export 'new_login_page_model.dart';
 
@@ -76,11 +77,11 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                   Flexible(
                     child: Container(
                       height: 300.0,
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: Column(
                         children: [
                           Align(
-                            alignment: const Alignment(0.0, 0),
+                            alignment: Alignment(0.0, 0),
                             child: TabBar(
                               labelColor:
                                   FlutterFlowTheme.of(context).primaryText,
@@ -89,18 +90,28 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                               labelStyle: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .titleMediumFamily,
                                     letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .titleMediumFamily),
                                   ),
                               unselectedLabelStyle: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .titleMediumFamily,
                                     letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .titleMediumFamily),
                                   ),
                               indicatorColor:
                                   FlutterFlowTheme.of(context).primary,
-                              tabs: const [
+                              tabs: [
                                 Tab(
                                   text: 'Sign Up',
                                 ),
@@ -123,9 +134,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 8.0, 24.0, 8.0),
-                                      child: SizedBox(
+                                      child: Container(
                                         width: 300.0,
                                         child: TextFormField(
                                           controller:
@@ -139,19 +150,37 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily),
                                                     ),
                                             hintText: 'Email...',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLargeFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLargeFamily),
                                                     ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.black,
                                                 width: 1.0,
                                               ),
@@ -159,7 +188,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                   BorderRadius.circular(18.0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -195,8 +224,16 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
                                                 letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
                                               ),
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
@@ -208,9 +245,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 8.0, 24.0, 8.0),
-                                      child: SizedBox(
+                                      child: Container(
                                         width: 300.0,
                                         child: TextFormField(
                                           controller:
@@ -226,19 +263,37 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily),
                                                     ),
                                             hintText: 'Password...',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLargeFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLargeFamily),
                                                     ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.black,
                                                 width: 1.0,
                                               ),
@@ -246,7 +301,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                   BorderRadius.circular(18.0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -298,8 +353,16 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
                                                 letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
                                               ),
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
@@ -311,9 +374,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 8.0, 24.0, 8.0),
-                                      child: SizedBox(
+                                      child: Container(
                                         width: 300.0,
                                         child: TextFormField(
                                           controller: _model
@@ -329,19 +392,37 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily),
                                                     ),
                                             hintText: 'Confirm Password...',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLargeFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLargeFamily),
                                                     ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.black,
                                                 width: 1.0,
                                               ),
@@ -349,7 +430,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                   BorderRadius.circular(18.0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -401,8 +482,16 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
                                                 letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
                                               ),
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
@@ -423,7 +512,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                 .text) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
-                                            const SnackBar(
+                                            SnackBar(
                                               content: Text(
                                                 'Passwords don\'t match!',
                                               ),
@@ -443,27 +532,38 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         }
 
                                         context.pushNamedAuth(
-                                            'onboardingPage', context.mounted);
+                                            'tasks', context.mounted);
                                       },
                                       text: 'Sign Up',
                                       options: FFButtonOptions(
                                         width: 300.0,
                                         height: 50.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
-                                        color: const Color(0xFF7657D5),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Inter Tight',
-                                              color: Colors.black,
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmallFamily),
                                             ),
                                         elevation: 0.0,
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Colors.black,
                                           width: 1.0,
                                         ),
@@ -477,9 +577,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 8.0, 24.0, 8.0),
-                                      child: SizedBox(
+                                      child: Container(
                                         width: 300.0,
                                         child: TextFormField(
                                           controller:
@@ -493,19 +593,37 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily),
                                                     ),
                                             hintText: 'Email...',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLargeFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLargeFamily),
                                                     ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.black,
                                                 width: 1.0,
                                               ),
@@ -513,7 +631,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                   BorderRadius.circular(18.0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -549,9 +667,18 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
                                                 letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
                                               ),
+                                          maxLength: 40,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -562,9 +689,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 8.0, 24.0, 8.0),
-                                      child: SizedBox(
+                                      child: Container(
                                         width: 300.0,
                                         child: TextFormField(
                                           controller:
@@ -579,19 +706,37 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily),
                                                     ),
                                             hintText: 'Password...',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLargeFamily,
                                                       letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLargeFamily),
                                                     ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.black,
                                                 width: 1.0,
                                               ),
@@ -599,7 +744,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                   BorderRadius.circular(18.0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -651,9 +796,18 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
                                                 letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
                                               ),
+                                          maxLength: 100,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -684,21 +838,29 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                       options: FFButtonOptions(
                                         width: 300.0,
                                         height: 50.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
-                                        color: const Color(0xFF7657D5),
+                                        color: Color(0xFF7657D5),
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Inter Tight',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
                                               color: Colors.black,
                                               letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmallFamily),
                                             ),
                                         elevation: 0.0,
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Colors.black,
                                           width: 1.0,
                                         ),
@@ -716,12 +878,15 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Text(
                       'or',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
-                            fontFamily: 'Inter Tight',
+                            fontFamily:
+                                FlutterFlowTheme.of(context).titleMediumFamily,
                             letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).titleMediumFamily),
                           ),
                     ),
                   ),
@@ -729,7 +894,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                   // Button linked to Google sign in (potentially not using this)
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         GoRouter.of(context).prepareAuthEvent();
@@ -742,7 +907,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                         context.goNamedAuth('tasks', context.mounted);
                       },
                       text: 'Continue with Google',
-                      icon: const FaIcon(
+                      icon: FaIcon(
                         FontAwesomeIcons.google,
                         size: 20.0,
                       ),
@@ -750,16 +915,21 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                         width: 230.0,
                         height: 44.0,
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Inter',
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.bold,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
+                            ),
                         elevation: 0.0,
                         borderSide: BorderSide(
                           color: FlutterFlowTheme.of(context).alternate,
@@ -774,13 +944,16 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                 ],
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Text(
                   'Task Nova',
                   style: FlutterFlowTheme.of(context).titleLarge.override(
-                        fontFamily: 'Inter Tight',
+                        fontFamily:
+                            FlutterFlowTheme.of(context).titleLargeFamily,
                         fontSize: 30.0,
                         letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).titleLargeFamily),
                       ),
                 ),
               ),

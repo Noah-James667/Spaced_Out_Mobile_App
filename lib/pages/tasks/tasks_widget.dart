@@ -1,10 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/create_task_widget.dart';
 import '/components/task_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'tasks_model.dart';
 export 'tasks_model.dart';
 
@@ -60,8 +63,8 @@ class _TasksWidgetState extends State<TasksWidget> {
                   },
                   child: Padding(
                     padding: MediaQuery.viewInsetsOf(context),
-                    child: const SizedBox(
-                      height: 400.0,
+                    child: Container(
+                      height: 600.0,
                       child: CreateTaskWidget(),
                     ),
                   ),
@@ -90,13 +93,13 @@ class _TasksWidgetState extends State<TasksWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -111,17 +114,22 @@ class _TasksWidgetState extends State<TasksWidget> {
                                 options: FFButtonOptions(
                                   width: 100.0,
                                   height: 30.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: const Color(0xFF930405),
+                                  color: Color(0xFF930405),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Inter Tight',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
                                         color: Colors.black,
                                         letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
                                       ),
                                   elevation: 0.0,
                                   borderRadius: BorderRadius.circular(8.0),
@@ -129,9 +137,9 @@ class _TasksWidgetState extends State<TasksWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 5.0, 0.0),
                                 child: Text(
                                   'Task Nova',
@@ -139,9 +147,14 @@ class _TasksWidgetState extends State<TasksWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .titleLarge
                                       .override(
-                                        fontFamily: 'Inter Tight',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleLargeFamily,
                                         fontSize: 25.0,
                                         letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLargeFamily),
                                       ),
                                 ),
                               ),
@@ -150,7 +163,7 @@ class _TasksWidgetState extends State<TasksWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -181,25 +194,68 @@ class _TasksWidgetState extends State<TasksWidget> {
                       Text(
                         'Tasks',
                         style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Inter Tight',
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).titleLargeFamily,
                               letterSpacing: 0.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .titleLargeFamily),
                             ),
                       ),
                       Expanded(
-                        child: ListView(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            wrapWithModel(
-                              model: _model.taskModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: const TaskWidget(
-                                taskText: 'Example Task',
-                                checked: false,
-                              ),
-                            ),
-                          ],
+                        child: StreamBuilder<List<TaskRecord>>(
+                          stream: queryTaskRecord(
+                            queryBuilder: (taskRecord) => taskRecord
+                                .where(
+                                  'user',
+                                  isEqualTo: currentUserReference,
+                                )
+                                .where(
+                                  'is_complete',
+                                  isEqualTo: false,
+                                ),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: SpinKitFoldingCube(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 50.0,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<TaskRecord> listViewTaskRecordList =
+                                snapshot.data!;
+
+                            return ListView.separated(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: listViewTaskRecordList.length,
+                              separatorBuilder: (_, __) =>
+                                  SizedBox(height: 10.0),
+                              itemBuilder: (context, listViewIndex) {
+                                final listViewTaskRecord =
+                                    listViewTaskRecordList[listViewIndex];
+                                return TaskWidget(
+                                  key: Key(
+                                      'Keynyz_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                  taskDoc: listViewTaskRecord,
+                                  checkAction: () async {
+                                    await listViewTaskRecord.reference
+                                        .update(createTaskRecordData(
+                                      isComplete: true,
+                                    ));
+                                  },
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
                     ],

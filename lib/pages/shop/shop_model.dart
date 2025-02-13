@@ -4,6 +4,10 @@ import 'shop_widget.dart' show ShopWidget;
 import 'package:flutter/material.dart';
 
 class ShopModel extends FlutterFlowModel<ShopWidget> {
+  ///  Local state fields for this page.
+  /// default state
+  int baseAstroState = 1;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Carousel widget.

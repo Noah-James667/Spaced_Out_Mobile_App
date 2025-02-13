@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
@@ -76,42 +77,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const NewLoginPageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : NewLoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const NewLoginPageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : NewLoginPageWidget(),
         ),
         FFRoute(
           name: 'newLoginPage',
           path: '/newLoginPage',
-          builder: (context, params) => const NewLoginPageWidget(),
+          builder: (context, params) => NewLoginPageWidget(),
         ),
         FFRoute(
           name: 'onboardingPage',
           path: '/onboardingPage',
-          builder: (context, params) => const OnboardingPageWidget(),
+          builder: (context, params) => OnboardingPageWidget(),
         ),
         FFRoute(
           name: 'shop',
           path: '/shop',
           builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'shop') : const ShopWidget(),
+              params.isEmpty ? NavBarPage(initialPage: 'shop') : ShopWidget(),
         ),
         FFRoute(
           name: 'tasks',
           path: '/tasks',
           builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'tasks') : const TasksWidget(),
+              params.isEmpty ? NavBarPage(initialPage: 'tasks') : TasksWidget(),
         ),
         FFRoute(
           name: 'calendar',
           path: '/calendar',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'calendar')
-              : const CalendarWidget(),
+              ? NavBarPage(initialPage: 'calendar')
+              : CalendarWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -300,10 +301,9 @@ class FFRoute {
                   child: SizedBox(
                     width: 50.0,
                     height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
+                    child: SpinKitFoldingCube(
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 50.0,
                     ),
                   ),
                 )
@@ -349,7 +349,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

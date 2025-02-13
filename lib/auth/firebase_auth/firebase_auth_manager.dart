@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../auth_manager.dart';
 
+import '/backend/backend.dart';
 import 'anonymous_auth.dart';
 import 'apple_auth.dart';
 import 'email_auth.dart';
@@ -70,7 +71,7 @@ class FirebaseAuthManager extends AuthManager
       if (e.code == 'requires-recent-login') {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
               content: Text(
                   'Too long since most recent sign in. Sign in again before deleting your account.')),
         );
@@ -89,11 +90,12 @@ class FirebaseAuthManager extends AuthManager
         return;
       }
       await currentUser?.updateEmail(email);
+      await updateUserDocument(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
               content: Text(
                   'Too long since most recent sign in. Sign in again before updating your email.')),
         );
@@ -137,7 +139,7 @@ class FirebaseAuthManager extends AuthManager
       return null;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Password reset email sent')),
+      SnackBar(content: Text('Password reset email sent')),
     );
   }
 
@@ -232,7 +234,7 @@ class FirebaseAuthManager extends AuthManager
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout:
-          const Duration(seconds: 0), // Skips Android's default auto-verification
+          Duration(seconds: 0), // Skips Android's default auto-verification
       verificationCompleted: (phoneAuthCredential) async {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
         phoneAuthManager.update(() {
@@ -301,6 +303,9 @@ class FirebaseAuthManager extends AuthManager
   ) async {
     try {
       final userCredential = await signInFunc();
+      if (userCredential?.user != null) {
+        await maybeCreateUser(userCredential!.user!);
+      }
       return userCredential == null
           ? null
           : TaskNovaFirebaseUser.fromUserCredential(userCredential);

@@ -9,61 +9,61 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class TaskRecord extends FirestoreRecord {
   TaskRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
-  // "account" field.
-  DocumentReference? _account;
-  DocumentReference? get account => _account;
-  bool hasAccount() => _account != null;
+  // "user" field.
+  DocumentReference? _user;
+  DocumentReference? get user => _user;
+  bool hasUser() => _user != null;
 
-  // "taskName" field.
+  // "task_name" field.
   String? _taskName;
   String get taskName => _taskName ?? '';
   bool hasTaskName() => _taskName != null;
 
-  // "taskDescription" field.
+  // "task_description" field.
   String? _taskDescription;
   String get taskDescription => _taskDescription ?? '';
   bool hasTaskDescription() => _taskDescription != null;
 
-  // "completeBy" field.
+  // "complete_by" field.
   DateTime? _completeBy;
   DateTime? get completeBy => _completeBy;
   bool hasCompleteBy() => _completeBy != null;
 
-  // "isComplete" field.
+  // "is_complete" field.
   bool? _isComplete;
   bool get isComplete => _isComplete ?? false;
   bool hasIsComplete() => _isComplete != null;
 
-  // "isRepeating" field.
+  // "is_repeating" field.
   bool? _isRepeating;
   bool get isRepeating => _isRepeating ?? false;
   bool hasIsRepeating() => _isRepeating != null;
 
-  // "difficultyLvl" field.
+  // "difficulty_lvl" field.
   int? _difficultyLvl;
   int get difficultyLvl => _difficultyLvl ?? 0;
   bool hasDifficultyLvl() => _difficultyLvl != null;
 
-  // "xpWeight" field.
+  // "xp_weight" field.
   int? _xpWeight;
   int get xpWeight => _xpWeight ?? 0;
   bool hasXpWeight() => _xpWeight != null;
 
   void _initializeFields() {
-    _account = snapshotData['account'] as DocumentReference?;
-    _taskName = snapshotData['taskName'] as String?;
-    _taskDescription = snapshotData['taskDescription'] as String?;
-    _completeBy = snapshotData['completeBy'] as DateTime?;
-    _isComplete = snapshotData['isComplete'] as bool?;
-    _isRepeating = snapshotData['isRepeating'] as bool?;
-    _difficultyLvl = castToType<int>(snapshotData['difficultyLvl']);
-    _xpWeight = castToType<int>(snapshotData['xpWeight']);
+    _user = snapshotData['user'] as DocumentReference?;
+    _taskName = snapshotData['task_name'] as String?;
+    _taskDescription = snapshotData['task_description'] as String?;
+    _completeBy = snapshotData['complete_by'] as DateTime?;
+    _isComplete = snapshotData['is_complete'] as bool?;
+    _isRepeating = snapshotData['is_repeating'] as bool?;
+    _difficultyLvl = castToType<int>(snapshotData['difficulty_lvl']);
+    _xpWeight = castToType<int>(snapshotData['xp_weight']);
   }
 
   static CollectionReference get collection =>
@@ -100,7 +100,7 @@ class TaskRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createTaskRecordData({
-  DocumentReference? account,
+  DocumentReference? user,
   String? taskName,
   String? taskDescription,
   DateTime? completeBy,
@@ -111,14 +111,14 @@ Map<String, dynamic> createTaskRecordData({
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'account': account,
-      'taskName': taskName,
-      'taskDescription': taskDescription,
-      'completeBy': completeBy,
-      'isComplete': isComplete,
-      'isRepeating': isRepeating,
-      'difficultyLvl': difficultyLvl,
-      'xpWeight': xpWeight,
+      'user': user,
+      'task_name': taskName,
+      'task_description': taskDescription,
+      'complete_by': completeBy,
+      'is_complete': isComplete,
+      'is_repeating': isRepeating,
+      'difficulty_lvl': difficultyLvl,
+      'xp_weight': xpWeight,
     }.withoutNulls,
   );
 
@@ -130,7 +130,7 @@ class TaskRecordDocumentEquality implements Equality<TaskRecord> {
 
   @override
   bool equals(TaskRecord? e1, TaskRecord? e2) {
-    return e1?.account == e2?.account &&
+    return e1?.user == e2?.user &&
         e1?.taskName == e2?.taskName &&
         e1?.taskDescription == e2?.taskDescription &&
         e1?.completeBy == e2?.completeBy &&
@@ -142,7 +142,7 @@ class TaskRecordDocumentEquality implements Equality<TaskRecord> {
 
   @override
   int hash(TaskRecord? e) => const ListEquality().hash([
-        e?.account,
+        e?.user,
         e?.taskName,
         e?.taskDescription,
         e?.completeBy,

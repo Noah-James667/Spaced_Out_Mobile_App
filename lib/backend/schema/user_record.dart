@@ -7,28 +7,13 @@ import '/backend/schema/util/firestore_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class AccountRecord extends FirestoreRecord {
-  AccountRecord._(
-    super.reference,
-    super.data,
-  ) {
+class UserRecord extends FirestoreRecord {
+  UserRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
-
-  // "dateCreated" field.
-  DateTime? _dateCreated;
-  DateTime? get dateCreated => _dateCreated;
-  bool hasDateCreated() => _dateCreated != null;
-
-  // "lastLogon" field.
-  DateTime? _lastLogon;
-  DateTime? get lastLogon => _lastLogon;
-  bool hasLastLogon() => _lastLogon != null;
-
-  // "gender" field.
-  bool? _gender;
-  bool get gender => _gender ?? false;
-  bool hasGender() => _gender != null;
 
   // "email" field.
   String? _email;
@@ -61,9 +46,6 @@ class AccountRecord extends FirestoreRecord {
   bool hasPhoneNumber() => _phoneNumber != null;
 
   void _initializeFields() {
-    _dateCreated = snapshotData['dateCreated'] as DateTime?;
-    _lastLogon = snapshotData['lastLogon'] as DateTime?;
-    _gender = snapshotData['gender'] as bool?;
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -73,43 +55,39 @@ class AccountRecord extends FirestoreRecord {
   }
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('account');
+      FirebaseFirestore.instance.collection('user');
 
-  static Stream<AccountRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map((s) => AccountRecord.fromSnapshot(s));
+  static Stream<UserRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => UserRecord.fromSnapshot(s));
 
-  static Future<AccountRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then((s) => AccountRecord.fromSnapshot(s));
+  static Future<UserRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => UserRecord.fromSnapshot(s));
 
-  static AccountRecord fromSnapshot(DocumentSnapshot snapshot) =>
-      AccountRecord._(
+  static UserRecord fromSnapshot(DocumentSnapshot snapshot) => UserRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static AccountRecord getDocumentFromData(
+  static UserRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      AccountRecord._(reference, mapFromFirestore(data));
+      UserRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'AccountRecord(reference: ${reference.path}, data: $snapshotData)';
+      'UserRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is AccountRecord &&
+      other is UserRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createAccountRecordData({
-  DateTime? dateCreated,
-  DateTime? lastLogon,
-  bool? gender,
+Map<String, dynamic> createUserRecordData({
   String? email,
   String? displayName,
   String? photoUrl,
@@ -119,9 +97,6 @@ Map<String, dynamic> createAccountRecordData({
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'dateCreated': dateCreated,
-      'lastLogon': lastLogon,
-      'gender': gender,
       'email': email,
       'display_name': displayName,
       'photo_url': photoUrl,
@@ -134,15 +109,12 @@ Map<String, dynamic> createAccountRecordData({
   return firestoreData;
 }
 
-class AccountRecordDocumentEquality implements Equality<AccountRecord> {
-  const AccountRecordDocumentEquality();
+class UserRecordDocumentEquality implements Equality<UserRecord> {
+  const UserRecordDocumentEquality();
 
   @override
-  bool equals(AccountRecord? e1, AccountRecord? e2) {
-    return e1?.dateCreated == e2?.dateCreated &&
-        e1?.lastLogon == e2?.lastLogon &&
-        e1?.gender == e2?.gender &&
-        e1?.email == e2?.email &&
+  bool equals(UserRecord? e1, UserRecord? e2) {
+    return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
@@ -151,10 +123,7 @@ class AccountRecordDocumentEquality implements Equality<AccountRecord> {
   }
 
   @override
-  int hash(AccountRecord? e) => const ListEquality().hash([
-        e?.dateCreated,
-        e?.lastLogon,
-        e?.gender,
+  int hash(UserRecord? e) => const ListEquality().hash([
         e?.email,
         e?.displayName,
         e?.photoUrl,
@@ -164,5 +133,5 @@ class AccountRecordDocumentEquality implements Equality<AccountRecord> {
       ]);
 
   @override
-  bool isValidKey(Object? o) => o is AccountRecord;
+  bool isValidKey(Object? o) => o is UserRecord;
 }

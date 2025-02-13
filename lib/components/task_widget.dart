@@ -1,6 +1,8 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'task_model.dart';
 export 'task_model.dart';
 
@@ -8,12 +10,12 @@ export 'task_model.dart';
 class TaskWidget extends StatefulWidget {
   const TaskWidget({
     super.key,
-    required this.taskText,
-    required this.checked,
+    required this.taskDoc,
+    required this.checkAction,
   });
 
-  final String? taskText;
-  final bool? checked;
+  final TaskRecord? taskDoc;
+  final Future Function()? checkAction;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -46,7 +48,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(24.0, 5.0, 24.0, 5.0),
+      padding: EdgeInsetsDirectional.fromSTEB(24.0, 5.0, 24.0, 5.0),
       child: Container(
         width: 300.0,
         height: 50.0,
@@ -63,7 +65,7 @@ class _TaskWidgetState extends State<TaskWidget> {
           children: [
             Theme(
               data: ThemeData(
-                checkboxTheme: const CheckboxThemeData(
+                checkboxTheme: CheckboxThemeData(
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   shape: CircleBorder(),
@@ -71,9 +73,12 @@ class _TaskWidgetState extends State<TaskWidget> {
                 unselectedWidgetColor: FlutterFlowTheme.of(context).alternate,
               ),
               child: Checkbox(
-                value: _model.checkboxValue ??= widget.checked!,
+                value: _model.checkboxValue ??= widget.taskDoc!.isComplete,
                 onChanged: (newValue) async {
                   safeSetState(() => _model.checkboxValue = newValue!);
+                  if (newValue!) {
+                    await widget.checkAction?.call();
+                  }
                 },
                 side: BorderSide(
                   width: 2,
@@ -85,15 +90,17 @@ class _TaskWidgetState extends State<TaskWidget> {
             ),
             Text(
               valueOrDefault<String>(
-                widget.taskText,
-                'task',
+                widget.taskDoc?.taskName,
+                'Title',
               ),
               style: FlutterFlowTheme.of(context).titleMedium.override(
-                    fontFamily: 'Inter Tight',
+                    fontFamily: FlutterFlowTheme.of(context).titleMediumFamily,
                     letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).titleMediumFamily),
                   ),
             ),
-          ].addToStart(const SizedBox(width: 15.0)).addToEnd(const SizedBox(width: 15.0)),
+          ].addToStart(SizedBox(width: 15.0)).addToEnd(SizedBox(width: 15.0)),
         ),
       ),
     );

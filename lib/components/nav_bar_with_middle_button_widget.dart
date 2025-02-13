@@ -43,7 +43,7 @@ class _NavBarWithMiddleButtonWidgetState
     return Container(
       width: double.infinity,
       height: 90.0,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0x00EEEEEE),
       ),
       child: Stack(
@@ -55,7 +55,7 @@ class _NavBarWithMiddleButtonWidgetState
               Material(
                 color: Colors.transparent,
                 elevation: 0.0,
-                shape: const RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0.0),
                     bottomRight: Radius.circular(0.0),
@@ -68,7 +68,7 @@ class _NavBarWithMiddleButtonWidgetState
                   height: 80.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
                         blurRadius: 10.0,
                         color: Color(0x1A57636C),
@@ -79,7 +79,7 @@ class _NavBarWithMiddleButtonWidgetState
                         spreadRadius: 0.1,
                       )
                     ],
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                       topLeft: Radius.circular(20.0),
@@ -100,7 +100,7 @@ class _NavBarWithMiddleButtonWidgetState
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 50.0,
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart,
                   color: Color(0xFF9299A1),
                   size: 24.0,
@@ -112,8 +112,8 @@ class _NavBarWithMiddleButtonWidgetState
               FlutterFlowIconButton(
                 borderRadius: 8.0,
                 buttonSize: 40.0,
-                fillColor: const Color(0x009299A1),
-                icon: const Icon(
+                fillColor: Color(0x009299A1),
+                icon: Icon(
                   Icons.list,
                   color: Color(0xFF9299A1),
                   size: 24.0,
@@ -127,7 +127,7 @@ class _NavBarWithMiddleButtonWidgetState
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 50.0,
-                icon: const Icon(
+                icon: Icon(
                   Icons.calendar_month_rounded,
                   color: Color(0xFF9299A1),
                   size: 24.0,

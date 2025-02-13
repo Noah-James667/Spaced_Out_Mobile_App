@@ -10,11 +10,17 @@ class CreateTaskModel extends FlutterFlowModel<CreateTaskWidget> {
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
+  DateTime? datePicked;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
   // State field(s) for Switch widget.
   bool? switchValue;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController;
+  List<String>? get choiceChipsValues => choiceChipsValueController?.value;
+  set choiceChipsValues(List<String>? val) =>
+      choiceChipsValueController?.value = val;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
