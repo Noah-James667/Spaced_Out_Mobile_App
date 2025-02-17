@@ -7,6 +7,8 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/task_record.dart';
 import 'schema/user_record.dart';
+import 'schema/shop_record.dart';
+import 'schema/weapons_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -17,6 +19,8 @@ export 'schema/util/schema_util.dart';
 
 export 'schema/task_record.dart';
 export 'schema/user_record.dart';
+export 'schema/shop_record.dart';
+export 'schema/weapons_record.dart';
 
 /// Functions to query TaskRecords (as a Stream and as a Future).
 Future<int> queryTaskRecordCount({
@@ -87,6 +91,83 @@ Future<List<UserRecord>> queryUserRecordOnce({
     queryCollectionOnce(
       UserRecord.collection,
       UserRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ShopRecords (as a Stream and as a Future).
+Future<int> queryShopRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ShopRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ShopRecord>> queryShopRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ShopRecord.collection,
+      ShopRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ShopRecord>> queryShopRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ShopRecord.collection,
+      ShopRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query WeaponsRecords (as a Stream and as a Future).
+Future<int> queryWeaponsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      WeaponsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<WeaponsRecord>> queryWeaponsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      WeaponsRecord.collection(parent),
+      WeaponsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<WeaponsRecord>> queryWeaponsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      WeaponsRecord.collection(parent),
+      WeaponsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

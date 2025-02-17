@@ -54,7 +54,8 @@
 	<true/>
 
 
-
+	<key>PermissionGroupNotification</key>
+    <string>To get notified about your tasks, you will need to enable notifications.</string>
 
 
 	<key>UILaunchStoryboardName</key>

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'shop_model.dart';
 export 'shop_model.dart';
@@ -23,6 +24,12 @@ class _ShopWidgetState extends State<ShopWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ShopModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.baseImageTest = _model.baseImageTest;
+      safeSetState(() {});
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -83,12 +90,32 @@ class _ShopWidgetState extends State<ShopWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           if (_model.baseAstroState == 2) {
+                            // needs to update the image to reflect the change - when the variable is 2 (set to 2 by clicking the button on the cowboy hat) this image should update to reflect the new hat
+                            _model.cowboyAstroTest = _model.cowboyAstroTest;
+                            safeSetState(() {});
                             await showDialog(
                               context: context,
                               builder: (alertDialogContext) {
                                 return AlertDialog(
-                                  title: Text('temp'),
-                                  content: Text('temporary testing value'),
+                                  title: Text('TEST'),
+                                  content: Text('CONFIRM'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('TEST'),
+                                  content: Text('FAIL'),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
@@ -153,56 +180,14 @@ class _ShopWidgetState extends State<ShopWidget> {
                                   width: 1.0,
                                 ),
                               ),
-                              child: Stack(
-                                children: [
-                                  Opacity(
-                                    opacity: 0.0,
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: 'Button',
-                                      options: FFButtonOptions(
-                                        width: 200.0,
-                                        height: 200.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily,
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmallFamily),
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                  ),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/Sword_Upgrade_1.png',
-                                      width: 200.0,
-                                      height: 200.0,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ],
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.asset(
+                                  'assets/images/swordUpgradeTwo.png',
+                                  width: 200.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Container(
@@ -416,6 +401,33 @@ class _ShopWidgetState extends State<ShopWidget> {
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
                                         'assets/images/unicornHorn.png',
+                                        width: 200.0,
+                                        height: 200.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFC6C6C6),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/magicHat.png',
                                         width: 200.0,
                                         height: 200.0,
                                         fit: BoxFit.cover,

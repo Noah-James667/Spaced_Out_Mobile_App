@@ -1,10 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/create_task_widget.dart';
-import '/components/task_widget.dart';
+import '/components/create_task/create_task_widget.dart';
+import '/components/task/task_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,6 +81,62 @@ class _TasksWidgetState extends State<TasksWidget> {
             size: 24.0,
           ),
         ),
+        drawer: Container(
+          width: 50.0,
+          child: Drawer(
+            elevation: 16.0,
+            child: Container(
+              width: 100.0,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).orangeWeb,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(0.0),
+                  bottomRight: Radius.circular(0.0),
+                  topLeft: Radius.circular(0.0),
+                  topRight: Radius.circular(0.0),
+                ),
+                shape: BoxShape.rectangle,
+              ),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: 40.0,
+                          fillColor: Colors.white,
+                          icon: Icon(
+                            Icons.login_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            GoRouter.of(context).prepareAuthEvent();
+                            await authManager.signOut();
+                            GoRouter.of(context).clearRedirectLocation();
+
+                            context.goNamedAuth(
+                                'newLoginPage', context.mounted);
+                          },
+                        ),
+                      ],
+                    ),
+                  ]
+                      .divide(SizedBox(height: 10.0))
+                      .around(SizedBox(height: 10.0)),
+                ),
+              ),
+            ),
+          ),
+        ),
         body: SafeArea(
           top: true,
           child: Column(
@@ -98,43 +155,18 @@ class _TasksWidgetState extends State<TasksWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 0.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  await authManager.signOut();
-                                  GoRouter.of(context).clearRedirectLocation();
-
-                                  context.goNamedAuth(
-                                      'newLoginPage', context.mounted);
-                                },
-                                text: 'Log Out',
-                                options: FFButtonOptions(
-                                  width: 100.0,
-                                  height: 30.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF930405),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .titleSmallFamily,
-                                        color: Colors.black,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
-                                      ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).orangeWeb,
+                              icon: Icon(
+                                Icons.notes,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
                               ),
+                              onPressed: () async {
+                                scaffoldKey.currentState!.openDrawer();
+                              },
                             ),
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
@@ -213,6 +245,10 @@ class _TasksWidgetState extends State<TasksWidget> {
                                 .where(
                                   'is_complete',
                                   isEqualTo: false,
+                                )
+                                .where(
+                                  'days_repeating',
+                                  arrayContains: functions.getCurrentDay(),
                                 ),
                           ),
                           builder: (context, snapshot) {

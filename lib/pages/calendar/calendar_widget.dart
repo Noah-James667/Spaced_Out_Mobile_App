@@ -1,8 +1,12 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/components/task/task_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'calendar_model.dart';
 export 'calendar_model.dart';
@@ -210,10 +214,13 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .labelMediumFamily),
                                           ),
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
                                     ),
                                   ),
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -241,12 +248,66 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 0.0),
-                                        child: ListView(
-                                          padding: EdgeInsets.zero,
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          children: [],
+                                        child: StreamBuilder<List<TaskRecord>>(
+                                          stream: queryTaskRecord(
+                                            queryBuilder: (taskRecord) =>
+                                                taskRecord
+                                                    .where(
+                                                      'user',
+                                                      isEqualTo:
+                                                          currentUserReference,
+                                                    )
+                                                    .where(
+                                                      'is_complete',
+                                                      isEqualTo: false,
+                                                    )
+                                                    .where(
+                                                      'complete_by',
+                                                      isGreaterThan:
+                                                          getCurrentTimestamp,
+                                                    ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitFoldingCube(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 50.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<TaskRecord>
+                                                listViewTaskRecordList =
+                                                snapshot.data!;
+
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  listViewTaskRecordList.length,
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewTaskRecord =
+                                                    listViewTaskRecordList[
+                                                        listViewIndex];
+                                                return TaskWidget(
+                                                  key: Key(
+                                                      'Key1gn_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                  taskDoc: listViewTaskRecord,
+                                                  checkAction: () async {},
+                                                );
+                                              },
+                                            );
+                                          },
                                         ),
                                       ),
                                       Padding(
@@ -273,12 +334,66 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 24.0),
-                                        child: ListView(
-                                          padding: EdgeInsets.zero,
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          children: [],
+                                        child: StreamBuilder<List<TaskRecord>>(
+                                          stream: queryTaskRecord(
+                                            queryBuilder: (taskRecord) =>
+                                                taskRecord
+                                                    .where(
+                                                      'user',
+                                                      isEqualTo:
+                                                          currentUserReference,
+                                                    )
+                                                    .where(
+                                                      'is_complete',
+                                                      isEqualTo: false,
+                                                    )
+                                                    .where(
+                                                      'complete_by',
+                                                      isLessThan:
+                                                          getCurrentTimestamp,
+                                                    ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitFoldingCube(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 50.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<TaskRecord>
+                                                listViewTaskRecordList =
+                                                snapshot.data!;
+
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  listViewTaskRecordList.length,
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewTaskRecord =
+                                                    listViewTaskRecordList[
+                                                        listViewIndex];
+                                                return TaskWidget(
+                                                  key: Key(
+                                                      'Keyf16_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                  taskDoc: listViewTaskRecord,
+                                                  checkAction: () async {},
+                                                );
+                                              },
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],
@@ -391,6 +506,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .labelMediumFamily),
                                           ),
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
                                     ),
                                   ),
                                   Column(
@@ -422,12 +539,66 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 0.0),
-                                        child: ListView(
-                                          padding: EdgeInsets.zero,
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          children: [],
+                                        child: StreamBuilder<List<TaskRecord>>(
+                                          stream: queryTaskRecord(
+                                            queryBuilder: (taskRecord) =>
+                                                taskRecord
+                                                    .where(
+                                                      'user',
+                                                      isEqualTo:
+                                                          currentUserReference,
+                                                    )
+                                                    .where(
+                                                      'is_complete',
+                                                      isEqualTo: false,
+                                                    )
+                                                    .where(
+                                                      'complete_by',
+                                                      isGreaterThan:
+                                                          getCurrentTimestamp,
+                                                    ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitFoldingCube(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 50.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<TaskRecord>
+                                                listViewTaskRecordList =
+                                                snapshot.data!;
+
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  listViewTaskRecordList.length,
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewTaskRecord =
+                                                    listViewTaskRecordList[
+                                                        listViewIndex];
+                                                return TaskWidget(
+                                                  key: Key(
+                                                      'Keymyp_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                  taskDoc: listViewTaskRecord,
+                                                  checkAction: () async {},
+                                                );
+                                              },
+                                            );
+                                          },
                                         ),
                                       ),
                                       Padding(
@@ -454,12 +625,66 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 24.0),
-                                        child: ListView(
-                                          padding: EdgeInsets.zero,
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          children: [],
+                                        child: StreamBuilder<List<TaskRecord>>(
+                                          stream: queryTaskRecord(
+                                            queryBuilder: (taskRecord) =>
+                                                taskRecord
+                                                    .where(
+                                                      'user',
+                                                      isEqualTo:
+                                                          currentUserReference,
+                                                    )
+                                                    .where(
+                                                      'is_complete',
+                                                      isEqualTo: false,
+                                                    )
+                                                    .where(
+                                                      'complete_by',
+                                                      isLessThan:
+                                                          getCurrentTimestamp,
+                                                    ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitFoldingCube(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 50.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<TaskRecord>
+                                                listViewTaskRecordList =
+                                                snapshot.data!;
+
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  listViewTaskRecordList.length,
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewTaskRecord =
+                                                    listViewTaskRecordList[
+                                                        listViewIndex];
+                                                return TaskWidget(
+                                                  key: Key(
+                                                      'Keynoz_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                  taskDoc: listViewTaskRecord,
+                                                  checkAction: () async {},
+                                                );
+                                              },
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],

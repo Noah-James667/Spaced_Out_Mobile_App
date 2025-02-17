@@ -1,3 +1,40 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "task",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "user",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "is_complete",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "days_repeating",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "task",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "user",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "is_complete",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "complete_by",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
 }

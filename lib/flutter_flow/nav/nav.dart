@@ -91,11 +91,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => NewLoginPageWidget(),
         ),
         FFRoute(
-          name: 'onboardingPage',
-          path: '/onboardingPage',
-          builder: (context, params) => OnboardingPageWidget(),
-        ),
-        FFRoute(
           name: 'shop',
           path: '/shop',
           builder: (context, params) =>
@@ -113,6 +108,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'calendar')
               : CalendarWidget(),
+        ),
+        FFRoute(
+          name: 'gamePage',
+          path: '/gamePage',
+          builder: (context, params) => GamePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

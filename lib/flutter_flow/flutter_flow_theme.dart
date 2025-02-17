@@ -133,13 +133,13 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF4B39EF);
+  late Color primary = const Color(0xFF39DEEF);
   late Color secondary = const Color(0xFF39D2C0);
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFFE0E3E7);
   late Color primaryText = const Color(0xFF14181B);
   late Color secondaryText = const Color(0xFF57636C);
-  late Color primaryBackground = const Color(0xFFF1F4F8);
+  late Color primaryBackground = const Color(0xFFFFFFFF);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color accent1 = const Color(0x4C4B39EF);
   late Color accent2 = const Color(0x4D39D2C0);
@@ -147,7 +147,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color accent4 = const Color(0xCCFFFFFF);
   late Color success = const Color(0xFF249689);
   late Color warning = const Color(0xFFF9CF58);
-  late Color error = const Color(0xFFFF5963);
+  late Color error = const Color(0xFFF0141E);
   late Color info = const Color(0xFFFFFFFF);
 
   late Color black = Color(0xFF000000);
@@ -258,44 +258,44 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Ubuntu';
+  String get labelLargeFamily => 'Roboto Mono';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Ubuntu';
+  String get labelMediumFamily => 'Roboto Mono';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Ubuntu';
+  String get labelSmallFamily => 'Roboto Mono';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Ubuntu';
+  String get bodyLargeFamily => 'Roboto Mono';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Ubuntu';
+  String get bodyMediumFamily => 'Roboto Mono';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Ubuntu';
+  String get bodySmallFamily => 'Roboto Mono';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -370,44 +370,44 @@ class TabletTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Ubuntu';
+  String get labelLargeFamily => 'Roboto Mono';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Ubuntu';
+  String get labelMediumFamily => 'Roboto Mono';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Ubuntu';
+  String get labelSmallFamily => 'Roboto Mono';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Ubuntu';
+  String get bodyLargeFamily => 'Roboto Mono';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Ubuntu';
+  String get bodyMediumFamily => 'Roboto Mono';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Ubuntu';
+  String get bodySmallFamily => 'Roboto Mono';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -482,44 +482,44 @@ class DesktopTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Ubuntu';
+  String get labelLargeFamily => 'Roboto Mono';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Ubuntu';
+  String get labelMediumFamily => 'Roboto Mono';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Ubuntu';
+  String get labelSmallFamily => 'Roboto Mono';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Ubuntu';
+  String get bodyLargeFamily => 'Roboto Mono';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Ubuntu';
+  String get bodyMediumFamily => 'Roboto Mono';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Ubuntu';
+  String get bodySmallFamily => 'Roboto Mono';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Ubuntu',
+        'Roboto Mono',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,

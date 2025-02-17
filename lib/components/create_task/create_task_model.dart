@@ -10,7 +10,8 @@ class CreateTaskModel extends FlutterFlowModel<CreateTaskWidget> {
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
-  DateTime? datePicked;
+  DateTime? datePicked1;
+  DateTime? datePicked2;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;

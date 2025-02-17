@@ -8,6 +8,12 @@ class ShopModel extends FlutterFlowModel<ShopWidget> {
   /// default state
   int baseAstroState = 1;
 
+  String cowboyAstroTest =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/task-nova-1vgq59/assets/kjcj9qdy7sg4/asWithCowboyHat.png';
+
+  String baseImageTest =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/task-nova-1vgq59/assets/7gdczucwoc3f/AS_1_(1).png';
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Carousel widget.
