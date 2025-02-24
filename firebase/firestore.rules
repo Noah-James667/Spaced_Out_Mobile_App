@@ -25,13 +25,32 @@ service cloud.firestore {
     match /shop/{parent}/weapons/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if true;
-      allow delete: if true;
+      allow write: if false;
+      allow delete: if false;
     }
 
     match /{path=**}/weapons/{document} {
       allow read: if true;
     }
 
+
+    match /shop/{parent}/cosmetics/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /{path=**}/cosmetics/{document} {
+      allow read: if true;
+    }
+
+
+    match /upgrade/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
   }
 }

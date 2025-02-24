@@ -9,6 +9,7 @@ import 'backend/firebase/firebase_config.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index.dart';
 
 void main() async {
@@ -45,6 +46,11 @@ class _MyAppState extends State<MyApp> {
         : _router.routerDelegate.currentConfiguration;
     return matchList.uri.toString();
   }
+
+  List<String> getRouteStack() =>
+      _router.routerDelegate.currentConfiguration.matches
+          .map((e) => getRoute(e))
+          .toList();
 
   late Stream<BaseAuthUser> userStream;
 
@@ -136,6 +142,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'shop': ShopWidget(),
       'tasks': TasksWidget(),
       'calendar': CalendarWidget(),
+      'gamePage': GamePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -173,6 +180,14 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.calendar_today,
+              size: 32.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.gamepad,
               size: 32.0,
             ),
             label: 'Home',

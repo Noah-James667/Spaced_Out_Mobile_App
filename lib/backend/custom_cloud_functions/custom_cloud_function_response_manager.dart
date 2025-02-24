@@ -1,5 +1,6 @@
-class ResetCompletedTasksCloudFunctionCallResponse {
-  ResetCompletedTasksCloudFunctionCallResponse({
+
+class ResetRecurringTasksCloudFunctionCallResponse {
+  ResetRecurringTasksCloudFunctionCallResponse({
     this.errorCode,
     this.succeeded,
     this.jsonBody,

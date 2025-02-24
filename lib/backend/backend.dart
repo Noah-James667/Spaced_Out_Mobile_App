@@ -9,6 +9,8 @@ import 'schema/task_record.dart';
 import 'schema/user_record.dart';
 import 'schema/shop_record.dart';
 import 'schema/weapons_record.dart';
+import 'schema/cosmetics_record.dart';
+import 'schema/upgrade_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -21,6 +23,8 @@ export 'schema/task_record.dart';
 export 'schema/user_record.dart';
 export 'schema/shop_record.dart';
 export 'schema/weapons_record.dart';
+export 'schema/cosmetics_record.dart';
+export 'schema/upgrade_record.dart';
 
 /// Functions to query TaskRecords (as a Stream and as a Future).
 Future<int> queryTaskRecordCount({
@@ -168,6 +172,83 @@ Future<List<WeaponsRecord>> queryWeaponsRecordOnce({
     queryCollectionOnce(
       WeaponsRecord.collection(parent),
       WeaponsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query CosmeticsRecords (as a Stream and as a Future).
+Future<int> queryCosmeticsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CosmeticsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CosmeticsRecord>> queryCosmeticsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CosmeticsRecord.collection(parent),
+      CosmeticsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CosmeticsRecord>> queryCosmeticsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CosmeticsRecord.collection(parent),
+      CosmeticsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query UpgradeRecords (as a Stream and as a Future).
+Future<int> queryUpgradeRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UpgradeRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<UpgradeRecord>> queryUpgradeRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      UpgradeRecord.collection,
+      UpgradeRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<UpgradeRecord>> queryUpgradeRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      UpgradeRecord.collection,
+      UpgradeRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

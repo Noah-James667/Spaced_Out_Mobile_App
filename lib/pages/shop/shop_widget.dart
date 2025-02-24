@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -10,6 +11,9 @@ export 'shop_model.dart';
 
 class ShopWidget extends StatefulWidget {
   const ShopWidget({super.key});
+
+  static String routeName = 'shop';
+  static String routePath = '/shop';
 
   @override
   State<ShopWidget> createState() => _ShopWidgetState();
@@ -51,6 +55,37 @@ class _ShopWidgetState extends State<ShopWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: true,
+          leading: Text(
+            'Coins',
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).bodyMediumFamily),
+                ),
+          ),
+          title: AuthUserStreamWidget(
+            builder: (context) => Text(
+              valueOrDefault<String>(
+                valueOrDefault(currentUserDocument?.coins, 0).toString(),
+                '0',
+              ),
+              textAlign: TextAlign.start,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).bodyMediumFamily),
+                  ),
+            ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -62,16 +97,9 @@ class _ShopWidgetState extends State<ShopWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      'Task Nova',
-                      style: FlutterFlowTheme.of(context).titleLarge.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).titleLargeFamily,
-                            fontSize: 25.0,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).titleLargeFamily),
-                          ),
+                    Divider(
+                      thickness: 2.0,
+                      color: FlutterFlowTheme.of(context).alternate,
                     ),
                     Container(
                       width: 300.0,
@@ -146,29 +174,25 @@ class _ShopWidgetState extends State<ShopWidget> {
                         height: 200.0,
                         child: CarouselSlider(
                           items: [
-                            Stack(
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFC6C6C6),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                    border: Border.all(
-                                      width: 1.0,
-                                    ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/Sword_Upgrade_1.png',
-                                      width: 200.0,
-                                      height: 200.0,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFC6C6C6),
+                                borderRadius: BorderRadius.circular(24.0),
+                                border: Border.all(
+                                  width: 1.0,
                                 ),
-                              ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.asset(
+                                  'assets/images/Sword_Upgrade_1.png',
+                                  width: 200.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                             Container(
                               width: double.infinity,

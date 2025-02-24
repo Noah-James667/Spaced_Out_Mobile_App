@@ -7,8 +7,8 @@ import '/backend/schema/util/firestore_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class WeaponsRecord extends FirestoreRecord {
-  WeaponsRecord._(
+class CosmeticsRecord extends FirestoreRecord {
+  CosmeticsRecord._(
     DocumentReference reference,
     Map<String, dynamic> data,
   ) : super(reference, data) {
@@ -40,44 +40,44 @@ class WeaponsRecord extends FirestoreRecord {
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
-          ? parent.collection('weapons')
-          : FirebaseFirestore.instance.collectionGroup('weapons');
+          ? parent.collection('cosmetics')
+          : FirebaseFirestore.instance.collectionGroup('cosmetics');
 
   static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
-      parent.collection('weapons').doc(id);
+      parent.collection('cosmetics').doc(id);
 
-  static Stream<WeaponsRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map((s) => WeaponsRecord.fromSnapshot(s));
+  static Stream<CosmeticsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => CosmeticsRecord.fromSnapshot(s));
 
-  static Future<WeaponsRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then((s) => WeaponsRecord.fromSnapshot(s));
+  static Future<CosmeticsRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => CosmeticsRecord.fromSnapshot(s));
 
-  static WeaponsRecord fromSnapshot(DocumentSnapshot snapshot) =>
-      WeaponsRecord._(
+  static CosmeticsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      CosmeticsRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static WeaponsRecord getDocumentFromData(
+  static CosmeticsRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      WeaponsRecord._(reference, mapFromFirestore(data));
+      CosmeticsRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'WeaponsRecord(reference: ${reference.path}, data: $snapshotData)';
+      'CosmeticsRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is WeaponsRecord &&
+      other is CosmeticsRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createWeaponsRecordData({
+Map<String, dynamic> createCosmeticsRecordData({
   String? itemName,
   String? itemDescription,
   int? itemPrice,
@@ -93,20 +93,20 @@ Map<String, dynamic> createWeaponsRecordData({
   return firestoreData;
 }
 
-class WeaponsRecordDocumentEquality implements Equality<WeaponsRecord> {
-  const WeaponsRecordDocumentEquality();
+class CosmeticsRecordDocumentEquality implements Equality<CosmeticsRecord> {
+  const CosmeticsRecordDocumentEquality();
 
   @override
-  bool equals(WeaponsRecord? e1, WeaponsRecord? e2) {
+  bool equals(CosmeticsRecord? e1, CosmeticsRecord? e2) {
     return e1?.itemName == e2?.itemName &&
         e1?.itemDescription == e2?.itemDescription &&
         e1?.itemPrice == e2?.itemPrice;
   }
 
   @override
-  int hash(WeaponsRecord? e) => const ListEquality()
+  int hash(CosmeticsRecord? e) => const ListEquality()
       .hash([e?.itemName, e?.itemDescription, e?.itemPrice]);
 
   @override
-  bool isValidKey(Object? o) => o is WeaponsRecord;
+  bool isValidKey(Object? o) => o is CosmeticsRecord;
 }

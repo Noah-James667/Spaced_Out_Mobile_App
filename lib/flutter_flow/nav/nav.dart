@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
 import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -86,33 +87,35 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : NewLoginPageWidget(),
         ),
         FFRoute(
-          name: 'newLoginPage',
-          path: '/newLoginPage',
+          name: NewLoginPageWidget.routeName,
+          path: NewLoginPageWidget.routePath,
           builder: (context, params) => NewLoginPageWidget(),
         ),
         FFRoute(
-          name: 'shop',
-          path: '/shop',
+          name: ShopWidget.routeName,
+          path: ShopWidget.routePath,
           builder: (context, params) =>
               params.isEmpty ? NavBarPage(initialPage: 'shop') : ShopWidget(),
         ),
         FFRoute(
-          name: 'tasks',
-          path: '/tasks',
+          name: TasksWidget.routeName,
+          path: TasksWidget.routePath,
           builder: (context, params) =>
               params.isEmpty ? NavBarPage(initialPage: 'tasks') : TasksWidget(),
         ),
         FFRoute(
-          name: 'calendar',
-          path: '/calendar',
+          name: CalendarWidget.routeName,
+          path: CalendarWidget.routePath,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'calendar')
               : CalendarWidget(),
         ),
         FFRoute(
-          name: 'gamePage',
-          path: '/gamePage',
-          builder: (context, params) => GamePageWidget(),
+          name: GamePageWidget.routeName,
+          path: GamePageWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'gamePage')
+              : GamePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -232,6 +235,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -250,6 +254,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -297,14 +302,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: SpinKitFoldingCube(
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 50.0,
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/asMagicHat.png',
+                    fit: BoxFit.cover,
                   ),
                 )
               : page;

@@ -1,25 +1,27 @@
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'upgrade_model.dart';
 export 'upgrade_model.dart';
 
 class UpgradeWidget extends StatefulWidget {
-  const UpgradeWidget({super.key});
+  const UpgradeWidget({
+    super.key,
+    this.dueTime,
+    this.upgradeCost,
+  });
+
+  final DateTime? dueTime;
+  final String? upgradeCost;
 
   @override
   State<UpgradeWidget> createState() => _UpgradeWidgetState();
 }
 
-class _UpgradeWidgetState extends State<UpgradeWidget>
-    with TickerProviderStateMixin {
+class _UpgradeWidgetState extends State<UpgradeWidget> {
   late UpgradeModel _model;
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -31,34 +33,6 @@ class _UpgradeWidgetState extends State<UpgradeWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => UpgradeModel());
-
-    animationsMap.addAll({
-      'containerOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 30.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-    });
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -126,23 +100,39 @@ class _UpgradeWidgetState extends State<UpgradeWidget>
                                           .headlineSmallFamily),
                                 ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                        child: Text(
-                          'More info?',
-                          style: FlutterFlowTheme.of(context)
-                              .bodySmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodySmallFamily,
-                                color: FlutterFlowTheme.of(context).primary,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodySmallFamily),
-                              ),
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Current: ',
+                            style: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodySmallFamily,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodySmallFamily),
+                                ),
+                          ),
+                          Text(
+                            'current number',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily),
+                                ),
+                          ),
+                        ],
                       ),
                       Padding(
                         padding:
@@ -150,10 +140,23 @@ class _UpgradeWidgetState extends State<UpgradeWidget>
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.all(5.0),
+                            Text(
+                              'Cost: ',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .labelMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .labelMediumFamily),
+                                  ),
+                            ),
+                            Expanded(
                               child: Text(
-                                'Current boost',
+                                'cost number',
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -167,25 +170,6 @@ class _UpgradeWidgetState extends State<UpgradeWidget>
                                     ),
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Text(
-                                  '24',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .labelMediumFamily,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMediumFamily),
-                                      ),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -193,23 +177,39 @@ class _UpgradeWidgetState extends State<UpgradeWidget>
                   ),
                 ),
               ),
-              FlutterFlowIconButton(
-                borderRadius: 8.0,
-                buttonSize: 40.0,
-                fillColor: FlutterFlowTheme.of(context).secondaryText,
-                icon: Icon(
-                  Icons.upgrade_outlined,
-                  color: FlutterFlowTheme.of(context).info,
-                  size: 24.0,
-                ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).secondaryText,
+                    icon: Icon(
+                      Icons.upgrade_outlined,
+                      color: FlutterFlowTheme.of(context).info,
+                      size: 24.0,
+                    ),
+                    onPressed: () {
+                      print('IconButton pressed ...');
+                    },
+                  ),
+                  Text(
+                    '+amount\n increased \nby',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
-      ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation']!),
+      ),
     );
   }
 }

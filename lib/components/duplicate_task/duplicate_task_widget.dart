@@ -5,12 +5,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'task_model.dart';
-export 'task_model.dart';
+import 'duplicate_task_model.dart';
+export 'duplicate_task_model.dart';
 
 /// This is the task
-class TaskWidget extends StatefulWidget {
-  const TaskWidget({
+class DuplicateTaskWidget extends StatefulWidget {
+  const DuplicateTaskWidget({
     super.key,
     required this.taskDoc,
     required this.checkAction,
@@ -20,11 +20,11 @@ class TaskWidget extends StatefulWidget {
   final Future Function()? checkAction;
 
   @override
-  State<TaskWidget> createState() => _TaskWidgetState();
+  State<DuplicateTaskWidget> createState() => _DuplicateTaskWidgetState();
 }
 
-class _TaskWidgetState extends State<TaskWidget> {
-  late TaskModel _model;
+class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
+  late DuplicateTaskModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -35,7 +35,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TaskModel());
+    _model = createModel(context, () => DuplicateTaskModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -81,8 +81,6 @@ class _TaskWidgetState extends State<TaskWidget> {
                   safeSetState(() => _model.checkboxValue = newValue!);
                   if (newValue!) {
                     await widget.checkAction?.call();
-                  } else {
-                    await widget.checkAction?.call();
                   }
                 },
                 side: BorderSide(
@@ -115,36 +113,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      dateTimeFormat(
-                        "Md",
-                        widget.taskDoc!.completeBy!,
-                        locale: FFLocalizations.of(context).languageCode,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
-                          ),
-                    ),
-                    Text(
-                      dateTimeFormat(
-                        "jm",
-                        widget.taskDoc!.completeTime!,
-                        locale: FFLocalizations.of(context).languageCode,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
-                          ),
-                    ),
-                  ].divide(SizedBox(width: 5.0)),
+                  children: <Widget>[].divide(SizedBox(width: 5.0)),
                 ),
               ],
             ),

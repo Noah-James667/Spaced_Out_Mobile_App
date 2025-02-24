@@ -169,95 +169,98 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: FFButtonWidget(
-                onPressed: () async {
-                  final _datePicked1Date = await showDatePicker(
-                    context: context,
-                    initialDate: getCurrentTimestamp,
-                    firstDate: getCurrentTimestamp,
-                    lastDate: DateTime(2050),
-                    builder: (context, child) {
-                      return wrapInMaterialDatePickerTheme(
-                        context,
-                        child!,
-                        headerBackgroundColor:
-                            FlutterFlowTheme.of(context).primary,
-                        headerForegroundColor:
-                            FlutterFlowTheme.of(context).info,
-                        headerTextStyle:
-                            FlutterFlowTheme.of(context).headlineLarge.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineLargeFamily,
-                                  fontSize: 32.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .headlineLargeFamily),
-                                ),
-                        pickerBackgroundColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        pickerForegroundColor:
-                            FlutterFlowTheme.of(context).primaryText,
-                        selectedDateTimeBackgroundColor: Color(0xFFFCFCFC),
-                        selectedDateTimeForegroundColor:
-                            FlutterFlowTheme.of(context).info,
-                        actionButtonForegroundColor:
-                            FlutterFlowTheme.of(context).primaryText,
-                        iconSize: 24.0,
-                      );
-                    },
-                  );
+            if (!_model.switchValue!)
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    final _datePicked1Date = await showDatePicker(
+                      context: context,
+                      initialDate: getCurrentTimestamp,
+                      firstDate: getCurrentTimestamp,
+                      lastDate: DateTime(2050),
+                      builder: (context, child) {
+                        return wrapInMaterialDatePickerTheme(
+                          context,
+                          child!,
+                          headerBackgroundColor:
+                              FlutterFlowTheme.of(context).primary,
+                          headerForegroundColor:
+                              FlutterFlowTheme.of(context).info,
+                          headerTextStyle: FlutterFlowTheme.of(context)
+                              .headlineLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .headlineLargeFamily,
+                                fontSize: 32.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .headlineLargeFamily),
+                              ),
+                          pickerBackgroundColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          pickerForegroundColor:
+                              FlutterFlowTheme.of(context).primaryText,
+                          selectedDateTimeBackgroundColor: Color(0xFFFCFCFC),
+                          selectedDateTimeForegroundColor:
+                              FlutterFlowTheme.of(context).info,
+                          actionButtonForegroundColor:
+                              FlutterFlowTheme.of(context).primaryText,
+                          iconSize: 24.0,
+                        );
+                      },
+                    );
 
-                  if (_datePicked1Date != null) {
-                    safeSetState(() {
-                      _model.datePicked1 = DateTime(
-                        _datePicked1Date.year,
-                        _datePicked1Date.month,
-                        _datePicked1Date.day,
-                      );
-                    });
-                  } else if (_model.datePicked1 != null) {
-                    safeSetState(() {
-                      _model.datePicked1 = getCurrentTimestamp;
-                    });
-                  }
-                },
-                text: dateTimeFormat(
-                  "Md",
-                  _model.datePicked1,
-                  locale: FFLocalizations.of(context).languageCode,
-                ),
-                icon: Icon(
-                  Icons.calendar_month,
-                  size: 20.0,
-                ),
-                options: FFButtonOptions(
-                  width: double.infinity,
-                  height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Colors.white,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).titleSmallFamily,
-                        color: Colors.black,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).titleSmallFamily),
-                      ),
-                  elevation: 0.0,
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                    width: 1.0,
+                    if (_datePicked1Date != null) {
+                      safeSetState(() {
+                        _model.datePicked1 = DateTime(
+                          _datePicked1Date.year,
+                          _datePicked1Date.month,
+                          _datePicked1Date.day,
+                        );
+                      });
+                    } else if (_model.datePicked1 != null) {
+                      safeSetState(() {
+                        _model.datePicked1 = getCurrentTimestamp;
+                      });
+                    }
+                  },
+                  text: dateTimeFormat(
+                    "Md",
+                    _model.datePicked1,
+                    locale: FFLocalizations.of(context).languageCode,
                   ),
-                  borderRadius: BorderRadius.circular(20.0),
+                  icon: Icon(
+                    Icons.calendar_month,
+                    size: 20.0,
+                  ),
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: Colors.white,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.black,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 0.0,
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
               ),
-            ),
             Padding(
               padding: EdgeInsets.all(5.0),
               child: FFButtonWidget(
@@ -425,13 +428,13 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                       padding: EdgeInsets.all(2.0),
                       child: FlutterFlowChoiceChips(
                         options: [
-                          ChipData('Sun'),
-                          ChipData('Mon'),
-                          ChipData('Tue'),
-                          ChipData('Wed'),
-                          ChipData('Thu'),
-                          ChipData('Fri'),
-                          ChipData('Sat')
+                          ChipData('Sunday'),
+                          ChipData('Monday'),
+                          ChipData('Tuesday'),
+                          ChipData('Wednesday'),
+                          ChipData('Thursday'),
+                          ChipData('Friday'),
+                          ChipData('Saturday')
                         ],
                         onChanged: (val) =>
                             safeSetState(() => _model.choiceChipsValues = val),
@@ -482,7 +485,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             FormFieldController<List<String>>(
                           [],
                         ),
-                        wrapped: false,
+                        wrapped: true,
                       ),
                     ),
                   ),
@@ -571,23 +574,40 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
               child: FFButtonWidget(
                 onPressed: () async {
                   Navigator.pop(context);
-
-                  await TaskRecord.collection.doc().set({
-                    ...createTaskRecordData(
-                      user: currentUserReference,
-                      taskName: _model.textController1.text,
-                      taskDescription: _model.textController2.text,
-                      completeBy: _model.datePicked1,
-                      isComplete: false,
-                      isRepeating: _model.switchValue,
-                      completeTime: _model.datePicked2,
-                    ),
-                    ...mapToFirestore(
-                      {
-                        'days_repeating': _model.choiceChipsValues,
-                      },
-                    ),
-                  });
+                  if (_model.switchValue == false) {
+                    await TaskRecord.collection.doc().set({
+                      ...createTaskRecordData(
+                        user: currentUserReference,
+                        taskName: _model.textController1.text,
+                        taskDescription: _model.textController2.text,
+                        completeBy: _model.datePicked1,
+                        isComplete: false,
+                        isRepeating: _model.switchValue,
+                        completeTime: _model.datePicked2,
+                      ),
+                      ...mapToFirestore(
+                        {
+                          'days_repeating': _model.choiceChipsValues,
+                        },
+                      ),
+                    });
+                  } else {
+                    await TaskRecord.collection.doc().set({
+                      ...createTaskRecordData(
+                        user: currentUserReference,
+                        taskName: _model.textController1.text,
+                        taskDescription: _model.textController2.text,
+                        isComplete: false,
+                        isRepeating: _model.switchValue,
+                        completeTime: _model.datePicked2,
+                      ),
+                      ...mapToFirestore(
+                        {
+                          'days_repeating': _model.choiceChipsValues,
+                        },
+                      ),
+                    });
+                  }
                 },
                 text: 'Add Task',
                 options: FFButtonOptions(

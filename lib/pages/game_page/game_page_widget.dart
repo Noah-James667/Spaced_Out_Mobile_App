@@ -8,6 +8,9 @@ export 'game_page_model.dart';
 class GamePageWidget extends StatefulWidget {
   const GamePageWidget({super.key});
 
+  static String routeName = 'gamePage';
+  static String routePath = '/gamePage';
+
   @override
   State<GamePageWidget> createState() => _GamePageWidgetState();
 }
@@ -44,63 +47,58 @@ class _GamePageWidgetState extends State<GamePageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.0, -1.0),
-                    child: Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Container(
-                        width: 350.0,
-                        height: 350.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://picsum.photos/seed/509/600',
-                            width: 200.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
+          child: Align(
+            alignment: AlignmentDirectional(0.0, -1.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.0, -1.0),
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Container(
+                          width: 375.0,
+                          height: 375.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: ListView(
-                      padding: EdgeInsets.symmetric(vertical: 5.0),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        wrapWithModel(
-                          model: _model.upgradeModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: UpgradeWidget(),
-                        ),
-                      ].divide(SizedBox(height: 5.0)),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          wrapWithModel(
+                            model: _model.upgradeModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: UpgradeWidget(),
+                          ),
+                        ].divide(SizedBox(height: 5.0)),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

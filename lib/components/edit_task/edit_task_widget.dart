@@ -46,7 +46,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
     _model.textController1 ??= TextEditingController(text: widget.taskName);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.switchValue = true;
+    _model.switchValue = false;
     _model.textController2 ??=
         TextEditingController(text: widget.taskDescription);
     _model.textFieldFocusNode2 ??= FocusNode();
@@ -335,7 +335,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     safeSetState(() => _model.switchValue = newValue);
                   },
                   activeColor: FlutterFlowTheme.of(context).primary,
-                  activeTrackColor: FlutterFlowTheme.of(context).primary,
+                  activeTrackColor: FlutterFlowTheme.of(context).alternate,
                   inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
                   inactiveThumbColor:
                       FlutterFlowTheme.of(context).secondaryBackground,
@@ -352,13 +352,13 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       padding: EdgeInsets.all(2.0),
                       child: FlutterFlowChoiceChips(
                         options: [
-                          ChipData('Sun'),
-                          ChipData('Mon'),
-                          ChipData('Tue'),
-                          ChipData('Wed'),
-                          ChipData('Thu'),
-                          ChipData('Fri'),
-                          ChipData('Sat')
+                          ChipData('Sunday'),
+                          ChipData('Monday'),
+                          ChipData('Tuesday'),
+                          ChipData('Wednesday'),
+                          ChipData('Thursday'),
+                          ChipData('Friday'),
+                          ChipData('Saturday')
                         ],
                         onChanged: (val) =>
                             safeSetState(() => _model.choiceChipsValues = val),
@@ -409,7 +409,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                             FormFieldController<List<String>>(
                           [],
                         ),
-                        wrapped: false,
+                        wrapped: true,
                       ),
                     ),
                   ),

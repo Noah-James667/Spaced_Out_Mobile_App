@@ -14,6 +14,9 @@ export 'calendar_model.dart';
 class CalendarWidget extends StatefulWidget {
   const CalendarWidget({super.key});
 
+  static String routeName = 'calendar';
+  static String routePath = '/calendar';
+
   @override
   State<CalendarWidget> createState() => _CalendarWidgetState();
 }

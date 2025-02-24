@@ -2,7 +2,9 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'new_login_page_model.dart';
@@ -10,6 +12,9 @@ export 'new_login_page_model.dart';
 
 class NewLoginPageWidget extends StatefulWidget {
   const NewLoginPageWidget({super.key});
+
+  static String routeName = 'newLoginPage';
+  static String routePath = '/newLoginPage';
 
   @override
   State<NewLoginPageWidget> createState() => _NewLoginPageWidgetState();
@@ -235,6 +240,14 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                                 context)
                                                             .labelMediumFamily),
                                               ),
+                                          maxLength: 40,
+                                          maxLengthEnforcement:
+                                              MaxLengthEnforcement.enforced,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -364,6 +377,14 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                                 context)
                                                             .labelMediumFamily),
                                               ),
+                                          maxLength: 100,
+                                          maxLengthEnforcement:
+                                              MaxLengthEnforcement.enforced,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -493,6 +514,14 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                                 context)
                                                             .labelMediumFamily),
                                               ),
+                                          maxLength: 100,
+                                          maxLengthEnforcement:
+                                              MaxLengthEnforcement.enforced,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -532,7 +561,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         }
 
                                         context.pushNamedAuth(
-                                            'tasks', context.mounted);
+                                            TasksWidget.routeName,
+                                            context.mounted);
                                       },
                                       text: 'Sign Up',
                                       options: FFButtonOptions(
@@ -679,6 +709,11 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                             .labelMediumFamily),
                                               ),
                                           maxLength: 40,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -808,6 +843,11 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                                             .labelMediumFamily),
                                               ),
                                           maxLength: 100,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
@@ -832,7 +872,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         }
 
                                         context.pushNamedAuth(
-                                            'tasks', context.mounted);
+                                            TasksWidget.routeName,
+                                            context.mounted);
                                       },
                                       text: 'Login',
                                       options: FFButtonOptions(
@@ -904,7 +945,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                           return;
                         }
 
-                        context.goNamedAuth('tasks', context.mounted);
+                        context.goNamedAuth(
+                            TasksWidget.routeName, context.mounted);
                       },
                       text: 'Continue with Google',
                       icon: FaIcon(
