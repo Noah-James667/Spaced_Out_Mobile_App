@@ -106,9 +106,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CalendarWidget.routeName,
           path: CalendarWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'calendar')
-              : CalendarWidget(),
+          builder: (context, params) => CalendarWidget(),
         ),
         FFRoute(
           name: GamePageWidget.routeName,

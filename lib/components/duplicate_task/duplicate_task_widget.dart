@@ -1,8 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/edit_task/edit_task_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'duplicate_task_model.dart';
@@ -81,6 +83,30 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   safeSetState(() => _model.checkboxValue = newValue!);
                   if (newValue!) {
                     await widget.checkAction?.call();
+
+                    await currentUserReference!.update({
+                      ...mapToFirestore(
+                        {
+                          'coins': FieldValue.increment(20),
+                        },
+                      ),
+                    });
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Task Complete'),
+                          content: Text('Your task has been completed!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
                 },
                 side: BorderSide(
@@ -113,11 +139,43 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[].divide(SizedBox(width: 5.0)),
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              valueOrDefault<String>(
+                                functions.displaydaysrepeating(
+                                    widget.taskDoc!.daysRepeating.toList()),
+                                'Sun, Mon, Tue, Wed, Thu, Fri',
+                              ),
+                              maxLines: 5,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    fontSize: 10.0,
+                                    letterSpacing: 1.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ].divide(SizedBox(width: 5.0)),
                 ),
               ],
             ),
-            Spacer(),
+            Spacer(flex: 10),
             Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: FlutterFlowIconButton(
@@ -137,11 +195,14 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                     builder: (context) {
                       return Padding(
                         padding: MediaQuery.viewInsetsOf(context),
-                        child: EditTaskWidget(
-                          taskReference: widget.taskDoc!.reference,
-                          taskName: widget.taskDoc!.taskName,
-                          taskDescription: widget.taskDoc!.taskDescription,
-                          dueDate: widget.taskDoc!.completeBy!,
+                        child: Container(
+                          height: 300.0,
+                          child: EditTaskWidget(
+                            taskReference: widget.taskDoc!.reference,
+                            taskName: widget.taskDoc!.taskName,
+                            taskDescription: widget.taskDoc!.taskDescription,
+                            dueDate: widget.taskDoc!.completeBy!,
+                          ),
                         ),
                       );
                     },

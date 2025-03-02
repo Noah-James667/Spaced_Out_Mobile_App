@@ -12,20 +12,26 @@ class CreateTaskModel extends FlutterFlowModel<CreateTaskWidget> {
   String? Function(BuildContext, String?)? textController1Validator;
   DateTime? datePicked1;
   DateTime? datePicked2;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController1;
+  List<String>? get choiceChipsValues1 => choiceChipsValueController1?.value;
+  set choiceChipsValues1(List<String>? val) =>
+      choiceChipsValueController1?.value = val;
+  // State field(s) for Switch widget.
+  bool? switchValue;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
-  // State field(s) for Switch widget.
-  bool? switchValue;
-  // State field(s) for ChoiceChips widget.
-  FormFieldController<List<String>>? choiceChipsValueController;
-  List<String>? get choiceChipsValues => choiceChipsValueController?.value;
-  set choiceChipsValues(List<String>? val) =>
-      choiceChipsValueController?.value = val;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController2;
+  String? get choiceChipsValue2 =>
+      choiceChipsValueController2?.value?.firstOrNull;
+  set choiceChipsValue2(String? val) =>
+      choiceChipsValueController2?.value = val != null ? [val] : [];
 
   @override
   void initState(BuildContext context) {}

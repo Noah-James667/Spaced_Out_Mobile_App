@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/edit_task/edit_task_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -81,6 +82,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                   safeSetState(() => _model.checkboxValue = newValue!);
                   if (newValue!) {
                     await widget.checkAction?.call();
+
+                    await currentUserReference!.update({
+                      ...mapToFirestore(
+                        {
+                          'coins': FieldValue.increment(20),
+                        },
+                      ),
+                    });
                   } else {
                     await widget.checkAction?.call();
                   }
@@ -168,11 +177,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                     builder: (context) {
                       return Padding(
                         padding: MediaQuery.viewInsetsOf(context),
-                        child: EditTaskWidget(
-                          taskReference: widget.taskDoc!.reference,
-                          taskName: widget.taskDoc!.taskName,
-                          taskDescription: widget.taskDoc!.taskDescription,
-                          dueDate: widget.taskDoc!.completeBy!,
+                        child: Container(
+                          height: 600.0,
+                          child: EditTaskWidget(
+                            taskReference: widget.taskDoc!.reference,
+                            taskName: widget.taskDoc!.taskName,
+                            taskDescription: widget.taskDoc!.taskDescription,
+                            dueDate: widget.taskDoc!.completeBy!,
+                          ),
                         ),
                       );
                     },

@@ -91,6 +91,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'task-nova',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
@@ -141,7 +142,6 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'shop': ShopWidget(),
       'tasks': TasksWidget(),
-      'calendar': CalendarWidget(),
       'gamePage': GamePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -172,14 +172,6 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
-              size: 32.0,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_today,
               size: 32.0,
             ),
             label: 'Home',
