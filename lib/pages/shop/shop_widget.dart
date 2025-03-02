@@ -863,32 +863,59 @@ class _ShopWidgetState extends State<ShopWidget> {
                         height: 200.0,
                         child: CarouselSlider(
                           items: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                'https://picsum.photos/seed/487/600',
-                                width: 200.0,
-                                height: 200.0,
-                                fit: BoxFit.cover,
-                              ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFC6C6C6),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                'https://picsum.photos/seed/539/600',
-                                width: 200.0,
-                                height: 200.0,
-                                fit: BoxFit.cover,
-                              ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFC6C6C6),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                'https://picsum.photos/seed/429/600',
-                                width: 200.0,
-                                height: 200.0,
-                                fit: BoxFit.cover,
-                              ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFC6C6C6),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                           carouselController: _model.carouselController3 ??=

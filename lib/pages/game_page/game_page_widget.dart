@@ -1,7 +1,8 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/instant_timer.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'game_page_model.dart';
@@ -155,21 +156,38 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          'Hello World',
+                                        FlutterFlowTimer(
+                                          initialTime:
+                                              _model.timerInitialTimeMs,
+                                          getDisplayTime: (value) =>
+                                              StopWatchTimer.getDisplayTime(
+                                            value,
+                                            hours: false,
+                                            milliSecond: false,
+                                          ),
+                                          controller: _model.timerController,
+                                          updateStateInterval:
+                                              Duration(milliseconds: 1000),
+                                          onChanged: (value, displayTime,
+                                              shouldUpdate) {
+                                            _model.timerMilliseconds = value;
+                                            _model.timerValue = displayTime;
+                                            if (shouldUpdate)
+                                              safeSetState(() {});
+                                          },
+                                          textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
+                                              .headlineSmall
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
+                                                        .headlineSmallFamily,
                                                 letterSpacing: 0.0,
                                                 useGoogleFonts: GoogleFonts
                                                         .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineSmallFamily),
                                               ),
                                         ),
                                         Padding(
@@ -188,13 +206,8 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                               size: 30.0,
                                             ),
                                             onPressed: () async {
-                                              _model.instantTimer =
-                                                  InstantTimer.periodic(
-                                                duration: Duration(
-                                                    milliseconds: 30000),
-                                                callback: (timer) async {},
-                                                startImmediately: true,
-                                              );
+                                              _model.timerController
+                                                  .onStartTimer();
                                             },
                                           ),
                                         ),

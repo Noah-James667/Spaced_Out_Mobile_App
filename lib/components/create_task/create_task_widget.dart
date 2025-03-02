@@ -73,19 +73,22 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      'https://picsum.photos/seed/528/600',
-                      width: 64.0,
-                      height: 64.0,
-                      fit: BoxFit.cover,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
+                  child: Container(
+                    width: 64.0,
+                    height: 64.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/game_logo.png',
+                        width: 64.0,
+                        height: 64.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
