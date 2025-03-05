@@ -32,6 +32,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
     super.initState();
     _model = createModel(context, () => CalendarModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'calendar'});
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,

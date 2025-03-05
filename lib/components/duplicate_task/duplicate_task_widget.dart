@@ -82,15 +82,21 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                 onChanged: (newValue) async {
                   safeSetState(() => _model.checkboxValue = newValue!);
                   if (newValue!) {
+                    logFirebaseEvent(
+                        'DUPLICATE_TASK_Checkbox_zs1fz6vc_ON_TOGG');
+                    logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
+                    logFirebaseEvent('Checkbox_backend_call');
 
                     await currentUserReference!.update({
                       ...mapToFirestore(
                         {
                           'coins': FieldValue.increment(20),
+                          'xp': FieldValue.increment(10),
                         },
                       ),
                     });
+                    logFirebaseEvent('Checkbox_alert_dialog');
                     await showDialog(
                       context: context,
                       builder: (alertDialogContext) {
@@ -187,6 +193,8 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   size: 20.0,
                 ),
                 onPressed: () async {
+                  logFirebaseEvent('DUPLICATE_TASK_COMP_edit_ICN_ON_TAP');
+                  logFirebaseEvent('IconButton_bottom_sheet');
                   await showModalBottomSheet(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,

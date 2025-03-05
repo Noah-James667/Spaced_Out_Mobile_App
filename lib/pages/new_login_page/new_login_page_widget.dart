@@ -31,6 +31,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
     super.initState();
     _model = createModel(context, () => NewLoginPageModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'newLoginPage'});
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
@@ -81,7 +83,7 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                 children: [
                   Flexible(
                     child: Container(
-                      height: 300.0,
+                      height: 350.0,
                       decoration: BoxDecoration(),
                       child: Column(
                         children: [
@@ -533,6 +535,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'NEW_LOGIN_PAGE_PAGE_signup_ON_TAP');
+                                        logFirebaseEvent('signup_auth');
                                         GoRouter.of(context).prepareAuthEvent();
                                         if (_model
                                                 .passwordTextController1.text !=
@@ -559,6 +564,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         if (user == null) {
                                           return;
                                         }
+
+                                        logFirebaseEvent('signup_navigate_to');
 
                                         context.pushNamedAuth(
                                             TasksWidget.routeName,
@@ -859,6 +866,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'NEW_LOGIN_PAGE_PAGE_login_ON_TAP');
+                                        logFirebaseEvent('login_auth');
                                         GoRouter.of(context).prepareAuthEvent();
 
                                         final user =
@@ -870,6 +880,8 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                                         if (user == null) {
                                           return;
                                         }
+
+                                        logFirebaseEvent('login_navigate_to');
 
                                         context.pushNamedAuth(
                                             TasksWidget.routeName,
@@ -938,6 +950,9 @@ class _NewLoginPageWidgetState extends State<NewLoginPageWidget>
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'NEW_LOGIN_CONTINUE_WITH_GOOGLE_BTN_ON_TA');
+                        logFirebaseEvent('Button_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         final user =
                             await authManager.signInWithGoogle(context);

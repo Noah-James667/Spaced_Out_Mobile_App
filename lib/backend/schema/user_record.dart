@@ -55,6 +55,16 @@ class UserRecord extends FirestoreRecord {
   String get displayName => _displayName ?? '';
   bool hasDisplayName() => _displayName != null;
 
+  // "damage" field.
+  double? _damage;
+  double get damage => _damage ?? 0.0;
+  bool hasDamage() => _damage != null;
+
+  // "damage_up_cost" field.
+  int? _damageUpCost;
+  int get damageUpCost => _damageUpCost ?? 0;
+  bool hasDamageUpCost() => _damageUpCost != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -64,6 +74,8 @@ class UserRecord extends FirestoreRecord {
     _coins = castToType<int>(snapshotData['coins']);
     _xp = castToType<int>(snapshotData['xp']);
     _displayName = snapshotData['display_name'] as String?;
+    _damage = castToType<double>(snapshotData['damage']);
+    _damageUpCost = castToType<int>(snapshotData['damage_up_cost']);
   }
 
   static CollectionReference get collection =>
@@ -108,6 +120,8 @@ Map<String, dynamic> createUserRecordData({
   int? coins,
   int? xp,
   String? displayName,
+  double? damage,
+  int? damageUpCost,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -119,6 +133,8 @@ Map<String, dynamic> createUserRecordData({
       'coins': coins,
       'xp': xp,
       'display_name': displayName,
+      'damage': damage,
+      'damage_up_cost': damageUpCost,
     }.withoutNulls,
   );
 
@@ -137,7 +153,9 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.coins == e2?.coins &&
         e1?.xp == e2?.xp &&
-        e1?.displayName == e2?.displayName;
+        e1?.displayName == e2?.displayName &&
+        e1?.damage == e2?.damage &&
+        e1?.damageUpCost == e2?.damageUpCost;
   }
 
   @override
@@ -149,7 +167,9 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e?.phoneNumber,
         e?.coins,
         e?.xp,
-        e?.displayName
+        e?.displayName,
+        e?.damage,
+        e?.damageUpCost
       ]);
 
   @override

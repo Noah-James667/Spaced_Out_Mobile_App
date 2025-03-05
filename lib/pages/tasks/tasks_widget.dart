@@ -34,6 +34,7 @@ class _TasksWidgetState extends State<TasksWidget>
     super.initState();
     _model = createModel(context, () => TasksModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'tasks'});
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
@@ -61,6 +62,8 @@ class _TasksWidgetState extends State<TasksWidget>
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            logFirebaseEvent('TASKS_FloatingActionButton_0tw0dwqf_ON_T');
+            logFirebaseEvent('FloatingActionButton_bottom_sheet');
             await showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
@@ -129,6 +132,9 @@ class _TasksWidgetState extends State<TasksWidget>
                             size: 24.0,
                           ),
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'TASKS_PAGE_login_rounded_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             await authManager.signOut();
                             GoRouter.of(context).clearRedirectLocation();
@@ -154,7 +160,10 @@ class _TasksWidgetState extends State<TasksWidget>
                             size: 24.0,
                           ),
                           onPressed: () async {
+                            logFirebaseEvent('TASKS_PAGE_delete_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_backend_call');
                             await currentUserReference!.delete();
+                            logFirebaseEvent('IconButton_alert_dialog');
                             var confirmDialogResponse = await showDialog<bool>(
                                   context: context,
                                   builder: (alertDialogContext) {
@@ -218,6 +227,8 @@ class _TasksWidgetState extends State<TasksWidget>
                                 size: 24.0,
                               ),
                               onPressed: () async {
+                                logFirebaseEvent('TASKS_PAGE_notes_ICN_ON_TAP');
+                                logFirebaseEvent('IconButton_drawer');
                                 scaffoldKey.currentState!.openDrawer();
                               },
                             ),
@@ -337,129 +348,151 @@ class _TasksWidgetState extends State<TasksWidget>
                       child: TabBarView(
                         controller: _model.tabBarController,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              StreamBuilder<List<TaskRecord>>(
-                                stream: queryTaskRecord(
-                                  queryBuilder: (taskRecord) => taskRecord
-                                      .where(
-                                        'user',
-                                        isEqualTo: currentUserReference,
-                                      )
-                                      .where(
-                                        'is_complete',
-                                        isEqualTo: false,
-                                      )
-                                      .where(
-                                        'is_repeating',
-                                        isEqualTo: false,
+                          KeepAliveWidgetWrapper(
+                            builder: (context) => SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  StreamBuilder<List<TaskRecord>>(
+                                    stream: FFAppState().queryCache(
+                                      requestFn: () => queryTaskRecord(
+                                        queryBuilder: (taskRecord) => taskRecord
+                                            .where(
+                                              'user',
+                                              isEqualTo: currentUserReference,
+                                            )
+                                            .where(
+                                              'is_complete',
+                                              isEqualTo: false,
+                                            )
+                                            .where(
+                                              'is_repeating',
+                                              isEqualTo: false,
+                                            ),
                                       ),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: SpinKitFoldingCube(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 50.0,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<TaskRecord> listViewTaskRecordList =
-                                      snapshot.data!;
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            child: SpinKitCubeGrid(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 40.0,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<TaskRecord> listViewTaskRecordList =
+                                          snapshot.data!;
 
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: listViewTaskRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewTaskRecord =
-                                          listViewTaskRecordList[listViewIndex];
-                                      return TaskWidget(
-                                        key: Key(
-                                            'Key39m_${listViewIndex}_of_${listViewTaskRecordList.length}'),
-                                        taskDoc: listViewTaskRecord,
-                                        checkAction: () async {
-                                          await listViewTaskRecord.reference
-                                              .update(createTaskRecordData(
-                                            isComplete: true,
-                                          ));
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewTaskRecordList.length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewTaskRecord =
+                                              listViewTaskRecordList[
+                                                  listViewIndex];
+                                          return TaskWidget(
+                                            key: Key(
+                                                'Key39m_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                            taskDoc: listViewTaskRecord,
+                                            checkAction: () async {
+                                              logFirebaseEvent(
+                                                  'TASKS_PAGE_Container_39mto8a7_CALLBACK');
+                                              logFirebaseEvent(
+                                                  'task_backend_call');
+
+                                              await listViewTaskRecord.reference
+                                                  .update(createTaskRecordData(
+                                                isComplete: true,
+                                              ));
+                                            },
+                                          );
                                         },
                                       );
                                     },
-                                  );
-                                },
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              StreamBuilder<List<TaskRecord>>(
-                                stream: queryTaskRecord(
-                                  queryBuilder: (taskRecord) => taskRecord
-                                      .where(
-                                        'user',
-                                        isEqualTo: currentUserReference,
-                                      )
-                                      .where(
-                                        'is_complete',
-                                        isEqualTo: false,
-                                      )
-                                      .where(
-                                        'is_repeating',
-                                        isEqualTo: true,
-                                      ),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: SpinKitFoldingCube(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 50.0,
+                          KeepAliveWidgetWrapper(
+                            builder: (context) => Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                StreamBuilder<List<TaskRecord>>(
+                                  stream: queryTaskRecord(
+                                    queryBuilder: (taskRecord) => taskRecord
+                                        .where(
+                                          'user',
+                                          isEqualTo: currentUserReference,
+                                        )
+                                        .where(
+                                          'is_complete',
+                                          isEqualTo: false,
+                                        )
+                                        .where(
+                                          'is_repeating',
+                                          isEqualTo: true,
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  List<TaskRecord> listViewTaskRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: listViewTaskRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewTaskRecord =
-                                          listViewTaskRecordList[listViewIndex];
-                                      return DuplicateTaskWidget(
-                                        key: Key(
-                                            'Keykkq_${listViewIndex}_of_${listViewTaskRecordList.length}'),
-                                        taskDoc: listViewTaskRecord,
-                                        checkAction: () async {
-                                          await listViewTaskRecord.reference
-                                              .update(createTaskRecordData(
-                                            isComplete: true,
-                                          ));
-                                        },
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: SpinKitFoldingCube(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 50.0,
+                                          ),
+                                        ),
                                       );
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
+                                    }
+                                    List<TaskRecord> listViewTaskRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: listViewTaskRecordList.length,
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewTaskRecord =
+                                            listViewTaskRecordList[
+                                                listViewIndex];
+                                        return DuplicateTaskWidget(
+                                          key: Key(
+                                              'Keykkq_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                          taskDoc: listViewTaskRecord,
+                                          checkAction: () async {
+                                            logFirebaseEvent(
+                                                'TASKS_PAGE_Container_kkqspky3_CALLBACK');
+                                            logFirebaseEvent(
+                                                'duplicateTask_backend_call');
+
+                                            await listViewTaskRecord.reference
+                                                .update(createTaskRecordData(
+                                              isComplete: true,
+                                            ));
+                                          },
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

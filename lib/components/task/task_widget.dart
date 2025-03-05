@@ -81,16 +81,23 @@ class _TaskWidgetState extends State<TaskWidget> {
                 onChanged: (newValue) async {
                   safeSetState(() => _model.checkboxValue = newValue!);
                   if (newValue!) {
+                    logFirebaseEvent(
+                        'TASK_COMP_Checkbox_byo01zxd_ON_TOGGLE_ON');
+                    logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
+                    logFirebaseEvent('Checkbox_backend_call');
 
                     await currentUserReference!.update({
                       ...mapToFirestore(
                         {
                           'coins': FieldValue.increment(20),
+                          'xp': FieldValue.increment(10),
                         },
                       ),
                     });
                   } else {
+                    logFirebaseEvent('TASK_Checkbox_byo01zxd_ON_TOGGLE_OFF');
+                    logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
                   }
                 },
@@ -126,10 +133,13 @@ class _TaskWidgetState extends State<TaskWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      dateTimeFormat(
-                        "Md",
-                        widget.taskDoc!.completeBy!,
-                        locale: FFLocalizations.of(context).languageCode,
+                      valueOrDefault<String>(
+                        dateTimeFormat(
+                          "Md",
+                          widget.taskDoc?.completeBy,
+                          locale: FFLocalizations.of(context).languageCode,
+                        ),
+                        '1/1',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
@@ -140,10 +150,13 @@ class _TaskWidgetState extends State<TaskWidget> {
                           ),
                     ),
                     Text(
-                      dateTimeFormat(
-                        "jm",
-                        widget.taskDoc!.completeTime!,
-                        locale: FFLocalizations.of(context).languageCode,
+                      valueOrDefault<String>(
+                        dateTimeFormat(
+                          "jm",
+                          widget.taskDoc?.completeTime,
+                          locale: FFLocalizations.of(context).languageCode,
+                        ),
+                        '00:00AM',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
@@ -169,6 +182,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                   size: 20.0,
                 ),
                 onPressed: () async {
+                  logFirebaseEvent('TASK_COMP_edit_ICN_ON_TAP');
+                  logFirebaseEvent('IconButton_bottom_sheet');
                   await showModalBottomSheet(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,

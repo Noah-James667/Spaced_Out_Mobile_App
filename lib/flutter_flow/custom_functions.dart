@@ -19,3 +19,7 @@ String? displaydaysrepeating(List<String> daysRepeating) {
   }
   return daysRepeating.map((day) => day.substring(0, 3)).join(", ");
 }
+
+List<DateTime> getHighlightedDates(List<DateTime> completeByDates) {
+  return completeByDates; // Returns the list of dates to be highlighted
+}

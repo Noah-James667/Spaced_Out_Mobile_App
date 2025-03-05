@@ -10,7 +10,7 @@ import 'schema/user_record.dart';
 import 'schema/shop_record.dart';
 import 'schema/weapons_record.dart';
 import 'schema/cosmetics_record.dart';
-import 'schema/upgrade_record.dart';
+import 'schema/ship_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -24,7 +24,7 @@ export 'schema/user_record.dart';
 export 'schema/shop_record.dart';
 export 'schema/weapons_record.dart';
 export 'schema/cosmetics_record.dart';
-export 'schema/upgrade_record.dart';
+export 'schema/ship_record.dart';
 
 /// Functions to query TaskRecords (as a Stream and as a Future).
 Future<int> queryTaskRecordCount({
@@ -217,38 +217,41 @@ Future<List<CosmeticsRecord>> queryCosmeticsRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query UpgradeRecords (as a Stream and as a Future).
-Future<int> queryUpgradeRecordCount({
+/// Functions to query ShipRecords (as a Stream and as a Future).
+Future<int> queryShipRecordCount({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      UpgradeRecord.collection,
+      ShipRecord.collection(parent),
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<UpgradeRecord>> queryUpgradeRecord({
+Stream<List<ShipRecord>> queryShipRecord({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      UpgradeRecord.collection,
-      UpgradeRecord.fromSnapshot,
+      ShipRecord.collection(parent),
+      ShipRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<UpgradeRecord>> queryUpgradeRecordOnce({
+Future<List<ShipRecord>> queryShipRecordOnce({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      UpgradeRecord.collection,
-      UpgradeRecord.fromSnapshot,
+      ShipRecord.collection(parent),
+      ShipRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

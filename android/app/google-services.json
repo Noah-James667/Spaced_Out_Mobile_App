@@ -12,7 +12,20 @@
           "package_name": "com.mycompany.tasknova"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "437158415244-loj0fij4p7g5g2f2p8e4mgktijt91ukm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.tasknova",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "437158415244-hngg07hgqh32510h93cb4jpimv85tfo4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCZeJySRuH0bfez8oRt_pfU2dT0UelPGxY"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437158415244-hngg07hgqh32510h93cb4jpimv85tfo4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437158415244-etutnuf5un9qr9jklln7nr7feqjis7eb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.tasknova"
+              }
+            }
+          ]
         }
       }
     }

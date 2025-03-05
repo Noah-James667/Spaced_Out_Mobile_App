@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,7 +10,6 @@ import 'backend/firebase/firebase_config.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index.dart';
 
 void main() async {
@@ -19,7 +19,13 @@ void main() async {
 
   await initFirebase();
 
-  runApp(MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -143,6 +149,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'shop': ShopWidget(),
       'tasks': TasksWidget(),
       'gamePage': GamePageWidget(),
+      'storagePage': StoragePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -155,7 +162,7 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPageName = tabs.keys.toList()[i];
         }),
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        selectedItemColor: FlutterFlowTheme.of(context).primary,
+        selectedItemColor: FlutterFlowTheme.of(context).secondary,
         unselectedItemColor: FlutterFlowTheme.of(context).primaryText,
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -178,8 +185,16 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.gamepad,
+            icon: Icon(
+              Icons.videogame_asset,
+              size: 32.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.pest_control_rounded,
               size: 32.0,
             ),
             label: 'Home',

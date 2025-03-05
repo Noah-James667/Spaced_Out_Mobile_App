@@ -46,11 +46,16 @@ service cloud.firestore {
     }
 
 
-    match /upgrade/{document} {
+    match /shop/{parent}/ship/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
+
+    match /{path=**}/ship/{document} {
+      allow read: if true;
+    }
+
   }
 }

@@ -74,25 +74,6 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
-                  child: Container(
-                    width: 64.0,
-                    height: 64.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/game_logo.png',
-                        width: 64.0,
-                        height: 64.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 100.0, 0.0),
                   child: Container(
                     width: 64.0,
@@ -121,6 +102,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                     size: 24.0,
                   ),
                   onPressed: () async {
+                    logFirebaseEvent('CREATE_TASK_COMP_close_ICN_ON_TAP');
+                    logFirebaseEvent('IconButton_bottom_sheet');
                     Navigator.pop(context);
                   },
                 ),
@@ -216,6 +199,10 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                   Expanded(
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'CREATE_TASK_COMP_Button_94tjfjqd_ON_TAP');
+                        logFirebaseEvent('Button_date_time_picker');
+
                         final _datePicked1Time = await showTimePicker(
                           context: context,
                           initialTime:
@@ -313,6 +300,9 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'CREATE_TASK_COMP_Button_139qyggc_ON_TAP');
+                          logFirebaseEvent('Button_date_time_picker');
                           final _datePicked2Date = await showDatePicker(
                             context: context,
                             initialDate: getCurrentTimestamp,
@@ -436,7 +426,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
                                     .bodyMediumFamily,
-                                color: FlutterFlowTheme.of(context).info,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 letterSpacing: 0.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
@@ -445,6 +435,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           iconColor: FlutterFlowTheme.of(context).info,
                           iconSize: 16.0,
                           elevation: 0.0,
+                          borderColor: FlutterFlowTheme.of(context).primaryText,
+                          borderWidth: 1.0,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         unselectedChipStyle: ChipStyle(
@@ -584,14 +576,14 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0x00000000),
+                          color: FlutterFlowTheme.of(context).primaryText,
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(18.0),
@@ -639,7 +631,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                 backgroundColor: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      color: FlutterFlowTheme.of(context).info,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       letterSpacing: 0.0,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
                           FlutterFlowTheme.of(context).bodyMediumFamily),
@@ -647,6 +639,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                 iconColor: FlutterFlowTheme.of(context).info,
                 iconSize: 16.0,
                 elevation: 0.0,
+                borderColor: FlutterFlowTheme.of(context).primaryText,
+                borderWidth: 1.0,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               unselectedChipStyle: ChipStyle(
@@ -678,40 +672,52 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
               padding: EdgeInsets.all(5.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  Navigator.pop(context);
-                  if (_model.switchValue == false) {
-                    await TaskRecord.collection.doc().set({
-                      ...createTaskRecordData(
-                        user: currentUserReference,
-                        taskName: _model.textController1.text,
-                        taskDescription: _model.textController2.text,
-                        completeBy: _model.datePicked2,
-                        isComplete: false,
-                        isRepeating: _model.switchValue,
-                        completeTime: _model.datePicked1,
-                      ),
-                      ...mapToFirestore(
-                        {
-                          'days_repeating': _model.choiceChipsValues1,
-                        },
-                      ),
-                    });
-                  } else {
-                    await TaskRecord.collection.doc().set({
-                      ...createTaskRecordData(
-                        user: currentUserReference,
-                        taskName: _model.textController1.text,
-                        taskDescription: _model.textController2.text,
-                        isComplete: false,
-                        isRepeating: _model.switchValue,
-                        completeTime: _model.datePicked1,
-                      ),
-                      ...mapToFirestore(
-                        {
-                          'days_repeating': _model.choiceChipsValues1,
-                        },
-                      ),
-                    });
+                  logFirebaseEvent('CREATE_TASK_COMP_ADD_TASK_BTN_ON_TAP');
+                  final firestoreBatch = FirebaseFirestore.instance.batch();
+                  try {
+                    logFirebaseEvent('Button_bottom_sheet');
+                    Navigator.pop(context);
+                    if (_model.switchValue == false) {
+                      logFirebaseEvent('Button_backend_call');
+
+                      firestoreBatch.set(TaskRecord.collection.doc(), {
+                        ...createTaskRecordData(
+                          user: currentUserReference,
+                          taskName: _model.textController1.text,
+                          taskDescription: _model.textController2.text,
+                          completeBy: _model.datePicked2,
+                          isComplete: false,
+                          isRepeating: _model.switchValue,
+                          completeTime: _model.datePicked1,
+                        ),
+                        ...mapToFirestore(
+                          {
+                            'days_repeating': _model.choiceChipsValues1,
+                          },
+                        ),
+                      });
+                    } else {
+                      logFirebaseEvent('Button_backend_call');
+
+                      firestoreBatch.set(TaskRecord.collection.doc(), {
+                        ...createTaskRecordData(
+                          user: currentUserReference,
+                          taskName: _model.textController1.text,
+                          taskDescription: _model.textController2.text,
+                          isComplete: false,
+                          isRepeating: _model.switchValue,
+                          completeTime: _model.datePicked1,
+                          completeBy: _model.datePicked2,
+                        ),
+                        ...mapToFirestore(
+                          {
+                            'days_repeating': _model.choiceChipsValues1,
+                          },
+                        ),
+                      });
+                    }
+                  } finally {
+                    await firestoreBatch.commit();
                   }
                 },
                 text: 'Add Task',

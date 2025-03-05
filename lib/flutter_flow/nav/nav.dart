@@ -114,6 +114,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'gamePage')
               : GamePageWidget(),
+        ),
+        FFRoute(
+          name: StoragePageWidget.routeName,
+          path: StoragePageWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'storagePage')
+              : StoragePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

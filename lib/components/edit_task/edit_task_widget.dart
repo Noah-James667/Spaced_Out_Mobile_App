@@ -85,25 +85,6 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
-                  child: Container(
-                    width: 64.0,
-                    height: 64.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/game_logo.png',
-                        width: 200.0,
-                        height: 200.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 100.0, 0.0),
                   child: Container(
                     width: 64.0,
@@ -132,6 +113,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     size: 24.0,
                   ),
                   onPressed: () async {
+                    logFirebaseEvent('EDIT_TASK_COMP_close_ICN_ON_TAP');
+                    logFirebaseEvent('IconButton_bottom_sheet');
                     Navigator.pop(context);
                   },
                 ),
@@ -227,6 +210,10 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   Expanded(
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'EDIT_TASK_COMP_Button_x569shyv_ON_TAP');
+                        logFirebaseEvent('Button_date_time_picker');
+
                         final _datePicked1Time = await showTimePicker(
                           context: context,
                           initialTime:
@@ -324,6 +311,9 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'EDIT_TASK_COMP_Button_9dj37g2i_ON_TAP');
+                          logFirebaseEvent('Button_date_time_picker');
                           final _datePicked2Date = await showDatePicker(
                             context: context,
                             initialDate: getCurrentTimestamp,
@@ -700,11 +690,15 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
               padding: EdgeInsets.all(5.0),
               child: FFButtonWidget(
                 onPressed: () async {
+                  logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
+                  logFirebaseEvent('Button_backend_call');
+
                   await widget.taskReference!.update(createTaskRecordData(
                     taskName: _model.textController1.text,
                     taskDescription: _model.textController2.text,
                     completeBy: widget.dueDate,
                   ));
+                  logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
                 },
                 text: 'Save',
