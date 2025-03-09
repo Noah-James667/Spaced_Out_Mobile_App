@@ -221,7 +221,7 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
-                                          'assets/images/vnimc_1.png',
+                                          'assets/images/nswz3_9.png',
                                           width: 200.0,
                                           height: 200.0,
                                           fit: BoxFit.cover,
@@ -238,7 +238,9 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x00FFFFFF),
                                       ),
-                                      child: ClipRRect(
+                                      child:
+                                          // have cosmetics tied to equip page and behind the background image and when the variable is switched the sprite will be brought to the front do this for the shop and equip page as well over top the image for tha astronaught.
+                                          ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(

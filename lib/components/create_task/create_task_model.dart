@@ -4,6 +4,12 @@ import 'create_task_widget.dart' show CreateTaskWidget;
 import 'package:flutter/material.dart';
 
 class CreateTaskModel extends FlutterFlowModel<CreateTaskWidget> {
+  ///  Local state fields for this component.
+
+  DateTime? addTaskTime;
+
+  DateTime? addTaskDate;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.

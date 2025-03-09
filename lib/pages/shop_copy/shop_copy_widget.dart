@@ -10,34 +10,34 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'shop_model.dart';
-export 'shop_model.dart';
+import 'shop_copy_model.dart';
+export 'shop_copy_model.dart';
 
-class ShopWidget extends StatefulWidget {
-  const ShopWidget({super.key});
+class ShopCopyWidget extends StatefulWidget {
+  const ShopCopyWidget({super.key});
 
-  static String routeName = 'shop';
-  static String routePath = '/shop';
+  static String routeName = 'shopCopy';
+  static String routePath = '/shopCopy';
 
   @override
-  State<ShopWidget> createState() => _ShopWidgetState();
+  State<ShopCopyWidget> createState() => _ShopCopyWidgetState();
 }
 
-class _ShopWidgetState extends State<ShopWidget> {
-  late ShopModel _model;
+class _ShopCopyWidgetState extends State<ShopCopyWidget> {
+  late ShopCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ShopModel());
+    _model = createModel(context, () => ShopCopyModel());
 
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'shop'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'shopCopy'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('SHOP_PAGE_shop_ON_INIT_STATE');
-      logFirebaseEvent('shop_update_page_state');
+      logFirebaseEvent('SHOP_COPY_PAGE_shopCopy_ON_INIT_STATE');
+      logFirebaseEvent('shopCopy_update_page_state');
       _model.baseImageTest = _model.baseImageTest;
       safeSetState(() {});
     });
@@ -66,7 +66,7 @@ class _ShopWidgetState extends State<ShopWidget> {
           top: true,
           child: GestureDetector(
             onHorizontalDragEnd: (details) async {
-              logFirebaseEvent('SHOP_Column_gbukbob5_ON_HORIZONTAL_DRAG_');
+              logFirebaseEvent('SHOP_COPY_Column_gv3ubhly_ON_HORIZONTAL_');
               logFirebaseEvent('Column_navigate_to');
 
               context.pushNamed(
@@ -208,7 +208,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               logFirebaseEvent(
-                                  'SHOP_PAGE_Image_53lzq7uc_ON_TAP');
+                                  'SHOP_COPY_PAGE_Image_xp4lxt91_ON_TAP');
                               if (_model.baseAstroState == 2) {
                                 // needs to update the image to reflect the change - when the variable is 2 (set to 2 by clicking the button on the cowboy hat) this image should update to reflect the new hat
                                 logFirebaseEvent('Image_update_page_state');
@@ -470,7 +470,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE_BUTTON_BTN_ON_TAP');
+                                                'SHOP_COPY_PAGE_BUTTON_BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_update_page_state');
                                             _model.baseAstroState = 2;
@@ -550,7 +550,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                       FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent(
-                                              'SHOP_PAGE__BTN_ON_TAP');
+                                              'SHOP_COPY_PAGE__BTN_ON_TAP');
                                           logFirebaseEvent(
                                               'Button_bottom_sheet');
                                           await showModalBottomSheet(
@@ -641,7 +641,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                       FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent(
-                                              'SHOP_PAGE__BTN_ON_TAP');
+                                              'SHOP_COPY_PAGE__BTN_ON_TAP');
                                           logFirebaseEvent(
                                               'Button_backend_call');
 
@@ -719,7 +719,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                             FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'SHOP_PAGE__BTN_ON_TAP');
+                                                    'SHOP_COPY_PAGE__BTN_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Button_backend_call');
 
@@ -804,7 +804,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                             FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'SHOP_PAGE__BTN_ON_TAP');
+                                                    'SHOP_COPY_PAGE__BTN_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Button_backend_call');
 
@@ -889,7 +889,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                             FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'SHOP_PAGE__BTN_ON_TAP');
+                                                    'SHOP_COPY_PAGE__BTN_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Button_backend_call');
 
@@ -974,7 +974,7 @@ class _ShopWidgetState extends State<ShopWidget> {
                                             FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'SHOP_PAGE__BTN_ON_TAP');
+                                                    'SHOP_COPY_PAGE__BTN_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Button_backend_call');
 

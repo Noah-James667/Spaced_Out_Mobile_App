@@ -166,7 +166,7 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
               await currentUserReference!.update({
                 ...mapToFirestore(
                   {
-                    'coins': FieldValue.increment(1),
+                    'coins': FieldValue.increment(-(1)),
                   },
                 ),
               });

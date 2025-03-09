@@ -150,6 +150,8 @@ class _NavBarPageState extends State<NavBarPage> {
       'tasks': TasksWidget(),
       'gamePage': GamePageWidget(),
       'storagePage': StoragePageWidget(),
+      'equipPage': EquipPageWidget(),
+      'shopCopy': ShopCopyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -195,6 +197,22 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.pest_control_rounded,
+              size: 32.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.attribution_sharp,
+              size: 32.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add_reaction_outlined,
               size: 32.0,
             ),
             label: 'Home',

@@ -121,6 +121,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'storagePage')
               : StoragePageWidget(),
+        ),
+        FFRoute(
+          name: EquipPageWidget.routeName,
+          path: EquipPageWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'equipPage')
+              : EquipPageWidget(),
+        ),
+        FFRoute(
+          name: ShopCopyWidget.routeName,
+          path: ShopCopyWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'shopCopy')
+              : ShopCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

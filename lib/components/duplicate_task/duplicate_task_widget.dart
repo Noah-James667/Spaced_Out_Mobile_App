@@ -204,12 +204,18 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                       return Padding(
                         padding: MediaQuery.viewInsetsOf(context),
                         child: Container(
-                          height: 300.0,
+                          height: 600.0,
                           child: EditTaskWidget(
                             taskReference: widget.taskDoc!.reference,
-                            taskName: widget.taskDoc!.taskName,
-                            taskDescription: widget.taskDoc!.taskDescription,
-                            dueDate: widget.taskDoc!.completeBy!,
+                            taskName: widget.taskDoc?.taskName,
+                            taskDescription: widget.taskDoc?.taskDescription,
+                            dueDate: widget.taskDoc?.completeBy,
+                            taskType: '',
+                            doesRepeat: widget.taskDoc?.isRepeating,
+                            timeDue: widget.taskDoc?.completeBy,
+                            taskDifficulty:
+                                widget.taskDoc?.difficultyLvl.toString(),
+                            daysRepeating: widget.taskDoc!.daysRepeating,
                           ),
                         ),
                       );

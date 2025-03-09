@@ -1,3 +1,4 @@
+import '';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
@@ -199,9 +200,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                   Expanded(
                     child: FFButtonWidget(
                       onPressed: () async {
-                        logFirebaseEvent(
-                            'CREATE_TASK_COMP_Button_94tjfjqd_ON_TAP');
-                        logFirebaseEvent('Button_date_time_picker');
+                        logFirebaseEvent('CREATE_TASK_COMP_timeDue_ON_TAP');
+                        logFirebaseEvent('timeDue_date_time_picker');
 
                         final _datePicked1Time = await showTimePicker(
                           context: context,
@@ -300,9 +300,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
-                          logFirebaseEvent(
-                              'CREATE_TASK_COMP_Button_139qyggc_ON_TAP');
-                          logFirebaseEvent('Button_date_time_picker');
+                          logFirebaseEvent('CREATE_TASK_COMP_dateDue_ON_TAP');
+                          logFirebaseEvent('dateDue_date_time_picker');
                           final _datePicked2Date = await showDatePicker(
                             context: context,
                             initialDate: getCurrentTimestamp,
@@ -675,27 +674,41 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                   logFirebaseEvent('CREATE_TASK_COMP_ADD_TASK_BTN_ON_TAP');
                   final firestoreBatch = FirebaseFirestore.instance.batch();
                   try {
-                    logFirebaseEvent('Button_bottom_sheet');
-                    Navigator.pop(context);
                     if (_model.switchValue == false) {
-                      logFirebaseEvent('Button_backend_call');
+                      if ((_model.datePicked1 != null) &&
+                          (_model.datePicked2 != null)) {
+                        logFirebaseEvent('Button_backend_call');
 
-                      firestoreBatch.set(TaskRecord.collection.doc(), {
-                        ...createTaskRecordData(
-                          user: currentUserReference,
-                          taskName: _model.textController1.text,
-                          taskDescription: _model.textController2.text,
-                          completeBy: _model.datePicked2,
-                          isComplete: false,
-                          isRepeating: _model.switchValue,
-                          completeTime: _model.datePicked1,
-                        ),
-                        ...mapToFirestore(
-                          {
-                            'days_repeating': _model.choiceChipsValues1,
+                        firestoreBatch.set(
+                            TaskRecord.collection.doc(),
+                            createTaskRecordData(
+                              user: currentUserReference,
+                              taskName: _model.textController1.text,
+                              taskDescription: _model.textController2.text,
+                              isComplete: false,
+                              isRepeating: _model.switchValue,
+                              completeTime: _model.datePicked1,
+                              completeBy: _model.datePicked2,
+                            ));
+                      } else {
+                        logFirebaseEvent('Button_alert_dialog');
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('unset value'),
+                              content: Text('Your date and time is not set'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
                           },
-                        ),
-                      });
+                        );
+                      }
                     } else {
                       logFirebaseEvent('Button_backend_call');
 

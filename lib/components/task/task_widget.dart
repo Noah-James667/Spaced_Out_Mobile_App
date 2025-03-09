@@ -133,13 +133,10 @@ class _TaskWidgetState extends State<TaskWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      valueOrDefault<String>(
-                        dateTimeFormat(
-                          "Md",
-                          widget.taskDoc?.completeBy,
-                          locale: FFLocalizations.of(context).languageCode,
-                        ),
-                        '1/1',
+                      dateTimeFormat(
+                        "Md",
+                        getCurrentTimestamp,
+                        locale: FFLocalizations.of(context).languageCode,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
@@ -150,13 +147,10 @@ class _TaskWidgetState extends State<TaskWidget> {
                           ),
                     ),
                     Text(
-                      valueOrDefault<String>(
-                        dateTimeFormat(
-                          "jm",
-                          widget.taskDoc?.completeTime,
-                          locale: FFLocalizations.of(context).languageCode,
-                        ),
-                        '00:00AM',
+                      dateTimeFormat(
+                        "jm",
+                        widget.taskDoc!.completeTime!,
+                        locale: FFLocalizations.of(context).languageCode,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
@@ -196,9 +190,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                           height: 600.0,
                           child: EditTaskWidget(
                             taskReference: widget.taskDoc!.reference,
-                            taskName: widget.taskDoc!.taskName,
-                            taskDescription: widget.taskDoc!.taskDescription,
-                            dueDate: widget.taskDoc!.completeBy!,
+                            taskName: widget.taskDoc?.taskName,
+                            taskDescription: widget.taskDoc?.taskDescription,
+                            dueDate: widget.taskDoc?.completeBy,
+                            doesRepeat: widget.taskDoc?.isRepeating,
+                            timeDue: widget.taskDoc?.completeTime,
+                            taskDifficulty:
+                                widget.taskDoc?.difficultyLvl.toString(),
+                            daysRepeating: [],
                           ),
                         ),
                       );

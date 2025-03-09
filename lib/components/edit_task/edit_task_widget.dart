@@ -15,15 +15,25 @@ class EditTaskWidget extends StatefulWidget {
   const EditTaskWidget({
     super.key,
     required this.taskReference,
-    required this.taskName,
-    required this.taskDescription,
-    required this.dueDate,
+    this.taskName,
+    this.taskDescription,
+    this.dueDate,
+    this.taskType,
+    this.doesRepeat,
+    this.timeDue,
+    this.taskDifficulty,
+    required this.daysRepeating,
   });
 
   final DocumentReference? taskReference;
   final String? taskName;
   final String? taskDescription;
   final DateTime? dueDate;
+  final String? taskType;
+  final bool? doesRepeat;
+  final DateTime? timeDue;
+  final String? taskDifficulty;
+  final List<String>? daysRepeating;
 
   @override
   State<EditTaskWidget> createState() => _EditTaskWidgetState();
@@ -46,7 +56,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
     _model.textController1 ??= TextEditingController(text: widget.taskName);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.switchValue = false;
+    _model.switchValue = widget.doesRepeat!;
     _model.textController2 ??=
         TextEditingController(text: widget.taskDescription);
     _model.textFieldFocusNode2 ??= FocusNode();
@@ -444,7 +454,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         onChanged: (val) =>
                             safeSetState(() => _model.choiceChipsValues1 = val),
                         selectedChipStyle: ChipStyle(
-                          backgroundColor: Color(0xFF00C923),
+                          backgroundColor: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -459,6 +469,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           iconColor: FlutterFlowTheme.of(context).info,
                           iconSize: 16.0,
                           elevation: 0.0,
+                          borderColor: FlutterFlowTheme.of(context).primaryText,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         unselectedChipStyle: ChipStyle(
@@ -648,7 +659,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
               onChanged: (val) => safeSetState(
                   () => _model.choiceChipsValue2 = val?.firstOrNull),
               selectedChipStyle: ChipStyle(
-                backgroundColor: Color(0xFF00C923),
+                backgroundColor: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                       color: FlutterFlowTheme.of(context).info,
@@ -659,6 +670,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 iconColor: FlutterFlowTheme.of(context).info,
                 iconSize: 16.0,
                 elevation: 0.0,
+                borderColor: FlutterFlowTheme.of(context).primaryText,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               unselectedChipStyle: ChipStyle(
@@ -679,51 +691,125 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
               chipSpacing: 8.0,
               rowSpacing: 8.0,
               multiselect: false,
+              initialized: _model.choiceChipsValue2 != null,
               alignment: WrapAlignment.start,
               controller: _model.choiceChipsValueController2 ??=
                   FormFieldController<List<String>>(
-                [],
+                [widget.taskDifficulty!],
               ),
               wrapped: true,
             ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: FFButtonWidget(
-                onPressed: () async {
-                  logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
-                  logFirebaseEvent('Button_backend_call');
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
+                      logFirebaseEvent('Button_backend_call');
 
-                  await widget.taskReference!.update(createTaskRecordData(
-                    taskName: _model.textController1.text,
-                    taskDescription: _model.textController2.text,
-                    completeBy: widget.dueDate,
-                  ));
-                  logFirebaseEvent('Button_bottom_sheet');
-                  Navigator.pop(context);
-                },
-                text: 'Save',
-                options: FFButtonOptions(
-                  width: 100.0,
-                  height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Color(0xFF71ED67),
-                  textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
+                      await widget.taskReference!.update(createTaskRecordData(
+                        taskName: _model.textController1.text,
+                        taskDescription: _model.textController2.text,
+                        completeBy: widget.dueDate,
+                        isRepeating: widget.doesRepeat,
+                      ));
+                      logFirebaseEvent('Button_bottom_sheet');
+                      Navigator.pop(context);
+                    },
+                    text: 'Save',
+                    options: FFButtonOptions(
+                      width: 100.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .bodyLarge
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
+                          ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1.0,
                       ),
-                  elevation: 0.0,
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                    width: 1.0,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(8.0),
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('EDIT_TASK_COMP_DELETE_BTN_ON_TAP');
+                      logFirebaseEvent('Button_alert_dialog');
+                      var confirmDialogResponse = await showDialog<bool>(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Delete Task'),
+                                content: Text(
+                                    '\"Are you sure you want to delete this task? This action cannot be undone.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        alertDialogContext, false),
+                                    child: Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext, true),
+                                    child: Text('Delete'),
+                                  ),
+                                ],
+                              );
+                            },
+                          ) ??
+                          false;
+                      if (confirmDialogResponse) {
+                        logFirebaseEvent('Button_bottom_sheet');
+                        Navigator.pop(context);
+                        logFirebaseEvent('Button_backend_call');
+                        await widget.taskReference!.delete();
+                      }
+                    },
+                    text: 'Delete',
+                    options: FFButtonOptions(
+                      width: 100.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFFED676C),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .bodyLarge
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
+                          ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
