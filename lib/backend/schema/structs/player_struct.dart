@@ -8,34 +8,34 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class PlayerStruct extends FFFirebaseStruct {
   PlayerStruct({
-    int? pHealth,
-    int? pDamage,
+    double? pHealth,
+    double? pDamage,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _pHealth = pHealth,
         _pDamage = pDamage,
         super(firestoreUtilData);
 
   // "p_health" field.
-  int? _pHealth;
-  int get pHealth => _pHealth ?? 20;
-  set pHealth(int? val) => _pHealth = val;
+  double? _pHealth;
+  double get pHealth => _pHealth ?? 1.0;
+  set pHealth(double? val) => _pHealth = val;
 
-  void incrementPHealth(int amount) => pHealth = pHealth + amount;
+  void incrementPHealth(double amount) => pHealth = pHealth + amount;
 
   bool hasPHealth() => _pHealth != null;
 
   // "p_damage" field.
-  int? _pDamage;
-  int get pDamage => _pDamage ?? 1;
-  set pDamage(int? val) => _pDamage = val;
+  double? _pDamage;
+  double get pDamage => _pDamage ?? .1;
+  set pDamage(double? val) => _pDamage = val;
 
-  void incrementPDamage(int amount) => pDamage = pDamage + amount;
+  void incrementPDamage(double amount) => pDamage = pDamage + amount;
 
   bool hasPDamage() => _pDamage != null;
 
   static PlayerStruct fromMap(Map<String, dynamic> data) => PlayerStruct(
-        pHealth: castToType<int>(data['p_health']),
-        pDamage: castToType<int>(data['p_damage']),
+        pHealth: castToType<double>(data['p_health']),
+        pDamage: castToType<double>(data['p_damage']),
       );
 
   static PlayerStruct? maybeFromMap(dynamic data) =>
@@ -50,11 +50,11 @@ class PlayerStruct extends FFFirebaseStruct {
   Map<String, dynamic> toSerializableMap() => {
         'p_health': serializeParam(
           _pHealth,
-          ParamType.int,
+          ParamType.double,
         ),
         'p_damage': serializeParam(
           _pDamage,
-          ParamType.int,
+          ParamType.double,
         ),
       }.withoutNulls;
 
@@ -62,12 +62,12 @@ class PlayerStruct extends FFFirebaseStruct {
       PlayerStruct(
         pHealth: deserializeParam(
           data['p_health'],
-          ParamType.int,
+          ParamType.double,
           false,
         ),
         pDamage: deserializeParam(
           data['p_damage'],
-          ParamType.int,
+          ParamType.double,
           false,
         ),
       );
@@ -87,8 +87,8 @@ class PlayerStruct extends FFFirebaseStruct {
 }
 
 PlayerStruct createPlayerStruct({
-  int? pHealth,
-  int? pDamage,
+  double? pHealth,
+  double? pDamage,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,

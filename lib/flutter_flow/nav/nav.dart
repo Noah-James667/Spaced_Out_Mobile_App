@@ -106,14 +106,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CalendarWidget.routeName,
           path: CalendarWidget.routePath,
-          builder: (context, params) => CalendarWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'calendar')
+              : CalendarWidget(),
         ),
         FFRoute(
           name: GamePageWidget.routeName,
           path: GamePageWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'gamePage')
-              : GamePageWidget(),
+          builder: (context, params) => GamePageWidget(),
         ),
         FFRoute(
           name: StoragePageWidget.routeName,
@@ -135,6 +135,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'shopCopy')
               : ShopCopyWidget(),
+        ),
+        FFRoute(
+          name: TestPageWidget.routeName,
+          path: TestPageWidget.routePath,
+          builder: (context, params) => TestPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

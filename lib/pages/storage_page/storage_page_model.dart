@@ -9,10 +9,10 @@ class StoragePageModel extends FlutterFlowModel<StoragePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Timer widget.
-  final timerInitialTimeMs = 30000;
-  int timerMilliseconds = 30000;
+  final timerInitialTimeMs = 15000;
+  int timerMilliseconds = 15000;
   String timerValue = StopWatchTimer.getDisplayTime(
-    30000,
+    15000,
     hours: false,
     milliSecond: false,
   );

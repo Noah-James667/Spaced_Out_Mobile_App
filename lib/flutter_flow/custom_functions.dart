@@ -23,3 +23,44 @@ String? displaydaysrepeating(List<String> daysRepeating) {
 List<DateTime> getHighlightedDates(List<DateTime> completeByDates) {
   return completeByDates; // Returns the list of dates to be highlighted
 }
+
+List<DateTime>? getMonthView(DateTime? currentDate) {
+  if (currentDate == null) return null;
+
+  final List<DateTime> monthView = [];
+
+  final int year = currentDate.year;
+  final int month = currentDate.month;
+
+  final DateTime firstDayOfMonth = DateTime(year, month, 1);
+  final int daysInMonth = DateTime(year, month + 1, 0).day;
+
+  int weekdayOfFirstDay = firstDayOfMonth.weekday;
+  if (weekdayOfFirstDay == 7) weekdayOfFirstDay = 0;
+
+  for (int i = 0; i < weekdayOfFirstDay; i++) {
+    monthView
+        .add(firstDayOfMonth.subtract(Duration(days: weekdayOfFirstDay - i)));
+  }
+
+  for (int i = 1; i <= daysInMonth; i++) {
+    monthView.add(DateTime(year, month, i));
+  }
+
+  int daysAdded = monthView.length;
+
+  for (int i = 1; daysAdded % 7 != 0; i++) {
+    monthView.add(DateTime(year, month + 1, i));
+    daysAdded++;
+  }
+
+  return monthView;
+}
+
+DateTime? convertCurrentTimetoDay(DateTime? currentTime) {
+// convert the current time into a dateTime format & return the date
+  if (currentTime == null) return null;
+  final now = DateTime.now();
+  final date = DateTime(now.year, now.month, now.day);
+  return date;
+}

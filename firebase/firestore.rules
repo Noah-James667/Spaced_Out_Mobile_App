@@ -2,10 +2,10 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /task/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
-      allow delete: if false;
+      allow create: if request.resource.data.user == /databases/$(database)/documents/user/$(request.auth.uid);
+      allow read: if resource.data.user == /databases/$(database)/documents/user/$(request.auth.uid);
+      allow write: if resource.data.user == /databases/$(database)/documents/user/$(request.auth.uid);
+      allow delete: if resource.data.user == /databases/$(database)/documents/user/$(request.auth.uid);
     }
 
     match /user/{document} {
@@ -15,47 +15,25 @@ service cloud.firestore {
       allow delete: if request.auth.uid == document;
     }
 
-    match /shop/{document} {
+    match /weapons_shop/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /shop/{parent}/weapons/{document} {
+    match /cosmetic_shop/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /{path=**}/weapons/{document} {
-      allow read: if true;
-    }
-
-
-    match /shop/{parent}/cosmetics/{document} {
+    match /ship_shop/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
-
-    match /{path=**}/cosmetics/{document} {
-      allow read: if true;
-    }
-
-
-    match /shop/{parent}/ship/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
-
-    match /{path=**}/ship/{document} {
-      allow read: if true;
-    }
-
   }
 }

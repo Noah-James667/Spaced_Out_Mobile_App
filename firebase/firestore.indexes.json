@@ -13,6 +13,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "is_repeating",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "complete_by",
           "order": "ASCENDING"
         }

@@ -43,7 +43,6 @@ abstract class FlutterFlowTheme {
 
   late Color black;
   late Color oxfordBlue;
-  late Color orangeWeb;
   late Color platinum;
   late Color white;
 
@@ -135,8 +134,8 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color primary = const Color(0xFF39DEEF);
   late Color secondary = const Color(0xFF003EC4);
-  late Color tertiary = const Color(0xFFEE8B60);
-  late Color alternate = const Color(0xFFE0E3E7);
+  late Color tertiary = const Color(0xFFFCA311);
+  late Color alternate = const Color(0xFFE5E5E5);
   late Color primaryText = const Color(0xFF14181B);
   late Color secondaryText = const Color(0xFF57636C);
   late Color primaryBackground = const Color(0xFFFFFFFF);
@@ -152,7 +151,6 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color black = Color(0xFF000000);
   late Color oxfordBlue = Color(0xFF14213D);
-  late Color orangeWeb = Color(0xFFFCA311);
   late Color platinum = Color(0xFFE5E5E5);
   late Color white = Color(0xFFFFFFFF);
 }

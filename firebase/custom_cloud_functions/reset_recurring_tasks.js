@@ -8,7 +8,9 @@ exports.resetRecurringTasks = functions.pubsub
   .schedule("every day 00:00")
   .timeZone("America/Chicago") // Change to your desired time zone
   .onRun(async (context) => {
-    const today = new Date().toLocaleString("en-US", { weekday: "long" }); // Get current day name (e.g., "Monday")
+    const today = new Date();
+    const todayDayName = today.toLocaleString("en-US", { weekday: "long" }); // Get current day name (e.g., "Monday")
+    const completeByDate = `${today.getMonth() + 1}/${today.getDate()}`; // Format as M/d (e.g., "3/17")
 
     try {
       const tasksRef = db.collection("task");
@@ -25,8 +27,11 @@ exports.resetRecurringTasks = functions.pubsub
         const taskData = doc.data();
         const daysRepeating = taskData.days_repeating || [];
 
-        if (daysRepeating.includes(today)) {
-          batch.update(doc.ref, { is_complete: false });
+        if (daysRepeating.includes(todayDayName)) {
+          batch.update(doc.ref, {
+            is_complete: false,
+            complete_by: completeByDate,
+          });
         }
       });
 

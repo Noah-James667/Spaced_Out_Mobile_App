@@ -99,13 +99,18 @@ class _TaskWidgetState extends State<TaskWidget> {
                     logFirebaseEvent('TASK_Checkbox_byo01zxd_ON_TOGGLE_OFF');
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
+                    logFirebaseEvent('Checkbox_backend_call');
+
+                    await currentUserReference!.update(createUserRecordData(
+                      email: '',
+                    ));
                   }
                 },
                 side: BorderSide(
                   width: 2,
                   color: FlutterFlowTheme.of(context).alternate,
                 ),
-                activeColor: FlutterFlowTheme.of(context).orangeWeb,
+                activeColor: FlutterFlowTheme.of(context).tertiary,
                 checkColor: FlutterFlowTheme.of(context).info,
               ),
             ),
@@ -133,10 +138,13 @@ class _TaskWidgetState extends State<TaskWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      dateTimeFormat(
-                        "Md",
-                        getCurrentTimestamp,
-                        locale: FFLocalizations.of(context).languageCode,
+                      valueOrDefault<String>(
+                        dateTimeFormat(
+                          "Md",
+                          widget.taskDoc?.completeBy,
+                          locale: FFLocalizations.of(context).languageCode,
+                        ),
+                        '[Md]',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:

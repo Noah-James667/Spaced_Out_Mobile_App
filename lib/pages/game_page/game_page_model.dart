@@ -1,11 +1,14 @@
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/instant_timer.dart';
 import 'game_page_widget.dart' show GamePageWidget;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 
 class GamePageModel extends FlutterFlowModel<GamePageWidget> {
+  ///  Local state fields for this page.
+
+  int? opacityTest;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Timer widget.
@@ -19,14 +22,11 @@ class GamePageModel extends FlutterFlowModel<GamePageWidget> {
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
-  InstantTimer? battleTimer;
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
     timerController.dispose();
-    battleTimer?.cancel();
   }
 }

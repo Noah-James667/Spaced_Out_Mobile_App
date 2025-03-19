@@ -8,34 +8,34 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class EnemyStruct extends FFFirebaseStruct {
   EnemyStruct({
-    int? eHealth,
-    int? eDmg,
+    double? eHealth,
+    double? eDmg,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _eHealth = eHealth,
         _eDmg = eDmg,
         super(firestoreUtilData);
 
   // "e_health" field.
-  int? _eHealth;
-  int get eHealth => _eHealth ?? 20;
-  set eHealth(int? val) => _eHealth = val;
+  double? _eHealth;
+  double get eHealth => _eHealth ?? 1.0;
+  set eHealth(double? val) => _eHealth = val;
 
-  void incrementEHealth(int amount) => eHealth = eHealth + amount;
+  void incrementEHealth(double amount) => eHealth = eHealth + amount;
 
   bool hasEHealth() => _eHealth != null;
 
   // "e_dmg" field.
-  int? _eDmg;
-  int get eDmg => _eDmg ?? 1;
-  set eDmg(int? val) => _eDmg = val;
+  double? _eDmg;
+  double get eDmg => _eDmg ?? .1;
+  set eDmg(double? val) => _eDmg = val;
 
-  void incrementEDmg(int amount) => eDmg = eDmg + amount;
+  void incrementEDmg(double amount) => eDmg = eDmg + amount;
 
   bool hasEDmg() => _eDmg != null;
 
   static EnemyStruct fromMap(Map<String, dynamic> data) => EnemyStruct(
-        eHealth: castToType<int>(data['e_health']),
-        eDmg: castToType<int>(data['e_dmg']),
+        eHealth: castToType<double>(data['e_health']),
+        eDmg: castToType<double>(data['e_dmg']),
       );
 
   static EnemyStruct? maybeFromMap(dynamic data) =>
@@ -50,11 +50,11 @@ class EnemyStruct extends FFFirebaseStruct {
   Map<String, dynamic> toSerializableMap() => {
         'e_health': serializeParam(
           _eHealth,
-          ParamType.int,
+          ParamType.double,
         ),
         'e_dmg': serializeParam(
           _eDmg,
-          ParamType.int,
+          ParamType.double,
         ),
       }.withoutNulls;
 
@@ -62,12 +62,12 @@ class EnemyStruct extends FFFirebaseStruct {
       EnemyStruct(
         eHealth: deserializeParam(
           data['e_health'],
-          ParamType.int,
+          ParamType.double,
           false,
         ),
         eDmg: deserializeParam(
           data['e_dmg'],
-          ParamType.int,
+          ParamType.double,
           false,
         ),
       );
@@ -87,8 +87,8 @@ class EnemyStruct extends FFFirebaseStruct {
 }
 
 EnemyStruct createEnemyStruct({
-  int? eHealth,
-  int? eDmg,
+  double? eHealth,
+  double? eDmg,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,

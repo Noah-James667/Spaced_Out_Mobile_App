@@ -119,7 +119,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   width: 2,
                   color: FlutterFlowTheme.of(context).alternate,
                 ),
-                activeColor: FlutterFlowTheme.of(context).orangeWeb,
+                activeColor: FlutterFlowTheme.of(context).tertiary,
                 checkColor: FlutterFlowTheme.of(context).info,
               ),
             ),
@@ -178,6 +178,24 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                       ),
                     ),
                   ].divide(SizedBox(width: 5.0)),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: Text(
+                    dateTimeFormat(
+                      "jm",
+                      widget.taskDoc!.completeTime!,
+                      locale: FFLocalizations.of(context).languageCode,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodySmallFamily,
+                          fontSize: 11.0,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodySmallFamily),
+                        ),
+                  ),
                 ),
               ],
             ),

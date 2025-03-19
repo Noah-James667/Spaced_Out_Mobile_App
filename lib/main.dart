@@ -17,6 +17,9 @@ void main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
+  final environmentValues = FFDevEnvironmentValues();
+  await environmentValues.initialize();
+
   await initFirebase();
 
   final appState = FFAppState(); // Initialize FFAppState
@@ -148,7 +151,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'shop': ShopWidget(),
       'tasks': TasksWidget(),
-      'gamePage': GamePageWidget(),
+      'calendar': CalendarWidget(),
       'storagePage': StoragePageWidget(),
       'equipPage': EquipPageWidget(),
       'shopCopy': ShopCopyWidget(),
@@ -188,7 +191,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.videogame_asset,
+              Icons.calendar_today,
               size: 32.0,
             ),
             label: 'Home',
@@ -196,7 +199,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.pest_control_rounded,
+              Icons.videogame_asset_rounded,
               size: 32.0,
             ),
             label: 'Home',
@@ -212,7 +215,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add_reaction_outlined,
+              Icons.shopping_cart,
               size: 32.0,
             ),
             label: 'Home',

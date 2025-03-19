@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'purchase_model.dart';
 export 'purchase_model.dart';
@@ -12,11 +11,14 @@ export 'purchase_model.dart';
 class PurchaseWidget extends StatefulWidget {
   const PurchaseWidget({
     super.key,
-    String? cost,
-  }) : this.cost = cost ?? '100';
+    this.cost,
+    this.img,
+  });
 
   /// cost of the item
-  final String cost;
+  final int? cost;
+
+  final String? img;
 
   @override
   State<PurchaseWidget> createState() => _PurchaseWidgetState();
@@ -77,7 +79,7 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
                 ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.network(
-                'https://picsum.photos/seed/212/600',
+                widget.img!,
                 width: 200.0,
                 height: 200.0,
                 fit: BoxFit.cover,
@@ -93,48 +95,19 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
                       FlutterFlowTheme.of(context).titleMediumFamily),
                 ),
           ),
-          StreamBuilder<List<ShopRecord>>(
-            stream: queryShopRecord(
-              singleRecord: true,
+          Text(
+            valueOrDefault<String>(
+              widget.cost?.toString(),
+              '0',
             ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: SpinKitFoldingCube(
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 50.0,
-                    ),
-                  ),
-                );
-              }
-              List<ShopRecord> textShopRecordList = snapshot.data!;
-              // Return an empty Container when the item does not exist.
-              if (snapshot.data!.isEmpty) {
-                return Container();
-              }
-              final textShopRecord = textShopRecordList.isNotEmpty
-                  ? textShopRecordList.first
-                  : null;
-
-              return Text(
-                valueOrDefault<String>(
-                  textShopRecord?.cost.toString(),
-                  '0',
+            textAlign: TextAlign.start,
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                  fontSize: 18.0,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).bodyMediumFamily),
                 ),
-                textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      fontSize: 18.0,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
-                    ),
-              );
-            },
           ),
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -161,22 +134,43 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
           FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('PURCHASE_COMP_BUY_BTN_ON_TAP');
-              logFirebaseEvent('Button_backend_call');
-
-              await currentUserReference!.update({
-                ...mapToFirestore(
-                  {
-                    'coins': FieldValue.increment(-(1)),
+              if (widget.cost! >
+                  valueOrDefault(currentUserDocument?.coins, 0)) {
+                logFirebaseEvent('Button_alert_dialog');
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: Text('!'),
+                      content: Text(
+                          'You don\'t have enough coins to purchase that!'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(alertDialogContext),
+                          child: Text('Ok'),
+                        ),
+                      ],
+                    );
                   },
-                ),
-              });
+                );
+              } else {
+                logFirebaseEvent('Button_backend_call');
+
+                await currentUserReference!.update({
+                  ...mapToFirestore(
+                    {
+                      'coins': FieldValue.increment(-(widget.cost!)),
+                    },
+                  ),
+                });
+              }
             },
             text: 'Buy',
             options: FFButtonOptions(
               height: 40.0,
               padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-              color: Color(0xFF005C15),
+              color: FlutterFlowTheme.of(context).tertiary,
               textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                     fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                     color: FlutterFlowTheme.of(context).primaryBackground,

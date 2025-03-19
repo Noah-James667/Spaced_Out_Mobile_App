@@ -1,14 +1,16 @@
+import '';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/instant_timer.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'game_page_model.dart';
 export 'game_page_model.dart';
 
@@ -22,10 +24,13 @@ class GamePageWidget extends StatefulWidget {
   State<GamePageWidget> createState() => _GamePageWidgetState();
 }
 
-class _GamePageWidgetState extends State<GamePageWidget> {
+class _GamePageWidgetState extends State<GamePageWidget>
+    with TickerProviderStateMixin {
   late GamePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -33,6 +38,35 @@ class _GamePageWidgetState extends State<GamePageWidget> {
     _model = createModel(context, () => GamePageModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'gamePage'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('GAME_PAGE_PAGE_gamePage_ON_INIT_STATE');
+      if (valueOrDefault(currentUserDocument?.damageUpCost, 0) <= 0) {
+        logFirebaseEvent('gamePage_backend_call');
+
+        await currentUserReference!.update(createUserRecordData(
+          damageUpCost: 1,
+        ));
+      } else {
+        return;
+      }
+    });
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.linear,
+            delay: 0.0.ms,
+            duration: 800.0.ms,
+            begin: Offset(0.989, 0.795),
+            end: Offset(-100.0, 0.795),
+          ),
+        ],
+      ),
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -45,8 +79,6 @@ class _GamePageWidgetState extends State<GamePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -160,7 +192,9 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
-                              child: Stack(
+                              child:
+                                  // Mother Stack
+                                  Stack(
                                 children: [
                                   Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
@@ -171,7 +205,9 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
                                       ),
-                                      child: Stack(
+                                      child:
+                                          // Enemy Stack
+                                          Stack(
                                         children: [
                                           ClipRRect(
                                             borderRadius:
@@ -197,12 +233,13 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                                     BorderRadius.circular(8.0),
                                                 child: Image.asset(
                                                   'assets/images/alienBatFly.gif',
-                                                  width: 200.0,
-                                                  height: 200.0,
+                                                  width: double.infinity,
+                                                  height: double.infinity,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
-                                            ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'containerOnPageLoadAnimation']!),
                                           ),
                                         ],
                                       ),
@@ -229,6 +266,34 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                       ),
                                     ),
                                   ),
+
+                                  // Sniper Rifle
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.15, 0.71),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Sniper Rifle
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/sniper.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   Align(
                                     alignment:
                                         AlignmentDirectional(-0.34, 0.79),
@@ -244,10 +309,205 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
-                                          'assets/images/asRayGunShoot.gif',
+                                          'assets/images/AS_1_(1).png',
                                           width: 200.0,
                                           height: 200.0,
                                           fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // -0.294, 0.574 (X,Y)
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.29, 0.57),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Wizard Hat
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/magicHat.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // -0.306, 0.58 (XY)
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.31, 0.58),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Pirate Hat
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/pirateHat.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Top Hat
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.3, 0.57),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Top Hat
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/topHat.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Unicorn Horn
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.24, 0.59),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Unicorn Horn
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/unicornHorn.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Cowboy beepbop
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.29, 0.54),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Cowboy Beepbop
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/New_Piskel.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Mushroom Cap
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.31, 0.59),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Mushroom Cap
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/HATWEAR_(1).png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Mushroom Cap
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.31, 0.59),
+                                    child: Container(
+                                      width: 32.0,
+                                      height: 32.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child:
+                                          // Mushroom Cap
+                                          Opacity(
+                                        opacity: 0.0,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/bow.png',
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -307,51 +567,8 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                               FlutterFlowTheme.of(context).info,
                                           size: 30.0,
                                         ),
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'GAME_PAGE_PAGE_wb_sunny_ICN_ON_TAP');
-                                          logFirebaseEvent('IconButton_timer');
-                                          _model.timerController.onStartTimer();
-                                          logFirebaseEvent(
-                                              'IconButton_start_periodic_action');
-                                          _model.battleTimer =
-                                              InstantTimer.periodic(
-                                            duration:
-                                                Duration(milliseconds: 5000),
-                                            callback: (timer) async {
-                                              await Future.wait([
-                                                Future(() async {
-                                                  logFirebaseEvent(
-                                                      'IconButton_update_app_state');
-                                                  FFAppState()
-                                                      .updateEnemyStruct(
-                                                    (e) => e
-                                                      ..incrementEHealth(
-                                                          FFAppState()
-                                                              .player
-                                                              .pDamage),
-                                                  );
-                                                  safeSetState(() {});
-                                                }),
-                                                Future(() async {
-                                                  logFirebaseEvent(
-                                                      'IconButton_update_app_state');
-                                                  FFAppState()
-                                                      .updatePlayerStruct(
-                                                    (e) => e
-                                                      ..pHealth = FFAppState()
-                                                          .enemy
-                                                          .eDmg,
-                                                  );
-                                                  safeSetState(() {});
-                                                }),
-                                              ]);
-                                              logFirebaseEvent(
-                                                  'IconButton_stop_periodic_action');
-                                              _model.battleTimer?.cancel();
-                                            },
-                                            startImmediately: false,
-                                          );
+                                        onPressed: () {
+                                          print('IconButton pressed ...');
                                         },
                                       ),
                                     ),
@@ -422,14 +639,11 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                             ),
                             AuthUserStreamWidget(
                               builder: (context) => Text(
-                                valueOrDefault<String>(
-                                  formatNumber(
-                                    valueOrDefault(
-                                        currentUserDocument?.damage, 0.0),
-                                    formatType: FormatType.decimal,
-                                    decimalType: DecimalType.automatic,
-                                  ),
-                                  '0',
+                                formatNumber(
+                                  valueOrDefault(
+                                      currentUserDocument?.damage, 0.0),
+                                  formatType: FormatType.decimal,
+                                  decimalType: DecimalType.automatic,
                                 ),
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
@@ -466,14 +680,11 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                             ),
                             AuthUserStreamWidget(
                               builder: (context) => Text(
-                                valueOrDefault<String>(
-                                  formatNumber(
-                                    valueOrDefault(
-                                        currentUserDocument?.damageUpCost, 0),
-                                    formatType: FormatType.decimal,
-                                    decimalType: DecimalType.automatic,
-                                  ),
-                                  '1',
+                                formatNumber(
+                                  valueOrDefault(
+                                      currentUserDocument?.damageUpCost, 0),
+                                  formatType: FormatType.decimal,
+                                  decimalType: DecimalType.automatic,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium

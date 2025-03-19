@@ -690,6 +690,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                               completeTime: _model.datePicked1,
                               completeBy: _model.datePicked2,
                             ));
+                        logFirebaseEvent('Button_bottom_sheet');
+                        Navigator.pop(context);
                       } else {
                         logFirebaseEvent('Button_alert_dialog');
                         await showDialog(
@@ -710,24 +712,48 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                         );
                       }
                     } else {
-                      logFirebaseEvent('Button_backend_call');
+                      if ((_model.datePicked1 != null) &&
+                          (_model.choiceChipsValues1?.firstOrNull != null &&
+                              _model.choiceChipsValues1?.firstOrNull != '')) {
+                        logFirebaseEvent('Button_backend_call');
 
-                      firestoreBatch.set(TaskRecord.collection.doc(), {
-                        ...createTaskRecordData(
-                          user: currentUserReference,
-                          taskName: _model.textController1.text,
-                          taskDescription: _model.textController2.text,
-                          isComplete: false,
-                          isRepeating: _model.switchValue,
-                          completeTime: _model.datePicked1,
-                          completeBy: _model.datePicked2,
-                        ),
-                        ...mapToFirestore(
-                          {
-                            'days_repeating': _model.choiceChipsValues1,
+                        firestoreBatch.set(TaskRecord.collection.doc(), {
+                          ...createTaskRecordData(
+                            user: currentUserReference,
+                            taskName: _model.textController1.text,
+                            taskDescription: _model.textController2.text,
+                            isComplete: false,
+                            isRepeating: _model.switchValue,
+                            completeTime: _model.datePicked1,
+                          ),
+                          ...mapToFirestore(
+                            {
+                              'days_repeating':
+                                  _model.choiceChipsValues1?.take(7).toList(),
+                            },
+                          ),
+                        });
+                        logFirebaseEvent('Button_bottom_sheet');
+                        Navigator.pop(context);
+                      } else {
+                        logFirebaseEvent('Button_alert_dialog');
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('unset value'),
+                              content: Text('Your date and time is not set'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
                           },
-                        ),
-                      });
+                        );
+                      }
                     }
                   } finally {
                     await firestoreBatch.commit();

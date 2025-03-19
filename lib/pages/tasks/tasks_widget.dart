@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/create_task/create_task_widget.dart';
+import '/components/description_sheet/description_sheet_widget.dart';
 import '/components/duplicate_task/duplicate_task_widget.dart';
 import '/components/task/task_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -59,7 +60,7 @@ class _TasksWidgetState extends State<TasksWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).accent1,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             logFirebaseEvent('TASKS_FloatingActionButton_0tw0dwqf_ON_T');
@@ -102,7 +103,7 @@ class _TasksWidgetState extends State<TasksWidget>
               width: 100.0,
               height: double.infinity,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).orangeWeb,
+                color: FlutterFlowTheme.of(context).tertiary,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),
                   bottomRight: Radius.circular(0.0),
@@ -220,7 +221,7 @@ class _TasksWidgetState extends State<TasksWidget>
                             FlutterFlowIconButton(
                               borderRadius: 8.0,
                               buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).orangeWeb,
+                              fillColor: FlutterFlowTheme.of(context).tertiary,
                               icon: Icon(
                                 Icons.notes,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -245,6 +246,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .titleLargeFamily,
+                                        color: Colors.white,
                                         fontSize: 25.0,
                                         letterSpacing: 0.0,
                                         useGoogleFonts: GoogleFonts.asMap()
@@ -258,30 +260,50 @@ class _TasksWidgetState extends State<TasksWidget>
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
+                      Container(
+                        width: 400.0,
+                        height: 100.0,
+                        child: Stack(
                           children: [
-                            Container(
-                              width: 100.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(24.0),
-                                border: Border.all(
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(22.0),
-                                child: Image.asset(
-                                  'assets/images/AS_1_(1).png',
-                                  width: 100.5,
-                                  height: 200.0,
-                                  fit: BoxFit.contain,
-                                ),
+                            Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFE9E9E9),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/mwmx0_600',
+                                        width: 200.0,
+                                        height: 200.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        'https://picsum.photos/seed/791/600',
+                                        width: 400.0,
+                                        height: 100.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -292,6 +314,7 @@ class _TasksWidgetState extends State<TasksWidget>
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).titleLargeFamily,
+                              color: Colors.white,
                               letterSpacing: 0.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context)
@@ -303,59 +326,197 @@ class _TasksWidgetState extends State<TasksWidget>
                 ],
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment(0.0, 0),
-                      child: TabBar(
-                        labelColor: FlutterFlowTheme.of(context).primaryText,
-                        unselectedLabelColor:
-                            FlutterFlowTheme.of(context).secondaryText,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleMediumFamily),
-                                ),
-                        unselectedLabelStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleMediumFamily),
-                                ),
-                        indicatorColor: FlutterFlowTheme.of(context).primary,
-                        tabs: [
-                          Tab(
-                            text: 'One Time Tasks',
-                          ),
-                          Tab(
-                            text: 'Weekly Tasks',
-                          ),
-                        ],
-                        controller: _model.tabBarController,
-                        onTap: (i) async {
-                          [() async {}, () async {}][i]();
-                        },
+                child: Padding(
+                  padding: EdgeInsets.all(6.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFE9E9E9),
+                      borderRadius: BorderRadius.circular(16.0),
+                      border: Border.all(
+                        width: 1.0,
                       ),
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        controller: _model.tabBarController,
-                        children: [
-                          KeepAliveWidgetWrapper(
-                            builder: (context) => SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  StreamBuilder<List<TaskRecord>>(
-                                    stream: FFAppState().queryCache(
-                                      requestFn: () => queryTaskRecord(
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment(0.0, 0),
+                          child: TabBar(
+                            labelColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            unselectedLabelColor:
+                                FlutterFlowTheme.of(context).secondaryText,
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .titleMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleMediumFamily),
+                                ),
+                            unselectedLabelStyle: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .titleMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleMediumFamily),
+                                ),
+                            indicatorColor:
+                                FlutterFlowTheme.of(context).primary,
+                            tabs: [
+                              Tab(
+                                text: 'One Time Tasks',
+                              ),
+                              Tab(
+                                text: 'Weekly Tasks',
+                              ),
+                            ],
+                            controller: _model.tabBarController,
+                            onTap: (i) async {
+                              [() async {}, () async {}][i]();
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: TabBarView(
+                            controller: _model.tabBarController,
+                            children: [
+                              KeepAliveWidgetWrapper(
+                                builder: (context) => SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      StreamBuilder<List<TaskRecord>>(
+                                        stream: FFAppState().queryCache(
+                                          requestFn: () => queryTaskRecord(
+                                            queryBuilder: (taskRecord) =>
+                                                taskRecord
+                                                    .where(
+                                                      'user',
+                                                      isEqualTo:
+                                                          currentUserReference,
+                                                    )
+                                                    .where(
+                                                      'is_complete',
+                                                      isEqualTo: false,
+                                                    )
+                                                    .where(
+                                                      'is_repeating',
+                                                      isEqualTo: false,
+                                                    ),
+                                          ),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 40.0,
+                                                height: 40.0,
+                                                child: SpinKitCubeGrid(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 40.0,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<TaskRecord>
+                                              listViewTaskRecordList =
+                                              snapshot.data!;
+
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount:
+                                                listViewTaskRecordList.length,
+                                            itemBuilder:
+                                                (context, listViewIndex) {
+                                              final listViewTaskRecord =
+                                                  listViewTaskRecordList[
+                                                      listViewIndex];
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'TASKS_PAGE_Container_39mto8a7_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'task_bottom_sheet');
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return GestureDetector(
+                                                        onTap: () {
+                                                          FocusScope.of(context)
+                                                              .unfocus();
+                                                          FocusManager.instance
+                                                              .primaryFocus
+                                                              ?.unfocus();
+                                                        },
+                                                        child: Padding(
+                                                          padding: MediaQuery
+                                                              .viewInsetsOf(
+                                                                  context),
+                                                          child: Container(
+                                                            height: 350.0,
+                                                            child:
+                                                                DescriptionSheetWidget(
+                                                              taskDoc:
+                                                                  listViewTaskRecord,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                },
+                                                child: TaskWidget(
+                                                  key: Key(
+                                                      'Key39m_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                  taskDoc: listViewTaskRecord,
+                                                  checkAction: () async {
+                                                    logFirebaseEvent(
+                                                        'TASKS_PAGE_Container_39mto8a7_CALLBACK');
+                                                    logFirebaseEvent(
+                                                        'task_backend_call');
+
+                                                    await listViewTaskRecord
+                                                        .reference
+                                                        .update(
+                                                            createTaskRecordData(
+                                                      isComplete: true,
+                                                    ));
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              KeepAliveWidgetWrapper(
+                                builder: (context) => Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    StreamBuilder<List<TaskRecord>>(
+                                      stream: queryTaskRecord(
                                         queryBuilder: (taskRecord) => taskRecord
                                             .where(
                                               'user',
@@ -367,137 +528,115 @@ class _TasksWidgetState extends State<TasksWidget>
                                             )
                                             .where(
                                               'is_repeating',
-                                              isEqualTo: false,
+                                              isEqualTo: true,
                                             ),
                                       ),
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 40.0,
-                                            height: 40.0,
-                                            child: SpinKitCubeGrid(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 40.0,
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitFoldingCube(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 50.0,
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      }
-                                      List<TaskRecord> listViewTaskRecordList =
-                                          snapshot.data!;
-
-                                      return ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount:
-                                            listViewTaskRecordList.length,
-                                        itemBuilder: (context, listViewIndex) {
-                                          final listViewTaskRecord =
-                                              listViewTaskRecordList[
-                                                  listViewIndex];
-                                          return TaskWidget(
-                                            key: Key(
-                                                'Key39m_${listViewIndex}_of_${listViewTaskRecordList.length}'),
-                                            taskDoc: listViewTaskRecord,
-                                            checkAction: () async {
-                                              logFirebaseEvent(
-                                                  'TASKS_PAGE_Container_39mto8a7_CALLBACK');
-                                              logFirebaseEvent(
-                                                  'task_backend_call');
-
-                                              await listViewTaskRecord.reference
-                                                  .update(createTaskRecordData(
-                                                isComplete: true,
-                                              ));
-                                            },
                                           );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          KeepAliveWidgetWrapper(
-                            builder: (context) => Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                StreamBuilder<List<TaskRecord>>(
-                                  stream: queryTaskRecord(
-                                    queryBuilder: (taskRecord) => taskRecord
-                                        .where(
-                                          'user',
-                                          isEqualTo: currentUserReference,
-                                        )
-                                        .where(
-                                          'is_complete',
-                                          isEqualTo: false,
-                                        )
-                                        .where(
-                                          'is_repeating',
-                                          isEqualTo: true,
-                                        ),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: SpinKitFoldingCube(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 50.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<TaskRecord> listViewTaskRecordList =
-                                        snapshot.data!;
+                                        }
+                                        List<TaskRecord>
+                                            listViewTaskRecordList =
+                                            snapshot.data!;
 
-                                    return ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: listViewTaskRecordList.length,
-                                      itemBuilder: (context, listViewIndex) {
-                                        final listViewTaskRecord =
-                                            listViewTaskRecordList[
-                                                listViewIndex];
-                                        return DuplicateTaskWidget(
-                                          key: Key(
-                                              'Keykkq_${listViewIndex}_of_${listViewTaskRecordList.length}'),
-                                          taskDoc: listViewTaskRecord,
-                                          checkAction: () async {
-                                            logFirebaseEvent(
-                                                'TASKS_PAGE_Container_kkqspky3_CALLBACK');
-                                            logFirebaseEvent(
-                                                'duplicateTask_backend_call');
+                                        return ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewTaskRecordList.length,
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewTaskRecord =
+                                                listViewTaskRecordList[
+                                                    listViewIndex];
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'TASKS_PAGE_Container_kkqspky3_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'duplicateTask_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 350.0,
+                                                          child:
+                                                              DescriptionSheetWidget(
+                                                            taskDoc:
+                                                                listViewTaskRecord,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: DuplicateTaskWidget(
+                                                key: Key(
+                                                    'Keykkq_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                taskDoc: listViewTaskRecord,
+                                                checkAction: () async {
+                                                  logFirebaseEvent(
+                                                      'TASKS_PAGE_Container_kkqspky3_CALLBACK');
+                                                  logFirebaseEvent(
+                                                      'duplicateTask_backend_call');
 
-                                            await listViewTaskRecord.reference
-                                                .update(createTaskRecordData(
-                                              isComplete: true,
-                                            ));
+                                                  await listViewTaskRecord
+                                                      .reference
+                                                      .update(
+                                                          createTaskRecordData(
+                                                    isComplete: true,
+                                                  ));
+                                                },
+                                              ),
+                                            );
                                           },
                                         );
                                       },
-                                    );
-                                  },
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
