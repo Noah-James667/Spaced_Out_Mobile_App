@@ -1,16 +1,15 @@
-import '';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
+import '/components/game_lose/game_lose_widget.dart';
+import '/components/game_win/game_win_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'game_page_model.dart';
 export 'game_page_model.dart';
 
@@ -24,13 +23,10 @@ class GamePageWidget extends StatefulWidget {
   State<GamePageWidget> createState() => _GamePageWidgetState();
 }
 
-class _GamePageWidgetState extends State<GamePageWidget>
-    with TickerProviderStateMixin {
+class _GamePageWidgetState extends State<GamePageWidget> {
   late GamePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -41,30 +37,24 @@ class _GamePageWidgetState extends State<GamePageWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('GAME_PAGE_PAGE_gamePage_ON_INIT_STATE');
+      logFirebaseEvent('gamePage_update_page_state');
+      _model.updatePageEnemyStruct(
+        (e) => e
+          ..eHealth = FFAppState().appEnemy.eHealth
+          ..eDmg = FFAppState().appEnemy.eDmg
+          ..eArmr = FFAppState().appEnemy.eArmr,
+      );
+      _model.updatePagePlayerStruct(
+        (e) => e
+          ..pHealth = FFAppState().appPlayer.pHealth
+          ..pDmg = FFAppState().appPlayer.pDmg
+          ..pArmr = FFAppState().appPlayer.pArmr,
+      );
+      safeSetState(() {});
       if (valueOrDefault(currentUserDocument?.damageUpCost, 0) <= 0) {
-        logFirebaseEvent('gamePage_backend_call');
-
-        await currentUserReference!.update(createUserRecordData(
-          damageUpCost: 1,
-        ));
       } else {
         return;
       }
-    });
-
-    animationsMap.addAll({
-      'containerOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.linear,
-            delay: 0.0.ms,
-            duration: 800.0.ms,
-            begin: Offset(0.989, 0.795),
-            end: Offset(-100.0, 0.795),
-          ),
-        ],
-      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -79,69 +69,71 @@ class _GamePageWidgetState extends State<GamePageWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Align(
-            alignment: AlignmentDirectional(0.0, -1.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(0.0, -1.0),
-                  child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Container(
-                      width: 375.0,
-                      height: 652.71,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          body: SafeArea(
+            top: true,
+            child: Align(
+              alignment: AlignmentDirectional(0.0, -1.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.0, -1.0),
+                      child: Container(
+                        width: 375.0,
+                        height: 450.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Level: ',
+                                  'XP: ',
                                   style: FlutterFlowTheme.of(context)
-                                      .headlineSmall
+                                      .bodyMedium
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .headlineSmallFamily,
+                                            .bodyMediumFamily,
                                         letterSpacing: 0.0,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .headlineSmallFamily),
+                                                    .bodyMediumFamily),
                                       ),
                                 ),
                                 AuthUserStreamWidget(
                                   builder: (context) => Text(
-                                    valueOrDefault<String>(
-                                      formatNumber(
-                                        valueOrDefault(
-                                            currentUserDocument?.xp, 0),
-                                        formatType: FormatType.decimal,
-                                        decimalType: DecimalType.automatic,
-                                      ),
-                                      '0',
+                                    formatNumber(
+                                      valueOrDefault(
+                                          currentUserDocument?.xp, 0),
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.automatic,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -149,6 +141,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMediumFamily,
+                                          fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
@@ -157,44 +150,17 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                         ),
                                   ),
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Icon(
-                                      Icons.favorite,
-                                      color: FlutterFlowTheme.of(context).error,
-                                      size: 24.0,
-                                    ),
-                                    Text(
-                                      'health',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineSmallFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineSmallFamily),
-                                          ),
-                                    ),
-                                  ].divide(SizedBox(width: 8.0)),
-                                ),
                               ],
                             ),
                             Container(
                               width: 410.0,
-                              height: 410.0,
+                              height: 292.01,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
-                              child:
-                                  // Mother Stack
-                                  Stack(
+                              child: Stack(
                                 children: [
                                   Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
@@ -205,9 +171,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
                                       ),
-                                      child:
-                                          // Enemy Stack
-                                          Stack(
+                                      child: Stack(
                                         children: [
                                           ClipRRect(
                                             borderRadius:
@@ -232,14 +196,13 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
                                                 child: Image.asset(
-                                                  'assets/images/alienBatFly.gif',
-                                                  width: double.infinity,
-                                                  height: double.infinity,
+                                                  'assets/images/wiggleMonster.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
-                                            ).animateOnPageLoad(animationsMap[
-                                                'containerOnPageLoadAnimation']!),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -247,10 +210,10 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                   ),
                                   Align(
                                     alignment:
-                                        AlignmentDirectional(-0.95, 0.91),
+                                        AlignmentDirectional(-1.07, 0.92),
                                     child: Container(
                                       width: 125.0,
-                                      height: 200.0,
+                                      height: 125.0,
                                       decoration: BoxDecoration(
                                         color: Color(0x00FFFFFF),
                                       ),
@@ -258,38 +221,10 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
-                                          'assets/images/nswz3_9.png',
+                                          'assets/images/shipBase.png',
                                           width: 200.0,
                                           height: 200.0,
                                           fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Sniper Rifle
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.15, 0.71),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Sniper Rifle
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/sniper.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -303,9 +238,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                       decoration: BoxDecoration(
                                         color: Color(0x00FFFFFF),
                                       ),
-                                      child:
-                                          // have cosmetics tied to equip page and behind the background image and when the variable is switched the sprite will be brought to the front do this for the shop and equip page as well over top the image for tha astronaught.
-                                          ClipRRect(
+                                      child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
@@ -313,201 +246,6 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                           width: 200.0,
                                           height: 200.0,
                                           fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // -0.294, 0.574 (X,Y)
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.29, 0.57),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Wizard Hat
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/magicHat.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // -0.306, 0.58 (XY)
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.31, 0.58),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Pirate Hat
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/pirateHat.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Top Hat
-                                  Align(
-                                    alignment: AlignmentDirectional(-0.3, 0.57),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Top Hat
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/topHat.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Unicorn Horn
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.24, 0.59),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Unicorn Horn
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/unicornHorn.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Cowboy beepbop
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.29, 0.54),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Cowboy Beepbop
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/New_Piskel.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Mushroom Cap
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.31, 0.59),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Mushroom Cap
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/HATWEAR_(1).png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Mushroom Cap
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.31, 0.59),
-                                    child: Container(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x00FFFFFF),
-                                      ),
-                                      child:
-                                          // Mushroom Cap
-                                          Opacity(
-                                        opacity: 0.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/bow.png',
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -523,54 +261,252 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    FlutterFlowTimer(
-                                      initialTime: _model.timerInitialTimeMs,
-                                      getDisplayTime: (value) =>
-                                          StopWatchTimer.getDisplayTime(
-                                        value,
-                                        hours: false,
-                                        milliSecond: false,
+                                    FlutterFlowIconButton(
+                                      borderRadius: 8.0,
+                                      buttonSize: 60.0,
+                                      fillColor:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      disabledColor: Color(0x8FFCA311),
+                                      disabledIconColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      icon: Icon(
+                                        Icons.local_fire_department_rounded,
+                                        color:
+                                            FlutterFlowTheme.of(context).info,
+                                        size: 30.0,
                                       ),
-                                      controller: _model.timerController,
-                                      updateStateInterval:
-                                          Duration(milliseconds: 1000),
-                                      onChanged:
-                                          (value, displayTime, shouldUpdate) {
-                                        _model.timerMilliseconds = value;
-                                        _model.timerValue = displayTime;
-                                        if (shouldUpdate) safeSetState(() {});
-                                      },
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineSmallFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineSmallFamily),
-                                          ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.all(5.0),
-                                      child: FlutterFlowIconButton(
-                                        borderRadius: 8.0,
-                                        buttonSize: 60.0,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondary,
-                                        icon: Icon(
-                                          Icons.wb_sunny,
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          size: 30.0,
-                                        ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
-                                        },
-                                      ),
+                                      onPressed: (_model.gameRunning == true)
+                                          ? null
+                                          : () async {
+                                              logFirebaseEvent(
+                                                  'GAME_PAGE_PAGE_battleButton_ON_TAP');
+                                              // Set temporary variables equal to player and enemy variables.
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.pageEnemy = EnemyStruct(
+                                                eHealth: FFAppState()
+                                                    .appEnemy
+                                                    .eHealth,
+                                                eDmg:
+                                                    FFAppState().appEnemy.eDmg,
+                                                eArmr:
+                                                    FFAppState().appEnemy.eArmr,
+                                              );
+                                              _model.pagePlayer = PlayerStruct(
+                                                pHealth: FFAppState()
+                                                    .appPlayer
+                                                    .pHealth,
+                                                pDmg:
+                                                    FFAppState().appPlayer.pDmg,
+                                                pArmr: FFAppState()
+                                                    .appPlayer
+                                                    .pArmr,
+                                              );
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.gameRunning = true;
+                                              safeSetState(() {});
+                                              while ((_model
+                                                          .pagePlayer!.pHealth >
+                                                      0.0) &&
+                                                  (_model.pageEnemy!.eHealth >
+                                                      0.0)) {
+                                                logFirebaseEvent(
+                                                    'battleButton_wait__delay');
+                                                await Future.delayed(
+                                                    const Duration(
+                                                        milliseconds: 1000));
+                                                logFirebaseEvent(
+                                                    'battleButton_update_page_state');
+                                                _model.updatePageEnemyStruct(
+                                                  (e) => e
+                                                    ..eHealth = _model
+                                                            .pageEnemy!
+                                                            .eHealth -
+                                                        FFAppState()
+                                                            .appPlayer
+                                                            .pDmg,
+                                                );
+                                                _model.updatePagePlayerStruct(
+                                                  (e) => e
+                                                    ..pHealth = _model
+                                                            .pagePlayer!
+                                                            .pHealth -
+                                                        FFAppState()
+                                                            .appEnemy
+                                                            .eDmg,
+                                                );
+                                                safeSetState(() {});
+                                              }
+                                              if (_model.pagePlayer!.pHealth <=
+                                                  0.0) {
+                                                logFirebaseEvent(
+                                                    'battleButton_update_page_state');
+                                                _model.playerWins = false;
+                                                safeSetState(() {});
+                                              } else {
+                                                logFirebaseEvent(
+                                                    'battleButton_update_page_state');
+                                                _model.playerWins = true;
+                                                safeSetState(() {});
+                                              }
+
+                                              if (_model.playerWins == true) {
+                                                logFirebaseEvent(
+                                                    'battleButton_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 300.0,
+                                                          child: GameWinWidget(
+                                                            rewards: valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.coins,
+                                                                    0)
+                                                                .toDouble(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+
+                                                logFirebaseEvent(
+                                                    'battleButton_update_app_state');
+                                                FFAppState()
+                                                    .updateAppEnemyStruct(
+                                                  (e) => e
+                                                    ..incrementEHealth(0.0)
+                                                    ..incrementEDmg(1.0)
+                                                    ..incrementEArmr(1.0),
+                                                );
+                                                safeSetState(() {});
+                                                logFirebaseEvent(
+                                                    'battleButton_backend_call');
+
+                                                await currentUserReference!
+                                                    .update({
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'coins':
+                                                          FieldValue.increment(
+                                                              10),
+                                                    },
+                                                  ),
+                                                });
+                                              } else {
+                                                logFirebaseEvent(
+                                                    'battleButton_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 300.0,
+                                                          child:
+                                                              GameLoseWidget(),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              }
+
+                                              logFirebaseEvent(
+                                                  'battleButton_alert_dialog');
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('!'),
+                                                    content: Text(
+                                                        'loop no longer running'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.gameRunning = false;
+                                              _model.pagePlayer = PlayerStruct(
+                                                pHealth: FFAppState()
+                                                    .appPlayer
+                                                    .pHealth,
+                                                pDmg:
+                                                    FFAppState().appPlayer.pDmg,
+                                                pArmr: FFAppState()
+                                                    .appPlayer
+                                                    .pArmr,
+                                              );
+                                              _model.pageEnemy = EnemyStruct(
+                                                eHealth: FFAppState()
+                                                    .appEnemy
+                                                    .eHealth,
+                                                eDmg:
+                                                    FFAppState().appEnemy.eDmg,
+                                                eArmr:
+                                                    FFAppState().appEnemy.eArmr,
+                                              );
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_navigate_to');
+
+                                              context.goNamed(
+                                                GamePageWidget.routeName,
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                    duration: Duration(
+                                                        milliseconds: 0),
+                                                  ),
+                                                },
+                                              );
+                                            },
                                     ),
                                     Text(
                                       'Attack',
@@ -582,6 +518,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                                     .bodyMediumFamily,
                                             fontSize: 18.0,
                                             letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
@@ -590,192 +527,907 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                     ),
                                   ].divide(SizedBox(height: 8.0)),
                                 ),
+                                FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.34,
+                                  fillColor: FlutterFlowTheme.of(context).error,
+                                  disabledColor: Color(0x83F0141E),
+                                  disabledIconColor:
+                                      FlutterFlowTheme.of(context).info,
+                                  icon: Icon(
+                                    Icons.restart_alt_sharp,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 20.0,
+                                  ),
+                                  onPressed: (_model.gameRunning == true)
+                                      ? null
+                                      : () async {
+                                          logFirebaseEvent(
+                                              'GAME_PAGE_PAGE_battleButton_ON_TAP');
+                                          logFirebaseEvent(
+                                              'battleButton_update_app_state');
+                                          FFAppState().updateAppEnemyStruct(
+                                            (e) => e
+                                              ..eHealth = 90.0
+                                              ..eDmg = 10.0
+                                              ..eArmr = 5.0,
+                                          );
+                                          FFAppState().updateAppPlayerStruct(
+                                            (e) => e
+                                              ..pHealth = 100.0
+                                              ..pDmg = 10.0
+                                              ..pArmr = 5.0,
+                                          );
+                                          safeSetState(() {});
+                                          logFirebaseEvent(
+                                              'battleButton_navigate_to');
+
+                                          context.pushNamed(
+                                            GamePageWidget.routeName,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                                duration:
+                                                    Duration(milliseconds: 0),
+                                              ),
+                                            },
+                                          );
+                                        },
+                                ),
                               ],
                             ),
                           ].divide(SizedBox(height: 16.0)),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Upgrade: ',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 18.0,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Current: ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                            ),
-                            AuthUserStreamWidget(
-                              builder: (context) => Text(
-                                formatNumber(
-                                  valueOrDefault(
-                                      currentUserDocument?.damage, 0.0),
-                                  formatType: FormatType.decimal,
-                                  decimalType: DecimalType.automatic,
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                LinearPercentIndicator(
+                                  percent: _model.pagePlayer!.pHealth * .01,
+                                  width: 120.0,
+                                  lineHeight: 15.0,
+                                  animation: true,
+                                  animateFromLastPercent: true,
+                                  progressColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  barRadius: Radius.circular(8.0),
+                                  padding: EdgeInsets.zero,
                                 ),
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Cost: ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                            ),
-                            AuthUserStreamWidget(
-                              builder: (context) => Text(
-                                formatNumber(
-                                  valueOrDefault(
-                                      currentUserDocument?.damageUpCost, 0),
-                                  formatType: FormatType.decimal,
-                                  decimalType: DecimalType.automatic,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: FlutterFlowIconButton(
-                        borderRadius: 8.0,
-                        buttonSize: 40.0,
-                        fillColor: FlutterFlowTheme.of(context).secondary,
-                        icon: Icon(
-                          Icons.trending_up_outlined,
-                          color: FlutterFlowTheme.of(context).info,
-                          size: 24.0,
-                        ),
-                        onPressed: () async {
-                          logFirebaseEvent(
-                              'GAME_trending_up_outlined_ICN_ON_TAP');
-                          final firestoreBatch =
-                              FirebaseFirestore.instance.batch();
-                          try {
-                            if ((valueOrDefault(currentUserDocument?.xp, 0) >
-                                    0) &&
-                                (valueOrDefault(currentUserDocument?.xp, 0) >=
-                                    valueOrDefault(
-                                        currentUserDocument?.damageUpCost,
-                                        0))) {
-                              logFirebaseEvent('IconButton_backend_call');
-
-                              firestoreBatch.update(currentUserReference!, {
-                                ...mapToFirestore(
-                                  {
-                                    'damage': FieldValue.increment(
-                                        valueOrDefault(
-                                            currentUserDocument?.damage, 0.0)),
-                                  },
-                                ),
-                              });
-                              logFirebaseEvent('IconButton_backend_call');
-
-                              firestoreBatch.update(currentUserReference!, {
-                                ...mapToFirestore(
-                                  {
-                                    'xp': FieldValue.increment(-(valueOrDefault(
-                                        currentUserDocument?.damageUpCost, 0))),
-                                  },
-                                ),
-                              });
-                            } else {
-                              logFirebaseEvent('IconButton_alert_dialog');
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('!'),
-                                    content: Text('Not enough xp!'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
+                                Text(
+                                  'Player',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
-                                    ],
-                                  );
-                                },
-                              );
-                              return;
-                            }
-                          } finally {
-                            await firestoreBatch.commit();
-                          }
-                        },
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Color(0xFFF0141E),
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.pagePlayer?.pHealth.toString(),
+                                        '1',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.local_fire_department_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.pagePlayer?.pDmg.toString(),
+                                        '1',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.shield_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.pagePlayer?.pArmr.toString(),
+                                        '1',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                LinearPercentIndicator(
+                                  percent: _model.pageEnemy!.eHealth * .01,
+                                  width: 120.0,
+                                  lineHeight: 15.0,
+                                  animation: true,
+                                  animateFromLastPercent: true,
+                                  progressColor:
+                                      FlutterFlowTheme.of(context).tertiary,
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  barRadius: Radius.circular(8.0),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                Text(
+                                  'Enemy',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Color(0xFFF0141E),
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.pageEnemy?.eHealth.toString(),
+                                        '1',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.local_fire_department_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.pageEnemy?.eDmg.toString(),
+                                        '1',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.shield_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.pageEnemy?.eArmr.toString(),
+                                        '1',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]
+                            .divide(SizedBox(width: 50.0))
+                            .around(SizedBox(width: 50.0)),
                       ),
                     ),
-                  ],
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 175.0,
+                              height: 65.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Health: ',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Current: ',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                      Text(
+                                        formatNumber(
+                                          FFAppState().appPlayer.pHealth,
+                                          formatType: FormatType.decimal,
+                                          decimalType: DecimalType.automatic,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Cost: ',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                      AuthUserStreamWidget(
+                                        builder: (context) => Text(
+                                          formatNumber(
+                                            valueOrDefault(
+                                                currentUserDocument
+                                                    ?.damageUpCost,
+                                                0),
+                                            formatType: FormatType.decimal,
+                                            decimalType: DecimalType.automatic,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily),
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).secondary,
+                              icon: Icon(
+                                Icons.add_outlined,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'GAME_PAGE_PAGE_add_outlined_ICN_ON_TAP');
+                                if ((valueOrDefault(
+                                            currentUserDocument?.xp, 0) >
+                                        0) &&
+                                    (valueOrDefault(
+                                            currentUserDocument?.xp, 0) >=
+                                        valueOrDefault(
+                                            currentUserDocument?.damageUpCost,
+                                            0))) {
+                                  logFirebaseEvent(
+                                      'IconButton_update_app_state');
+                                  FFAppState().updateAppPlayerStruct(
+                                    (e) => e..incrementPHealth(1.0),
+                                  );
+                                  FFAppState().updateAppEnemyStruct(
+                                    (e) => e..incrementEHealth(1.0),
+                                  );
+                                  safeSetState(() {});
+                                } else {
+                                  logFirebaseEvent('IconButton_alert_dialog');
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('!'),
+                                        content: Text('Not enough xp!'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  return;
+                                }
+                              },
+                            ),
+                          ].divide(SizedBox(width: 10.0)),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 175.0,
+                              height: 65.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Armor: ',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Current: ',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                      Text(
+                                        formatNumber(
+                                          FFAppState().appPlayer.pArmr,
+                                          formatType: FormatType.decimal,
+                                          decimalType: DecimalType.automatic,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Cost: ',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                      AuthUserStreamWidget(
+                                        builder: (context) => Text(
+                                          formatNumber(
+                                            valueOrDefault(
+                                                currentUserDocument
+                                                    ?.damageUpCost,
+                                                0),
+                                            formatType: FormatType.decimal,
+                                            decimalType: DecimalType.automatic,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily),
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).secondary,
+                              icon: Icon(
+                                Icons.add_outlined,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'GAME_PAGE_PAGE_add_outlined_ICN_ON_TAP');
+                                if ((valueOrDefault(
+                                            currentUserDocument?.xp, 0) >
+                                        0) &&
+                                    (valueOrDefault(
+                                            currentUserDocument?.xp, 0) >=
+                                        valueOrDefault(
+                                            currentUserDocument?.damageUpCost,
+                                            0))) {
+                                  logFirebaseEvent(
+                                      'IconButton_update_app_state');
+                                  FFAppState().updateAppPlayerStruct(
+                                    (e) => e..incrementPArmr(1.0),
+                                  );
+                                  FFAppState().updateAppEnemyStruct(
+                                    (e) => e..incrementEArmr(1.0),
+                                  );
+                                  safeSetState(() {});
+                                } else {
+                                  logFirebaseEvent('IconButton_alert_dialog');
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('!'),
+                                        content: Text('Not enough xp!'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  return;
+                                }
+                              },
+                            ),
+                          ].divide(SizedBox(width: 10.0)),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 175.0,
+                              height: 65.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                borderRadius: BorderRadius.circular(8.0),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Damage: ',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Current: ',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                      Text(
+                                        formatNumber(
+                                          FFAppState().appPlayer.pDmg,
+                                          formatType: FormatType.decimal,
+                                          decimalType: DecimalType.automatic,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Cost: ',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily),
+                                              ),
+                                        ),
+                                        AuthUserStreamWidget(
+                                          builder: (context) => Text(
+                                            formatNumber(
+                                              valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.damageUpCost,
+                                                  0),
+                                              formatType: FormatType.decimal,
+                                              decimalType:
+                                                  DecimalType.automatic,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).secondary,
+                              icon: Icon(
+                                Icons.add_outlined,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'GAME_PAGE_PAGE_add_outlined_ICN_ON_TAP');
+                                if ((valueOrDefault(
+                                            currentUserDocument?.xp, 0) >
+                                        0) &&
+                                    (valueOrDefault(
+                                            currentUserDocument?.xp, 0) >=
+                                        valueOrDefault(
+                                            currentUserDocument?.damageUpCost,
+                                            0))) {
+                                  logFirebaseEvent(
+                                      'IconButton_update_app_state');
+                                  FFAppState().updateAppPlayerStruct(
+                                    (e) => e..incrementPDmg(1.0),
+                                  );
+                                  FFAppState().updateAppEnemyStruct(
+                                    (e) => e..incrementEDmg(1.0),
+                                  );
+                                  safeSetState(() {});
+                                } else {
+                                  logFirebaseEvent('IconButton_alert_dialog');
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('!'),
+                                        content: Text('Not enough xp!'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  return;
+                                }
+                              },
+                            ),
+                          ].divide(SizedBox(width: 10.0)),
+                        ),
+                      ].divide(SizedBox(height: 10.0)),
+                    ),
+                  ]
+                      .divide(SizedBox(height: 10.0))
+                      .around(SizedBox(height: 10.0)),
                 ),
-              ],
+              ),
             ),
           ),
         ),

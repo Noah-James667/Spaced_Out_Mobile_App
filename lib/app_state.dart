@@ -110,8 +110,8 @@ class FFAppState extends ChangeNotifier {
     _equippedWeapon = value;
   }
 
-  EnemyStruct _appEnemy = EnemyStruct.fromSerializableMap(
-      jsonDecode('{\"e_health\":\"1.0\",\"e_dmg\":\"-0.01\"}'));
+  EnemyStruct _appEnemy = EnemyStruct.fromSerializableMap(jsonDecode(
+      '{\"e_health\":\"1.0\",\"e_dmg\":\"1.0\",\"e_armr\":\"1.0\",\"e_maxHealth\":\"1.0\"}'));
   EnemyStruct get appEnemy => _appEnemy;
   set appEnemy(EnemyStruct value) {
     _appEnemy = value;
@@ -127,8 +127,8 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_appEnemy', _appEnemy.serialize());
   }
 
-  PlayerStruct _appPlayer = PlayerStruct.fromSerializableMap(
-      jsonDecode('{\"p_health\":\"1.0\",\"p_damage\":\"-0.01\"}'));
+  PlayerStruct _appPlayer = PlayerStruct.fromSerializableMap(jsonDecode(
+      '{\"p_health\":\"1.0\",\"p_dmg\":\"1.0\",\"p_armr\":\"1.0\",\"p_maxHealth\":\"1.0\"}'));
   PlayerStruct get appPlayer => _appPlayer;
   set appPlayer(PlayerStruct value) {
     _appPlayer = value;
@@ -142,6 +142,19 @@ class FFAppState extends ChangeNotifier {
   void updateAppPlayerStruct(Function(PlayerStruct) updateFn) {
     updateFn(_appPlayer);
     secureStorage.setString('ff_appPlayer', _appPlayer.serialize());
+  }
+
+  /// Allows the astronaught to spin when incrimented
+  int _taskSpin = 0;
+  int get taskSpin => _taskSpin;
+  set taskSpin(int value) {
+    _taskSpin = value;
+  }
+
+  int _smallSwordBought = 0;
+  int get smallSwordBought => _smallSwordBought;
+  set smallSwordBought(int value) {
+    _smallSwordBought = value;
   }
 
   final _queryCacheManager = StreamRequestManager<List<TaskRecord>>();

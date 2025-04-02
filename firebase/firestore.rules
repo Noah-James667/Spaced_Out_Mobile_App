@@ -15,25 +15,16 @@ service cloud.firestore {
       allow delete: if request.auth.uid == document;
     }
 
-    match /weapons_shop/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
+    match /user/{parent}/shop_items/{document} {
+      allow create: if request.resource.data.users_shop_items == /databases/$(database)/documents/user/$(request.auth.uid);
+      allow read: if request.auth != null;
+      allow write: if resource.data.users_shop_items == /databases/$(database)/documents/user/$(request.auth.uid);
+      allow delete: if resource.data.users_shop_items == /databases/$(database)/documents/user/$(request.auth.uid);
     }
 
-    match /cosmetic_shop/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
+    match /{path=**}/shop_items/{document} {
+      allow read: if request.auth != null;
     }
 
-    match /ship_shop/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
   }
 }

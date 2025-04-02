@@ -103,6 +103,22 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   ),
             ),
             Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                valueOrDefault<String>(
+                  widget.taskDoc?.taskName,
+                  'Task Title',
+                ),
+                style: FlutterFlowTheme.of(context).titleMedium.override(
+                      fontFamily:
+                          FlutterFlowTheme.of(context).titleMediumFamily,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).titleMediumFamily),
+                    ),
+              ),
+            ),
+            Padding(
               padding: EdgeInsets.all(6.0),
               child: Container(
                 width: 350.0,

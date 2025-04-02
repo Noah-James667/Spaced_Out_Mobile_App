@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/edit_task/edit_task_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'task_model.dart';
 export 'task_model.dart';
@@ -24,8 +26,10 @@ class TaskWidget extends StatefulWidget {
   State<TaskWidget> createState() => _TaskWidgetState();
 }
 
-class _TaskWidgetState extends State<TaskWidget> {
+class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
   late TaskModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -37,6 +41,35 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TaskModel());
+
+    animationsMap.addAll({
+      'containerOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeOut,
+            delay: 100.0.ms,
+            duration: 330.0.ms,
+            begin: 1.0,
+            end: 0.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(100.0, 0.0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -64,7 +97,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Theme(
@@ -83,6 +116,13 @@ class _TaskWidgetState extends State<TaskWidget> {
                   if (newValue!) {
                     logFirebaseEvent(
                         'TASK_COMP_Checkbox_byo01zxd_ON_TOGGLE_ON');
+                    logFirebaseEvent('Checkbox_widget_animation');
+                    if (animationsMap['containerOnActionTriggerAnimation'] !=
+                        null) {
+                      await animationsMap['containerOnActionTriggerAnimation']!
+                          .controller
+                          .forward(from: 0.0);
+                    }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
                     logFirebaseEvent('Checkbox_backend_call');
@@ -91,12 +131,19 @@ class _TaskWidgetState extends State<TaskWidget> {
                       ...mapToFirestore(
                         {
                           'coins': FieldValue.increment(20),
-                          'xp': FieldValue.increment(10),
+                          'xp': FieldValue.increment(20),
                         },
                       ),
                     });
                   } else {
                     logFirebaseEvent('TASK_Checkbox_byo01zxd_ON_TOGGLE_OFF');
+                    logFirebaseEvent('Checkbox_widget_animation');
+                    if (animationsMap['containerOnActionTriggerAnimation'] !=
+                        null) {
+                      await animationsMap['containerOnActionTriggerAnimation']!
+                          .controller
+                          .forward(from: 0.0);
+                    }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
                     logFirebaseEvent('Checkbox_backend_call');
@@ -110,7 +157,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   width: 2,
                   color: FlutterFlowTheme.of(context).alternate,
                 ),
-                activeColor: FlutterFlowTheme.of(context).tertiary,
+                activeColor: FlutterFlowTheme.of(context).primary,
                 checkColor: FlutterFlowTheme.of(context).info,
               ),
             ),
@@ -123,6 +170,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                   valueOrDefault<String>(
                     widget.taskDoc?.taskName,
                     'Title',
+                  ).maybeHandleOverflow(
+                    maxChars: 19,
+                    replacement: '…',
                   ),
                   style: FlutterFlowTheme.of(context).titleMedium.override(
                         fontFamily:
@@ -157,7 +207,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                     Text(
                       dateTimeFormat(
                         "jm",
-                        widget.taskDoc!.completeTime!,
+                        widget.taskDoc!.completeBy!,
                         locale: FFLocalizations.of(context).languageCode,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -202,10 +252,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                             taskDescription: widget.taskDoc?.taskDescription,
                             dueDate: widget.taskDoc?.completeBy,
                             doesRepeat: widget.taskDoc?.isRepeating,
-                            timeDue: widget.taskDoc?.completeTime,
                             taskDifficulty:
                                 widget.taskDoc?.difficultyLvl.toString(),
-                            daysRepeating: [],
+                            daysRepeating: widget.taskDoc!.daysRepeating,
                           ),
                         ),
                       );
@@ -216,6 +265,8 @@ class _TaskWidgetState extends State<TaskWidget> {
             ),
           ].addToStart(SizedBox(width: 15.0)).addToEnd(SizedBox(width: 15.0)),
         ),
+      ).animateOnActionTrigger(
+        animationsMap['containerOnActionTriggerAnimation']!,
       ),
     );
   }

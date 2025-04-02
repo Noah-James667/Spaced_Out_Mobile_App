@@ -6,8 +6,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'edit_task_model.dart';
 export 'edit_task_model.dart';
 
@@ -211,214 +213,238 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        logFirebaseEvent(
-                            'EDIT_TASK_COMP_Button_x569shyv_ON_TAP');
-                        logFirebaseEvent('Button_date_time_picker');
-
-                        final _datePicked1Time = await showTimePicker(
-                          context: context,
-                          initialTime:
-                              TimeOfDay.fromDateTime(getCurrentTimestamp),
-                          builder: (context, child) {
-                            return wrapInMaterialTimePickerTheme(
-                              context,
-                              child!,
-                              headerBackgroundColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              headerForegroundColor:
-                                  FlutterFlowTheme.of(context).info,
-                              headerTextStyle: FlutterFlowTheme.of(context)
-                                  .headlineLarge
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .headlineLargeFamily,
-                                    fontSize: 32.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .headlineLargeFamily),
-                                  ),
-                              pickerBackgroundColor:
-                                  FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                              pickerForegroundColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              selectedDateTimeBackgroundColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              selectedDateTimeForegroundColor:
-                                  FlutterFlowTheme.of(context).info,
-                              actionButtonForegroundColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              iconSize: 24.0,
-                            );
-                          },
-                        );
-                        if (_datePicked1Time != null) {
-                          safeSetState(() {
-                            _model.datePicked1 = DateTime(
-                              getCurrentTimestamp.year,
-                              getCurrentTimestamp.month,
-                              getCurrentTimestamp.day,
-                              _datePicked1Time.hour,
-                              _datePicked1Time.minute,
-                            );
-                          });
-                        } else if (_model.datePicked1 != null) {
-                          safeSetState(() {
-                            _model.datePicked1 = getCurrentTimestamp;
-                          });
-                        }
-                      },
-                      text: dateTimeFormat(
-                        "Hm",
-                        _model.datePicked1,
-                        locale: FFLocalizations.of(context).languageCode,
-                      ),
-                      icon: Icon(
-                        Icons.timer_sharp,
-                        size: 20.0,
-                      ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: Colors.white,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .titleSmall
-                            .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).titleSmallFamily,
-                              color: Colors.black,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .titleSmallFamily),
-                            ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                  if (!_model.switchValue!)
-                    Expanded(
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          logFirebaseEvent(
-                              'EDIT_TASK_COMP_Button_9dj37g2i_ON_TAP');
-                          logFirebaseEvent('Button_date_time_picker');
-                          final _datePicked2Date = await showDatePicker(
-                            context: context,
-                            initialDate: getCurrentTimestamp,
-                            firstDate: getCurrentTimestamp,
-                            lastDate: DateTime(2050),
-                            builder: (context, child) {
-                              return wrapInMaterialDatePickerTheme(
-                                context,
-                                child!,
-                                headerBackgroundColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                headerForegroundColor:
-                                    FlutterFlowTheme.of(context).info,
-                                headerTextStyle: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .headlineLargeFamily,
-                                      fontSize: 32.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLargeFamily),
-                                    ),
-                                pickerBackgroundColor:
-                                    FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                pickerForegroundColor:
-                                    FlutterFlowTheme.of(context).primaryText,
-                                selectedDateTimeBackgroundColor:
-                                    Color(0xFFFCFCFC),
-                                selectedDateTimeForegroundColor:
-                                    FlutterFlowTheme.of(context).info,
-                                actionButtonForegroundColor:
-                                    FlutterFlowTheme.of(context).primaryText,
-                                iconSize: 24.0,
-                              );
-                            },
-                          );
-
-                          if (_datePicked2Date != null) {
-                            safeSetState(() {
-                              _model.datePicked2 = DateTime(
-                                _datePicked2Date.year,
-                                _datePicked2Date.month,
-                                _datePicked2Date.day,
-                              );
-                            });
-                          } else if (_model.datePicked2 != null) {
-                            safeSetState(() {
-                              _model.datePicked2 = getCurrentTimestamp;
-                            });
-                          }
-                        },
-                        text: dateTimeFormat(
-                          "Md",
-                          _model.datePicked2,
-                          locale: FFLocalizations.of(context).languageCode,
-                        ),
-                        icon: Icon(
-                          Icons.calendar_month,
-                          size: 20.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: Colors.white,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
+            Stack(
+              children: [
+                FFButtonWidget(
+                  onPressed: () async {
+                    logFirebaseEvent('EDIT_TASK_COMP_timeDue_ON_TAP');
+                    logFirebaseEvent('timeDue_date_time_picker');
+                    final _datePicked1Date = await showDatePicker(
+                      context: context,
+                      initialDate: getCurrentTimestamp,
+                      firstDate: getCurrentTimestamp,
+                      lastDate: DateTime(2050),
+                      builder: (context, child) {
+                        return wrapInMaterialDatePickerTheme(
+                          context,
+                          child!,
+                          headerBackgroundColor:
+                              FlutterFlowTheme.of(context).primary,
+                          headerForegroundColor:
+                              FlutterFlowTheme.of(context).info,
+                          headerTextStyle: FlutterFlowTheme.of(context)
+                              .headlineLarge
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .titleSmallFamily,
-                                color: Colors.black,
+                                    .headlineLargeFamily,
+                                fontSize: 32.0,
                                 letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .titleSmallFamily),
+                                        .headlineLargeFamily),
                               ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
+                          pickerBackgroundColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          pickerForegroundColor:
+                              FlutterFlowTheme.of(context).primaryText,
+                          selectedDateTimeBackgroundColor:
+                              FlutterFlowTheme.of(context).primary,
+                          selectedDateTimeForegroundColor:
+                              FlutterFlowTheme.of(context).info,
+                          actionButtonForegroundColor:
+                              FlutterFlowTheme.of(context).primaryText,
+                          iconSize: 24.0,
+                        );
+                      },
+                    );
+
+                    TimeOfDay? _datePicked1Time;
+                    if (_datePicked1Date != null) {
+                      _datePicked1Time = await showTimePicker(
+                        context: context,
+                        initialTime:
+                            TimeOfDay.fromDateTime(getCurrentTimestamp),
+                        builder: (context, child) {
+                          return wrapInMaterialTimePickerTheme(
+                            context,
+                            child!,
+                            headerBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            headerForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            headerTextStyle: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .headlineLargeFamily,
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .headlineLargeFamily),
+                                ),
+                            pickerBackgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            pickerForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            selectedDateTimeBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            selectedDateTimeForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            actionButtonForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            iconSize: 24.0,
+                          );
+                        },
+                      );
+                    }
+
+                    if (_datePicked1Date != null && _datePicked1Time != null) {
+                      safeSetState(() {
+                        _model.datePicked1 = DateTime(
+                          _datePicked1Date.year,
+                          _datePicked1Date.month,
+                          _datePicked1Date.day,
+                          _datePicked1Time!.hour,
+                          _datePicked1Time.minute,
+                        );
+                      });
+                    } else if (_model.datePicked1 != null) {
+                      safeSetState(() {
+                        _model.datePicked1 = getCurrentTimestamp;
+                      });
+                    }
+                  },
+                  text: dateTimeFormat(
+                    "M/d h:mm a",
+                    _model.datePicked1,
+                    locale: FFLocalizations.of(context).languageCode,
+                  ),
+                  icon: Icon(
+                    Icons.timer_sharp,
+                    size: 20.0,
+                  ),
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: Colors.white,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.black,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
                         ),
-                      ),
+                    elevation: 0.0,
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.0,
                     ),
-                ],
-              ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+                if (_model.switchValue ?? true)
+                  FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('EDIT_TASK_COMP_dayDue_ON_TAP');
+                      logFirebaseEvent('dayDue_date_time_picker');
+
+                      final _datePicked2Time = await showTimePicker(
+                        context: context,
+                        initialTime:
+                            TimeOfDay.fromDateTime(getCurrentTimestamp),
+                        builder: (context, child) {
+                          return wrapInMaterialTimePickerTheme(
+                            context,
+                            child!,
+                            headerBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            headerForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            headerTextStyle: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .headlineLargeFamily,
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .headlineLargeFamily),
+                                ),
+                            pickerBackgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            pickerForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            selectedDateTimeBackgroundColor: Color(0xFFFCFCFC),
+                            selectedDateTimeForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            actionButtonForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            iconSize: 24.0,
+                          );
+                        },
+                      );
+                      if (_datePicked2Time != null) {
+                        safeSetState(() {
+                          _model.datePicked2 = DateTime(
+                            getCurrentTimestamp.year,
+                            getCurrentTimestamp.month,
+                            getCurrentTimestamp.day,
+                            _datePicked2Time.hour,
+                            _datePicked2Time.minute,
+                          );
+                        });
+                      } else if (_model.datePicked2 != null) {
+                        safeSetState(() {
+                          _model.datePicked2 = getCurrentTimestamp;
+                        });
+                      }
+                    },
+                    text: dateTimeFormat(
+                      "jm",
+                      _model.datePicked2,
+                      locale: FFLocalizations.of(context).languageCode,
+                    ),
+                    icon: Icon(
+                      Icons.calendar_month,
+                      size: 20.0,
+                    ),
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: Colors.white,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).titleSmallFamily,
+                            color: Colors.black,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).titleSmallFamily),
+                          ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+              ],
             ),
             Text(
               valueOrDefault<String>(
@@ -708,14 +734,46 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
-                      logFirebaseEvent('Button_backend_call');
+                      if (_model.switchValue == false) {
+                        logFirebaseEvent('Button_backend_call');
 
-                      await widget.taskReference!.update(createTaskRecordData(
-                        taskName: _model.textController1.text,
-                        taskDescription: _model.textController2.text,
-                        completeBy: widget.dueDate,
-                        isRepeating: widget.doesRepeat,
-                      ));
+                        await widget.taskReference!.update({
+                          ...createTaskRecordData(
+                            taskName: _model.textController1.text,
+                            taskDescription: _model.textController2.text,
+                            completeBy: _model.datePicked1,
+                            isRepeating: false,
+                            completeDate: functions
+                                .returnDayMonthPicker(_model.datePicked1),
+                          ),
+                          ...mapToFirestore(
+                            {
+                              'days_repeating': FieldValue.delete(),
+                            },
+                          ),
+                        });
+                      } else {
+                        logFirebaseEvent('Button_backend_call');
+
+                        await widget.taskReference!.update({
+                          ...createTaskRecordData(
+                            taskName: _model.textController1.text,
+                            taskDescription: _model.textController2.text,
+                            completeBy: functions.getNextCompleteDate(
+                                _model.choiceChipsValues1!.toList(),
+                                _model.datePicked2!),
+                            isRepeating: true,
+                            completeDate: functions
+                                .returnDayMonthPicker(_model.datePicked1),
+                          ),
+                          ...mapToFirestore(
+                            {
+                              'days_repeating': widget.daysRepeating,
+                            },
+                          ),
+                        });
+                      }
+
                       logFirebaseEvent('Button_bottom_sheet');
                       Navigator.pop(context);
                     },
@@ -780,6 +838,15 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         Navigator.pop(context);
                         logFirebaseEvent('Button_backend_call');
                         await widget.taskReference!.delete();
+                        logFirebaseEvent('Button_play_sound');
+                        _model.soundPlayer ??= AudioPlayer();
+                        if (_model.soundPlayer!.playing) {
+                          await _model.soundPlayer!.stop();
+                        }
+                        _model.soundPlayer!.setVolume(1.0);
+                        _model.soundPlayer!
+                            .setAsset('assets/audios/Pixel_17.wav')
+                            .then((_) => _model.soundPlayer!.play());
                       }
                     },
                     text: 'Delete',

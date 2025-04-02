@@ -9,10 +9,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 class PlayerStruct extends FFFirebaseStruct {
   PlayerStruct({
     double? pHealth,
-    double? pDamage,
+    double? pDmg,
+    double? pArmr,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _pHealth = pHealth,
-        _pDamage = pDamage,
+        _pDmg = pDmg,
+        _pArmr = pArmr,
         super(firestoreUtilData);
 
   // "p_health" field.
@@ -24,18 +26,28 @@ class PlayerStruct extends FFFirebaseStruct {
 
   bool hasPHealth() => _pHealth != null;
 
-  // "p_damage" field.
-  double? _pDamage;
-  double get pDamage => _pDamage ?? .1;
-  set pDamage(double? val) => _pDamage = val;
+  // "p_dmg" field.
+  double? _pDmg;
+  double get pDmg => _pDmg ?? 1.0;
+  set pDmg(double? val) => _pDmg = val;
 
-  void incrementPDamage(double amount) => pDamage = pDamage + amount;
+  void incrementPDmg(double amount) => pDmg = pDmg + amount;
 
-  bool hasPDamage() => _pDamage != null;
+  bool hasPDmg() => _pDmg != null;
+
+  // "p_armr" field.
+  double? _pArmr;
+  double get pArmr => _pArmr ?? 1.0;
+  set pArmr(double? val) => _pArmr = val;
+
+  void incrementPArmr(double amount) => pArmr = pArmr + amount;
+
+  bool hasPArmr() => _pArmr != null;
 
   static PlayerStruct fromMap(Map<String, dynamic> data) => PlayerStruct(
         pHealth: castToType<double>(data['p_health']),
-        pDamage: castToType<double>(data['p_damage']),
+        pDmg: castToType<double>(data['p_dmg']),
+        pArmr: castToType<double>(data['p_armr']),
       );
 
   static PlayerStruct? maybeFromMap(dynamic data) =>
@@ -43,7 +55,8 @@ class PlayerStruct extends FFFirebaseStruct {
 
   Map<String, dynamic> toMap() => {
         'p_health': _pHealth,
-        'p_damage': _pDamage,
+        'p_dmg': _pDmg,
+        'p_armr': _pArmr,
       }.withoutNulls;
 
   @override
@@ -52,8 +65,12 @@ class PlayerStruct extends FFFirebaseStruct {
           _pHealth,
           ParamType.double,
         ),
-        'p_damage': serializeParam(
-          _pDamage,
+        'p_dmg': serializeParam(
+          _pDmg,
+          ParamType.double,
+        ),
+        'p_armr': serializeParam(
+          _pArmr,
           ParamType.double,
         ),
       }.withoutNulls;
@@ -65,8 +82,13 @@ class PlayerStruct extends FFFirebaseStruct {
           ParamType.double,
           false,
         ),
-        pDamage: deserializeParam(
-          data['p_damage'],
+        pDmg: deserializeParam(
+          data['p_dmg'],
+          ParamType.double,
+          false,
+        ),
+        pArmr: deserializeParam(
+          data['p_armr'],
           ParamType.double,
           false,
         ),
@@ -79,16 +101,18 @@ class PlayerStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is PlayerStruct &&
         pHealth == other.pHealth &&
-        pDamage == other.pDamage;
+        pDmg == other.pDmg &&
+        pArmr == other.pArmr;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([pHealth, pDamage]);
+  int get hashCode => const ListEquality().hash([pHealth, pDmg, pArmr]);
 }
 
 PlayerStruct createPlayerStruct({
   double? pHealth,
-  double? pDamage,
+  double? pDmg,
+  double? pArmr,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -96,7 +120,8 @@ PlayerStruct createPlayerStruct({
 }) =>
     PlayerStruct(
       pHealth: pHealth,
-      pDamage: pDamage,
+      pDmg: pDmg,
+      pArmr: pArmr,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

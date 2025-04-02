@@ -78,18 +78,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : NewLoginPageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : NewLoginPageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginPageWidget(),
         ),
         FFRoute(
-          name: NewLoginPageWidget.routeName,
-          path: NewLoginPageWidget.routePath,
-          builder: (context, params) => NewLoginPageWidget(),
+          name: LoginPageWidget.routeName,
+          path: LoginPageWidget.routePath,
+          builder: (context, params) => LoginPageWidget(),
         ),
         FFRoute(
           name: ShopWidget.routeName,
@@ -111,16 +111,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : CalendarWidget(),
         ),
         FFRoute(
-          name: GamePageWidget.routeName,
-          path: GamePageWidget.routePath,
-          builder: (context, params) => GamePageWidget(),
+          name: GamePageOldWidget.routeName,
+          path: GamePageOldWidget.routePath,
+          builder: (context, params) => GamePageOldWidget(),
         ),
         FFRoute(
-          name: StoragePageWidget.routeName,
-          path: StoragePageWidget.routePath,
+          name: GamePageWidget.routeName,
+          path: GamePageWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'storagePage')
-              : StoragePageWidget(),
+              ? NavBarPage(initialPage: 'gamePage')
+              : GamePageWidget(),
         ),
         FFRoute(
           name: EquipPageWidget.routeName,
@@ -128,18 +128,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'equipPage')
               : EquipPageWidget(),
-        ),
-        FFRoute(
-          name: ShopCopyWidget.routeName,
-          path: ShopCopyWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'shopCopy')
-              : ShopCopyWidget(),
-        ),
-        FFRoute(
-          name: TestPageWidget.routeName,
-          path: TestPageWidget.routePath,
-          builder: (context, params) => TestPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -312,7 +300,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/newLoginPage';
+            return '/loginPage';
           }
           return null;
         },

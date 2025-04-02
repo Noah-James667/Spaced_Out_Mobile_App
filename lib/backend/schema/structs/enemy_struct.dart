@@ -10,9 +10,11 @@ class EnemyStruct extends FFFirebaseStruct {
   EnemyStruct({
     double? eHealth,
     double? eDmg,
+    double? eArmr,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _eHealth = eHealth,
         _eDmg = eDmg,
+        _eArmr = eArmr,
         super(firestoreUtilData);
 
   // "e_health" field.
@@ -26,16 +28,26 @@ class EnemyStruct extends FFFirebaseStruct {
 
   // "e_dmg" field.
   double? _eDmg;
-  double get eDmg => _eDmg ?? .1;
+  double get eDmg => _eDmg ?? 1.0;
   set eDmg(double? val) => _eDmg = val;
 
   void incrementEDmg(double amount) => eDmg = eDmg + amount;
 
   bool hasEDmg() => _eDmg != null;
 
+  // "e_armr" field.
+  double? _eArmr;
+  double get eArmr => _eArmr ?? 1.0;
+  set eArmr(double? val) => _eArmr = val;
+
+  void incrementEArmr(double amount) => eArmr = eArmr + amount;
+
+  bool hasEArmr() => _eArmr != null;
+
   static EnemyStruct fromMap(Map<String, dynamic> data) => EnemyStruct(
         eHealth: castToType<double>(data['e_health']),
         eDmg: castToType<double>(data['e_dmg']),
+        eArmr: castToType<double>(data['e_armr']),
       );
 
   static EnemyStruct? maybeFromMap(dynamic data) =>
@@ -44,6 +56,7 @@ class EnemyStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'e_health': _eHealth,
         'e_dmg': _eDmg,
+        'e_armr': _eArmr,
       }.withoutNulls;
 
   @override
@@ -54,6 +67,10 @@ class EnemyStruct extends FFFirebaseStruct {
         ),
         'e_dmg': serializeParam(
           _eDmg,
+          ParamType.double,
+        ),
+        'e_armr': serializeParam(
+          _eArmr,
           ParamType.double,
         ),
       }.withoutNulls;
@@ -70,6 +87,11 @@ class EnemyStruct extends FFFirebaseStruct {
           ParamType.double,
           false,
         ),
+        eArmr: deserializeParam(
+          data['e_armr'],
+          ParamType.double,
+          false,
+        ),
       );
 
   @override
@@ -79,16 +101,18 @@ class EnemyStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is EnemyStruct &&
         eHealth == other.eHealth &&
-        eDmg == other.eDmg;
+        eDmg == other.eDmg &&
+        eArmr == other.eArmr;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([eHealth, eDmg]);
+  int get hashCode => const ListEquality().hash([eHealth, eDmg, eArmr]);
 }
 
 EnemyStruct createEnemyStruct({
   double? eHealth,
   double? eDmg,
+  double? eArmr,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -97,6 +121,7 @@ EnemyStruct createEnemyStruct({
     EnemyStruct(
       eHealth: eHealth,
       eDmg: eDmg,
+      eArmr: eArmr,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

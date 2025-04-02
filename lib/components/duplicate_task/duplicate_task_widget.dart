@@ -119,7 +119,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   width: 2,
                   color: FlutterFlowTheme.of(context).alternate,
                 ),
-                activeColor: FlutterFlowTheme.of(context).tertiary,
+                activeColor: FlutterFlowTheme.of(context).primary,
                 checkColor: FlutterFlowTheme.of(context).info,
               ),
             ),
@@ -157,7 +157,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                               valueOrDefault<String>(
                                 functions.displaydaysrepeating(
                                     widget.taskDoc!.daysRepeating.toList()),
-                                'Sun, Mon, Tue, Wed, Thu, Fri',
+                                'no days available',
                               ),
                               maxLines: 5,
                               style: FlutterFlowTheme.of(context)
@@ -182,10 +182,13 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                 Padding(
                   padding: EdgeInsets.all(2.0),
                   child: Text(
-                    dateTimeFormat(
-                      "jm",
-                      widget.taskDoc!.completeTime!,
-                      locale: FFLocalizations.of(context).languageCode,
+                    valueOrDefault<String>(
+                      dateTimeFormat(
+                        "jm",
+                        widget.taskDoc?.completeBy,
+                        locale: FFLocalizations.of(context).languageCode,
+                      ),
+                      'time unavailable',
                     ),
                     style: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily:

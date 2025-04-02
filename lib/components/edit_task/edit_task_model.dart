@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'edit_task_widget.dart' show EditTaskWidget;
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
   ///  State fields for stateful widgets in this component.
@@ -32,6 +33,7 @@ class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
       choiceChipsValueController2?.value?.firstOrNull;
   set choiceChipsValue2(String? val) =>
       choiceChipsValueController2?.value = val != null ? [val] : [];
+  AudioPlayer? soundPlayer;
 
   @override
   void initState(BuildContext context) {}

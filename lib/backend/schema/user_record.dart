@@ -65,6 +65,11 @@ class UserRecord extends FirestoreRecord {
   int get damageUpCost => _damageUpCost ?? 0;
   bool hasDamageUpCost() => _damageUpCost != null;
 
+  // "task_added" field.
+  int? _taskAdded;
+  int get taskAdded => _taskAdded ?? 0;
+  bool hasTaskAdded() => _taskAdded != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -76,6 +81,7 @@ class UserRecord extends FirestoreRecord {
     _displayName = snapshotData['display_name'] as String?;
     _damage = castToType<double>(snapshotData['damage']);
     _damageUpCost = castToType<int>(snapshotData['damage_up_cost']);
+    _taskAdded = castToType<int>(snapshotData['task_added']);
   }
 
   static CollectionReference get collection =>
@@ -122,6 +128,7 @@ Map<String, dynamic> createUserRecordData({
   String? displayName,
   double? damage,
   int? damageUpCost,
+  int? taskAdded,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -135,6 +142,7 @@ Map<String, dynamic> createUserRecordData({
       'display_name': displayName,
       'damage': damage,
       'damage_up_cost': damageUpCost,
+      'task_added': taskAdded,
     }.withoutNulls,
   );
 
@@ -155,7 +163,8 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e1?.xp == e2?.xp &&
         e1?.displayName == e2?.displayName &&
         e1?.damage == e2?.damage &&
-        e1?.damageUpCost == e2?.damageUpCost;
+        e1?.damageUpCost == e2?.damageUpCost &&
+        e1?.taskAdded == e2?.taskAdded;
   }
 
   @override
@@ -169,7 +178,8 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e?.xp,
         e?.displayName,
         e?.damage,
-        e?.damageUpCost
+        e?.damageUpCost,
+        e?.taskAdded
       ]);
 
   @override

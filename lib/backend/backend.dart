@@ -7,9 +7,7 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/task_record.dart';
 import 'schema/user_record.dart';
-import 'schema/weapons_shop_record.dart';
-import 'schema/cosmetic_shop_record.dart';
-import 'schema/ship_shop_record.dart';
+import 'schema/shop_items_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -20,9 +18,7 @@ export 'schema/util/schema_util.dart';
 
 export 'schema/task_record.dart';
 export 'schema/user_record.dart';
-export 'schema/weapons_shop_record.dart';
-export 'schema/cosmetic_shop_record.dart';
-export 'schema/ship_shop_record.dart';
+export 'schema/shop_items_record.dart';
 
 /// Functions to query TaskRecords (as a Stream and as a Future).
 Future<int> queryTaskRecordCount({
@@ -98,112 +94,41 @@ Future<List<UserRecord>> queryUserRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query WeaponsShopRecords (as a Stream and as a Future).
-Future<int> queryWeaponsShopRecordCount({
+/// Functions to query ShopItemsRecords (as a Stream and as a Future).
+Future<int> queryShopItemsRecordCount({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      WeaponsShopRecord.collection,
+      ShopItemsRecord.collection(parent),
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<WeaponsShopRecord>> queryWeaponsShopRecord({
+Stream<List<ShopItemsRecord>> queryShopItemsRecord({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      WeaponsShopRecord.collection,
-      WeaponsShopRecord.fromSnapshot,
+      ShopItemsRecord.collection(parent),
+      ShopItemsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<WeaponsShopRecord>> queryWeaponsShopRecordOnce({
+Future<List<ShopItemsRecord>> queryShopItemsRecordOnce({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      WeaponsShopRecord.collection,
-      WeaponsShopRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query CosmeticShopRecords (as a Stream and as a Future).
-Future<int> queryCosmeticShopRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      CosmeticShopRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<CosmeticShopRecord>> queryCosmeticShopRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      CosmeticShopRecord.collection,
-      CosmeticShopRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<CosmeticShopRecord>> queryCosmeticShopRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      CosmeticShopRecord.collection,
-      CosmeticShopRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query ShipShopRecords (as a Stream and as a Future).
-Future<int> queryShipShopRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      ShipShopRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<ShipShopRecord>> queryShipShopRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      ShipShopRecord.collection,
-      ShipShopRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<ShipShopRecord>> queryShipShopRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      ShipShopRecord.collection,
-      ShipShopRecord.fromSnapshot,
+      ShopItemsRecord.collection(parent),
+      ShopItemsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

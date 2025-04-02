@@ -64,3 +64,88 @@ DateTime? convertCurrentTimetoDay(DateTime? currentTime) {
   final date = DateTime(now.year, now.month, now.day);
   return date;
 }
+
+DateTime getNextCompleteDate(
+  List<String> daysRepeating,
+  DateTime pickedTime,
+) {
+  if (daysRepeating.isEmpty) return pickedTime;
+
+  // Map days of the week to integers
+  Map<String, int> daysMap = {
+    'Sunday': 0,
+    'Monday': 1,
+    'Tuesday': 2,
+    'Wednesday': 3,
+    'Thursday': 4,
+    'Friday': 5,
+    'Saturday': 6
+  };
+
+  // Get today's date and weekday index
+  DateTime today = DateTime.now();
+  int todayIndex = today.weekday % 7;
+
+  // Convert repeating days to their numeric values and sort them
+  List<int> repeatingIndexes =
+      daysRepeating.map((day) => daysMap[day]!).toList()..sort();
+
+  // Find the next repeating day
+  for (int index in repeatingIndexes) {
+    if (index >= todayIndex) {
+      int daysUntilNext = index - todayIndex;
+      DateTime nextDate = today.add(Duration(days: daysUntilNext));
+      return DateTime(nextDate.year, nextDate.month, nextDate.day,
+          pickedTime.hour, pickedTime.minute);
+    }
+  }
+
+  // If no day in the current week is ahead, pick the first available one next week
+  int daysUntilNext = (7 - todayIndex) + repeatingIndexes.first;
+  DateTime nextDate = today.add(Duration(days: daysUntilNext));
+  return DateTime(nextDate.year, nextDate.month, nextDate.day, pickedTime.hour,
+      pickedTime.minute);
+}
+
+DateTime? returnDayMonthPicker(DateTime? datePicker) {
+  // Recieves a variable of type dateTime and returns the day, month, and year in a dateTime type
+  if (datePicker == null) return null;
+  return DateTime(datePicker.year, datePicker.month, datePicker.day);
+}
+
+DateTime getNextMonthDayYear(List<String> daysRepeating) {
+  if (daysRepeating.isEmpty) return DateTime.now();
+
+  // Map days of the week to integers
+  Map<String, int> daysMap = {
+    'Sunday': 0,
+    'Monday': 1,
+    'Tuesday': 2,
+    'Wednesday': 3,
+    'Thursday': 4,
+    'Friday': 5,
+    'Saturday': 6
+  };
+
+  // Get today's date and weekday index
+  DateTime today = DateTime.now();
+  int todayIndex = today.weekday % 7;
+
+  // Convert repeating days to their numeric values and sort them
+  List<int> repeatingIndexes =
+      daysRepeating.map((day) => daysMap[day]!).toList()..sort();
+
+  // Find the next repeating day
+  for (int index in repeatingIndexes) {
+    if (index >= todayIndex) {
+      int daysUntilNext = index - todayIndex;
+      DateTime nextDate = today.add(Duration(days: daysUntilNext));
+      return DateTime(nextDate.year, nextDate.month, nextDate.day);
+    }
+  }
+
+  // If no day in the current week is ahead, pick the first available one next week
+  int daysUntilNext = (7 - todayIndex) + repeatingIndexes.first;
+  DateTime nextDate = today.add(Duration(days: daysUntilNext));
+  return DateTime(nextDate.year, nextDate.month, nextDate.day);
+}
