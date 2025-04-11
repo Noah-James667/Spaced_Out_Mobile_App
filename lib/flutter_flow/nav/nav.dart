@@ -108,12 +108,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: CalendarWidget.routePath,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'calendar')
-              : CalendarWidget(),
-        ),
-        FFRoute(
-          name: GamePageOldWidget.routeName,
-          path: GamePageOldWidget.routePath,
-          builder: (context, params) => GamePageOldWidget(),
+              : CalendarWidget(
+                  listcount: params.getParam(
+                    'listcount',
+                    ParamType.String,
+                  ),
+                ),
         ),
         FFRoute(
           name: GamePageWidget.routeName,
@@ -128,6 +128,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'equipPage')
               : EquipPageWidget(),
+        ),
+        FFRoute(
+          name: LoadingPageWidget.routeName,
+          path: LoadingPageWidget.routePath,
+          builder: (context, params) => LoadingPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

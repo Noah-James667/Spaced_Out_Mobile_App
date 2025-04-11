@@ -1,5 +1,7 @@
 const admin = require("firebase-admin/app");
 admin.initializeApp();
 
-const resetRecurringTasks = require("./reset_recurring_tasks.js");
-exports.resetRecurringTasks = resetRecurringTasks.resetRecurringTasks;
+const resetRecurringTask = require("./reset_recurring_task.js");
+exports.resetRecurringTask = resetRecurringTask.resetRecurringTask;
+const updateRepeatingTasks = require("./update_repeating_tasks.js");
+exports.updateRepeatingTasks = updateRepeatingTasks.updateRepeatingTasks;

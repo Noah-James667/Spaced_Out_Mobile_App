@@ -232,6 +232,10 @@ class _PurchasePirateHatWidgetState extends State<PurchasePirateHatWidget> {
                         );
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().pirateHatBought = 0.5;
+                        FFAppState().pirateHatAvail = 1.0;
+                        safeSetState(() {});
                       } else if (valueOrDefault(currentUserDocument?.coins, 0) <
                           750) {
                         logFirebaseEvent('Button_alert_dialog');
@@ -281,6 +285,11 @@ class _PurchasePirateHatWidgetState extends State<PurchasePirateHatWidget> {
                         _model.soundPlayer!
                             .setAsset('assets/audios/Pixel_20.wav')
                             .then((_) => _model.soundPlayer!.play());
+
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().pirateHatBought = 0.5;
+                        FFAppState().pirateHatAvail = 1.0;
+                        safeSetState(() {});
                       }
                     },
                     text: 'Buy',

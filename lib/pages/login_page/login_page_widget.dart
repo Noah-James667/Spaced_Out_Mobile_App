@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_page_model.dart';
 export 'login_page_model.dart';
@@ -663,6 +662,80 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                             lightBlueShip: false,
                                           ));
                                           logFirebaseEvent(
+                                              'signup_update_app_state');
+                                          FFAppState().smallSwordBought = 1.0;
+                                          FFAppState().bigSwordBought = 1.0;
+                                          FFAppState().spaceSwordBought = 1.0;
+                                          FFAppState().zappyGunBought = 1.0;
+                                          FFAppState().sniperBought = 1.0;
+                                          FFAppState().cowboyHatBought = 1.0;
+                                          FFAppState().bowHatBought = 1.0;
+                                          FFAppState().pirateHatBought = 1.0;
+                                          FFAppState().topHatBought = 1.0;
+                                          FFAppState().mushroomHatBought = 1.0;
+                                          FFAppState().unicornHatBought = 1.0;
+                                          FFAppState().magicHatBought = 1.0;
+                                          FFAppState().redPantsBought = 1.0;
+                                          FFAppState().greenPantsBought = 1.0;
+                                          FFAppState().bluePantsBought = 1.0;
+                                          FFAppState().yellowPantsBought = 1.0;
+                                          FFAppState().purplePantsBought = 1.0;
+                                          FFAppState().cyanPantsBought = 1.0;
+                                          FFAppState().blueShipBought = 1.0;
+                                          FFAppState().redShipBought = 1.0;
+                                          FFAppState().greenShipBought = 1.0;
+                                          FFAppState().yellowShipBought = 1.0;
+                                          FFAppState().purpleShipBought = 1.0;
+                                          FFAppState().cyanShipBought = 1.0;
+                                          FFAppState().smallSwordEquip = 0;
+                                          FFAppState().smallSwordAvail = 0.5;
+                                          FFAppState().bigSwordEquip = 0;
+                                          FFAppState().bigSwordAvail = 0.5;
+                                          FFAppState().spaceSwordEquip = 0;
+                                          FFAppState().spaceSwordAvail = 0.5;
+                                          FFAppState().zappyGunEquip = 0;
+                                          FFAppState().zappyGunAvail = 0.5;
+                                          FFAppState().cowboyHatEquip = 0;
+                                          FFAppState().cowboyHatAvail = 0.5;
+                                          FFAppState().bowHatEquip = 0;
+                                          FFAppState().bowHatAvail = 0.5;
+                                          FFAppState().pirateHatEquip = 0;
+                                          FFAppState().pirateHatAvail = 0.5;
+                                          FFAppState().topHatEquip = 0;
+                                          FFAppState().topHatAvail = 0.5;
+                                          FFAppState().mushroomHatEquip = 0;
+                                          FFAppState().mushroomHatAvail = 0.5;
+                                          FFAppState().unicornHatEquip = 0;
+                                          FFAppState().unicornHatAvail = 0.5;
+                                          FFAppState().sniperGunEquip = 0;
+                                          FFAppState().sniperAvail = 0.5;
+                                          FFAppState().magicHatEquip = 0;
+                                          FFAppState().magicHatAvail = 0.5;
+                                          FFAppState().redPantsEquip = 0;
+                                          FFAppState().redPantsAvail = 0.5;
+                                          FFAppState().redShipEquip = 0;
+                                          FFAppState().redShipAvail = 0.5;
+                                          FFAppState().bluePantsEquip = 0;
+                                          FFAppState().bluePantsAvail = 0.5;
+                                          FFAppState().blueShipEquip = 0;
+                                          FFAppState().blueShipAvail = 0.5;
+                                          FFAppState().greenShipEquip = 0;
+                                          FFAppState().greenPantsEquip = 0;
+                                          FFAppState().greenPantsAvail = 0.5;
+                                          FFAppState().greenShipAvail = 0.5;
+                                          FFAppState().yellowShipEquip = 0;
+                                          FFAppState().yellowPantsEquip = 0;
+                                          FFAppState().yellowPantsAvail = 0.5;
+                                          FFAppState().yellowShipAvail = 0.5;
+                                          FFAppState().purpleShipEquip = 0;
+                                          FFAppState().purplePantsEquip = 0;
+                                          FFAppState().purplePantsAvail = 0.5;
+                                          FFAppState().purpleShipAvail = 0.5;
+                                          FFAppState().cyanShipEquip = 0;
+                                          FFAppState().cyanPantsEquip = 0;
+                                          FFAppState().cyanPantsAvail = 0.5;
+                                          FFAppState().cyanShipAvail = 0.5;
+                                          logFirebaseEvent(
                                               'signup_navigate_to');
 
                                           context.pushNamedAuth(
@@ -1000,7 +1073,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           logFirebaseEvent('login_navigate_to');
 
                                           context.pushNamedAuth(
-                                              TasksWidget.routeName,
+                                              LoadingPageWidget.routeName,
                                               context.mounted);
                                         },
                                         text: 'Login',
@@ -1048,77 +1121,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                               ),
                             ),
                           ],
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Text(
-                        'or',
-                        style:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleMediumFamily),
-                                ),
-                      ),
-                    ),
-
-                    // Button linked to Google sign in (potentially not using this)
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          logFirebaseEvent(
-                              'LOGIN_CONTINUE_WITH_GOOGLE_BTN_ON_TAP');
-                          logFirebaseEvent('Button_auth');
-                          GoRouter.of(context).prepareAuthEvent();
-                          final user =
-                              await authManager.signInWithGoogle(context);
-                          if (user == null) {
-                            return;
-                          }
-
-                          context.goNamedAuth(
-                              TasksWidget.routeName, context.mounted);
-                        },
-                        text: 'Continue with Google',
-                        icon: FaIcon(
-                          FontAwesomeIcons.google,
-                          size: 20.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: 230.0,
-                          height: 44.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(40.0),
-                          hoverColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
                         ),
                       ),
                     ),

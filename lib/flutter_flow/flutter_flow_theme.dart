@@ -193,107 +193,107 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Roboto Mono';
+  String get displayLargeFamily => 'Rubik';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Roboto Mono';
+  String get displayMediumFamily => 'Rubik';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Roboto Mono';
+  String get displaySmallFamily => 'Rubik';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Roboto Mono';
+  String get headlineLargeFamily => 'Rubik';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Roboto Mono';
+  String get headlineMediumFamily => 'Rubik';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Roboto Mono';
+  String get headlineSmallFamily => 'Rubik';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Roboto Mono';
+  String get titleLargeFamily => 'Rubik';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Roboto Mono';
+  String get titleMediumFamily => 'Rubik';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Roboto Mono';
+  String get titleSmallFamily => 'Rubik';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Roboto Mono';
+  String get labelLargeFamily => 'Rubik';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Roboto Mono';
+  String get labelMediumFamily => 'Rubik';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Roboto Mono';
+  String get labelSmallFamily => 'Rubik';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Roboto Mono';
+  String get bodyLargeFamily => 'Rubik';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Roboto Mono';
+  String get bodyMediumFamily => 'Rubik';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Roboto Mono';
+  String get bodySmallFamily => 'Rubik';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -305,107 +305,107 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Roboto Mono';
+  String get displayLargeFamily => 'Rubik';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Roboto Mono';
+  String get displayMediumFamily => 'Rubik';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Roboto Mono';
+  String get displaySmallFamily => 'Rubik';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Roboto Mono';
+  String get headlineLargeFamily => 'Rubik';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Roboto Mono';
+  String get headlineMediumFamily => 'Rubik';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Roboto Mono';
+  String get headlineSmallFamily => 'Rubik';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Roboto Mono';
+  String get titleLargeFamily => 'Rubik';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Roboto Mono';
+  String get titleMediumFamily => 'Rubik';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Roboto Mono';
+  String get titleSmallFamily => 'Rubik';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Roboto Mono';
+  String get labelLargeFamily => 'Rubik';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Roboto Mono';
+  String get labelMediumFamily => 'Rubik';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Roboto Mono';
+  String get labelSmallFamily => 'Rubik';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Roboto Mono';
+  String get bodyLargeFamily => 'Rubik';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Roboto Mono';
+  String get bodyMediumFamily => 'Rubik';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Roboto Mono';
+  String get bodySmallFamily => 'Rubik';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -417,107 +417,107 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Roboto Mono';
+  String get displayLargeFamily => 'Rubik';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Roboto Mono';
+  String get displayMediumFamily => 'Rubik';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Roboto Mono';
+  String get displaySmallFamily => 'Rubik';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Roboto Mono';
+  String get headlineLargeFamily => 'Rubik';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Roboto Mono';
+  String get headlineMediumFamily => 'Rubik';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Roboto Mono';
+  String get headlineSmallFamily => 'Rubik';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Roboto Mono';
+  String get titleLargeFamily => 'Rubik';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Roboto Mono';
+  String get titleMediumFamily => 'Rubik';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Roboto Mono';
+  String get titleSmallFamily => 'Rubik';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Roboto Mono';
+  String get labelLargeFamily => 'Rubik';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Roboto Mono';
+  String get labelMediumFamily => 'Rubik';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Roboto Mono';
+  String get labelSmallFamily => 'Rubik';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Roboto Mono';
+  String get bodyLargeFamily => 'Rubik';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Roboto Mono';
+  String get bodyMediumFamily => 'Rubik';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Roboto Mono';
+  String get bodySmallFamily => 'Rubik';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Roboto Mono',
+        'Rubik',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,

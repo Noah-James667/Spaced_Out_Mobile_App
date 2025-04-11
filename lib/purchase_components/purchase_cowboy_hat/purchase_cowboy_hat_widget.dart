@@ -232,6 +232,10 @@ class _PurchaseCowboyHatWidgetState extends State<PurchaseCowboyHatWidget> {
                         );
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().cowboyHatBought = 0.5;
+                        FFAppState().cowboyHatAvail = 1.0;
+                        safeSetState(() {});
                       } else if (valueOrDefault(currentUserDocument?.coins, 0) <
                           250) {
                         logFirebaseEvent('Button_alert_dialog');
@@ -281,6 +285,11 @@ class _PurchaseCowboyHatWidgetState extends State<PurchaseCowboyHatWidget> {
                         _model.soundPlayer!
                             .setAsset('assets/audios/Pixel_20.wav')
                             .then((_) => _model.soundPlayer!.play());
+
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().cowboyHatBought = 0.5;
+                        FFAppState().cowboyHatAvail = 1.0;
+                        safeSetState(() {});
                       }
                     },
                     text: 'Buy',

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'astronaught_widget.dart' show AstronaughtWidget;
+import 'equip_green_ship_widget.dart' show EquipGreenShipWidget;
 import 'package:flutter/material.dart';
 
-class AstronaughtModel extends FlutterFlowModel<AstronaughtWidget> {
+class EquipGreenShipModel extends FlutterFlowModel<EquipGreenShipWidget> {
   @override
   void initState(BuildContext context) {}
 

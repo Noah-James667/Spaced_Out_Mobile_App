@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -91,6 +92,7 @@ class _EquipBigSwordWidgetState extends State<EquipBigSwordWidget> {
           ),
           StreamBuilder<List<ShopItemsRecord>>(
             stream: queryShopItemsRecord(
+              parent: currentUserReference,
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -119,6 +121,35 @@ class _EquipBigSwordWidgetState extends State<EquipBigSwordWidget> {
               return FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('EQUIP_BIG_SWORD_COMP_EQUIP_BTN_ON_TAP');
+                  if (buttonShopItemsRecord!.bigSword) {
+                    logFirebaseEvent('Button_update_app_state');
+                    FFAppState().bigSwordEquip = 1;
+                    FFAppState().smallSwordEquip = 0;
+                    FFAppState().spaceSwordEquip = 0;
+                    FFAppState().zappyGunEquip = 0;
+                    FFAppState().sniperGunEquip = 0;
+                    safeSetState(() {});
+                  } else {
+                    logFirebaseEvent('Button_alert_dialog');
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Item Not Owned!'),
+                          content:
+                              Text('You have not yet purchased this item!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+
                   logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
                 },
@@ -155,6 +186,9 @@ class _EquipBigSwordWidgetState extends State<EquipBigSwordWidget> {
               logFirebaseEvent('EQUIP_BIG_SWORD_COMP_UNEQUIP_BTN_ON_TAP');
               logFirebaseEvent('Button_bottom_sheet');
               Navigator.pop(context);
+              logFirebaseEvent('Button_update_app_state');
+              FFAppState().bigSwordEquip = 0;
+              safeSetState(() {});
             },
             text: 'Unequip',
             options: FFButtonOptions(

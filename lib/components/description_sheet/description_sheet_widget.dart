@@ -94,7 +94,7 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
               ],
             ),
             Text(
-              'Task Description',
+              'Task Details',
               style: FlutterFlowTheme.of(context).titleLarge.override(
                     fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
                     letterSpacing: 0.0,
@@ -146,6 +146,161 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                         ),
                   ),
                 ),
+              ),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    'difficulty: ',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                ),
+                Text(
+                  valueOrDefault<String>(
+                    () {
+                      if (widget.taskDoc?.difficultyLvl == 1) {
+                        return 'easy';
+                      } else if (widget.taskDoc?.difficultyLvl == 2) {
+                        return 'medium';
+                      } else if (widget.taskDoc?.difficultyLvl == 3) {
+                        return 'hard';
+                      } else {
+                        return 'N/A';
+                      }
+                    }(),
+                    '[diff lvl]',
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    'Type: ',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                ),
+                Text(
+                  valueOrDefault<String>(
+                    widget.taskDoc?.taskCategory,
+                    '[category]',
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      'coins: ',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
+                          ),
+                    ),
+                  ),
+                  Text(
+                    valueOrDefault<String>(
+                      () {
+                        if (widget.taskDoc?.difficultyLvl == 1) {
+                          return '10';
+                        } else if (widget.taskDoc?.difficultyLvl == 2) {
+                          return '20';
+                        } else if (widget.taskDoc?.difficultyLvl == 3) {
+                          return '30';
+                        } else {
+                          return 'N/A';
+                        }
+                      }(),
+                      '[diff lvl]',
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      'XP: ',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
+                          ),
+                    ),
+                  ),
+                  Text(
+                    valueOrDefault<String>(
+                      () {
+                        if (widget.taskDoc?.difficultyLvl == 1) {
+                          return '10';
+                        } else if (widget.taskDoc?.difficultyLvl == 2) {
+                          return '20';
+                        } else if (widget.taskDoc?.difficultyLvl == 3) {
+                          return '30';
+                        } else {
+                          return 'N/A';
+                        }
+                      }(),
+                      '[diff lvl]',
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                  ),
+                ],
               ),
             ),
           ],

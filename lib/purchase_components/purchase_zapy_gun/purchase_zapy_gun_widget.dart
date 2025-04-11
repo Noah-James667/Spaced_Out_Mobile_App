@@ -230,6 +230,10 @@ class _PurchaseZapyGunWidgetState extends State<PurchaseZapyGunWidget> {
                         );
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().zappyGunBought = 0.5;
+                        FFAppState().zappyGunAvail = 1.0;
+                        safeSetState(() {});
                       } else if (valueOrDefault(currentUserDocument?.coins, 0) <
                           1000) {
                         logFirebaseEvent('Button_alert_dialog');
@@ -279,6 +283,11 @@ class _PurchaseZapyGunWidgetState extends State<PurchaseZapyGunWidget> {
                         _model.soundPlayer!
                             .setAsset('assets/audios/Pixel_20.wav')
                             .then((_) => _model.soundPlayer!.play());
+
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().zappyGunBought = 0.5;
+                        FFAppState().zappyGunAvail = 1.0;
+                        safeSetState(() {});
                       }
                     },
                     text: 'Buy',

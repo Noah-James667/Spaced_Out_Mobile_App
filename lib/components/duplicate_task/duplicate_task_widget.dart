@@ -86,33 +86,122 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                         'DUPLICATE_TASK_Checkbox_zs1fz6vc_ON_TOGG');
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
-                    logFirebaseEvent('Checkbox_backend_call');
+                    if (widget.taskDoc!.completeBy! < getCurrentTimestamp) {
+                      if (widget.taskDoc?.difficultyLvl == 1) {
+                        logFirebaseEvent('Checkbox_backend_call');
 
-                    await currentUserReference!.update({
-                      ...mapToFirestore(
-                        {
-                          'coins': FieldValue.increment(20),
-                          'xp': FieldValue.increment(10),
-                        },
-                      ),
-                    });
-                    logFirebaseEvent('Checkbox_alert_dialog');
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Task Complete'),
-                          content: Text('Your task has been completed!'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(10),
+                              'xp': FieldValue.increment(10),
+                            },
+                          ),
+                        });
+                      } else {
+                        if (widget.taskDoc?.difficultyLvl == 2) {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(20),
+                                'xp': FieldValue.increment(20),
+                              },
                             ),
-                          ],
-                        );
-                      },
-                    );
+                          });
+                        } else {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(30),
+                                'xp': FieldValue.increment(30),
+                              },
+                            ),
+                          });
+                        }
+                      }
+                    } else {
+                      if (widget.taskDoc?.difficultyLvl == 1) {
+                        logFirebaseEvent('Checkbox_backend_call');
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(5),
+                              'xp': FieldValue.increment(5),
+                            },
+                          ),
+                        });
+                      } else {
+                        if (widget.taskDoc?.difficultyLvl == 2) {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(10),
+                                'xp': FieldValue.increment(10),
+                              },
+                            ),
+                          });
+                        } else {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(15),
+                                'xp': FieldValue.increment(15),
+                              },
+                            ),
+                          });
+                        }
+                      }
+                    }
+                  } else {
+                    logFirebaseEvent(
+                        'DUPLICATE_TASK_Checkbox_zs1fz6vc_ON_TOGG');
+                    logFirebaseEvent('Checkbox_execute_callback');
+                    await widget.checkAction?.call();
+                    if (widget.taskDoc?.difficultyLvl == 1) {
+                      logFirebaseEvent('Checkbox_backend_call');
+
+                      await currentUserReference!.update({
+                        ...mapToFirestore(
+                          {
+                            'coins': FieldValue.increment(-(10)),
+                            'xp': FieldValue.increment(-(30)),
+                          },
+                        ),
+                      });
+                    } else {
+                      if (widget.taskDoc?.difficultyLvl == 2) {
+                        logFirebaseEvent('Checkbox_backend_call');
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(-(20)),
+                              'xp': FieldValue.increment(-(30)),
+                            },
+                          ),
+                        });
+                      } else {
+                        logFirebaseEvent('Checkbox_backend_call');
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(-(30)),
+                              'xp': FieldValue.increment(-(30)),
+                            },
+                          ),
+                        });
+                      }
+                    }
                   }
                 },
                 side: BorderSide(

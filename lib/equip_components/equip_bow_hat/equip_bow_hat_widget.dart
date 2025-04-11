@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -91,6 +92,7 @@ class _EquipBowHatWidgetState extends State<EquipBowHatWidget> {
           ),
           StreamBuilder<List<ShopItemsRecord>>(
             stream: queryShopItemsRecord(
+              parent: currentUserReference,
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -119,6 +121,37 @@ class _EquipBowHatWidgetState extends State<EquipBowHatWidget> {
               return FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('EQUIP_BOW_HAT_COMP_EQUIP_BTN_ON_TAP');
+                  if (buttonShopItemsRecord!.bowHat) {
+                    logFirebaseEvent('Button_update_app_state');
+                    FFAppState().bowHatEquip = 1;
+                    FFAppState().cowboyHatEquip = 0;
+                    FFAppState().pirateHatEquip = 0;
+                    FFAppState().topHatEquip = 0;
+                    FFAppState().mushroomHatEquip = 0;
+                    FFAppState().unicornHatEquip = 0;
+                    FFAppState().magicHatEquip = 0;
+                    safeSetState(() {});
+                  } else {
+                    logFirebaseEvent('Button_alert_dialog');
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Item Not Owned!'),
+                          content:
+                              Text('You have not yet purchased this item!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+
                   logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
                 },
@@ -155,6 +188,9 @@ class _EquipBowHatWidgetState extends State<EquipBowHatWidget> {
               logFirebaseEvent('EQUIP_BOW_HAT_COMP_UNEQUIP_BTN_ON_TAP');
               logFirebaseEvent('Button_bottom_sheet');
               Navigator.pop(context);
+              logFirebaseEvent('Button_update_app_state');
+              FFAppState().bowHatEquip = 0;
+              safeSetState(() {});
             },
             text: 'Unequip',
             options: FFButtonOptions(

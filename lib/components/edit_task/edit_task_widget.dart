@@ -680,50 +680,59 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 ),
               ),
             ),
-            FlutterFlowChoiceChips(
-              options: [ChipData('Easy'), ChipData('Medium'), ChipData('Hard')],
-              onChanged: (val) => safeSetState(
-                  () => _model.choiceChipsValue2 = val?.firstOrNull),
-              selectedChipStyle: ChipStyle(
-                backgroundColor: FlutterFlowTheme.of(context).primary,
-                textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      color: FlutterFlowTheme.of(context).info,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
-                    ),
-                iconColor: FlutterFlowTheme.of(context).info,
-                iconSize: 16.0,
-                elevation: 0.0,
-                borderColor: FlutterFlowTheme.of(context).primaryText,
-                borderRadius: BorderRadius.circular(8.0),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+              child: FlutterFlowChoiceChips(
+                options: [
+                  ChipData('Easy'),
+                  ChipData('Medium'),
+                  ChipData('Hard')
+                ],
+                onChanged: (val) => safeSetState(
+                    () => _model.choiceChipsValue2 = val?.firstOrNull),
+                selectedChipStyle: ChipStyle(
+                  backgroundColor: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        color: FlutterFlowTheme.of(context).info,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                  iconColor: FlutterFlowTheme.of(context).info,
+                  iconSize: 16.0,
+                  elevation: 0.0,
+                  borderColor: FlutterFlowTheme.of(context).primaryText,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                unselectedChipStyle: ChipStyle(
+                  backgroundColor:
+                      FlutterFlowTheme.of(context).secondaryBackground,
+                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                  iconColor: FlutterFlowTheme.of(context).secondaryText,
+                  iconSize: 16.0,
+                  elevation: 0.0,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                chipSpacing: 8.0,
+                rowSpacing: 8.0,
+                multiselect: false,
+                initialized: _model.choiceChipsValue2 != null,
+                alignment: WrapAlignment.start,
+                controller: _model.choiceChipsValueController2 ??=
+                    FormFieldController<List<String>>(
+                  [widget.taskDifficulty!],
+                ),
+                wrapped: true,
               ),
-              unselectedChipStyle: ChipStyle(
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
-                    ),
-                iconColor: FlutterFlowTheme.of(context).secondaryText,
-                iconSize: 16.0,
-                elevation: 0.0,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              chipSpacing: 8.0,
-              rowSpacing: 8.0,
-              multiselect: false,
-              initialized: _model.choiceChipsValue2 != null,
-              alignment: WrapAlignment.start,
-              controller: _model.choiceChipsValueController2 ??=
-                  FormFieldController<List<String>>(
-                [widget.taskDifficulty!],
-              ),
-              wrapped: true,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -745,10 +754,15 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                             isRepeating: false,
                             completeDate: functions
                                 .returnDayMonthPicker(_model.datePicked1),
+                            difficultyLvl: functions
+                                .difficultyToInt(_model.choiceChipsValue2!),
+                            taskCategory: _model.dropDownValue,
                           ),
                           ...mapToFirestore(
                             {
                               'days_repeating': FieldValue.delete(),
+                              'complete_date_list':
+                                  functions.wrapDateInList(_model.datePicked1!),
                             },
                           ),
                         });
@@ -763,12 +777,18 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                                 _model.choiceChipsValues1!.toList(),
                                 _model.datePicked2!),
                             isRepeating: true,
-                            completeDate: functions
-                                .returnDayMonthPicker(_model.datePicked1),
+                            completeDate: functions.getNextMonthDayYear(
+                                _model.choiceChipsValues1!.toList()),
+                            difficultyLvl: functions
+                                .difficultyToInt(_model.choiceChipsValue2!),
+                            taskCategory: _model.dropDownValue,
                           ),
                           ...mapToFirestore(
                             {
-                              'days_repeating': widget.daysRepeating,
+                              'days_repeating': _model.choiceChipsValues1,
+                              'complete_date_list':
+                                  functions.getUpcomingWeekdays(
+                                      _model.choiceChipsValues1!.toList()),
                             },
                           ),
                         });

@@ -27,13 +27,13 @@ import '/purchase_components/purchase_wizard_hat/purchase_wizard_hat_widget.dart
 import '/purchase_components/purchase_yellow_pants/purchase_yellow_pants_widget.dart';
 import '/purchase_components/purchase_yellow_ship/purchase_yellow_ship_widget.dart';
 import '/purchase_components/purchase_zapy_gun/purchase_zapy_gun_widget.dart';
-import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'shop_model.dart';
 export 'shop_model.dart';
 
@@ -102,6 +102,8 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -109,7 +111,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryText,
         body: SafeArea(
           top: true,
           child: Container(
@@ -123,142 +125,156 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                 ).image,
               ),
             ),
-            child: GestureDetector(
-              onHorizontalDragEnd: (details) async {
-                logFirebaseEvent('SHOP_Column_gbukbob5_ON_HORIZONTAL_DRAG_');
-                logFirebaseEvent('Column_navigate_to');
-
-                context.pushNamed(
-                  TasksWidget.routeName,
-                  extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
-                      hasTransition: true,
-                      transitionType: PageTransitionType.rightToLeft,
-                    ),
-                  },
-                );
-              },
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    StickyHeader(
-                      overlapHeaders: false,
-                      header: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 400.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20.0),
-                                  bottomRight: Radius.circular(20.0),
-                                  topLeft: Radius.circular(0.0),
-                                  topRight: Radius.circular(0.0),
-                                ),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).tertiary,
-                                  width: 2.0,
-                                ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  StickyHeader(
+                    overlapHeaders: false,
+                    header: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 400.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20.0),
+                                bottomRight: Radius.circular(20.0),
+                                topLeft: Radius.circular(0.0),
+                                topRight: Radius.circular(0.0),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(0.0, -1.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Flexible(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 64.0,
-                                            height: 64.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.asset(
-                                                'assets/images/coinSpin64Slow.gif',
-                                                width: 200.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).tertiary,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, -1.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 64.0,
+                                          height: 64.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/coinSpin64Slow.gif',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                          Container(
-                                            width: 128.0,
-                                            height: 64.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(6.0),
-                                              child: Image.asset(
-                                                'assets/images/shopShine.gif',
-                                                width: 100.0,
-                                                height: 100.0,
-                                                fit: BoxFit.cover,
-                                              ),
+                                        ),
+                                        Container(
+                                          width: 128.0,
+                                          height: 64.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            child: Image.asset(
+                                              'assets/images/shopShine.gif',
+                                              width: 100.0,
+                                              height: 100.0,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                          Container(
-                                            width: 64.0,
-                                            height: 64.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.asset(
-                                                'assets/images/coinSpin64Slow.gif',
-                                                width: 200.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
+                                        ),
+                                        Container(
+                                          width: 64.0,
+                                          height: 64.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/coinSpin64Slow.gif',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                    Flexible(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Flexible(
-                                            child: Container(
-                                              width: 393.0,
-                                              height: 30.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Coins: ',
+                                  ),
+                                  Flexible(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Container(
+                                            width: 393.0,
+                                            height: 30.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Coins: ',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        fontSize: 18.0,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                                ),
+                                                AuthUserStreamWidget(
+                                                  builder: (context) => Text(
+                                                    valueOrDefault<String>(
+                                                      formatNumber(
+                                                        valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.coins,
+                                                            0),
+                                                        formatType:
+                                                            FormatType.compact,
+                                                      ),
+                                                      '0',
+                                                    ),
+                                                    textAlign: TextAlign.start,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -277,111 +293,83 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                                       .bodyMediumFamily),
                                                         ),
                                                   ),
-                                                  AuthUserStreamWidget(
-                                                    builder: (context) => Text(
-                                                      valueOrDefault<String>(
-                                                        formatNumber(
-                                                          valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.coins,
-                                                              0),
-                                                          formatType: FormatType
-                                                              .compact,
-                                                        ),
-                                                        '0',
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily,
-                                                                fontSize: 18.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      content:
-                          // Changed from primary scrollable
-                          SingleChildScrollView(
-                        primary: false,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height: 25.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                    border: Border.all(
-                                      color: Color(0xFE000000),
-                                    ),
+                        ),
+                      ],
+                    ),
+                    content:
+                        // Changed from primary scrollable
+                        SingleChildScrollView(
+                      primary: false,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 30.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  border: Border.all(
+                                    color: Color(0xFE000000),
+                                    width: 3.0,
                                   ),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
                                       'Weapons',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .bodyLarge
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            fontSize: 14.0,
+                                                    .bodyLargeFamily,
                                             letterSpacing: 0.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
+                                                        .bodyLargeFamily),
                                           ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 0.7),
-                              child: Container(
-                                width: double.infinity,
-                                height: 180.0,
-                                child: CarouselSlider(
-                                  items: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                              ),
+                            ],
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.7),
+                            child: Container(
+                              width: double.infinity,
+                              height: 180.0,
+                              child: CarouselSlider(
+                                items: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity: FFAppState().sniperBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -488,11 +476,14 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: 100.0,
-                                      height: double.infinity,
+                                      ),
+                                    ],
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().smallSwordBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -592,9 +583,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                       animationsMap[
                                           'containerOnActionTriggerAnimation']!,
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().bigSwordBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -697,9 +691,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().spaceSwordBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -796,13 +793,16 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity: FFAppState().zappyGunBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -909,69 +909,77 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                  carouselController:
-                                      _model.carouselController1 ??=
-                                          CarouselSliderController(),
-                                  options: CarouselOptions(
-                                    initialPage: 1,
-                                    viewportFraction: 0.5,
-                                    disableCenter: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.25,
-                                    enableInfiniteScroll: true,
-                                    scrollDirection: Axis.horizontal,
-                                    autoPlay: false,
-                                    onPageChanged: (index, _) =>
-                                        _model.carouselCurrentIndex1 = index,
+                                      ),
+                                    ],
                                   ),
+                                ],
+                                carouselController:
+                                    _model.carouselController1 ??=
+                                        CarouselSliderController(),
+                                options: CarouselOptions(
+                                  initialPage: 1,
+                                  viewportFraction: 0.5,
+                                  disableCenter: true,
+                                  enlargeCenterPage: true,
+                                  enlargeFactor: 0.25,
+                                  enableInfiniteScroll: true,
+                                  scrollDirection: Axis.horizontal,
+                                  autoPlay: false,
+                                  onPageChanged: (index, _) =>
+                                      _model.carouselCurrentIndex1 = index,
                                 ),
                               ),
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: 25.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).tertiary,
-                                border: Border.all(
-                                  color: Colors.black,
-                                ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 30.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).tertiary,
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 3.0,
                               ),
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsets.all(2.0),
                                 child: Text(
                                   'Cosmetics',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
+                                      .bodyLarge
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
+                                            .bodyLargeFamily,
                                         letterSpacing: 0.0,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                                    .bodyLargeFamily),
                                       ),
                                 ),
                               ),
                             ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, -0.7),
-                              child: Container(
-                                width: double.infinity,
-                                height: 180.0,
-                                child: CarouselSlider(
-                                  items: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, -0.7),
+                            child: Container(
+                              width: double.infinity,
+                              height: 180.0,
+                              child: CarouselSlider(
+                                items: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity: FFAppState().magicHatBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1078,11 +1086,14 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                      ),
+                                    ],
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().cowboyHatBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -1186,9 +1197,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().bowHatBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -1285,9 +1299,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().pirateHatBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -1384,13 +1401,16 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity: FFAppState().topHatBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1497,15 +1517,19 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity:
+                                              FFAppState().mushroomHatBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1612,15 +1636,19 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity:
+                                              FFAppState().unicornHatBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1727,67 +1755,75 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                  carouselController:
-                                      _model.carouselController2 ??=
-                                          CarouselSliderController(),
-                                  options: CarouselOptions(
-                                    initialPage: 1,
-                                    viewportFraction: 0.5,
-                                    disableCenter: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.25,
-                                    enableInfiniteScroll: true,
-                                    scrollDirection: Axis.horizontal,
-                                    autoPlay: false,
-                                    onPageChanged: (index, _) =>
-                                        _model.carouselCurrentIndex2 = index,
+                                      ),
+                                    ],
                                   ),
+                                ],
+                                carouselController:
+                                    _model.carouselController2 ??=
+                                        CarouselSliderController(),
+                                options: CarouselOptions(
+                                  initialPage: 1,
+                                  viewportFraction: 0.5,
+                                  disableCenter: true,
+                                  enlargeCenterPage: true,
+                                  enlargeFactor: 0.25,
+                                  enableInfiniteScroll: true,
+                                  scrollDirection: Axis.horizontal,
+                                  autoPlay: false,
+                                  onPageChanged: (index, _) =>
+                                      _model.carouselCurrentIndex2 = index,
                                 ),
                               ),
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: 25.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).tertiary,
-                                border: Border.all(
-                                  color: Colors.black,
-                                ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 30.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).tertiary,
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 3.0,
                               ),
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsets.all(2.0),
                                 child: Text(
                                   'Pants',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
+                                      .bodyLarge
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
+                                            .bodyLargeFamily,
                                         letterSpacing: 0.0,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                                    .bodyLargeFamily),
                                       ),
                                 ),
                               ),
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: 200.0,
-                              child: CarouselSlider(
-                                items: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 200.0,
+                            child: CarouselSlider(
+                              items: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Opacity(
+                                        opacity: FFAppState().redPantsBought,
                                         child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 200.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -1890,15 +1926,18 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Opacity(
+                                        opacity: FFAppState().bluePantsBought,
                                         child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 200.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -2001,15 +2040,18 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Opacity(
+                                        opacity: FFAppState().greenPantsBought,
                                         child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 200.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -2112,15 +2154,18 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Opacity(
+                                        opacity: FFAppState().yellowPantsBought,
                                         child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 200.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -2223,15 +2268,18 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Opacity(
+                                        opacity: FFAppState().purplePantsBought,
                                         child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 200.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -2334,15 +2382,18 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Opacity(
+                                        opacity: FFAppState().cyanPantsBought,
                                         child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 200.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -2445,61 +2496,74 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ],
-                                carouselController:
-                                    _model.carouselController3 ??=
-                                        CarouselSliderController(),
-                                options: CarouselOptions(
-                                  initialPage: 1,
-                                  viewportFraction: 0.5,
-                                  disableCenter: true,
-                                  enlargeCenterPage: true,
-                                  enlargeFactor: 0.25,
-                                  enableInfiniteScroll: true,
-                                  scrollDirection: Axis.horizontal,
-                                  autoPlay: false,
-                                  onPageChanged: (index, _) =>
-                                      _model.carouselCurrentIndex3 = index,
+                                    ),
+                                  ],
                                 ),
+                              ],
+                              carouselController: _model.carouselController3 ??=
+                                  CarouselSliderController(),
+                              options: CarouselOptions(
+                                initialPage: 1,
+                                viewportFraction: 0.5,
+                                disableCenter: true,
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.25,
+                                enableInfiniteScroll: true,
+                                scrollDirection: Axis.horizontal,
+                                autoPlay: false,
+                                onPageChanged: (index, _) =>
+                                    _model.carouselCurrentIndex3 = index,
                               ),
                             ),
-                            Container(
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Container(
                               width: double.infinity,
-                              height: 25.0,
+                              height: 30.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).tertiary,
+                                borderRadius: BorderRadius.circular(8.0),
+                                border: Border.all(
+                                  width: 3.0,
+                                ),
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  'Ships',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
-                                      ),
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsets.all(2.0),
+                                  child: Text(
+                                    'Ships',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLargeFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLargeFamily),
+                                        ),
+                                  ),
                                 ),
                               ),
                             ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                height: 200.0,
-                                child: CarouselSlider(
-                                  items: [
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 200.0,
+                              child: CarouselSlider(
+                                items: [
+                                  Opacity(
+                                    opacity: FFAppState().redShipBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -2592,9 +2656,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().blueShipBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -2687,9 +2754,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().greenShipBought,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
@@ -2782,13 +2852,17 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity:
+                                              FFAppState().yellowShipBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -2890,15 +2964,19 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity:
+                                              FFAppState().purpleShipBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -3000,15 +3078,18 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity: FFAppState().cyanShipBought,
                                           child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: 200.0,
+                                            height: 200.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -3110,35 +3191,35 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                  carouselController:
-                                      _model.carouselController4 ??=
-                                          CarouselSliderController(),
-                                  options: CarouselOptions(
-                                    initialPage: 1,
-                                    viewportFraction: 0.5,
-                                    disableCenter: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.25,
-                                    enableInfiniteScroll: true,
-                                    scrollDirection: Axis.horizontal,
-                                    autoPlay: false,
-                                    onPageChanged: (index, _) =>
-                                        _model.carouselCurrentIndex4 = index,
+                                      ),
+                                    ],
                                   ),
+                                ],
+                                carouselController:
+                                    _model.carouselController4 ??=
+                                        CarouselSliderController(),
+                                options: CarouselOptions(
+                                  initialPage: 1,
+                                  viewportFraction: 0.5,
+                                  disableCenter: true,
+                                  enlargeCenterPage: true,
+                                  enlargeFactor: 0.25,
+                                  enableInfiniteScroll: true,
+                                  scrollDirection: Axis.horizontal,
+                                  autoPlay: false,
+                                  onPageChanged: (index, _) =>
+                                      _model.carouselCurrentIndex4 = index,
                                 ),
                               ),
                             ),
-                          ]
-                              .divide(SizedBox(height: 15.0))
-                              .around(SizedBox(height: 15.0)),
-                        ),
+                          ),
+                        ]
+                            .divide(SizedBox(height: 15.0))
+                            .around(SizedBox(height: 15.0)),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

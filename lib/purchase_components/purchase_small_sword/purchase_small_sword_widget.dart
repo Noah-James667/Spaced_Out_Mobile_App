@@ -232,6 +232,10 @@ class _PurchaseSmallSwordWidgetState extends State<PurchaseSmallSwordWidget> {
                         );
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().smallSwordBought = 0.5;
+                        FFAppState().smallSwordAvail = 1.0;
+                        safeSetState(() {});
                       } else if (valueOrDefault(currentUserDocument?.coins, 0) <
                           100) {
                         logFirebaseEvent('Button_alert_dialog');
@@ -283,7 +287,8 @@ class _PurchaseSmallSwordWidgetState extends State<PurchaseSmallSwordWidget> {
                             .then((_) => _model.soundPlayer!.play());
 
                         logFirebaseEvent('Button_update_app_state');
-                        FFAppState().smallSwordBought = 1;
+                        FFAppState().smallSwordBought = 0.5;
+                        FFAppState().smallSwordAvail = 1.0;
                         safeSetState(() {});
                       }
                     },

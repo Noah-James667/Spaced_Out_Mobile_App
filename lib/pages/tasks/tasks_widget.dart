@@ -113,7 +113,7 @@ class _TasksWidgetState extends State<TasksWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).black,
+        backgroundColor: FlutterFlowTheme.of(context).primaryText,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             logFirebaseEvent('TASKS_FloatingActionButton_0tw0dwqf_ON_T');
@@ -251,6 +251,9 @@ class _TasksWidgetState extends State<TasksWidget>
                                 false;
                             logFirebaseEvent('IconButton_backend_call');
                             await currentUserReference!.delete();
+                            logFirebaseEvent('IconButton_navigate_to');
+
+                            context.pushNamed(LoginPageWidget.routeName);
                           },
                         ),
                       ],
@@ -481,24 +484,27 @@ class _TasksWidgetState extends State<TasksWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         StreamBuilder<List<TaskRecord>>(
-                                          stream: FFAppState().queryCache(
-                                            requestFn: () => queryTaskRecord(
-                                              queryBuilder: (taskRecord) =>
-                                                  taskRecord
-                                                      .where(
-                                                        'user',
-                                                        isEqualTo:
-                                                            currentUserReference,
-                                                      )
-                                                      .where(
-                                                        'is_complete',
-                                                        isEqualTo: false,
-                                                      )
-                                                      .where(
-                                                        'is_repeating',
-                                                        isEqualTo: false,
-                                                      ),
-                                            ),
+                                          stream: queryTaskRecord(
+                                            queryBuilder: (taskRecord) =>
+                                                taskRecord
+                                                    .where(
+                                                      'user',
+                                                      isEqualTo:
+                                                          currentUserReference,
+                                                    )
+                                                    .where(
+                                                      'is_complete',
+                                                      isEqualTo: false,
+                                                    )
+                                                    .where(
+                                                      'complete_by',
+                                                      isGreaterThan:
+                                                          getCurrentTimestamp,
+                                                    )
+                                                    .where(
+                                                      'is_repeating',
+                                                      isEqualTo: false,
+                                                    ),
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
@@ -566,7 +572,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child: Container(
-                                                              height: 350.0,
+                                                              height: 400.0,
                                                               child:
                                                                   DescriptionSheetWidget(
                                                                 taskDoc:
@@ -629,6 +635,11 @@ class _TasksWidgetState extends State<TasksWidget>
                                                   .where(
                                                     'is_repeating',
                                                     isEqualTo: true,
+                                                  )
+                                                  .where(
+                                                    'complete_by',
+                                                    isGreaterThan:
+                                                        getCurrentTimestamp,
                                                   ),
                                         ),
                                         builder: (context, snapshot) {
@@ -692,7 +703,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                                               .viewInsetsOf(
                                                                   context),
                                                           child: Container(
-                                                            height: 350.0,
+                                                            height: 400.0,
                                                             child:
                                                                 DescriptionSheetWidget(
                                                               taskDoc:

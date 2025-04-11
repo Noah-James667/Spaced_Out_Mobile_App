@@ -231,6 +231,10 @@ class _PurchaseMushroomHatWidgetState extends State<PurchaseMushroomHatWidget> {
                         );
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().mushroomHatBought = 0.5;
+                        FFAppState().mushroomHatAvail = 1.0;
+                        safeSetState(() {});
                       } else if (valueOrDefault(currentUserDocument?.coins, 0) <
                           1500) {
                         logFirebaseEvent('Button_alert_dialog');
@@ -280,6 +284,11 @@ class _PurchaseMushroomHatWidgetState extends State<PurchaseMushroomHatWidget> {
                         _model.soundPlayer!
                             .setAsset('assets/audios/Pixel_20.wav')
                             .then((_) => _model.soundPlayer!.play());
+
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().mushroomHatBought = 0.5;
+                        FFAppState().mushroomHatAvail = 1.0;
+                        safeSetState(() {});
                       }
                     },
                     text: 'Buy',

@@ -65,6 +65,16 @@ class TaskRecord extends FirestoreRecord {
   DateTime? get completeDate => _completeDate;
   bool hasCompleteDate() => _completeDate != null;
 
+  // "task_category" field.
+  String? _taskCategory;
+  String get taskCategory => _taskCategory ?? '';
+  bool hasTaskCategory() => _taskCategory != null;
+
+  // "complete_date_list" field.
+  List<DateTime>? _completeDateList;
+  List<DateTime> get completeDateList => _completeDateList ?? const [];
+  bool hasCompleteDateList() => _completeDateList != null;
+
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _taskName = snapshotData['task_name'] as String?;
@@ -76,6 +86,8 @@ class TaskRecord extends FirestoreRecord {
     _xpWeight = castToType<int>(snapshotData['xp_weight']);
     _daysRepeating = getDataList(snapshotData['days_repeating']);
     _completeDate = snapshotData['complete_date'] as DateTime?;
+    _taskCategory = snapshotData['task_category'] as String?;
+    _completeDateList = getDataList(snapshotData['complete_date_list']);
   }
 
   static CollectionReference get collection =>
@@ -121,6 +133,7 @@ Map<String, dynamic> createTaskRecordData({
   int? difficultyLvl,
   int? xpWeight,
   DateTime? completeDate,
+  String? taskCategory,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -133,6 +146,7 @@ Map<String, dynamic> createTaskRecordData({
       'difficulty_lvl': difficultyLvl,
       'xp_weight': xpWeight,
       'complete_date': completeDate,
+      'task_category': taskCategory,
     }.withoutNulls,
   );
 
@@ -154,7 +168,9 @@ class TaskRecordDocumentEquality implements Equality<TaskRecord> {
         e1?.difficultyLvl == e2?.difficultyLvl &&
         e1?.xpWeight == e2?.xpWeight &&
         listEquality.equals(e1?.daysRepeating, e2?.daysRepeating) &&
-        e1?.completeDate == e2?.completeDate;
+        e1?.completeDate == e2?.completeDate &&
+        e1?.taskCategory == e2?.taskCategory &&
+        listEquality.equals(e1?.completeDateList, e2?.completeDateList);
   }
 
   @override
@@ -168,7 +184,9 @@ class TaskRecordDocumentEquality implements Equality<TaskRecord> {
         e?.difficultyLvl,
         e?.xpWeight,
         e?.daysRepeating,
-        e?.completeDate
+        e?.completeDate,
+        e?.taskCategory,
+        e?.completeDateList
       ]);
 
   @override

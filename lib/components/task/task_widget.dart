@@ -125,16 +125,81 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                     }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
-                    logFirebaseEvent('Checkbox_backend_call');
+                    if (widget.taskDoc!.completeBy! < getCurrentTimestamp) {
+                      if (widget.taskDoc?.difficultyLvl == 1) {
+                        logFirebaseEvent('Checkbox_backend_call');
 
-                    await currentUserReference!.update({
-                      ...mapToFirestore(
-                        {
-                          'coins': FieldValue.increment(20),
-                          'xp': FieldValue.increment(20),
-                        },
-                      ),
-                    });
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(10),
+                              'xp': FieldValue.increment(10),
+                            },
+                          ),
+                        });
+                      } else {
+                        if (widget.taskDoc?.difficultyLvl == 2) {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(20),
+                                'xp': FieldValue.increment(20),
+                              },
+                            ),
+                          });
+                        } else {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(30),
+                                'xp': FieldValue.increment(30),
+                              },
+                            ),
+                          });
+                        }
+                      }
+                    } else {
+                      if (widget.taskDoc?.difficultyLvl == 1) {
+                        logFirebaseEvent('Checkbox_backend_call');
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(5),
+                              'xp': FieldValue.increment(5),
+                            },
+                          ),
+                        });
+                      } else {
+                        if (widget.taskDoc?.difficultyLvl == 2) {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(10),
+                                'xp': FieldValue.increment(10),
+                              },
+                            ),
+                          });
+                        } else {
+                          logFirebaseEvent('Checkbox_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'coins': FieldValue.increment(15),
+                                'xp': FieldValue.increment(15),
+                              },
+                            ),
+                          });
+                        }
+                      }
+                    }
                   } else {
                     logFirebaseEvent('TASK_Checkbox_byo01zxd_ON_TOGGLE_OFF');
                     logFirebaseEvent('Checkbox_widget_animation');
@@ -146,11 +211,42 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                     }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
-                    logFirebaseEvent('Checkbox_backend_call');
+                    if (widget.taskDoc?.difficultyLvl == 1) {
+                      logFirebaseEvent('Checkbox_backend_call');
 
-                    await currentUserReference!.update(createUserRecordData(
-                      email: '',
-                    ));
+                      await currentUserReference!.update({
+                        ...mapToFirestore(
+                          {
+                            'coins': FieldValue.increment(-(10)),
+                            'xp': FieldValue.increment(-(30)),
+                          },
+                        ),
+                      });
+                    } else {
+                      if (widget.taskDoc?.difficultyLvl == 2) {
+                        logFirebaseEvent('Checkbox_backend_call');
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(-(20)),
+                              'xp': FieldValue.increment(-(30)),
+                            },
+                          ),
+                        });
+                      } else {
+                        logFirebaseEvent('Checkbox_backend_call');
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'coins': FieldValue.increment(-(30)),
+                              'xp': FieldValue.increment(-(30)),
+                            },
+                          ),
+                        });
+                      }
+                    }
                   }
                 },
                 side: BorderSide(

@@ -232,6 +232,10 @@ class _PurchasePurpleShipWidgetState extends State<PurchasePurpleShipWidget> {
                         );
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().purpleShipBought = 0.5;
+                        FFAppState().purpleShipAvail = 1.0;
+                        safeSetState(() {});
                       } else if (valueOrDefault(currentUserDocument?.coins, 0) <
                           1000) {
                         logFirebaseEvent('Button_alert_dialog');
@@ -281,6 +285,11 @@ class _PurchasePurpleShipWidgetState extends State<PurchasePurpleShipWidget> {
                         _model.soundPlayer!
                             .setAsset('assets/audios/Pixel_20.wav')
                             .then((_) => _model.soundPlayer!.play());
+
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().purpleShipBought = 0.5;
+                        FFAppState().purpleShipAvail = 1.0;
+                        safeSetState(() {});
                       }
                     },
                     text: 'Buy',

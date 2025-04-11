@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -91,6 +92,7 @@ class _EquipSmallSwordWidgetState extends State<EquipSmallSwordWidget> {
           ),
           StreamBuilder<List<ShopItemsRecord>>(
             stream: queryShopItemsRecord(
+              parent: currentUserReference,
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -119,6 +121,35 @@ class _EquipSmallSwordWidgetState extends State<EquipSmallSwordWidget> {
               return FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('EQUIP_SMALL_SWORD_COMP_EQUIP_BTN_ON_TAP');
+                  if (buttonShopItemsRecord!.smallSword) {
+                    logFirebaseEvent('Button_update_app_state');
+                    FFAppState().smallSwordEquip = 1;
+                    FFAppState().bigSwordEquip = 0;
+                    FFAppState().spaceSwordEquip = 0;
+                    FFAppState().zappyGunEquip = 0;
+                    FFAppState().sniperGunEquip = 0;
+                    safeSetState(() {});
+                  } else {
+                    logFirebaseEvent('Button_alert_dialog');
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Item Not Owned!'),
+                          content:
+                              Text('You have not yet purchased this item!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+
                   logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
                 },
@@ -153,6 +184,9 @@ class _EquipSmallSwordWidgetState extends State<EquipSmallSwordWidget> {
           FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('EQUIP_SMALL_SWORD_UNEQUIP_BTN_ON_TAP');
+              logFirebaseEvent('Button_update_app_state');
+              FFAppState().smallSwordEquip = 0;
+              safeSetState(() {});
               logFirebaseEvent('Button_bottom_sheet');
               Navigator.pop(context);
             },

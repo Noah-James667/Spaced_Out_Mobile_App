@@ -149,3 +149,75 @@ DateTime getNextMonthDayYear(List<String> daysRepeating) {
   DateTime nextDate = today.add(Duration(days: daysUntilNext));
   return DateTime(nextDate.year, nextDate.month, nextDate.day);
 }
+
+int difficultyToInt(String difficulty) {
+  switch (difficulty.toLowerCase()) {
+    case 'easy':
+      return 1;
+    case 'medium':
+      return 2;
+    case 'hard':
+      return 3;
+    default:
+      return 0; // Return 0 if input is invalid
+  }
+}
+
+List<DateTime> getUpcomingWeekdays(List<String> repeatingDays) {
+  final now = DateTime.now();
+  // Dart's weekday starts from Monday = 1 to Sunday = 7
+  // Adjust to start week on Sunday = 0 to Saturday = 6
+  int currentWeekdayIndex = now.weekday % 7; // Sunday becomes 0
+
+  // Map EEEE format weekday names to 0 (Sun) through 6 (Sat)
+  final weekDayMap = {
+    'Sunday': 0,
+    'Monday': 1,
+    'Tuesday': 2,
+    'Wednesday': 3,
+    'Thursday': 4,
+    'Friday': 5,
+    'Saturday': 6,
+  };
+
+  List<DateTime> result = [];
+
+  for (var day in repeatingDays) {
+    final normalizedDay = day.trim().substring(0, 1).toUpperCase() +
+        day.trim().substring(1).toLowerCase();
+
+    if (weekDayMap.containsKey(normalizedDay)) {
+      final targetIndex = weekDayMap[normalizedDay]!;
+
+      // Only include if it's today or later in the week
+      if (targetIndex >= currentWeekdayIndex) {
+        final daysFromNow = targetIndex - currentWeekdayIndex;
+        result.add(DateTime(now.year, now.month, now.day + daysFromNow));
+      }
+    }
+  }
+
+  return result;
+}
+
+List<DateTime> wrapDateInList(DateTime selectedDate) {
+  return [DateTime(selectedDate.year, selectedDate.month, selectedDate.day)];
+}
+
+DateTime getNearestDate(List<DateTime> dates) {
+  if (dates.isEmpty) return DateTime.now();
+
+  DateTime now = DateTime.now();
+  DateTime closestDate = dates.first;
+  Duration minDifference = (closestDate.difference(now)).abs();
+
+  for (DateTime date in dates) {
+    Duration diff = (date.difference(now)).abs();
+    if (diff < minDifference) {
+      closestDate = date;
+      minDifference = diff;
+    }
+  }
+
+  return closestDate;
+}

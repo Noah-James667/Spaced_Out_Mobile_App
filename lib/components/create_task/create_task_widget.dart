@@ -661,7 +661,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                 FlutterFlowTheme.of(context).labelMediumFamily),
                           ),
-                      maxLines: 3,
+                      maxLines: 10,
                       cursorColor: FlutterFlowTheme.of(context).primaryText,
                       validator:
                           _model.textController2Validator.asValidator(context),
@@ -671,56 +671,59 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
               ),
 
               // these should have values tied to them that reflect how many coins the user gets when task is complete. it must also know if it is part of a larger task which will give it more weight - 20, 30, 50 if it isnt part of a larger task and +5 more on each of those if it is.
-              FlutterFlowChoiceChips(
-                options: [
-                  ChipData('Easy'),
-                  ChipData('Medium'),
-                  ChipData('Hard')
-                ],
-                onChanged: (val) => safeSetState(
-                    () => _model.choiceChipsValue2 = val?.firstOrNull),
-                selectedChipStyle: ChipStyle(
-                  backgroundColor: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                      ),
-                  iconColor: FlutterFlowTheme.of(context).info,
-                  iconSize: 16.0,
-                  elevation: 0.0,
-                  borderColor: FlutterFlowTheme.of(context).primaryText,
-                  borderWidth: 1.0,
-                  borderRadius: BorderRadius.circular(8.0),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                child: FlutterFlowChoiceChips(
+                  options: [
+                    ChipData('Easy'),
+                    ChipData('Medium'),
+                    ChipData('Hard')
+                  ],
+                  onChanged: (val) => safeSetState(
+                      () => _model.choiceChipsValue2 = val?.firstOrNull),
+                  selectedChipStyle: ChipStyle(
+                    backgroundColor: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                    iconColor: FlutterFlowTheme.of(context).info,
+                    iconSize: 16.0,
+                    elevation: 0.0,
+                    borderColor: FlutterFlowTheme.of(context).primaryText,
+                    borderWidth: 1.0,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  unselectedChipStyle: ChipStyle(
+                    backgroundColor:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                    iconColor: FlutterFlowTheme.of(context).secondaryText,
+                    iconSize: 16.0,
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  chipSpacing: 1.0,
+                  rowSpacing: 8.0,
+                  multiselect: false,
+                  alignment: WrapAlignment.start,
+                  controller: _model.choiceChipsValueController2 ??=
+                      FormFieldController<List<String>>(
+                    [],
+                  ),
+                  wrapped: true,
                 ),
-                unselectedChipStyle: ChipStyle(
-                  backgroundColor:
-                      FlutterFlowTheme.of(context).secondaryBackground,
-                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                      ),
-                  iconColor: FlutterFlowTheme.of(context).secondaryText,
-                  iconSize: 16.0,
-                  elevation: 0.0,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                chipSpacing: 1.0,
-                rowSpacing: 8.0,
-                multiselect: false,
-                alignment: WrapAlignment.start,
-                controller: _model.choiceChipsValueController2 ??=
-                    FormFieldController<List<String>>(
-                  [],
-                ),
-                wrapped: true,
               ),
               Padding(
                 padding: EdgeInsets.all(5.0),
@@ -733,18 +736,27 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                         if (_model.datePicked1 != null) {
                           logFirebaseEvent('Button_backend_call');
 
-                          firestoreBatch.set(
-                              TaskRecord.collection.doc(),
-                              createTaskRecordData(
-                                user: currentUserReference,
-                                taskName: _model.textController1.text,
-                                taskDescription: _model.textController2.text,
-                                isComplete: false,
-                                isRepeating: _model.switchValue,
-                                completeBy: _model.datePicked1,
-                                completeDate: functions
-                                    .returnDayMonthPicker(_model.datePicked1),
-                              ));
+                          firestoreBatch.set(TaskRecord.collection.doc(), {
+                            ...createTaskRecordData(
+                              user: currentUserReference,
+                              taskName: _model.textController1.text,
+                              taskDescription: _model.textController2.text,
+                              isComplete: false,
+                              isRepeating: _model.switchValue,
+                              completeBy: _model.datePicked1,
+                              completeDate: functions
+                                  .returnDayMonthPicker(_model.datePicked1),
+                              difficultyLvl: functions
+                                  .difficultyToInt(_model.choiceChipsValue2!),
+                              taskCategory: _model.dropDownValue,
+                            ),
+                            ...mapToFirestore(
+                              {
+                                'complete_date_list': functions
+                                    .wrapDateInList(_model.datePicked1!),
+                              },
+                            ),
+                          });
                           logFirebaseEvent('Button_bottom_sheet');
                           Navigator.pop(context);
                         } else {
@@ -784,11 +796,17 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                                   _model.datePicked2!),
                               completeDate: functions.getNextMonthDayYear(
                                   _model.choiceChipsValues1!.toList()),
+                              difficultyLvl: functions
+                                  .difficultyToInt(_model.choiceChipsValue2!),
+                              taskCategory: _model.dropDownValue,
                             ),
                             ...mapToFirestore(
                               {
                                 'days_repeating':
                                     _model.choiceChipsValues1?.take(7).toList(),
+                                'complete_date_list':
+                                    functions.getUpcomingWeekdays(
+                                        _model.choiceChipsValues1!.toList()),
                               },
                             ),
                           });
