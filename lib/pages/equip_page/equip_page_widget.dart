@@ -29,6 +29,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'equip_page_model.dart';
@@ -96,60 +97,58 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                 children: [
                   StickyHeader(
                     overlapHeaders: false,
-                    header: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 1.0),
-                          child: SafeArea(
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 200.0,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                    FlutterFlowTheme.of(context).oxfordBlue
-                                  ],
-                                  stops: [0.0, 0.8],
-                                  begin: AlignmentDirectional(0.0, -1.0),
-                                  end: AlignmentDirectional(0, 1.0),
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(15.0),
-                                  bottomRight: Radius.circular(15.0),
-                                  topLeft: Radius.circular(0.0),
-                                  topRight: Radius.circular(0.0),
-                                ),
-                                shape: BoxShape.rectangle,
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).black,
-                                  width: 4.0,
-                                ),
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                    header: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: Image.asset(
+                            'assets/images/512x512_purple_nebula_1.png',
+                          ).image,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 1.0),
+                            child: SafeArea(
                               child: Container(
-                                width: 200.0,
-                                height: 200.0,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: 230.0,
                                 decoration: BoxDecoration(
-                                  color: Color(0x00FFFFFF),
-                                  borderRadius: BorderRadius.circular(24.0),
-                                  border: Border.all(
-                                    color: Colors.transparent,
-                                    width: 0.0,
+                                  color: Color(0x45B1F6FF),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.asset(
+                                      'assets/images/New_Piskel-2.png_(8).png',
+                                    ).image,
                                   ),
+                                  shape: BoxShape.rectangle,
                                 ),
-                                child: wrapWithModel(
-                                  model: _model.astronautModel,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: AstronautWidget(),
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Container(
+                                  width: 200.0,
+                                  height: 200.0,
+                                  decoration: BoxDecoration(
+                                    color: Color(0x00FFFFFF),
+                                    borderRadius: BorderRadius.circular(24.0),
+                                    border: Border.all(
+                                      color: Colors.transparent,
+                                      width: 0.0,
+                                    ),
+                                  ),
+                                  child: wrapWithModel(
+                                    model: _model.astronautModel,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: AstronautWidget(),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     content:
                         // Changed from primary scrollable
@@ -161,175 +160,176 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                         children: [
                           Container(
                             width: double.infinity,
-                            height: 30.0,
+                            height: 35.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).oxfordBlue,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                color: Color(0xFE000000),
-                                width: 3.0,
-                              ),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  'Weapons',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyLargeFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
-                                      ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleRight,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
                                 ),
-                              ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      'Weapons',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .equipText,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleLeft,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
+                                ),
+                              ].divide(SizedBox(width: 10.0)),
                             ),
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.7),
                             child: Container(
                               width: double.infinity,
-                              height: 180.0,
+                              height: 200.0,
                               child: CarouselSlider(
                                 items: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().sniperAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/sniper.png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipBigGunWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                  Opacity(
+                                    opacity: FFAppState().sniperAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
-                                    ],
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/sniper.png',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipBigGunWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Opacity(
                                     opacity: FFAppState().smallSwordAvail,
                                     child: Container(
-                                      width: 100.0,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -415,361 +415,313 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().bigSwordAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
+                                  Opacity(
+                                    opacity: FFAppState().bigSwordAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
+                                        ),
+                                      ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Container(
+                                        width: 200.0,
+                                        child: Stack(
+                                          children: [
+                                            ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/swordUpgradeTwo.png',
+                                                width: 200.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                                alignment: Alignment(0.0, 0.0),
                                               ),
                                             ),
-                                            child: Container(
+                                            FFButtonWidget(
+                                              onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Button_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 320.0,
+                                                          child:
+                                                              EquipBigSwordWidget(),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              text: '',
+                                              options: FFButtonOptions(
+                                                width: 200.0,
+                                                height: 200.0,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 0.0, 16.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                color: Color(0x0039DEEF),
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
+                                                        ),
+                                                elevation: 0.0,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Opacity(
+                                    opacity: FFAppState().spaceSwordAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
+                                        ),
+                                      ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/energySword.png',
                                               width: 200.0,
-                                              child: Stack(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/swordUpgradeTwo.png',
-                                                      width: 200.0,
-                                                      height: 200.0,
-                                                      fit: BoxFit.cover,
-                                                      alignment:
-                                                          Alignment(0.0, 0.0),
-                                                    ),
-                                                  ),
-                                                  FFButtonWidget(
-                                                    onPressed: () async {
-                                                      logFirebaseEvent(
-                                                          'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Button_bottom_sheet');
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        enableDrag: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return GestureDetector(
-                                                            onTap: () {
-                                                              FocusScope.of(
-                                                                      context)
-                                                                  .unfocus();
-                                                              FocusManager
-                                                                  .instance
-                                                                  .primaryFocus
-                                                                  ?.unfocus();
-                                                            },
-                                                            child: Padding(
-                                                              padding: MediaQuery
-                                                                  .viewInsetsOf(
-                                                                      context),
-                                                              child: Container(
-                                                                height: 320.0,
-                                                                child:
-                                                                    EquipBigSwordWidget(),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
                                                     },
-                                                    text: '',
-                                                    options: FFButtonOptions(
-                                                      width: 200.0,
-                                                      height: 200.0,
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  16.0,
-                                                                  0.0,
-                                                                  16.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: Color(0x0039DEEF),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                                color: Colors
-                                                                    .white,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .titleSmallFamily),
-                                                              ),
-                                                      elevation: 0.0,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipSpaceSwordWidget(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().spaceSwordAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/energySword.png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
                                                                     context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipSpaceSwordWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().zappyGunAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/rayGun.png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipZappyGunWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                  Opacity(
+                                    opacity: FFAppState().zappyGunAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
-                                    ],
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/rayGun.png',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipZappyGunWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                                 carouselController:
@@ -792,60 +744,75 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                           ),
                           Container(
                             width: double.infinity,
-                            height: 30.0,
+                            height: 35.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).oxfordBlue,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 3.0,
-                              ),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  'Cosmetics',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyLargeFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
-                                      ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleRight,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
                                 ),
-                              ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      'Cosmetics',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .equipText,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleLeft,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
+                                ),
+                              ].divide(SizedBox(width: 10.0)),
                             ),
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.0, -0.7),
                             child: Container(
                               width: double.infinity,
-                              height: 180.0,
+                              height: 200.0,
                               child: CarouselSlider(
                                 items: [
                                   Opacity(
                                     opacity: FFAppState().magicHatAvail,
                                     child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -934,17 +901,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().cowboyHatAvail,
                                     child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -1033,17 +1002,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().bowHatAvail,
                                     child: Container(
-                                      width: 100.0,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -1129,466 +1100,409 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().pirateHatAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/pirateHat.png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipPirateHatWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                  Opacity(
+                                    opacity: FFAppState().pirateHatAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
-                                    ],
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/pirateHat.png',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipPirateHatWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().topHatAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/topHat.png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipTopHatWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                  Opacity(
+                                    opacity: FFAppState().topHatAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
-                                    ],
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/topHat.png',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipTopHatWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity:
-                                              FFAppState().mushroomHatAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: 200.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/HATWEAR_(1).png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipMushroomHatWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                  Opacity(
+                                    opacity: FFAppState().mushroomHatAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
-                                    ],
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/HATWEAR_(1).png',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipMushroomHatWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Opacity(
-                                          opacity: FFAppState().unicornHatAvail,
-                                          child: Container(
-                                            width: 200.0,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/unicornHorn.png',
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
-                                                  ),
-                                                ),
-                                                FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child: Container(
-                                                              height: 320.0,
-                                                              child:
-                                                                  EquipUnicornHatWidget(),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  text: '',
-                                                  options: FFButtonOptions(
-                                                    width: 200.0,
-                                                    height: 200.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: Color(0x0039DEEF),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                  Opacity(
+                                    opacity: FFAppState().unicornHatAvail,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
-                                    ],
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/unicornHorn.png',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                              alignment: Alignment(0.0, 0.0),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            EquipUnicornHatWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: '',
+                                            options: FFButtonOptions(
+                                              width: 200.0,
+                                              height: 200.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0x0039DEEF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily),
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                                 carouselController:
@@ -1613,35 +1527,48 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                             width: double.infinity,
                             height: 30.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).oxfordBlue,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 3.0,
-                              ),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  'Pants',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyLargeFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
-                                      ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleRight,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
                                 ),
-                              ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      'Pants',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .equipText,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleLeft,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
+                                ),
+                              ].divide(SizedBox(width: 10.0)),
                             ),
                           ),
                           Container(
@@ -1649,659 +1576,605 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                             height: 200.0,
                             child: CarouselSlider(
                               items: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity: FFAppState().redPantsAvail,
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                            border: Border.all(
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/redBoots.png',
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                EquipRedPantsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                text: '',
-                                                options: FFButtonOptions(
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039DEEF),
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                Opacity(
+                                  opacity: FFAppState().redPantsAvail,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x5C57636C),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .equipText,
+                                        width: 4.0,
                                       ),
                                     ),
-                                  ],
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/redBoots.png',
+                                            width: 200.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 300.0,
+                                                      child:
+                                                          EquipRedPantsWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          text: '',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Color(0x0039DEEF),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity: FFAppState().bluePantsAvail,
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                            border: Border.all(
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/blueBoots.png',
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                EquipDarkBluePantsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                text: '',
-                                                options: FFButtonOptions(
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039DEEF),
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                Opacity(
+                                  opacity: FFAppState().bluePantsAvail,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x5C57636C),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .equipText,
+                                        width: 4.0,
                                       ),
                                     ),
-                                  ],
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/blueBoots.png',
+                                            width: 200.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 300.0,
+                                                      child:
+                                                          EquipDarkBluePantsWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          text: '',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Color(0x0039DEEF),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity: FFAppState().greenPantsAvail,
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                            border: Border.all(
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/greenBoots.png',
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                EquipGreenPantsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                text: '',
-                                                options: FFButtonOptions(
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039DEEF),
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                Opacity(
+                                  opacity: FFAppState().greenPantsAvail,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x5C57636C),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .equipText,
+                                        width: 4.0,
                                       ),
                                     ),
-                                  ],
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/greenBoots.png',
+                                            width: 200.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 300.0,
+                                                      child:
+                                                          EquipGreenPantsWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          text: '',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Color(0x0039DEEF),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity: FFAppState().yellowPantsAvail,
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                            border: Border.all(
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/yellowPants.png',
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                EquipYellowPantsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                text: '',
-                                                options: FFButtonOptions(
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039DEEF),
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                Opacity(
+                                  opacity: FFAppState().yellowPantsAvail,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x5C57636C),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .equipText,
+                                        width: 4.0,
                                       ),
                                     ),
-                                  ],
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/yellowPants.png',
+                                            width: 200.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 300.0,
+                                                      child:
+                                                          EquipYellowPantsWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          text: '',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Color(0x0039DEEF),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity: FFAppState().purplePantsAvail,
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                            border: Border.all(
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/purpleBoots.png',
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                EquipPurplePantsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                text: '',
-                                                options: FFButtonOptions(
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039DEEF),
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                Opacity(
+                                  opacity: FFAppState().purplePantsAvail,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x5C57636C),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .equipText,
+                                        width: 4.0,
                                       ),
                                     ),
-                                  ],
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/purpleBoots.png',
+                                            width: 200.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 300.0,
+                                                      child:
+                                                          EquipPurplePantsWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          text: '',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Color(0x0039DEEF),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity: FFAppState().cyanPantsAvail,
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                            border: Border.all(
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/cyanBoots.png',
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EQUIP_PAGE_PAGE__BTN_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                EquipLightBluePantsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                text: '',
-                                                options: FFButtonOptions(
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039DEEF),
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                Opacity(
+                                  opacity: FFAppState().cyanPantsAvail,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x5C57636C),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .equipText,
+                                        width: 4.0,
                                       ),
                                     ),
-                                  ],
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/cyanBoots.png',
+                                            width: 200.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EQUIP_PAGE_PAGE__BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 300.0,
+                                                      child:
+                                                          EquipLightBluePantsWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          text: '',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Color(0x0039DEEF),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ],
                               carouselController: _model.carouselController3 ??=
@@ -2322,36 +2195,50 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                           ),
                           Container(
                             width: double.infinity,
-                            height: 30.0,
+                            height: 35.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).oxfordBlue,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                width: 3.0,
-                              ),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  'Ships',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyLargeFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLargeFamily),
-                                      ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleRight,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
                                 ),
-                              ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      'SHips',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .equipText,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.angleDoubleLeft,
+                                  color: FlutterFlowTheme.of(context).equipText,
+                                  size: 24.0,
+                                ),
+                              ].divide(SizedBox(width: 10.0)),
                             ),
                           ),
                           Align(
@@ -2364,17 +2251,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().redShipAvail,
                                     child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -2462,17 +2351,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().blueShipAvail,
                                     child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -2560,17 +2451,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().greenShipAvail,
                                     child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                        color: Color(0x5C57636C),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
                                         border: Border.all(
-                                          width: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -2664,18 +2557,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().yellowShipAvail,
                                     child: Container(
-                                      width: 100.0,
-                                      height: 100.0,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(24.0),
-                                          bottomRight: Radius.circular(24.0),
-                                          topLeft: Radius.circular(24.0),
-                                          topRight: Radius.circular(24.0),
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -2763,18 +2657,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().purpleShipAvail,
                                     child: Container(
-                                      width: 100.0,
-                                      height: 100.0,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(24.0),
-                                          bottomRight: Radius.circular(24.0),
-                                          topLeft: Radius.circular(24.0),
-                                          topRight: Radius.circular(24.0),
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
@@ -2862,18 +2757,19 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                   Opacity(
                                     opacity: FFAppState().cyanShipAvail,
                                     child: Container(
-                                      width: 100.0,
-                                      height: 100.0,
+                                      width: 200.0,
+                                      height: 200.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(24.0),
-                                          bottomRight: Radius.circular(24.0),
-                                          topLeft: Radius.circular(24.0),
-                                          topRight: Radius.circular(24.0),
+                                        color: Color(0x5C57636C),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .equipText,
+                                          width: 4.0,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Stack(
                                         children: [
                                           ClipRRect(

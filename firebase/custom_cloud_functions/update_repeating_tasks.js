@@ -1,14 +1,13 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-// To avoid deployment errors, do not call admin.initializeApp() in your code
 exports.updateRepeatingTasks = functions.pubsub
   .schedule("0 0 * * 0") // Every Sunday at 12:00 AM
-  .timeZone("America/Chicago") // Set your desired timezone
+  .timeZone("America/Chicago") // Use your local timezone
   .onRun(async (context) => {
     const db = admin.firestore();
-    const tasksRef = db.collection("tasks");
+    const taskRef = db.collection("task"); // ✅ singular
 
-    const snapshot = await tasksRef.where("is_repeating", "==", true).get();
+    const snapshot = await taskRef.where("is_repeating", "==", true).get();
 
     if (snapshot.empty) {
       console.log("No repeating tasks found.");
@@ -21,17 +20,29 @@ exports.updateRepeatingTasks = functions.pubsub
       const data = doc.data();
       const oldDates = data.complete_date_list || [];
 
+      if (!Array.isArray(oldDates)) {
+        console.warn(`Task ${doc.id} has invalid complete_date_list`);
+        return;
+      }
+
       const newDates = oldDates.map((timestamp) => {
-        const date = timestamp.toDate(); // Convert Firestore Timestamp to JS Date
-        const newDate = new Date(date);
-        newDate.setDate(date.getDate() + 7); // Add 7 days
-        return admin.firestore.Timestamp.fromDate(newDate);
+        try {
+          const date = timestamp.toDate(); // Ensure this is a Firestore Timestamp
+          const newDate = new Date(date);
+          newDate.setDate(newDate.getDate() + 7);
+          return admin.firestore.Timestamp.fromDate(newDate);
+        } catch (error) {
+          console.error(`Failed to process a date in task ${doc.id}:`, error);
+          return timestamp;
+        }
       });
 
-      batch.update(doc.ref, { complete_date_list: newDates });
+      batch.update(doc.ref, {
+        complete_date_list: newDates,
+      });
     });
 
     await batch.commit();
-    console.log("Repeating tasks updated successfully.");
+    console.log("Updated repeating tasks successfully.");
     return null;
   });

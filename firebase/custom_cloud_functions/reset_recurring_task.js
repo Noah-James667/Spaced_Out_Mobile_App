@@ -1,9 +1,9 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-// To avoid deployment errors, do not call admin.initializeApp() in your code
+
 exports.resetRecurringTask = functions.pubsub
-  .schedule("0 0 * * *") // Midnight daily
-  .timeZone("America/Chicago") // Adjust to your local timezone
+  .schedule("0 0 * * *") // Run daily at midnight
+  .timeZone("America/Chicago")
   .onRun(async (context) => {
     const db = admin.firestore();
     const taskRef = db.collection("task");
@@ -14,21 +14,41 @@ exports.resetRecurringTask = functions.pubsub
       return null;
     }
 
-    const now = admin.firestore.Timestamp.now().toDate();
-    const todayName = now.toLocaleDateString("en-US", { weekday: "long" });
+    // Get current date in central timezone (no time component)
+    const now = new Date(
+      new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }),
+    );
+    const todayYMD = now.toISOString().split("T")[0]; // "YYYY-MM-DD"
 
     const batch = db.batch();
 
     snapshot.forEach((doc) => {
       const task = doc.data();
 
-      if (!task.days_repeating) return;
+      if (!Array.isArray(task.complete_date_list)) return;
 
-      const daysList = task.days_repeating.split(",").map((day) => day.trim());
+      // Match today to any date in complete_date_list (by year, month, day)
+      const match = task.complete_date_list.some((date) => {
+        try {
+          const compareDate = date.toDate ? date.toDate() : new Date(date);
+          const compareYMD = compareDate.toISOString().split("T")[0];
+          return compareYMD === todayYMD;
+        } catch (e) {
+          console.warn(`Invalid date in complete_date_list for task ${doc.id}`);
+          return false;
+        }
+      });
 
-      if (!daysList.includes(todayName)) return;
+      if (!match) {
+        console.log(`Task ${doc.id} skipped — no date match.`);
+        return;
+      }
 
-      // Preserve previous time from complete_by
+      if (!task.complete_by || !task.complete_by.toDate) {
+        console.warn(`Task ${doc.id} has invalid complete_by`);
+        return;
+      }
+
       const previousCompleteBy = task.complete_by.toDate();
       const newCompleteBy = new Date(
         now.getFullYear(),
@@ -52,7 +72,7 @@ exports.resetRecurringTask = functions.pubsub
         complete_date: admin.firestore.Timestamp.fromDate(newCompleteDate),
       });
 
-      console.log(`Reset task ${doc.id} for ${todayName}.`);
+      console.log(`Reset task ${doc.id} for ${todayYMD}.`);
     });
 
     await batch.commit();

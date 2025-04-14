@@ -270,12 +270,12 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                     maxChars: 19,
                     replacement: '…',
                   ),
-                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                  style: FlutterFlowTheme.of(context).bodyLarge.override(
                         fontFamily:
-                            FlutterFlowTheme.of(context).titleMediumFamily,
+                            FlutterFlowTheme.of(context).bodyLargeFamily,
                         letterSpacing: 0.0,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).titleMediumFamily),
+                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                 ),
                 Row(

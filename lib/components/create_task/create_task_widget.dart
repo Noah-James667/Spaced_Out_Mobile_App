@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'create_task_model.dart';
 export 'create_task_model.dart';
@@ -77,26 +78,6 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 100.0, 0.0),
-                    child: Container(
-                      width: 64.0,
-                      height: 64.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          'assets/images/check.gif',
-                          width: 200.0,
-                          height: 200.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
                   FlutterFlowIconButton(
                     borderRadius: 8.0,
                     buttonSize: 40.0,
@@ -114,13 +95,35 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                   ),
                 ],
               ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 64.0,
+                    height: 64.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/check.gif',
+                        width: 200.0,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Text(
                 'Add task',
-                style: FlutterFlowTheme.of(context).titleLarge.override(
-                      fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                       letterSpacing: 0.0,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).titleLargeFamily),
+                          FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
               Padding(
@@ -134,6 +137,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       isDense: true,
+                      labelText: 'Task Name',
                       labelStyle: FlutterFlowTheme.of(context)
                           .labelMedium
                           .override(
@@ -192,6 +196,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).labelMediumFamily),
                         ),
+                    maxLength: 30,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     cursorColor: FlutterFlowTheme.of(context).primaryText,
                     validator:
                         _model.textController1Validator.asValidator(context),
@@ -421,15 +427,13 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.white,
                         textStyle: FlutterFlowTheme.of(context)
-                            .titleSmall
+                            .bodyLarge
                             .override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).titleSmallFamily,
-                              color: Colors.black,
+                                  FlutterFlowTheme.of(context).bodyLargeFamily,
                               letterSpacing: 0.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .titleSmallFamily),
+                                  FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
                         elevation: 0.0,
                         borderSide: BorderSide(
@@ -528,12 +532,12 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                     padding: EdgeInsets.all(5.0),
                     child: Text(
                       'Does the task repeat?',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
                             fontFamily:
-                                FlutterFlowTheme.of(context).titleMediumFamily,
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
                             letterSpacing: 0.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).titleMediumFamily),
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
                           ),
                     ),
                   ),
@@ -838,7 +842,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                   },
                   text: 'Add Task',
                   options: FFButtonOptions(
-                    width: 100.0,
+                    width: 115.0,
                     height: 40.0,
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),

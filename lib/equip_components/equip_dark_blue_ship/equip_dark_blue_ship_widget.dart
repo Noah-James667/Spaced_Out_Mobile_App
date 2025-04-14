@@ -56,7 +56,7 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+        color: Color(0xE457636C),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
@@ -64,8 +64,8 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
           topRight: Radius.circular(30.0),
         ),
         border: Border.all(
-          color: FlutterFlowTheme.of(context).tertiary,
-          width: 3.0,
+          color: FlutterFlowTheme.of(context).equipText,
+          width: 4.0,
         ),
       ),
       child: Column(
@@ -73,11 +73,12 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
         children: [
           Text(
             'Equip the Blue Ship?',
-            style: FlutterFlowTheme.of(context).titleMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).titleMediumFamily,
+            style: FlutterFlowTheme.of(context).bodyLarge.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                  color: FlutterFlowTheme.of(context).equipText,
                   letterSpacing: 0.0,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).titleMediumFamily),
+                      FlutterFlowTheme.of(context).bodyLargeFamily),
                 ),
           ),
 
@@ -101,11 +102,11 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
               if (!snapshot.hasData) {
                 return Center(
                   child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: SpinKitFoldingCube(
+                    width: 25.0,
+                    height: 25.0,
+                    child: SpinKitRipple(
                       color: FlutterFlowTheme.of(context).primary,
-                      size: 50.0,
+                      size: 25.0,
                     ),
                   ),
                 );
@@ -176,13 +177,6 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
               );
             },
           ),
-          Container(
-            width: 100.0,
-            height: 10.0,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
-            ),
-          ),
           FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('EQUIP_DARK_BLUE_SHIP_UNEQUIP_BTN_ON_TAP');
@@ -209,13 +203,6 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          Container(
-            width: 100.0,
-            height: 10.0,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
-            ),
-          ),
           FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('EQUIP_DARK_BLUE_SHIP_CANCEL_BTN_ON_TAP');
@@ -239,7 +226,7 @@ class _EquipDarkBlueShipWidgetState extends State<EquipDarkBlueShipWidget> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-        ],
+        ].divide(SizedBox(height: 6.0)),
       ),
     );
   }

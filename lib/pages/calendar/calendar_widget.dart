@@ -82,7 +82,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.asset(
-                  'assets/images/download.jpg',
+                  'assets/images/38NBT3.png',
                 ).image,
               ),
             ),
@@ -98,14 +98,14 @@ class _CalendarWidgetState extends State<CalendarWidget>
                           useToggleButtonStyle: true,
                           isScrollable: true,
                           labelStyle: FlutterFlowTheme.of(context)
-                              .titleMedium
+                              .bodyMedium
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .titleMediumFamily,
+                                    .bodyMediumFamily,
                                 letterSpacing: 0.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .titleMediumFamily),
+                                        .bodyMediumFamily),
                               ),
                           unselectedLabelStyle: TextStyle(),
                           labelColor: FlutterFlowTheme.of(context).primaryText,
@@ -205,18 +205,18 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .titleLarge
+                                                              .bodyMedium
                                                               .override(
                                                                 fontFamily: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .titleLargeFamily,
+                                                                    .bodyMediumFamily,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
                                                                         FlutterFlowTheme.of(context)
-                                                                            .titleLargeFamily),
+                                                                            .bodyMediumFamily),
                                                               ),
                                                     ),
                                                   ),
@@ -251,12 +251,6 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                               queryBuilder: (taskRecord) =>
                                                   taskRecord
                                                       .where(
-                                                        'complete_date',
-                                                        isEqualTo: functions
-                                                            .convertCurrentTimetoDay(
-                                                                getCurrentTimestamp),
-                                                      )
-                                                      .where(
                                                         'user',
                                                         isEqualTo:
                                                             currentUserReference,
@@ -274,14 +268,14 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                               if (!snapshot.hasData) {
                                                 return Center(
                                                   child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child: SpinKitFoldingCube(
+                                                    width: 25.0,
+                                                    height: 25.0,
+                                                    child: SpinKitRipple(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
-                                                      size: 50.0,
+                                                      size: 25.0,
                                                     ),
                                                   ),
                                                 );
@@ -333,101 +327,210 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.all(6.0),
-                                                        child: Container(
-                                                          width: 376.6,
-                                                          height: 60.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.0),
-                                                            border: Border.all(
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                          ),
-                                                          child: InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              logFirebaseEvent(
-                                                                  'CALENDAR_PAGE_Row_iqe8g9pc_ON_TAP');
-                                                              logFirebaseEvent(
-                                                                  'Row_bottom_sheet');
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () {
-                                                                      FocusScope.of(
-                                                                              context)
-                                                                          .unfocus();
-                                                                      FocusManager
-                                                                          .instance
-                                                                          .primaryFocus
-                                                                          ?.unfocus();
-                                                                    },
+                                                        child: InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'CALENDAR_PAGE_Container_p4eakhq6_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Container_bottom_sheet');
+                                                            await showModalBottomSheet(
+                                                              isScrollControlled:
+                                                                  true,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return GestureDetector(
+                                                                  onTap: () {
+                                                                    FocusScope.of(
+                                                                            context)
+                                                                        .unfocus();
+                                                                    FocusManager
+                                                                        .instance
+                                                                        .primaryFocus
+                                                                        ?.unfocus();
+                                                                  },
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: MediaQuery
+                                                                        .viewInsetsOf(
+                                                                            context),
                                                                     child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                                        Container(
+                                                                      height:
+                                                                          400.0,
                                                                       child:
-                                                                          Container(
-                                                                        height:
-                                                                            400.0,
-                                                                        child:
-                                                                            DescriptionSheetWidget(
-                                                                          taskDoc:
-                                                                              listViewTaskRecord,
-                                                                        ),
+                                                                          DescriptionSheetWidget(
+                                                                        taskDoc:
+                                                                            listViewTaskRecord,
                                                                       ),
                                                                     ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  safeSetState(
-                                                                      () {}));
-                                                            },
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ).then((value) =>
+                                                                safeSetState(
+                                                                    () {}));
+                                                          },
+                                                          child: Container(
+                                                            width: 376.6,
+                                                            height: 60.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'CALENDAR_PAGE_Row_iqe8g9pc_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Row_bottom_sheet');
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        FocusScope.of(context)
+                                                                            .unfocus();
+                                                                        FocusManager
+                                                                            .instance
+                                                                            .primaryFocus
+                                                                            ?.unfocus();
+                                                                      },
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            Container(
+                                                                          height:
+                                                                              400.0,
+                                                                          child:
+                                                                              DescriptionSheetWidget(
+                                                                            taskDoc:
+                                                                                listViewTaskRecord,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(6.0),
+                                                                        child:
+                                                                            Text(
+                                                                          listViewTaskRecord
+                                                                              .taskName
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                25,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.start,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            10.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            dateTimeFormat(
+                                                                              "jm",
+                                                                              listViewTaskRecord.completeBy,
+                                                                              locale: FFLocalizations.of(context).languageCode,
+                                                                            ),
+                                                                            '[jm]',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  if (listViewTaskRecord
+                                                                          .isComplete ==
+                                                                      true)
                                                                     Padding(
                                                                       padding:
                                                                           EdgeInsets.all(
-                                                                              6.0),
+                                                                              10.0),
                                                                       child:
                                                                           Text(
-                                                                        listViewTaskRecord
-                                                                            .taskName,
+                                                                        'Complete',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
@@ -437,62 +540,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                             ),
                                                                       ),
                                                                     ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          dateTimeFormat(
-                                                                            "jm",
-                                                                            listViewTaskRecord.completeBy,
-                                                                            locale:
-                                                                                FFLocalizations.of(context).languageCode,
-                                                                          ),
-                                                                          '[jm]',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                              letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                if ((listViewTaskRecord
-                                                                            .isComplete ==
-                                                                        true) &&
-                                                                    listViewTaskRecord
-                                                                        .completeDateList
-                                                                        .contains(
-                                                                            functions.returnDayMonthPicker(getCurrentTimestamp)))
-                                                                  Padding(
-                                                                    padding:
-                                                                        EdgeInsets.all(
-                                                                            10.0),
-                                                                    child: Text(
-                                                                      'Complete',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -555,14 +604,13 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                   if (!snapshot.hasData) {
                                                     return Center(
                                                       child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            SpinKitFoldingCube(
+                                                        width: 25.0,
+                                                        height: 25.0,
+                                                        child: SpinKitRipple(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primary,
-                                                          size: 50.0,
+                                                          size: 25.0,
                                                         ),
                                                       ),
                                                     );
@@ -643,14 +691,14 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                               .center,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .titleLarge
+                                                                          .bodyMedium
                                                                           .override(
                                                                             fontFamily:
-                                                                                FlutterFlowTheme.of(context).titleLargeFamily,
+                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                             letterSpacing:
                                                                                 0.0,
                                                                             useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleLargeFamily),
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                           ),
                                                                     ),
                                                                   ),
@@ -708,16 +756,16 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                 return Center(
                                                                   child:
                                                                       SizedBox(
-                                                                    width: 50.0,
+                                                                    width: 25.0,
                                                                     height:
-                                                                        50.0,
+                                                                        25.0,
                                                                     child:
-                                                                        SpinKitFoldingCube(
+                                                                        SpinKitRipple(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .primary,
                                                                       size:
-                                                                          50.0,
+                                                                          25.0,
                                                                     ),
                                                                   ),
                                                                 );
@@ -802,28 +850,6 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                      if (listViewTaskRecord
-                                                                              .isComplete ==
-                                                                          true)
-                                                                        Padding(
-                                                                          padding:
-                                                                              EdgeInsets.all(6.0),
-                                                                          child:
-                                                                              Container(
-                                                                            width:
-                                                                                double.infinity,
-                                                                            height:
-                                                                                60.0,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: Color(0x8AB7B7B7),
-                                                                              borderRadius: BorderRadius.circular(10.0),
-                                                                              border: Border.all(
-                                                                                color: Colors.black,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
                                                                       Stack(
                                                                         children: [
                                                                           if ((listViewTaskRecord.isComplete == true) &&
@@ -846,42 +872,92 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                             padding:
                                                                                 EdgeInsets.all(6.0),
                                                                             child:
-                                                                                Container(
-                                                                              width: 376.6,
-                                                                              height: 60.0,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: BorderRadius.circular(10.0),
-                                                                                border: Border.all(
-                                                                                  color: Colors.black,
-                                                                                ),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                children: [
-                                                                                  Column(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      Padding(
-                                                                                        padding: EdgeInsets.all(6.0),
-                                                                                        child: Text(
-                                                                                          listViewTaskRecord.taskName,
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                letterSpacing: 0.0,
-                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                              ),
-                                                                                        ),
-                                                                                      ),
-                                                                                      Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                        child: Text(
-                                                                                          dateTimeFormat(
-                                                                                            "jm",
-                                                                                            listViewTaskRecord.completeBy!,
-                                                                                            locale: FFLocalizations.of(context).languageCode,
+                                                                                InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                logFirebaseEvent('CALENDAR_PAGE_Container_fq4ozqi1_ON_TAP');
+                                                                                logFirebaseEvent('Container_bottom_sheet');
+                                                                                await showModalBottomSheet(
+                                                                                  isScrollControlled: true,
+                                                                                  backgroundColor: Colors.transparent,
+                                                                                  context: context,
+                                                                                  builder: (context) {
+                                                                                    return GestureDetector(
+                                                                                      onTap: () {
+                                                                                        FocusScope.of(context).unfocus();
+                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                      },
+                                                                                      child: Padding(
+                                                                                        padding: MediaQuery.viewInsetsOf(context),
+                                                                                        child: Container(
+                                                                                          height: 400.0,
+                                                                                          child: DescriptionSheetWidget(
+                                                                                            taskDoc: listViewTaskRecord,
                                                                                           ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                ).then((value) => safeSetState(() {}));
+                                                                              },
+                                                                              child: Container(
+                                                                                width: 376.6,
+                                                                                height: 60.0,
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(10.0),
+                                                                                  border: Border.all(
+                                                                                    color: Colors.black,
+                                                                                  ),
+                                                                                ),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  children: [
+                                                                                    Column(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        Padding(
+                                                                                          padding: EdgeInsets.all(6.0),
+                                                                                          child: Text(
+                                                                                            listViewTaskRecord.taskName.maybeHandleOverflow(
+                                                                                              maxChars: 25,
+                                                                                              replacement: '…',
+                                                                                            ),
+                                                                                            textAlign: TextAlign.start,
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                          child: Text(
+                                                                                            dateTimeFormat(
+                                                                                              "jm",
+                                                                                              listViewTaskRecord.completeBy!,
+                                                                                              locale: FFLocalizations.of(context).languageCode,
+                                                                                            ),
+                                                                                            maxLines: 1,
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    if ((listViewTaskRecord.isComplete == true) && (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
+                                                                                      Padding(
+                                                                                        padding: EdgeInsets.all(10.0),
+                                                                                        child: Text(
+                                                                                          'Complete',
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                 letterSpacing: 0.0,
@@ -889,21 +965,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                                               ),
                                                                                         ),
                                                                                       ),
-                                                                                    ],
-                                                                                  ),
-                                                                                  if ((listViewTaskRecord.isComplete == true) && (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
-                                                                                    Padding(
-                                                                                      padding: EdgeInsets.all(10.0),
-                                                                                      child: Text(
-                                                                                        'Complete',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                              letterSpacing: 0.0,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                ],
+                                                                                  ],
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ),
@@ -1019,14 +1082,14 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                 if (!snapshot.hasData) {
                                                   return Center(
                                                     child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child: SpinKitFoldingCube(
+                                                      width: 25.0,
+                                                      height: 25.0,
+                                                      child: SpinKitRipple(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primary,
-                                                        size: 50.0,
+                                                        size: 25.0,
                                                       ),
                                                     ),
                                                   );
@@ -1196,14 +1259,14 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                               if (!snapshot.hasData) {
                                                 return Center(
                                                   child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child: SpinKitFoldingCube(
+                                                    width: 25.0,
+                                                    height: 25.0,
+                                                    child: SpinKitRipple(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
-                                                      size: 50.0,
+                                                      size: 25.0,
                                                     ),
                                                   ),
                                                 );

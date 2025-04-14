@@ -69,13 +69,12 @@ class _GameWinWidgetState extends State<GameWinWidget> {
             children: [
               Text(
                 'You win!',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                       fontSize: 24.0,
                       letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                          FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
             ],

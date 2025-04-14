@@ -6,8 +6,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'edit_task_model.dart';
@@ -96,25 +98,6 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 100.0, 0.0),
-                  child: Container(
-                    width: 64.0,
-                    height: 64.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/check.gif',
-                        width: 200.0,
-                        height: 200.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
                 FlutterFlowIconButton(
                   borderRadius: 8.0,
                   buttonSize: 40.0,
@@ -132,13 +115,35 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 ),
               ],
             ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 64.0,
+                  height: 64.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/check.gif',
+                      width: 200.0,
+                      height: 200.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Text(
               'Edit task',
-              style: FlutterFlowTheme.of(context).titleLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
+              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                     letterSpacing: 0.0,
                     useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).titleLargeFamily),
+                        FlutterFlowTheme.of(context).bodyLargeFamily),
                   ),
             ),
             Padding(
@@ -152,6 +157,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     isDense: true,
+                    labelText: 'Task Name',
                     labelStyle: FlutterFlowTheme.of(context)
                         .labelMedium
                         .override(
@@ -207,6 +213,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
                             FlutterFlowTheme.of(context).labelMediumFamily),
                       ),
+                  maxLength: 30,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   cursorColor: FlutterFlowTheme.of(context).primaryText,
                   validator:
                       _model.textController1Validator.asValidator(context),
@@ -427,14 +435,13 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: Colors.white,
                       textStyle: FlutterFlowTheme.of(context)
-                          .titleSmall
+                          .bodyMedium
                           .override(
                             fontFamily:
-                                FlutterFlowTheme.of(context).titleSmallFamily,
-                            color: Colors.black,
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
                             letterSpacing: 0.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).titleSmallFamily),
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                       elevation: 0.0,
                       borderSide: BorderSide(
@@ -541,12 +548,12 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   padding: EdgeInsets.all(5.0),
                   child: Text(
                     'Does the task repeat?',
-                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily:
-                              FlutterFlowTheme.of(context).titleMediumFamily,
+                              FlutterFlowTheme.of(context).bodyLargeFamily,
                           letterSpacing: 0.0,
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleMediumFamily),
+                              FlutterFlowTheme.of(context).bodyLargeFamily),
                         ),
                   ),
                 ),
@@ -745,53 +752,114 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
                       if (_model.switchValue == false) {
                         logFirebaseEvent('Button_backend_call');
+                        unawaited(
+                          () async {
+                            await widget.taskReference!.update({
+                              ...createTaskRecordData(
+                                taskName: _model.textController1.text,
+                                taskDescription: _model.textController2.text,
+                                completeBy: _model.datePicked1,
+                                isRepeating: false,
+                                completeDate: functions
+                                    .returnDayMonthPicker(_model.datePicked1),
+                                taskCategory: _model.dropDownValue,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'days_repeating': FieldValue.delete(),
+                                  'complete_date_list': functions
+                                      .wrapDateInList(_model.datePicked1!),
+                                },
+                              ),
+                            });
+                          }(),
+                        );
+                        if ((_model.choiceChipsValue2 != null &&
+                                _model.choiceChipsValue2 != '') ||
+                            (_model.choiceChipsValue2 == 'medium') ||
+                            (_model.choiceChipsValue2 == 'hard')) {
+                          logFirebaseEvent('Button_backend_call');
 
-                        await widget.taskReference!.update({
-                          ...createTaskRecordData(
-                            taskName: _model.textController1.text,
-                            taskDescription: _model.textController2.text,
-                            completeBy: _model.datePicked1,
-                            isRepeating: false,
-                            completeDate: functions
-                                .returnDayMonthPicker(_model.datePicked1),
+                          await widget.taskReference!
+                              .update(createTaskRecordData(
                             difficultyLvl: functions
                                 .difficultyToInt(_model.choiceChipsValue2!),
-                            taskCategory: _model.dropDownValue,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'days_repeating': FieldValue.delete(),
-                              'complete_date_list':
-                                  functions.wrapDateInList(_model.datePicked1!),
+                          ));
+                          logFirebaseEvent('Button_alert_dialog');
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('difficulty selected debug'),
+                                content: Text(widget.taskDifficulty!),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
                             },
-                          ),
-                        });
+                          );
+                        } else {
+                          logFirebaseEvent('Button_alert_dialog');
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('difficulty not selected debug'),
+                                content: Text(widget.taskDifficulty!),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
                       } else {
                         logFirebaseEvent('Button_backend_call');
+                        unawaited(
+                          () async {
+                            await widget.taskReference!.update({
+                              ...createTaskRecordData(
+                                taskName: _model.textController1.text,
+                                taskDescription: _model.textController2.text,
+                                completeBy: functions.getNextCompleteDate(
+                                    _model.choiceChipsValues1!.toList(),
+                                    _model.datePicked2!),
+                                isRepeating: true,
+                                completeDate: functions.getNextMonthDayYear(
+                                    _model.choiceChipsValues1!.toList()),
+                                difficultyLvl: functions
+                                    .difficultyToInt(_model.choiceChipsValue2!),
+                                taskCategory: _model.dropDownValue,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'days_repeating': _model.choiceChipsValues1,
+                                  'complete_date_list':
+                                      functions.getUpcomingWeekdays(
+                                          _model.choiceChipsValues1!.toList()),
+                                },
+                              ),
+                            });
+                          }(),
+                        );
+                        if (widget.taskDifficulty != null &&
+                            widget.taskDifficulty != '') {
+                          logFirebaseEvent('Button_backend_call');
 
-                        await widget.taskReference!.update({
-                          ...createTaskRecordData(
-                            taskName: _model.textController1.text,
-                            taskDescription: _model.textController2.text,
-                            completeBy: functions.getNextCompleteDate(
-                                _model.choiceChipsValues1!.toList(),
-                                _model.datePicked2!),
-                            isRepeating: true,
-                            completeDate: functions.getNextMonthDayYear(
-                                _model.choiceChipsValues1!.toList()),
+                          await widget.taskReference!
+                              .update(createTaskRecordData(
                             difficultyLvl: functions
                                 .difficultyToInt(_model.choiceChipsValue2!),
-                            taskCategory: _model.dropDownValue,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'days_repeating': _model.choiceChipsValues1,
-                              'complete_date_list':
-                                  functions.getUpcomingWeekdays(
-                                      _model.choiceChipsValues1!.toList()),
-                            },
-                          ),
-                        });
+                          ));
+                        }
                       }
 
                       logFirebaseEvent('Button_bottom_sheet');

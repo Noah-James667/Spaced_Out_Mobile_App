@@ -1,11 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/edit_task/edit_task_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'duplicate_task_model.dart';
 export 'duplicate_task_model.dart';
@@ -25,8 +27,11 @@ class DuplicateTaskWidget extends StatefulWidget {
   State<DuplicateTaskWidget> createState() => _DuplicateTaskWidgetState();
 }
 
-class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
+class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
+    with TickerProviderStateMixin {
   late DuplicateTaskModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -38,6 +43,35 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DuplicateTaskModel());
+
+    animationsMap.addAll({
+      'containerOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeOut,
+            delay: 100.0.ms,
+            duration: 330.0.ms,
+            begin: 1.0,
+            end: 0.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(100.0, 0.0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -64,7 +98,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
           ),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -84,6 +118,13 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   if (newValue!) {
                     logFirebaseEvent(
                         'DUPLICATE_TASK_Checkbox_zs1fz6vc_ON_TOGG');
+                    logFirebaseEvent('Checkbox_widget_animation');
+                    if (animationsMap['containerOnActionTriggerAnimation'] !=
+                        null) {
+                      await animationsMap['containerOnActionTriggerAnimation']!
+                          .controller
+                          .forward(from: 0.0);
+                    }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
                     if (widget.taskDoc!.completeBy! < getCurrentTimestamp) {
@@ -164,6 +205,13 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                   } else {
                     logFirebaseEvent(
                         'DUPLICATE_TASK_Checkbox_zs1fz6vc_ON_TOGG');
+                    logFirebaseEvent('Checkbox_widget_animation');
+                    if (animationsMap['containerOnActionTriggerAnimation'] !=
+                        null) {
+                      await animationsMap['containerOnActionTriggerAnimation']!
+                          .controller
+                          .forward(from: 0.0);
+                    }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
                     if (widget.taskDoc?.difficultyLvl == 1) {
@@ -222,12 +270,12 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
                     widget.taskDoc?.taskName,
                     'Title',
                   ),
-                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                  style: FlutterFlowTheme.of(context).bodyLarge.override(
                         fontFamily:
-                            FlutterFlowTheme.of(context).titleMediumFamily,
+                            FlutterFlowTheme.of(context).bodyLargeFamily,
                         letterSpacing: 0.0,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).titleMediumFamily),
+                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                 ),
                 Row(
@@ -336,6 +384,8 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget> {
             ),
           ].addToStart(SizedBox(width: 15.0)).addToEnd(SizedBox(width: 15.0)),
         ),
+      ).animateOnActionTrigger(
+        animationsMap['containerOnActionTriggerAnimation']!,
       ),
     );
   }

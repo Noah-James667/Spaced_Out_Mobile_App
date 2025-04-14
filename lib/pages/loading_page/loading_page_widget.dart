@@ -1,13 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'loading_page_model.dart';
 export 'loading_page_model.dart';
@@ -22,13 +20,10 @@ class LoadingPageWidget extends StatefulWidget {
   State<LoadingPageWidget> createState() => _LoadingPageWidgetState();
 }
 
-class _LoadingPageWidgetState extends State<LoadingPageWidget>
-    with TickerProviderStateMixin {
+class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   late LoadingPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -104,7 +99,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget>
         logFirebaseEvent('loadingPage_update_app_state');
         FFAppState().sniperBought = 0.5;
         FFAppState().sniperGunEquip = 0;
-        FFAppState().sniperAvail = 0.5;
+        FFAppState().sniperAvail = 1.0;
         safeSetState(() {});
       } else {
         logFirebaseEvent('loadingPage_update_app_state');
@@ -385,21 +380,6 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget>
       context.pushNamed(TasksWidget.routeName);
     });
 
-    animationsMap.addAll({
-      'imageOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOutQuint,
-            delay: 0.0.ms,
-            duration: 2000.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
-    });
-
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -421,7 +401,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).black,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: SafeArea(
@@ -429,17 +409,14 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget>
               width: MediaQuery.sizeOf(context).width * 1.0,
               height: MediaQuery.sizeOf(context).height * 1.0,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).black,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  'assets/images/asMagicHat.png',
-                  width: 200.0,
-                  height: 200.0,
-                  fit: BoxFit.cover,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+                image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: Image.asset(
+                    'assets/images/check.gif',
+                  ).image,
                 ),
-              ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
+              ),
             ),
           ),
         ),

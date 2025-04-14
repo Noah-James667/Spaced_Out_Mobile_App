@@ -98,30 +98,6 @@ class _AstronautWidgetState extends State<AstronautWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.6, 0.0),
-                  child: Container(
-                    width: 70.0,
-                    height: 70.0,
-                    decoration: BoxDecoration(
-                      color: Color(0x00FFFFFF),
-                    ),
-                    child:
-                        // halo sword
-                        Opacity(
-                      opacity: 0.0,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          'assets/images/energySword.png',
-                          width: 200.0,
-                          height: 200.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
                   alignment: AlignmentDirectional(0.75, 0.09),
                   child: Container(
                     width: 50.0,
@@ -161,6 +137,30 @@ class _AstronautWidgetState extends State<AstronautWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
                           'assets/images/sniper.png',
+                          width: 200.0,
+                          height: 200.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.99, 0.33),
+                  child: Container(
+                    width: 70.0,
+                    height: 70.0,
+                    decoration: BoxDecoration(
+                      color: Color(0x00FFFFFF),
+                    ),
+                    child:
+                        // halo sword
+                        Opacity(
+                      opacity: FFAppState().spaceSwordEquip.toDouble(),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/energySwordSideways.png',
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,

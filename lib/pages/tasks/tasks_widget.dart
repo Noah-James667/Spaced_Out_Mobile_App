@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/components/create_task/create_task_widget.dart';
 import '/components/description_sheet/description_sheet_widget.dart';
 import '/components/duplicate_task/duplicate_task_widget.dart';
+import '/components/profile/profile_widget.dart';
 import '/components/task/task_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -47,19 +48,6 @@ class _TasksWidgetState extends State<TasksWidget>
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
     animationsMap.addAll({
-      'imageOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        applyInitialState: true,
-        effectsBuilder: () => [
-          RotateEffect(
-            curve: Curves.easeInOut,
-            delay: 260.0.ms,
-            duration: 2000.0.ms,
-            begin: 0.0,
-            end: 2.0,
-          ),
-        ],
-      ),
       'imageOnActionTriggerAnimation': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
         applyInitialState: true,
@@ -74,6 +62,19 @@ class _TasksWidgetState extends State<TasksWidget>
         ],
       ),
       'taskOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, -84.0),
+          ),
+        ],
+      ),
+      'duplicateTaskOnActionTriggerAnimation': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
         applyInitialState: true,
         effectsBuilder: () => [
@@ -153,9 +154,9 @@ class _TasksWidgetState extends State<TasksWidget>
           backgroundColor: FlutterFlowTheme.of(context).primary,
           elevation: 8.0,
           child: Icon(
-            Icons.add_rounded,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24.0,
+            Icons.add_sharp,
+            color: FlutterFlowTheme.of(context).primaryText,
+            size: 30.0,
           ),
         ),
         drawer: Container(
@@ -308,8 +309,27 @@ class _TasksWidgetState extends State<TasksWidget>
                                 onPressed: () async {
                                   logFirebaseEvent(
                                       'TASKS_PAGE_notes_ICN_ON_TAP');
-                                  logFirebaseEvent('IconButton_drawer');
-                                  scaffoldKey.currentState!.openDrawer();
+                                  logFirebaseEvent('IconButton_bottom_sheet');
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    enableDrag: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          FocusScope.of(context).unfocus();
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: ProfileWidget(),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
                                 },
                               ),
                               Align(
@@ -321,18 +341,18 @@ class _TasksWidgetState extends State<TasksWidget>
                                     'Task Nova',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
-                                        .titleLarge
+                                        .labelLarge
                                         .override(
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
-                                                  .titleLargeFamily,
+                                                  .labelLargeFamily,
                                           color: Colors.white,
-                                          fontSize: 25.0,
+                                          fontSize: 24.0,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .titleLargeFamily),
+                                                      .labelLargeFamily),
                                         ),
                                   ),
                                 ),
@@ -385,13 +405,10 @@ class _TasksWidgetState extends State<TasksWidget>
                                             fit: BoxFit.cover,
                                           ),
                                         ),
-                                      )
-                                          .animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation']!)
-                                          .animateOnActionTrigger(
-                                            animationsMap[
-                                                'imageOnActionTriggerAnimation']!,
-                                          ),
+                                      ).animateOnActionTrigger(
+                                        animationsMap[
+                                            'imageOnActionTriggerAnimation']!,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -402,15 +419,16 @@ class _TasksWidgetState extends State<TasksWidget>
                         Text(
                           'Tasks',
                           style: FlutterFlowTheme.of(context)
-                              .titleLarge
+                              .bodyLarge
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .titleLargeFamily,
+                                    .bodyLargeFamily,
                                 color: Colors.white,
+                                fontSize: 20.0,
                                 letterSpacing: 0.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .titleLargeFamily),
+                                        .bodyLargeFamily),
                               ),
                         ),
                       ],
@@ -437,26 +455,28 @@ class _TasksWidgetState extends State<TasksWidget>
                                   FlutterFlowTheme.of(context).alternate,
                               unselectedLabelColor: Color(0xFF9F9F9F),
                               labelStyle: FlutterFlowTheme.of(context)
-                                  .titleMedium
+                                  .bodyMedium
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .titleMediumFamily,
+                                        .bodyMediumFamily,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .titleMediumFamily),
+                                                .bodyMediumFamily),
                                   ),
                               unselectedLabelStyle: FlutterFlowTheme.of(context)
-                                  .titleMedium
+                                  .bodyMedium
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .titleMediumFamily,
+                                        .bodyMediumFamily,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .titleMediumFamily),
+                                                .bodyMediumFamily),
                                   ),
                               indicatorColor:
                                   FlutterFlowTheme.of(context).primary,
@@ -647,13 +667,13 @@ class _TasksWidgetState extends State<TasksWidget>
                                           if (!snapshot.hasData) {
                                             return Center(
                                               child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitFoldingCube(
+                                                width: 25.0,
+                                                height: 25.0,
+                                                child: SpinKitRipple(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
-                                                  size: 50.0,
+                                                  size: 25.0,
                                                 ),
                                               ),
                                             );
@@ -734,6 +754,9 @@ class _TasksWidgetState extends State<TasksWidget>
                                                     ));
                                                   },
                                                 ),
+                                              ).animateOnActionTrigger(
+                                                animationsMap[
+                                                    'duplicateTaskOnActionTriggerAnimation']!,
                                               );
                                             },
                                           );

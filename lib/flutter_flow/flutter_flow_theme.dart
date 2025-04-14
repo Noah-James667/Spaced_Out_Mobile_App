@@ -45,6 +45,8 @@ abstract class FlutterFlowTheme {
   late Color oxfordBlue;
   late Color platinum;
   late Color white;
+  late Color shopText;
+  late Color equipText;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -153,6 +155,8 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color oxfordBlue = Color(0xFF14213D);
   late Color platinum = Color(0xFFE5E5E5);
   late Color white = Color(0xFFFFFFFF);
+  late Color shopText = Color(0xFFD3A813);
+  late Color equipText = Color(0xFFB1F6FF);
 }
 
 abstract class Typography {
@@ -193,107 +197,107 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Rubik';
-  TextStyle get displayLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get displayLargeFamily => 'Symtext';
+  TextStyle get displayLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Rubik';
-  TextStyle get displayMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get displayMediumFamily => 'Symtext';
+  TextStyle get displayMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Rubik';
-  TextStyle get displaySmall => GoogleFonts.getFont(
-        'Rubik',
+  String get displaySmallFamily => 'Symtext';
+  TextStyle get displaySmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Rubik';
-  TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineLargeFamily => 'Symtext';
+  TextStyle get headlineLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Rubik';
-  TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineMediumFamily => 'Symtext';
+  TextStyle get headlineMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Rubik';
-  TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineSmallFamily => 'Symtext';
+  TextStyle get headlineSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Rubik';
-  TextStyle get titleLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get titleLargeFamily => 'Symtext';
+  TextStyle get titleLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Rubik';
-  TextStyle get titleMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get titleMediumFamily => 'Symtext';
+  TextStyle get titleMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Rubik';
-  TextStyle get titleSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get titleSmallFamily => 'Symtext';
+  TextStyle get titleSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Rubik';
-  TextStyle get labelLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get labelLargeFamily => 'Symtext';
+  TextStyle get labelLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Rubik';
-  TextStyle get labelMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get labelMediumFamily => 'Symtext';
+  TextStyle get labelMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Rubik';
-  TextStyle get labelSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get labelSmallFamily => 'Symtext';
+  TextStyle get labelSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Rubik';
-  TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get bodyLargeFamily => 'Symtext';
+  TextStyle get bodyLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Rubik';
-  TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get bodyMediumFamily => 'Symtext';
+  TextStyle get bodyMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Rubik';
-  TextStyle get bodySmall => GoogleFonts.getFont(
-        'Rubik',
+  String get bodySmallFamily => 'Symtext';
+  TextStyle get bodySmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -305,107 +309,107 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Rubik';
-  TextStyle get displayLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get displayLargeFamily => 'Symtext';
+  TextStyle get displayLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Rubik';
-  TextStyle get displayMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get displayMediumFamily => 'Symtext';
+  TextStyle get displayMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Rubik';
-  TextStyle get displaySmall => GoogleFonts.getFont(
-        'Rubik',
+  String get displaySmallFamily => 'Symtext';
+  TextStyle get displaySmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Rubik';
-  TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineLargeFamily => 'Symtext';
+  TextStyle get headlineLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Rubik';
-  TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineMediumFamily => 'Symtext';
+  TextStyle get headlineMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Rubik';
-  TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineSmallFamily => 'Symtext';
+  TextStyle get headlineSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Rubik';
-  TextStyle get titleLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get titleLargeFamily => 'Symtext';
+  TextStyle get titleLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Rubik';
-  TextStyle get titleMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get titleMediumFamily => 'Symtext';
+  TextStyle get titleMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Rubik';
-  TextStyle get titleSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get titleSmallFamily => 'Symtext';
+  TextStyle get titleSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Rubik';
-  TextStyle get labelLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get labelLargeFamily => 'Symtext';
+  TextStyle get labelLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Rubik';
-  TextStyle get labelMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get labelMediumFamily => 'Symtext';
+  TextStyle get labelMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Rubik';
-  TextStyle get labelSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get labelSmallFamily => 'Symtext';
+  TextStyle get labelSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Rubik';
-  TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get bodyLargeFamily => 'Symtext';
+  TextStyle get bodyLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Rubik';
-  TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get bodyMediumFamily => 'Symtext';
+  TextStyle get bodyMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Rubik';
-  TextStyle get bodySmall => GoogleFonts.getFont(
-        'Rubik',
+  String get bodySmallFamily => 'Symtext';
+  TextStyle get bodySmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -417,107 +421,107 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Rubik';
-  TextStyle get displayLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get displayLargeFamily => 'Symtext';
+  TextStyle get displayLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Rubik';
-  TextStyle get displayMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get displayMediumFamily => 'Symtext';
+  TextStyle get displayMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Rubik';
-  TextStyle get displaySmall => GoogleFonts.getFont(
-        'Rubik',
+  String get displaySmallFamily => 'Symtext';
+  TextStyle get displaySmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Rubik';
-  TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineLargeFamily => 'Symtext';
+  TextStyle get headlineLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Rubik';
-  TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineMediumFamily => 'Symtext';
+  TextStyle get headlineMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Rubik';
-  TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get headlineSmallFamily => 'Symtext';
+  TextStyle get headlineSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Rubik';
-  TextStyle get titleLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get titleLargeFamily => 'Symtext';
+  TextStyle get titleLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Rubik';
-  TextStyle get titleMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get titleMediumFamily => 'Symtext';
+  TextStyle get titleMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Rubik';
-  TextStyle get titleSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get titleSmallFamily => 'Symtext';
+  TextStyle get titleSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Rubik';
-  TextStyle get labelLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get labelLargeFamily => 'Symtext';
+  TextStyle get labelLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Rubik';
-  TextStyle get labelMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get labelMediumFamily => 'Symtext';
+  TextStyle get labelMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Rubik';
-  TextStyle get labelSmall => GoogleFonts.getFont(
-        'Rubik',
+  String get labelSmallFamily => 'Symtext';
+  TextStyle get labelSmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Rubik';
-  TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Rubik',
+  String get bodyLargeFamily => 'Symtext';
+  TextStyle get bodyLarge => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Rubik';
-  TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Rubik',
+  String get bodyMediumFamily => 'Symtext';
+  TextStyle get bodyMedium => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Rubik';
-  TextStyle get bodySmall => GoogleFonts.getFont(
-        'Rubik',
+  String get bodySmallFamily => 'Symtext';
+  TextStyle get bodySmall => TextStyle(
+        fontFamily: 'Symtext',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,

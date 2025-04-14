@@ -96,28 +96,28 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                 unselectedLabelColor:
                                     FlutterFlowTheme.of(context).secondaryText,
                                 labelStyle: FlutterFlowTheme.of(context)
-                                    .titleMedium
+                                    .labelLarge
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .titleMediumFamily,
+                                          .labelLargeFamily,
                                       letterSpacing: 0.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .titleMediumFamily),
+                                                  .labelLargeFamily),
                                     ),
                                 unselectedLabelStyle:
                                     FlutterFlowTheme.of(context)
-                                        .titleMedium
+                                        .bodyLarge
                                         .override(
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
-                                                  .titleMediumFamily,
+                                                  .bodyLargeFamily,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .titleMediumFamily),
+                                                      .bodyLargeFamily),
                                         ),
                                 indicatorColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -288,6 +288,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                     required isFocused,
                                                     maxLength}) =>
                                                 null,
+                                            keyboardType:
+                                                TextInputType.emailAddress,
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
@@ -738,9 +740,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           logFirebaseEvent(
                                               'signup_navigate_to');
 
-                                          context.pushNamedAuth(
-                                              TasksWidget.routeName,
-                                              context.mounted);
+                                          context.goNamedAuth(
+                                            TasksWidget.routeName,
+                                            context.mounted,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
+                                          );
                                         },
                                         text: 'Sign Up',
                                         options: FFButtonOptions(
@@ -756,26 +767,23 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               .primary,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
-                                              .titleSmall
+                                              .bodyMedium
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .titleSmallFamily,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
+                                                        .bodyMediumFamily,
                                                 letterSpacing: 0.0,
                                                 useGoogleFonts: GoogleFonts
                                                         .asMap()
                                                     .containsKey(
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .titleSmallFamily),
+                                                            .bodyMediumFamily),
                                               ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(
                                             color: Colors.black,
-                                            width: 1.0,
+                                            width: 2.0,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(20.0),
@@ -898,6 +906,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                     required isFocused,
                                                     maxLength}) =>
                                                 null,
+                                            keyboardType:
+                                                TextInputType.emailAddress,
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
@@ -1052,67 +1062,84 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           ),
                                         ),
                                       ),
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'LOGIN_PAGE_PAGE_login_ON_TAP');
-                                          logFirebaseEvent('login_auth');
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 5.0, 0.0, 5.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'LOGIN_PAGE_PAGE_login_ON_TAP');
+                                            logFirebaseEvent('login_auth');
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
 
-                                          final user =
-                                              await authManager.signInWithEmail(
-                                            context,
-                                            _model.emailTextController2.text,
-                                            _model.passwordTextController2.text,
-                                          );
-                                          if (user == null) {
-                                            return;
-                                          }
+                                            final user = await authManager
+                                                .signInWithEmail(
+                                              context,
+                                              _model.emailTextController2.text,
+                                              _model
+                                                  .passwordTextController2.text,
+                                            );
+                                            if (user == null) {
+                                              return;
+                                            }
 
-                                          logFirebaseEvent('login_navigate_to');
+                                            logFirebaseEvent(
+                                                'login_navigate_to');
 
-                                          context.pushNamedAuth(
+                                            context.goNamedAuth(
                                               LoadingPageWidget.routeName,
-                                              context.mounted);
-                                        },
-                                        text: 'Login',
-                                        options: FFButtonOptions(
-                                          width: 300.0,
-                                          height: 50.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .titleSmall
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmallFamily,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .titleSmallFamily),
-                                              ),
-                                          elevation: 0.0,
-                                          borderSide: BorderSide(
-                                            color: Colors.black,
-                                            width: 1.0,
+                                              context.mounted,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                ),
+                                              },
+                                            );
+                                          },
+                                          text: 'Login',
+                                          options: FFButtonOptions(
+                                            width: 300.0,
+                                            height: 50.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 0.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.black,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
                                         ),
                                       ),
                                     ],
@@ -1130,13 +1157,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: Text(
                     'Task Nova',
-                    style: FlutterFlowTheme.of(context).titleLarge.override(
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily:
-                              FlutterFlowTheme.of(context).titleLargeFamily,
-                          fontSize: 30.0,
+                              FlutterFlowTheme.of(context).bodyLargeFamily,
+                          fontSize: 28.0,
                           letterSpacing: 0.0,
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleLargeFamily),
+                              FlutterFlowTheme.of(context).bodyLargeFamily),
                         ),
                   ),
                 ),

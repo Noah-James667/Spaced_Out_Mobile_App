@@ -56,7 +56,7 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+        color: Color(0xE457636C),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
@@ -64,8 +64,8 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
           topRight: Radius.circular(30.0),
         ),
         border: Border.all(
-          color: FlutterFlowTheme.of(context).tertiary,
-          width: 3.0,
+          color: FlutterFlowTheme.of(context).shopText,
+          width: 4.0,
         ),
       ),
       child: Column(
@@ -73,19 +73,18 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
         children: [
           Text(
             'Confirm Purchase',
-            style: FlutterFlowTheme.of(context).titleMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).titleMediumFamily,
+            style: FlutterFlowTheme.of(context).bodyLarge.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                  color: FlutterFlowTheme.of(context).shopText,
                   letterSpacing: 0.0,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).titleMediumFamily),
+                      FlutterFlowTheme.of(context).bodyLargeFamily),
                 ),
           ),
           Container(
             width: 100.0,
             height: 100.0,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
-            ),
+            decoration: BoxDecoration(),
             child:
                 // variable, should display selected shop item
                 ClipRRect(
@@ -100,11 +99,12 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
           ),
           Text(
             'This item costs:',
-            style: FlutterFlowTheme.of(context).titleMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).titleMediumFamily,
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                  color: FlutterFlowTheme.of(context).shopText,
                   letterSpacing: 0.0,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).titleMediumFamily),
+                      FlutterFlowTheme.of(context).bodyMediumFamily),
                 ),
           ),
           Row(
@@ -114,9 +114,7 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
               Container(
                 width: 64.0,
                 height: 64.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
+                decoration: BoxDecoration(),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
@@ -166,14 +164,11 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
                             FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                   elevation: 0.0,
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).black,
+                    width: 2.0,
+                  ),
                   borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              Container(
-                width: 60.0,
-                height: 10.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
               ),
               StreamBuilder<List<ShopItemsRecord>>(
@@ -186,11 +181,11 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
                   if (!snapshot.hasData) {
                     return Center(
                       child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: SpinKitFoldingCube(
+                        width: 25.0,
+                        height: 25.0,
+                        child: SpinKitRipple(
                           color: FlutterFlowTheme.of(context).primary,
-                          size: 50.0,
+                          size: 25.0,
                         ),
                       ),
                     );
@@ -294,10 +289,10 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).tertiary,
+                      color: FlutterFlowTheme.of(context).shopText,
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(
@@ -310,12 +305,16 @@ class _PurchaseRedShipWidgetState extends State<PurchaseRedShipWidget> {
                                 FlutterFlowTheme.of(context).bodyLargeFamily),
                           ),
                       elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        width: 2.0,
+                      ),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   );
                 },
               ),
-            ],
+            ].divide(SizedBox(width: 50.0)),
           ),
         ],
       ),

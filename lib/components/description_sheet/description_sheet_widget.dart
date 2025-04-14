@@ -95,11 +95,11 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
             ),
             Text(
               'Task Details',
-              style: FlutterFlowTheme.of(context).titleLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
+              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                     letterSpacing: 0.0,
                     useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).titleLargeFamily),
+                        FlutterFlowTheme.of(context).bodyLargeFamily),
                   ),
             ),
             Padding(
@@ -109,12 +109,11 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   widget.taskDoc?.taskName,
                   'Task Title',
                 ),
-                style: FlutterFlowTheme.of(context).titleMedium.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).titleMediumFamily,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                       letterSpacing: 0.0,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).titleMediumFamily),
+                          FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
               ),
             ),
