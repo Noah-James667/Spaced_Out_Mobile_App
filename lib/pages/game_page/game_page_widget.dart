@@ -1,13 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/astronaut/astronaut_widget.dart';
 import '/components/game_lose/game_lose_widget.dart';
 import '/components/game_win/game_win_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/game_page/health_upgrade_display/health_upgrade_display_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -90,19 +90,6 @@ class _GamePageWidgetState extends State<GamePageWidget>
             duration: 600.0.ms,
             begin: Offset(0.0, 0.0),
             end: Offset(-100.0, 0.0),
-          ),
-        ],
-      ),
-      'containerOnActionTriggerAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onActionTrigger,
-        applyInitialState: true,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 500.0.ms,
-            begin: Offset(0.0, 0.0),
-            end: Offset(90.0, 0.0),
           ),
         ],
       ),
@@ -207,6 +194,19 @@ class _GamePageWidgetState extends State<GamePageWidget>
           ),
         ],
       ),
+      'iconButtonOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
     });
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -244,6 +244,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
             child: Align(
               alignment: AlignmentDirectional(0.0, -1.0),
               child: Container(
+                height: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -266,7 +267,12 @@ class _GamePageWidgetState extends State<GamePageWidget>
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(8.0),
+                              bottomRight: Radius.circular(8.0),
+                              topLeft: Radius.circular(0.0),
+                              topRight: Radius.circular(0.0),
+                            ),
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
@@ -333,7 +339,9 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                     Align(
                                       alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Container(
-                                        width: 410.0,
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                1.0,
                                         height: 410.0,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
@@ -355,10 +363,10 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                             ),
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  0.65, 0.8),
+                                                  0.96, 0.86),
                                               child: Container(
-                                                width: 64.0,
-                                                height: 64.0,
+                                                width: 100.0,
+                                                height: 100.0,
                                                 decoration: BoxDecoration(
                                                   color: Color(0x00FFFFFF),
                                                 ),
@@ -385,8 +393,8 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                               alignment: AlignmentDirectional(
                                                   0.11, 0.81),
                                               child: Container(
-                                                width: 72.0,
-                                                height: 72.0,
+                                                width: 120.0,
+                                                height: 120.0,
                                                 decoration: BoxDecoration(
                                                   color: Color(0x00FFFFFF),
                                                 ),
@@ -415,50 +423,145 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                     ),
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-1.07, 0.92),
+                                          AlignmentDirectional(-0.76, 1.11),
                                       child: Container(
-                                        width: 125.0,
-                                        height: 125.0,
+                                        width: 198.0,
+                                        height: 198.0,
                                         decoration: BoxDecoration(
                                           color: Color(0x00FFFFFF),
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(0.0),
+                                            bottomRight: Radius.circular(0.0),
+                                            topLeft: Radius.circular(0.0),
+                                            topRight: Radius.circular(0.0),
+                                          ),
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
-                                          child: Image.asset(
-                                            'assets/images/shipStart.png',
-                                            width: 200.0,
-                                            height: 200.0,
-                                            fit: BoxFit.cover,
+                                        child: Visibility(
+                                          visible: !_model.gameRunning,
+                                          child: wrapWithModel(
+                                            model: _model.astronautModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: AstronautWidget(),
                                           ),
                                         ),
                                       ),
                                     ),
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-0.34, 0.79),
+                                          AlignmentDirectional(-1.52, 0.96),
                                       child: Container(
-                                        width: 64.0,
-                                        height: 64.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0x00FFFFFF),
-                                        ),
-                                        child: Visibility(
-                                          visible: !_model.gameRunning,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.asset(
-                                              'assets/images/AS_1_(1).png',
-                                              width: 200.0,
-                                              height: 200.0,
-                                              fit: BoxFit.cover,
+                                        width: 198.0,
+                                        height: 198.0,
+                                        decoration: BoxDecoration(),
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipStart.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Opacity(
+                                              opacity: FFAppState()
+                                                  .blueShipEquip
+                                                  .toDouble(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipDarkBlue.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Opacity(
+                                              opacity: FFAppState()
+                                                  .yellowShipEquip
+                                                  .toDouble(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipYellow.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Opacity(
+                                              opacity: FFAppState()
+                                                  .purpleShipEquip
+                                                  .toDouble(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipPurple.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Opacity(
+                                              opacity: FFAppState()
+                                                  .greenShipEquip
+                                                  .toDouble(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipGreen.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Opacity(
+                                              opacity: FFAppState()
+                                                  .redShipEquip
+                                                  .toDouble(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipRed.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Opacity(
+                                              opacity: FFAppState()
+                                                  .cyanShipEquip
+                                                  .toDouble(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/shipBase.png',
+                                                  width: 200.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ).animateOnActionTrigger(
-                                        animationsMap[
-                                            'containerOnActionTriggerAnimation3']!,
                                       ),
                                     ),
                                   ],
@@ -684,16 +787,6 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                                         .pArmr,
                                                 );
                                                 safeSetState(() {});
-                                                logFirebaseEvent(
-                                                    'battleButton_widget_animation');
-                                                if (animationsMap[
-                                                        'containerOnActionTriggerAnimation3'] !=
-                                                    null) {
-                                                  animationsMap[
-                                                          'containerOnActionTriggerAnimation3']!
-                                                      .controller
-                                                      .forward(from: 0.0);
-                                                }
                                                 logFirebaseEvent(
                                                     'battleButton_widget_animation');
                                                 if (animationsMap[
@@ -1175,11 +1268,12 @@ class _GamePageWidgetState extends State<GamePageWidget>
                         ),
                       ),
                       Container(
+                        height: 300.0,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: Image.asset(
-                              'assets/images/armStopState.png',
+                              'assets/images/armTerminal.png',
                             ).image,
                           ),
                         ),
@@ -1187,692 +1281,391 @@ class _GamePageWidgetState extends State<GamePageWidget>
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 175.0,
-                                  height: 65.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: wrapWithModel(
-                                    model: _model.healthUpgradeDisplayModel,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: HealthUpgradeDisplayWidget(),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFF0141E),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: Image.asset(
-                                        'assets/images/heartButton.png',
-                                      ).image,
-                                    ),
-                                  ),
-                                  child: Opacity(
-                                    opacity: 0.0,
-                                    child: FlutterFlowIconButton(
-                                      borderRadius: 8.0,
-                                      buttonSize: 40.0,
-                                      fillColor: Color(0xFFF0141E),
-                                      disabledColor:
-                                          FlutterFlowTheme.of(context).error,
-                                      icon: Icon(
-                                        Icons.favorite_border,
-                                        color:
-                                            FlutterFlowTheme.of(context).info,
-                                        size: 24.0,
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  59.0, 0.0, 0.0, 10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: Image.asset(
+                                          'assets/images/heartButton.png',
+                                        ).image,
                                       ),
-                                      onPressed: _model.gameRunning
-                                          ? null
-                                          : () async {
-                                              logFirebaseEvent(
-                                                  'GAME_PAGE_PAGE_upgHlthBtn_ON_TAP');
-                                              if ((valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.xp,
-                                                          0) >
-                                                      0) &&
-                                                  (valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.xp,
-                                                          0) >=
-                                                      valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.damageUpCost,
-                                                          0))) {
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                    child: Opacity(
+                                      opacity: 0.0,
+                                      child: FlutterFlowIconButton(
+                                        borderRadius: 8.0,
+                                        buttonSize: 40.0,
+                                        fillColor: Color(0xFFF0141E),
+                                        disabledColor:
+                                            FlutterFlowTheme.of(context).error,
+                                        icon: Icon(
+                                          Icons.favorite_border,
+                                          color: Colors.white,
+                                          size: 24.0,
+                                        ),
+                                        onPressed: _model.gameRunning
+                                            ? null
+                                            : () async {
                                                 logFirebaseEvent(
-                                                    'upgHlthBtn_widget_animation');
-                                                if (animationsMap[
-                                                        'iconOnActionTriggerAnimation1'] !=
-                                                    null) {
-                                                  safeSetState(() =>
-                                                      hasIconTriggered1 = true);
-                                                  SchedulerBinding.instance
-                                                      .addPostFrameCallback(
-                                                          (_) async => animationsMap[
-                                                                  'iconOnActionTriggerAnimation1']!
-                                                              .controller
-                                                              .forward(
-                                                                  from: 0.0)
-                                                              .whenComplete(
-                                                                  animationsMap[
-                                                                          'iconOnActionTriggerAnimation1']!
-                                                                      .controller
-                                                                      .reverse));
+                                                    'GAME_PAGE_PAGE_upgHlthBtn_ON_TAP');
+                                                if ((valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.xp,
+                                                            0) >
+                                                        0) &&
+                                                    (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.xp,
+                                                            0) >=
+                                                        valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.damageUpCost,
+                                                            0))) {
+                                                  logFirebaseEvent(
+                                                      'upgHlthBtn_widget_animation');
+                                                  if (animationsMap[
+                                                          'iconOnActionTriggerAnimation1'] !=
+                                                      null) {
+                                                    safeSetState(() =>
+                                                        hasIconTriggered1 =
+                                                            true);
+                                                    SchedulerBinding.instance.addPostFrameCallback(
+                                                        (_) async => animationsMap[
+                                                                'iconOnActionTriggerAnimation1']!
+                                                            .controller
+                                                            .forward(from: 0.0)
+                                                            .whenComplete(
+                                                                animationsMap[
+                                                                        'iconOnActionTriggerAnimation1']!
+                                                                    .controller
+                                                                    .reverse));
+                                                  }
+                                                  logFirebaseEvent(
+                                                      'upgHlthBtn_update_app_state');
+                                                  FFAppState()
+                                                      .updateAppUpgradeStruct(
+                                                    (e) => e
+                                                      ..uHlthCost = FFAppState()
+                                                              .appUpgrade
+                                                              .uHlthCost +
+                                                          (5 *
+                                                              (FFAppState()
+                                                                      .appUpgrade
+                                                                      .uHlthLvl -
+                                                                  1))
+                                                      ..uHlthLvl = FFAppState()
+                                                              .appUpgrade
+                                                              .uHlthLvl +
+                                                          1,
+                                                  );
+                                                  FFAppState()
+                                                      .updateAppPlayerStruct(
+                                                    (e) => e
+                                                      ..pHealth = FFAppState()
+                                                              .appPlayer
+                                                              .pHealth +
+                                                          (5 *
+                                                              (FFAppState()
+                                                                      .appUpgrade
+                                                                      .uHlthLvl -
+                                                                  1)),
+                                                  );
+                                                  safeSetState(() {});
+                                                } else {
+                                                  logFirebaseEvent(
+                                                      'upgHlthBtn_alert_dialog');
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text('!'),
+                                                        content: Text(
+                                                            'Not enough xp!'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  return;
                                                 }
+
                                                 logFirebaseEvent(
-                                                    'upgHlthBtn_update_app_state');
-                                                FFAppState()
-                                                    .updateAppUpgradeStruct(
-                                                  (e) => e
-                                                    ..uHlthCost = FFAppState()
-                                                            .appUpgrade
-                                                            .uHlthCost +
-                                                        (5 *
-                                                            (FFAppState()
-                                                                    .appUpgrade
-                                                                    .uHlthLvl -
-                                                                1))
-                                                    ..uHlthLvl = FFAppState()
-                                                            .appUpgrade
-                                                            .uHlthLvl +
-                                                        1,
-                                                );
-                                                FFAppState()
-                                                    .updateAppPlayerStruct(
-                                                  (e) => e
-                                                    ..pHealth = FFAppState()
-                                                            .appPlayer
-                                                            .pHealth +
-                                                        (5 *
-                                                            (FFAppState()
-                                                                    .appUpgrade
-                                                                    .uHlthLvl -
-                                                                1)),
-                                                );
-                                                safeSetState(() {});
-                                              } else {
-                                                logFirebaseEvent(
-                                                    'upgHlthBtn_alert_dialog');
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text('!'),
-                                                      content: Text(
-                                                          'Not enough xp!'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
+                                                    'upgHlthBtn_navigate_to');
+
+                                                context.goNamed(
+                                                  GamePageWidget.routeName,
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 0),
+                                                    ),
                                                   },
                                                 );
-                                                return;
-                                              }
-
-                                              logFirebaseEvent(
-                                                  'upgHlthBtn_navigate_to');
-
-                                              context.goNamed(
-                                                GamePageWidget.routeName,
-                                                extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType.fade,
-                                                    duration: Duration(
-                                                        milliseconds: 0),
-                                                  ),
-                                                },
-                                              );
-                                            },
+                                              },
+                                      ).animateOnActionTrigger(
+                                        animationsMap[
+                                            'iconButtonOnActionTriggerAnimation']!,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ].divide(SizedBox(width: 10.0)),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 175.0,
-                                  height: 65.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Armor: ',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Level: ',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
+                                  FlutterFlowIconButton(
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                    disabledColor: Color(0x9536004D),
+                                    icon: Icon(
+                                      Icons.add_outlined,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: _model.gameRunning
+                                        ? null
+                                        : () async {
+                                            logFirebaseEvent(
+                                                'GAME_PAGE_PAGE_upgDmgBtn_ON_TAP');
+                                            if ((valueOrDefault(
+                                                        currentUserDocument?.xp,
+                                                        0) >
+                                                    0) &&
+                                                (valueOrDefault(
+                                                        currentUserDocument?.xp,
+                                                        0) >=
+                                                    valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.damageUpCost,
+                                                        0))) {
+                                              logFirebaseEvent(
+                                                  'upgDmgBtn_update_app_state');
                                               FFAppState()
-                                                  .appUpgrade
-                                                  .uArmrLvl
-                                                  .toString(),
-                                              '1',
-                                            ),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Cost: ',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              formatNumber(
-                                                FFAppState()
-                                                    .appUpgrade
-                                                    .uArmrCost,
-                                                formatType: FormatType.custom,
-                                                format: '####.0#',
-                                                locale: '',
-                                              ),
-                                              '1',
-                                            ),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                FlutterFlowIconButton(
-                                  borderRadius: 8.0,
-                                  buttonSize: 40.0,
-                                  fillColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                  disabledColor: Color(0x9536004D),
-                                  icon: Icon(
-                                    Icons.add_outlined,
-                                    color: FlutterFlowTheme.of(context).info,
-                                    size: 24.0,
-                                  ),
-                                  onPressed: _model.gameRunning
-                                      ? null
-                                      : () async {
-                                          logFirebaseEvent(
-                                              'GAME_PAGE_PAGE_upgArmrBtn_ON_TAP');
-                                          if ((valueOrDefault(
-                                                      currentUserDocument?.xp,
-                                                      0) >
-                                                  0) &&
-                                              (valueOrDefault(
-                                                      currentUserDocument?.xp,
-                                                      0) >=
-                                                  valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.damageUpCost,
-                                                      0))) {
-                                            logFirebaseEvent(
-                                                'upgArmrBtn_widget_animation');
-                                            if (animationsMap[
-                                                    'iconOnActionTriggerAnimation3'] !=
-                                                null) {
-                                              animationsMap[
-                                                      'iconOnActionTriggerAnimation3']!
-                                                  .controller
-                                                  .forward(from: 0.0)
-                                                  .whenComplete(animationsMap[
-                                                          'iconOnActionTriggerAnimation3']!
-                                                      .controller
-                                                      .reverse);
+                                                  .updateAppPlayerStruct(
+                                                (e) => e..incrementPDmg(1.0),
+                                              );
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'upgDmgBtn_widget_animation');
+                                              if (animationsMap[
+                                                      'iconOnActionTriggerAnimation2'] !=
+                                                  null) {
+                                                animationsMap[
+                                                        'iconOnActionTriggerAnimation2']!
+                                                    .controller
+                                                    .forward(from: 0.0)
+                                                    .whenComplete(animationsMap[
+                                                            'iconOnActionTriggerAnimation2']!
+                                                        .controller
+                                                        .reverse);
+                                              }
+                                              logFirebaseEvent(
+                                                  'upgDmgBtn_update_app_state');
+                                              FFAppState()
+                                                  .updateAppUpgradeStruct(
+                                                (e) => e
+                                                  ..uDmgCost = FFAppState()
+                                                          .appUpgrade
+                                                          .uDmgCost +
+                                                      (5 *
+                                                          (FFAppState()
+                                                                  .appUpgrade
+                                                                  .uDmgLvl -
+                                                              1))
+                                                  ..uDmgLvl = FFAppState()
+                                                          .appUpgrade
+                                                          .uDmgLvl +
+                                                      1,
+                                              );
+                                              FFAppState()
+                                                  .updateAppPlayerStruct(
+                                                (e) => e
+                                                  ..pDmg = FFAppState()
+                                                          .appPlayer
+                                                          .pDmg +
+                                                      (5 *
+                                                          (FFAppState()
+                                                                  .appUpgrade
+                                                                  .uHlthLvl -
+                                                              1)),
+                                              );
+                                              safeSetState(() {});
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'upgDmgBtn_alert_dialog');
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('!'),
+                                                    content:
+                                                        Text('Not enough xp!'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              return;
                                             }
+
                                             logFirebaseEvent(
-                                                'upgArmrBtn_update_app_state');
-                                            FFAppState().updateAppUpgradeStruct(
-                                              (e) => e
-                                                ..uArmrCost = FFAppState()
-                                                        .appUpgrade
-                                                        .uArmrCost +
-                                                    (5 *
-                                                        (FFAppState()
-                                                                .appUpgrade
-                                                                .uArmrLvl -
-                                                            1))
-                                                ..uArmrLvl = FFAppState()
-                                                        .appUpgrade
-                                                        .uArmrLvl +
-                                                    1,
-                                            );
-                                            FFAppState().updateAppPlayerStruct(
-                                              (e) => e
-                                                ..pArmr = FFAppState()
-                                                        .appPlayer
-                                                        .pArmr +
-                                                    (5 *
-                                                        (FFAppState()
-                                                                .appUpgrade
-                                                                .uHlthLvl -
-                                                            1)),
-                                            );
-                                            safeSetState(() {});
-                                          } else {
-                                            logFirebaseEvent(
-                                                'upgArmrBtn_alert_dialog');
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('!'),
-                                                  content:
-                                                      Text('Not enough xp!'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
+                                                'upgDmgBtn_navigate_to');
+
+                                            context.goNamed(
+                                              GamePageWidget.routeName,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                ),
                                               },
                                             );
-                                            return;
-                                          }
-
-                                          logFirebaseEvent(
-                                              'upgArmrBtn_navigate_to');
-
-                                          context.goNamed(
-                                            GamePageWidget.routeName,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
-                                                duration:
-                                                    Duration(milliseconds: 0),
-                                              ),
-                                            },
-                                          );
-                                        },
-                                ),
-                              ].divide(SizedBox(width: 10.0)),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 175.0,
-                                  height: 65.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    shape: BoxShape.rectangle,
+                                          },
                                   ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Damage: ',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Level: ',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
+                                  FlutterFlowIconButton(
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    fillColor: Color(0xFF39DEEF),
+                                    disabledColor: Color(0x9536004D),
+                                    icon: Icon(
+                                      Icons.add_outlined,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: _model.gameRunning
+                                        ? null
+                                        : () async {
+                                            logFirebaseEvent(
+                                                'GAME_PAGE_PAGE_upgArmrBtn_ON_TAP');
+                                            if ((valueOrDefault(
+                                                        currentUserDocument?.xp,
+                                                        0) >
+                                                    0) &&
+                                                (valueOrDefault(
+                                                        currentUserDocument?.xp,
+                                                        0) >=
+                                                    valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.damageUpCost,
+                                                        0))) {
+                                              logFirebaseEvent(
+                                                  'upgArmrBtn_widget_animation');
+                                              if (animationsMap[
+                                                      'iconOnActionTriggerAnimation3'] !=
+                                                  null) {
+                                                animationsMap[
+                                                        'iconOnActionTriggerAnimation3']!
+                                                    .controller
+                                                    .forward(from: 0.0)
+                                                    .whenComplete(animationsMap[
+                                                            'iconOnActionTriggerAnimation3']!
+                                                        .controller
+                                                        .reverse);
+                                              }
+                                              logFirebaseEvent(
+                                                  'upgArmrBtn_update_app_state');
                                               FFAppState()
-                                                  .appUpgrade
-                                                  .uDmgLvl
-                                                  .toString(),
-                                              '1',
-                                            ),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(2.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Cost: ',
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
+                                                  .updateAppUpgradeStruct(
+                                                (e) => e
+                                                  ..uArmrCost = FFAppState()
+                                                          .appUpgrade
+                                                          .uArmrCost +
+                                                      (5 *
+                                                          (FFAppState()
+                                                                  .appUpgrade
+                                                                  .uArmrLvl -
+                                                              1))
+                                                  ..uArmrLvl = FFAppState()
+                                                          .appUpgrade
+                                                          .uArmrLvl +
+                                                      1,
+                                              );
+                                              FFAppState()
+                                                  .updateAppPlayerStruct(
+                                                (e) => e
+                                                  ..pArmr = FFAppState()
+                                                          .appPlayer
+                                                          .pArmr +
+                                                      (5 *
+                                                          (FFAppState()
+                                                                  .appUpgrade
+                                                                  .uHlthLvl -
+                                                              1)),
+                                              );
+                                              safeSetState(() {});
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'upgArmrBtn_alert_dialog');
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('!'),
+                                                    content:
+                                                        Text('Not enough xp!'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
                                                       ),
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  FFAppState()
-                                                      .appUpgrade
-                                                      .uDmgCost,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                FlutterFlowIconButton(
-                                  borderRadius: 8.0,
-                                  buttonSize: 40.0,
-                                  fillColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                  disabledColor: Color(0x9536004D),
-                                  icon: Icon(
-                                    Icons.add_outlined,
-                                    color: FlutterFlowTheme.of(context).info,
-                                    size: 24.0,
-                                  ),
-                                  onPressed: _model.gameRunning
-                                      ? null
-                                      : () async {
-                                          logFirebaseEvent(
-                                              'GAME_PAGE_PAGE_upgDmgBtn_ON_TAP');
-                                          if ((valueOrDefault(
-                                                      currentUserDocument?.xp,
-                                                      0) >
-                                                  0) &&
-                                              (valueOrDefault(
-                                                      currentUserDocument?.xp,
-                                                      0) >=
-                                                  valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.damageUpCost,
-                                                      0))) {
-                                            logFirebaseEvent(
-                                                'upgDmgBtn_update_app_state');
-                                            FFAppState().updateAppPlayerStruct(
-                                              (e) => e..incrementPDmg(1.0),
-                                            );
-                                            safeSetState(() {});
-                                            logFirebaseEvent(
-                                                'upgDmgBtn_widget_animation');
-                                            if (animationsMap[
-                                                    'iconOnActionTriggerAnimation2'] !=
-                                                null) {
-                                              animationsMap[
-                                                      'iconOnActionTriggerAnimation2']!
-                                                  .controller
-                                                  .forward(from: 0.0)
-                                                  .whenComplete(animationsMap[
-                                                          'iconOnActionTriggerAnimation2']!
-                                                      .controller
-                                                      .reverse);
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              return;
                                             }
+
                                             logFirebaseEvent(
-                                                'upgDmgBtn_update_app_state');
-                                            FFAppState().updateAppUpgradeStruct(
-                                              (e) => e
-                                                ..uDmgCost = FFAppState()
-                                                        .appUpgrade
-                                                        .uDmgCost +
-                                                    (5 *
-                                                        (FFAppState()
-                                                                .appUpgrade
-                                                                .uDmgLvl -
-                                                            1))
-                                                ..uDmgLvl = FFAppState()
-                                                        .appUpgrade
-                                                        .uDmgLvl +
-                                                    1,
-                                            );
-                                            FFAppState().updateAppPlayerStruct(
-                                              (e) => e
-                                                ..pDmg = FFAppState()
-                                                        .appPlayer
-                                                        .pDmg +
-                                                    (5 *
-                                                        (FFAppState()
-                                                                .appUpgrade
-                                                                .uHlthLvl -
-                                                            1)),
-                                            );
-                                            safeSetState(() {});
-                                          } else {
-                                            logFirebaseEvent(
-                                                'upgDmgBtn_alert_dialog');
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('!'),
-                                                  content:
-                                                      Text('Not enough xp!'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
+                                                'upgArmrBtn_navigate_to');
+
+                                            context.goNamed(
+                                              GamePageWidget.routeName,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                ),
                                               },
                                             );
-                                            return;
-                                          }
-
-                                          logFirebaseEvent(
-                                              'upgDmgBtn_navigate_to');
-
-                                          context.goNamed(
-                                            GamePageWidget.routeName,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
-                                                duration:
-                                                    Duration(milliseconds: 0),
-                                              ),
-                                            },
-                                          );
-                                        },
-                                ),
-                              ].divide(SizedBox(width: 10.0)),
+                                          },
+                                  ),
+                                ].divide(SizedBox(width: 10.0)),
+                              ),
                             ),
                           ].divide(SizedBox(height: 10.0)),
                         ).animateOnActionTrigger(
@@ -1925,9 +1718,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                 );
                               },
                       ),
-                    ]
-                        .divide(SizedBox(height: 10.0))
-                        .around(SizedBox(height: 10.0)),
+                    ].divide(SizedBox(height: 12.0)),
                   ),
                 ),
               ),

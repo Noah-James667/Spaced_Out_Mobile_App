@@ -1,7 +1,7 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/astronaut/astronaut_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/game_page/health_upgrade_display/health_upgrade_display_widget.dart';
 import '/index.dart';
 import 'game_page_widget.dart' show GamePageWidget;
 import 'package:flutter/material.dart';
@@ -25,17 +25,16 @@ class GamePageModel extends FlutterFlowModel<GamePageWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Model for healthUpgradeDisplay component.
-  late HealthUpgradeDisplayModel healthUpgradeDisplayModel;
+  // Model for astronaut component.
+  late AstronautModel astronautModel;
 
   @override
   void initState(BuildContext context) {
-    healthUpgradeDisplayModel =
-        createModel(context, () => HealthUpgradeDisplayModel());
+    astronautModel = createModel(context, () => AstronautModel());
   }
 
   @override
   void dispose() {
-    healthUpgradeDisplayModel.dispose();
+    astronautModel.dispose();
   }
 }

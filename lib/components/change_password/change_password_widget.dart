@@ -55,8 +55,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        border: Border.all(
+          width: 4.0,
         ),
       ),
       child: Column(
@@ -84,7 +87,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -120,28 +123,28 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             color: FlutterFlowTheme.of(context).primaryText,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
                         fillColor:
@@ -190,7 +193,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -226,28 +229,28 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             color: FlutterFlowTheme.of(context).primaryText,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
                         fillColor:
@@ -298,20 +301,43 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('CHANGE_PASSWORD_COMP_CONFIRM_BTN_ON_TAP');
-                  logFirebaseEvent('Button_auth');
-                  await authManager.updatePassword(
-                    newPassword: _model.newPasswordTextController.text,
-                    context: context,
-                  );
-                  safeSetState(() {});
+                  if (_model.newPasswordTextController.text ==
+                      _model.newPasswordConfirmTextController.text) {
+                    logFirebaseEvent('Button_auth');
+                    await authManager.updatePassword(
+                      newPassword: _model.newPasswordTextController.text,
+                      context: context,
+                    );
+                    safeSetState(() {});
 
-                  logFirebaseEvent('Button_close_dialog_drawer_etc');
-                  Navigator.pop(context);
+                    logFirebaseEvent('Button_close_dialog_drawer_etc');
+                    Navigator.pop(context);
+                  } else {
+                    logFirebaseEvent('Button_alert_dialog');
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Paswords do not match!'),
+                          content: Text(
+                              'Please make sure that the passwords you entered are the same!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
                 text: 'Confirm',
                 options: FFButtonOptions(
+                  width: 120.0,
                   height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
@@ -324,7 +350,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).black,
+                    color: Colors.black,
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(8.0),
@@ -332,7 +358,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               ),
             ],
           ),
-        ].divide(SizedBox(height: 15.0)),
+        ].divide(SizedBox(height: 15.0)).around(SizedBox(height: 15.0)),
       ),
     );
   }

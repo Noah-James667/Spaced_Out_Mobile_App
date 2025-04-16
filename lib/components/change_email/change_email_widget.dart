@@ -53,8 +53,11 @@ class _ChangeEmailWidgetState extends State<ChangeEmailWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        border: Border.all(
+          width: 4.0,
         ),
       ),
       child: Column(
@@ -82,7 +85,7 @@ class _ChangeEmailWidgetState extends State<ChangeEmailWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -115,30 +118,30 @@ class _ChangeEmailWidgetState extends State<ChangeEmailWidget> {
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
-                            width: 1.0,
+                            width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
-                            width: 1.0,
+                            width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
+                            width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
+                            width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(18.0),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
                         fillColor:
@@ -185,8 +188,9 @@ class _ChangeEmailWidgetState extends State<ChangeEmailWidget> {
                 },
                 text: 'Confirm',
                 options: FFButtonOptions(
+                  width: 120.0,
                   height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
@@ -198,12 +202,16 @@ class _ChangeEmailWidgetState extends State<ChangeEmailWidget> {
                             FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
                   elevation: 0.0,
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 2.0,
+                  ),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
             ],
           ),
-        ].divide(SizedBox(height: 15.0)),
+        ].divide(SizedBox(height: 15.0)).around(SizedBox(height: 15.0)),
       ),
     );
   }

@@ -9,8 +9,12 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/tasks_pages_walkthrough.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,11 +46,21 @@ class _TasksWidgetState extends State<TasksWidget>
     _model = createModel(context, () => TasksModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'tasks'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('TASKS_PAGE_tasks_ON_INIT_STATE');
+      logFirebaseEvent('tasks_start_walkthrough');
+      safeSetState(() => _model.tasksPagesWalkthroughController =
+          createPageWalkthrough(context));
+      _model.tasksPagesWalkthroughController?.show(context: context);
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
+
     animationsMap.addAll({
       'imageOnActionTriggerAnimation': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
@@ -117,8 +131,8 @@ class _TasksWidgetState extends State<TasksWidget>
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            logFirebaseEvent('TASKS_FloatingActionButton_0tw0dwqf_ON_T');
-            logFirebaseEvent('FloatingActionButton_bottom_sheet');
+            logFirebaseEvent('TASKS_PAGE_createTaskBtn_ON_TAP');
+            logFirebaseEvent('createTaskBtn_bottom_sheet');
             await showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
@@ -141,7 +155,7 @@ class _TasksWidgetState extends State<TasksWidget>
               },
             ).then((value) => safeSetState(() {}));
 
-            logFirebaseEvent('FloatingActionButton_play_sound');
+            logFirebaseEvent('createTaskBtn_play_sound');
             _model.soundPlayer ??= AudioPlayer();
             if (_model.soundPlayer!.playing) {
               await _model.soundPlayer!.stop();
@@ -158,6 +172,9 @@ class _TasksWidgetState extends State<TasksWidget>
             color: FlutterFlowTheme.of(context).primaryText,
             size: 30.0,
           ),
+        ).addWalkthrough(
+          floatingActionButton0tw0dwqf,
+          _model.tasksPagesWalkthroughController,
         ),
         drawer: Container(
           width: 50.0,
@@ -296,41 +313,49 @@ class _TasksWidgetState extends State<TasksWidget>
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 40.0,
-                                fillColor: FlutterFlowTheme.of(context).primary,
-                                icon: Icon(
-                                  Icons.notes,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.person,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'TASKS_PAGE_person_ICN_ON_TAP');
+                                    logFirebaseEvent('IconButton_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: ProfileWidget(),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                ).addWalkthrough(
+                                  iconButton95fb6a8l,
+                                  _model.tasksPagesWalkthroughController,
                                 ),
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'TASKS_PAGE_notes_ICN_ON_TAP');
-                                  logFirebaseEvent('IconButton_bottom_sheet');
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          FocusScope.of(context).unfocus();
-                                          FocusManager.instance.primaryFocus
-                                              ?.unfocus();
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: ProfileWidget(),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
-                                },
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
@@ -338,7 +363,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 5.0, 0.0),
                                   child: Text(
-                                    'Task Nova',
+                                    'spaced out',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -357,7 +382,42 @@ class _TasksWidgetState extends State<TasksWidget>
                                   ),
                                 ),
                               ),
-                            ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'TASKS_PAGE_Image_xaj78ly1_ON_TAP');
+                                    logFirebaseEvent('Image_widget_animation');
+                                    if (animationsMap[
+                                            'imageOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'imageOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/AS_1_(1).png',
+                                      width: 40.0,
+                                      height: 80.0,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ).animateOnActionTrigger(
+                                  animationsMap[
+                                      'imageOnActionTriggerAnimation']!,
+                                ),
+                              ),
+                            ].divide(SizedBox(width: 0.0)),
                           ),
                         ),
                         Container(
@@ -375,39 +435,6 @@ class _TasksWidgetState extends State<TasksWidget>
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(0.0),
-                                      ),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'TASKS_PAGE_Image_xaj78ly1_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Image_widget_animation');
-                                          if (animationsMap[
-                                                  'imageOnActionTriggerAnimation'] !=
-                                              null) {
-                                            await animationsMap[
-                                                    'imageOnActionTriggerAnimation']!
-                                                .controller
-                                                .forward(from: 0.0);
-                                          }
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/AS_1_(1).png',
-                                            width: 100.0,
-                                            height: 100.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ).animateOnActionTrigger(
-                                        animationsMap[
-                                            'imageOnActionTriggerAnimation']!,
                                       ),
                                     ),
                                   ],
@@ -440,10 +467,10 @@ class _TasksWidgetState extends State<TasksWidget>
                     padding: EdgeInsets.all(12.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0x00FFFFFF),
-                        borderRadius: BorderRadius.circular(16.0),
+                        shape: BoxShape.rectangle,
                         border: Border.all(
-                          width: 1.0,
+                          color: Colors.transparent,
+                          width: 0.0,
                         ),
                       ),
                       child: Column(
@@ -483,9 +510,15 @@ class _TasksWidgetState extends State<TasksWidget>
                               tabs: [
                                 Tab(
                                   text: 'One Time Tasks',
+                                ).addWalkthrough(
+                                  tabWp4qfvf1,
+                                  _model.tasksPagesWalkthroughController,
                                 ),
                                 Tab(
                                   text: 'Weekly Tasks',
+                                ).addWalkthrough(
+                                  tabPs56u1ak,
+                                  _model.tasksPagesWalkthroughController,
                                 ),
                               ],
                               controller: _model.tabBarController,
@@ -628,6 +661,10 @@ class _TasksWidgetState extends State<TasksWidget>
                                                       'taskOnActionTriggerAnimation']!,
                                                 );
                                               },
+                                            ).addWalkthrough(
+                                              listViewCpgut7am,
+                                              _model
+                                                  .tasksPagesWalkthroughController,
                                             );
                                           },
                                         ),
@@ -780,4 +817,15 @@ class _TasksWidgetState extends State<TasksWidget>
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.tasksPagesWalkthroughController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

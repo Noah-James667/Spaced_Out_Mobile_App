@@ -53,8 +53,11 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        border: Border.all(
+          width: 4.0,
         ),
       ),
       child: Padding(
@@ -127,6 +130,7 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   borderRadius: BorderRadius.circular(14.0),
                   border: Border.all(
                     color: Colors.black,
+                    width: 2.0,
                   ),
                 ),
                 child: Padding(

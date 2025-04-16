@@ -53,6 +53,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
       length: 3,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
+
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -117,7 +118,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                               FlutterFlowTheme.of(context).alternate,
                           borderColor: FlutterFlowTheme.of(context).alternate,
                           borderWidth: 2.0,
-                          borderRadius: 12.0,
+                          borderRadius: 8.0,
                           elevation: 0.0,
                           labelPadding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 20.0, 0.0),
@@ -144,393 +145,552 @@ class _CalendarWidgetState extends State<CalendarWidget>
                         child: TabBarView(
                           controller: _model.tabBarController,
                           children: [
-                            SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        border: Border.all(
-                                          color: Colors.black,
-                                          width: 2.0,
+                            KeepAliveWidgetWrapper(
+                              builder: (context) => SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 2.0,
+                                          ),
                                         ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.all(6.0),
-                                                child: Container(
-                                                  width: 70.0,
-                                                  height: 70.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0xFFE8E8E8),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(16.0),
-                                                    child: Text(
-                                                      valueOrDefault<String>(
-                                                        dateTimeFormat(
-                                                          "d",
-                                                          getCurrentTimestamp,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.all(6.0),
+                                                  child: Container(
+                                                    width: 70.0,
+                                                    height: 70.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xFFE8E8E8),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0.0, 0.0),
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          dateTimeFormat(
+                                                            "d",
+                                                            getCurrentTimestamp,
+                                                            locale: FFLocalizations
+                                                                    .of(context)
+                                                                .languageCode,
+                                                          ),
+                                                          'd',
                                                         ),
-                                                        'd',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily),
-                                                              ),
                                                     ),
                                                   ),
                                                 ),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.all(4.0),
+                                              child: Text(
+                                                'today\'s tasks:',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
                                               ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Text(
-                                              'todays tasks:',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
+                                            ),
+                                            StreamBuilder<List<TaskRecord>>(
+                                              stream: queryTaskRecord(
+                                                queryBuilder: (taskRecord) =>
+                                                    taskRecord
+                                                        .where(
+                                                          'user',
+                                                          isEqualTo:
+                                                              currentUserReference,
+                                                        )
+                                                        .where(
+                                                          'complete_date_list',
+                                                          arrayContains: functions
+                                                              .convertCurrentTimetoDay(
+                                                                  getCurrentTimestamp),
+                                                        )
+                                                        .orderBy('is_complete'),
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 25.0,
+                                                      height: 25.0,
+                                                      child: SpinKitRipple(
+                                                        color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
+                                                                .primary,
+                                                        size: 25.0,
                                                       ),
-                                            ),
-                                          ),
-                                          StreamBuilder<List<TaskRecord>>(
-                                            stream: queryTaskRecord(
-                                              queryBuilder: (taskRecord) =>
-                                                  taskRecord
-                                                      .where(
-                                                        'user',
-                                                        isEqualTo:
-                                                            currentUserReference,
-                                                      )
-                                                      .where(
-                                                        'complete_date_list',
-                                                        arrayContains: functions
-                                                            .convertCurrentTimetoDay(
-                                                                getCurrentTimestamp),
-                                                      )
-                                                      .orderBy('is_complete'),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 25.0,
-                                                    height: 25.0,
-                                                    child: SpinKitRipple(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 25.0,
                                                     ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TaskRecord>
-                                                  listViewTaskRecordList =
-                                                  snapshot.data!;
+                                                  );
+                                                }
+                                                List<TaskRecord>
+                                                    listViewTaskRecordList =
+                                                    snapshot.data!;
 
-                                              return ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                itemCount:
-                                                    listViewTaskRecordList
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, listViewIndex) {
-                                                  final listViewTaskRecord =
-                                                      listViewTaskRecordList[
-                                                          listViewIndex];
-                                                  return Stack(
-                                                    children: [
-                                                      if (listViewTaskRecord
-                                                              .isComplete ==
-                                                          true)
+                                                return ListView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount:
+                                                      listViewTaskRecordList
+                                                          .length,
+                                                  itemBuilder:
+                                                      (context, listViewIndex) {
+                                                    final listViewTaskRecord =
+                                                        listViewTaskRecordList[
+                                                            listViewIndex];
+                                                    return Stack(
+                                                      children: [
+                                                        if (listViewTaskRecord
+                                                                .isComplete ==
+                                                            true)
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    6.0),
+                                                            child: Container(
+                                                              width: 376.59,
+                                                              height: 60.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0xFFB7B7B7),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Colors
+                                                                      .black,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsets.all(
                                                                   6.0),
-                                                          child: Container(
-                                                            width: 376.59,
-                                                            height: 60.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0xFFB7B7B7),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10.0),
-                                                              border:
-                                                                  Border.all(
-                                                                color: Colors
-                                                                    .black,
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'CALENDAR_PAGE_Container_p4eakhq6_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Container_bottom_sheet');
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          Container(
+                                                                        height:
+                                                                            400.0,
+                                                                        child:
+                                                                            DescriptionSheetWidget(
+                                                                          taskDoc:
+                                                                              listViewTaskRecord,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child: Container(
+                                                              width: 376.6,
+                                                              height: 60.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  width: 2.0,
+                                                                ),
+                                                              ),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  logFirebaseEvent(
+                                                                      'CALENDAR_PAGE_Row_iqe8g9pc_ON_TAP');
+                                                                  logFirebaseEvent(
+                                                                      'Row_bottom_sheet');
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled:
+                                                                        true,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          FocusScope.of(context)
+                                                                              .unfocus();
+                                                                          FocusManager
+                                                                              .instance
+                                                                              .primaryFocus
+                                                                              ?.unfocus();
+                                                                        },
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                400.0,
+                                                                            child:
+                                                                                DescriptionSheetWidget(
+                                                                              taskDoc: listViewTaskRecord,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ).then((value) =>
+                                                                      safeSetState(
+                                                                          () {}));
+                                                                },
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.all(6.0),
+                                                                          child:
+                                                                              Text(
+                                                                            listViewTaskRecord.taskName.maybeHandleOverflow(
+                                                                              maxChars: 25,
+                                                                              replacement: '…',
+                                                                            ),
+                                                                            textAlign:
+                                                                                TextAlign.start,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              10.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              dateTimeFormat(
+                                                                                "jm",
+                                                                                listViewTaskRecord.completeBy,
+                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                              ),
+                                                                              '[jm]',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    if (listViewTaskRecord
+                                                                            .isComplete ==
+                                                                        true)
+                                                                      Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(10.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Complete',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.all(6.0),
-                                                        child: InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            logFirebaseEvent(
-                                                                'CALENDAR_PAGE_Container_p4eakhq6_ON_TAP');
-                                                            logFirebaseEvent(
-                                                                'Container_bottom_sheet');
-                                                            await showModalBottomSheet(
-                                                              isScrollControlled:
-                                                                  true,
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return GestureDetector(
-                                                                  onTap: () {
-                                                                    FocusScope.of(
-                                                                            context)
-                                                                        .unfocus();
-                                                                    FocusManager
-                                                                        .instance
-                                                                        .primaryFocus
-                                                                        ?.unfocus();
-                                                                  },
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Builder(
+                                      builder: (context) {
+                                        final currentMonth = functions
+                                                .getMonthView(
+                                                    getCurrentTimestamp)
+                                                ?.toList() ??
+                                            [];
+
+                                        return ListView.builder(
+                                          padding: EdgeInsets.fromLTRB(
+                                            0,
+                                            0,
+                                            0,
+                                            44.0,
+                                          ),
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: currentMonth.length,
+                                          itemBuilder:
+                                              (context, currentMonthIndex) {
+                                            final currentMonthItem =
+                                                currentMonth[currentMonthIndex];
+                                            return Visibility(
+                                              visible: currentMonthItem >=
+                                                  getCurrentTimestamp,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(12.0),
+                                                child: StreamBuilder<
+                                                    List<TaskRecord>>(
+                                                  stream: queryTaskRecord(
+                                                    queryBuilder:
+                                                        (taskRecord) =>
+                                                            taskRecord
+                                                                .where(
+                                                                  'complete_by',
+                                                                  isEqualTo:
+                                                                      currentMonthItem,
+                                                                )
+                                                                .where(
+                                                                  'user',
+                                                                  isEqualTo:
+                                                                      currentUserReference,
+                                                                ),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 25.0,
+                                                          height: 25.0,
+                                                          child: SpinKitRipple(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            size: 25.0,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<TaskRecord>
+                                                        containerTaskRecordList =
+                                                        snapshot.data!;
+
+                                                    return Container(
+                                                      width: 100.0,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        border: Border.all(
+                                                          color: Colors.black,
+                                                          width: 2.0,
+                                                        ),
+                                                      ),
+                                                      child:
+                                                          SingleChildScrollView(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              6.0),
                                                                   child:
-                                                                      Padding(
-                                                                    padding: MediaQuery
-                                                                        .viewInsetsOf(
-                                                                            context),
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          400.0,
-                                                                      child:
-                                                                          DescriptionSheetWidget(
-                                                                        taskDoc:
-                                                                            listViewTaskRecord,
-                                                                      ),
+                                                                      Container(
+                                                                    width: 70.0,
+                                                                    height:
+                                                                        70.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFE8E8E8),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
                                                                     ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            ).then((value) =>
-                                                                safeSetState(
-                                                                    () {}));
-                                                          },
-                                                          child: Container(
-                                                            width: 376.6,
-                                                            height: 60.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10.0),
-                                                              border:
-                                                                  Border.all(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                            ),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                logFirebaseEvent(
-                                                                    'CALENDAR_PAGE_Row_iqe8g9pc_ON_TAP');
-                                                                logFirebaseEvent(
-                                                                    'Row_bottom_sheet');
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        FocusScope.of(context)
-                                                                            .unfocus();
-                                                                        FocusManager
-                                                                            .instance
-                                                                            .primaryFocus
-                                                                            ?.unfocus();
-                                                                      },
-                                                                      child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            Container(
-                                                                          height:
-                                                                              400.0,
-                                                                          child:
-                                                                              DescriptionSheetWidget(
-                                                                            taskDoc:
-                                                                                listViewTaskRecord,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    safeSetState(
-                                                                        () {}));
-                                                              },
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Padding(
-                                                                        padding:
-                                                                            EdgeInsets.all(6.0),
-                                                                        child:
-                                                                            Text(
-                                                                          listViewTaskRecord
-                                                                              .taskName
-                                                                              .maybeHandleOverflow(
-                                                                            maxChars:
-                                                                                25,
-                                                                            replacement:
-                                                                                '…',
-                                                                          ),
-                                                                          textAlign:
-                                                                              TextAlign.start,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            dateTimeFormat(
-                                                                              "jm",
-                                                                              listViewTaskRecord.completeBy,
-                                                                              locale: FFLocalizations.of(context).languageCode,
-                                                                            ),
-                                                                            '[jm]',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  if (listViewTaskRecord
-                                                                          .isComplete ==
-                                                                      true)
-                                                                    Padding(
-                                                                      padding:
-                                                                          EdgeInsets.all(
-                                                                              10.0),
+                                                                    child:
+                                                                        Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
                                                                       child:
                                                                           Text(
-                                                                        'Complete',
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          dateTimeFormat(
+                                                                            "d",
+                                                                            currentMonthItem,
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          ),
+                                                                          'd',
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.center,
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
@@ -540,63 +700,376 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                             ),
                                                                       ),
                                                                     ),
-                                                                ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(4.0),
+                                                              child: Text(
+                                                                'Upcoming Tasks:',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                    ),
                                                               ),
                                                             ),
-                                                          ),
+                                                            StreamBuilder<
+                                                                List<
+                                                                    TaskRecord>>(
+                                                              stream:
+                                                                  queryTaskRecord(
+                                                                queryBuilder: (taskRecord) =>
+                                                                    taskRecord
+                                                                        .where(
+                                                                          'user',
+                                                                          isEqualTo:
+                                                                              currentUserReference,
+                                                                        )
+                                                                        .where(
+                                                                          'complete_date_list',
+                                                                          arrayContains:
+                                                                              currentMonthItem,
+                                                                        )
+                                                                        .orderBy(
+                                                                            'is_complete'),
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
+                                                                    child:
+                                                                        SizedBox(
+                                                                      width:
+                                                                          25.0,
+                                                                      height:
+                                                                          25.0,
+                                                                      child:
+                                                                          SpinKitRipple(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            25.0,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                List<TaskRecord>
+                                                                    listViewTaskRecordList =
+                                                                    snapshot
+                                                                        .data!;
+
+                                                                return ListView
+                                                                    .builder(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  scrollDirection:
+                                                                      Axis.vertical,
+                                                                  itemCount:
+                                                                      listViewTaskRecordList
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          listViewIndex) {
+                                                                    final listViewTaskRecord =
+                                                                        listViewTaskRecordList[
+                                                                            listViewIndex];
+                                                                    return Stack(
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.all(6.0),
+                                                                          child:
+                                                                              Container(
+                                                                            width:
+                                                                                double.infinity,
+                                                                            height:
+                                                                                60.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                              border: Border.all(
+                                                                                color: Colors.black,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Padding(
+                                                                                  padding: EdgeInsets.all(6.0),
+                                                                                  child: Text(
+                                                                                    listViewTaskRecord.taskName,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                  child: Text(
+                                                                                    dateTimeFormat(
+                                                                                      "jm",
+                                                                                      listViewTaskRecord.completeBy!,
+                                                                                      locale: FFLocalizations.of(context).languageCode,
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Stack(
+                                                                          children: [
+                                                                            if ((listViewTaskRecord.isComplete == true) &&
+                                                                                (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
+                                                                              Padding(
+                                                                                padding: EdgeInsets.all(6.0),
+                                                                                child: Container(
+                                                                                  width: 376.6,
+                                                                                  height: 60.0,
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: Color(0xFFB7B7B7),
+                                                                                    borderRadius: BorderRadius.circular(8.0),
+                                                                                    border: Border.all(
+                                                                                      color: Colors.black,
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            Padding(
+                                                                              padding: EdgeInsets.all(6.0),
+                                                                              child: InkWell(
+                                                                                splashColor: Colors.transparent,
+                                                                                focusColor: Colors.transparent,
+                                                                                hoverColor: Colors.transparent,
+                                                                                highlightColor: Colors.transparent,
+                                                                                onTap: () async {
+                                                                                  logFirebaseEvent('CALENDAR_PAGE_Container_fq4ozqi1_ON_TAP');
+                                                                                  logFirebaseEvent('Container_bottom_sheet');
+                                                                                  await showModalBottomSheet(
+                                                                                    isScrollControlled: true,
+                                                                                    backgroundColor: Colors.transparent,
+                                                                                    context: context,
+                                                                                    builder: (context) {
+                                                                                      return GestureDetector(
+                                                                                        onTap: () {
+                                                                                          FocusScope.of(context).unfocus();
+                                                                                          FocusManager.instance.primaryFocus?.unfocus();
+                                                                                        },
+                                                                                        child: Padding(
+                                                                                          padding: MediaQuery.viewInsetsOf(context),
+                                                                                          child: Container(
+                                                                                            height: 400.0,
+                                                                                            child: DescriptionSheetWidget(
+                                                                                              taskDoc: listViewTaskRecord,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      );
+                                                                                    },
+                                                                                  ).then((value) => safeSetState(() {}));
+                                                                                },
+                                                                                child: Container(
+                                                                                  width: 376.6,
+                                                                                  height: 60.0,
+                                                                                  decoration: BoxDecoration(
+                                                                                    borderRadius: BorderRadius.circular(8.0),
+                                                                                    border: Border.all(
+                                                                                      color: Colors.black,
+                                                                                      width: 2.0,
+                                                                                    ),
+                                                                                  ),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.min,
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Column(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                        children: [
+                                                                                          Padding(
+                                                                                            padding: EdgeInsets.all(6.0),
+                                                                                            child: Text(
+                                                                                              listViewTaskRecord.taskName.maybeHandleOverflow(
+                                                                                                maxChars: 25,
+                                                                                                replacement: '…',
+                                                                                              ),
+                                                                                              textAlign: TextAlign.start,
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                    letterSpacing: 0.0,
+                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ),
+                                                                                          Padding(
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                            child: Text(
+                                                                                              dateTimeFormat(
+                                                                                                "jm",
+                                                                                                listViewTaskRecord.completeBy!,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
+                                                                                              maxLines: 1,
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                    letterSpacing: 0.0,
+                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      if ((listViewTaskRecord.isComplete == true) && (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
+                                                                                        Padding(
+                                                                                          padding: EdgeInsets.all(10.0),
+                                                                                          child: Text(
+                                                                                            'Complete',
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                ),
+                                                                                          ),
+                                                                                        ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
                                     ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            KeepAliveWidgetWrapper(
+                              builder: (context) => Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: 100.0,
+                                  height: 0.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    borderRadius: BorderRadius.circular(16.0),
                                   ),
-                                  Builder(
-                                    builder: (context) {
-                                      final currentMonth = functions
-                                              .getMonthView(getCurrentTimestamp)
-                                              ?.toList() ??
-                                          [];
-
-                                      return ListView.builder(
-                                        padding: EdgeInsets.fromLTRB(
-                                          0,
-                                          0,
-                                          0,
-                                          44.0,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 3.0,
+                                                color: Color(0x33000000),
+                                                offset: Offset(
+                                                  0.0,
+                                                  1.0,
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                        primary: false,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount: currentMonth.length,
-                                        itemBuilder:
-                                            (context, currentMonthIndex) {
-                                          final currentMonthItem =
-                                              currentMonth[currentMonthIndex];
-                                          return Visibility(
-                                            visible: currentMonthItem >=
-                                                getCurrentTimestamp,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(12.0),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 12.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Past Due',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMediumFamily),
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 12.0, 0.0, 24.0),
                                               child: StreamBuilder<
                                                   List<TaskRecord>>(
                                                 stream: queryTaskRecord(
                                                   queryBuilder: (taskRecord) =>
                                                       taskRecord
                                                           .where(
-                                                            'complete_by',
-                                                            isEqualTo:
-                                                                currentMonthItem,
-                                                          )
-                                                          .where(
                                                             'user',
                                                             isEqualTo:
                                                                 currentUserReference,
+                                                          )
+                                                          .where(
+                                                            'is_complete',
+                                                            isEqualTo: false,
+                                                          )
+                                                          .where(
+                                                            'complete_by',
+                                                            isLessThan:
+                                                                getCurrentTimestamp,
                                                           ),
                                                 ),
                                                 builder: (context, snapshot) {
@@ -616,414 +1089,122 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                     );
                                                   }
                                                   List<TaskRecord>
-                                                      containerTaskRecordList =
+                                                      listViewTaskRecordList =
                                                       snapshot.data!;
 
-                                                  return Container(
-                                                    width: 100.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                      border: Border.all(
-                                                        color: Colors.black,
-                                                        width: 2.0,
-                                                      ),
-                                                    ),
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(
-                                                                            6.0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 70.0,
-                                                                  height: 70.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Color(
-                                                                        0xFFE8E8E8),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10.0),
-                                                                  ),
+                                                  return ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    primary: false,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount:
+                                                        listViewTaskRecordList
+                                                            .length,
+                                                    itemBuilder: (context,
+                                                        listViewIndex) {
+                                                      final listViewTaskRecord =
+                                                          listViewTaskRecordList[
+                                                              listViewIndex];
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'CALENDAR_PAGE_Container_nozn4eem_ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'task_bottom_sheet');
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return GestureDetector(
+                                                                onTap: () {
+                                                                  FocusScope.of(
+                                                                          context)
+                                                                      .unfocus();
+                                                                  FocusManager
+                                                                      .instance
+                                                                      .primaryFocus
+                                                                      ?.unfocus();
+                                                                },
+                                                                child: Padding(
+                                                                  padding: MediaQuery
+                                                                      .viewInsetsOf(
+                                                                          context),
                                                                   child:
-                                                                      Padding(
-                                                                    padding:
-                                                                        EdgeInsets.all(
-                                                                            16.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        dateTimeFormat(
-                                                                          "d",
-                                                                          currentMonthItem,
-                                                                          locale:
-                                                                              FFLocalizations.of(context).languageCode,
-                                                                        ),
-                                                                        'd',
-                                                                      ),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .center,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                          ),
+                                                                      Container(
+                                                                    height:
+                                                                        400.0,
+                                                                    child:
+                                                                        DescriptionSheetWidget(
+                                                                      taskDoc:
+                                                                          listViewTaskRecord,
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    4.0),
-                                                            child: Text(
-                                                              'Upcoming Tasks:',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          StreamBuilder<
-                                                              List<TaskRecord>>(
-                                                            stream:
-                                                                queryTaskRecord(
-                                                              queryBuilder:
-                                                                  (taskRecord) =>
-                                                                      taskRecord
-                                                                          .where(
-                                                                            'user',
-                                                                            isEqualTo:
-                                                                                currentUserReference,
-                                                                          )
-                                                                          .where(
-                                                                            'complete_date_list',
-                                                                            arrayContains:
-                                                                                currentMonthItem,
-                                                                          )
-                                                                          .orderBy(
-                                                                              'is_complete'),
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 25.0,
-                                                                    height:
-                                                                        25.0,
-                                                                    child:
-                                                                        SpinKitRipple(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          25.0,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<TaskRecord>
-                                                                  listViewTaskRecordList =
-                                                                  snapshot
-                                                                      .data!;
-
-                                                              return ListView
-                                                                  .builder(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                shrinkWrap:
-                                                                    true,
-                                                                scrollDirection:
-                                                                    Axis.vertical,
-                                                                itemCount:
-                                                                    listViewTaskRecordList
-                                                                        .length,
-                                                                itemBuilder:
-                                                                    (context,
-                                                                        listViewIndex) {
-                                                                  final listViewTaskRecord =
-                                                                      listViewTaskRecordList[
-                                                                          listViewIndex];
-                                                                  return Stack(
-                                                                    children: [
-                                                                      Padding(
-                                                                        padding:
-                                                                            EdgeInsets.all(6.0),
-                                                                        child:
-                                                                            Container(
-                                                                          width:
-                                                                              double.infinity,
-                                                                          height:
-                                                                              60.0,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10.0),
-                                                                            border:
-                                                                                Border.all(
-                                                                              color: Colors.black,
-                                                                            ),
-                                                                          ),
-                                                                          child:
-                                                                              Column(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              Padding(
-                                                                                padding: EdgeInsets.all(6.0),
-                                                                                child: Text(
-                                                                                  listViewTaskRecord.taskName,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                        letterSpacing: 0.0,
-                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                child: Text(
-                                                                                  dateTimeFormat(
-                                                                                    "jm",
-                                                                                    listViewTaskRecord.completeBy!,
-                                                                                    locale: FFLocalizations.of(context).languageCode,
-                                                                                  ),
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                        letterSpacing: 0.0,
-                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      Stack(
-                                                                        children: [
-                                                                          if ((listViewTaskRecord.isComplete == true) &&
-                                                                              (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
-                                                                            Padding(
-                                                                              padding: EdgeInsets.all(6.0),
-                                                                              child: Container(
-                                                                                width: 376.6,
-                                                                                height: 60.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: Color(0xFFB7B7B7),
-                                                                                  borderRadius: BorderRadius.circular(10.0),
-                                                                                  border: Border.all(
-                                                                                    color: Colors.black,
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                EdgeInsets.all(6.0),
-                                                                            child:
-                                                                                InkWell(
-                                                                              splashColor: Colors.transparent,
-                                                                              focusColor: Colors.transparent,
-                                                                              hoverColor: Colors.transparent,
-                                                                              highlightColor: Colors.transparent,
-                                                                              onTap: () async {
-                                                                                logFirebaseEvent('CALENDAR_PAGE_Container_fq4ozqi1_ON_TAP');
-                                                                                logFirebaseEvent('Container_bottom_sheet');
-                                                                                await showModalBottomSheet(
-                                                                                  isScrollControlled: true,
-                                                                                  backgroundColor: Colors.transparent,
-                                                                                  context: context,
-                                                                                  builder: (context) {
-                                                                                    return GestureDetector(
-                                                                                      onTap: () {
-                                                                                        FocusScope.of(context).unfocus();
-                                                                                        FocusManager.instance.primaryFocus?.unfocus();
-                                                                                      },
-                                                                                      child: Padding(
-                                                                                        padding: MediaQuery.viewInsetsOf(context),
-                                                                                        child: Container(
-                                                                                          height: 400.0,
-                                                                                          child: DescriptionSheetWidget(
-                                                                                            taskDoc: listViewTaskRecord,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    );
-                                                                                  },
-                                                                                ).then((value) => safeSetState(() {}));
-                                                                              },
-                                                                              child: Container(
-                                                                                width: 376.6,
-                                                                                height: 60.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  borderRadius: BorderRadius.circular(10.0),
-                                                                                  border: Border.all(
-                                                                                    color: Colors.black,
-                                                                                  ),
-                                                                                ),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  children: [
-                                                                                    Column(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsets.all(6.0),
-                                                                                          child: Text(
-                                                                                            listViewTaskRecord.taskName.maybeHandleOverflow(
-                                                                                              maxChars: 25,
-                                                                                              replacement: '…',
-                                                                                            ),
-                                                                                            textAlign: TextAlign.start,
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                          child: Text(
-                                                                                            dateTimeFormat(
-                                                                                              "jm",
-                                                                                              listViewTaskRecord.completeBy!,
-                                                                                              locale: FFLocalizations.of(context).languageCode,
-                                                                                            ),
-                                                                                            maxLines: 1,
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                    if ((listViewTaskRecord.isComplete == true) && (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
-                                                                                      Padding(
-                                                                                        padding: EdgeInsets.all(10.0),
-                                                                                        child: Text(
-                                                                                          'Complete',
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                letterSpacing: 0.0,
-                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                              ),
-                                                                                        ),
-                                                                                      ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
                                                               );
                                                             },
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                                          ).then((value) =>
+                                                              safeSetState(
+                                                                  () {}));
+                                                        },
+                                                        child: TaskWidget(
+                                                          key: Key(
+                                                              'Keynoz_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                          taskDoc:
+                                                              listViewTaskRecord,
+                                                          checkAction:
+                                                              () async {
+                                                            logFirebaseEvent(
+                                                                'CALENDAR_Container_nozn4eem_CALLBACK');
+                                                            logFirebaseEvent(
+                                                                'task_backend_call');
+
+                                                            await listViewTaskRecord
+                                                                .reference
+                                                                .update(
+                                                                    createTaskRecordData(
+                                                              isComplete: true,
+                                                            ));
+                                                          },
+                                                        ),
+                                                      );
+                                                    },
                                                   );
                                                 },
                                               ),
                                             ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 100.0,
-                                height: 0.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 3.0,
-                                              color: Color(0x33000000),
-                                              offset: Offset(
-                                                0.0,
-                                                1.0,
-                                              ),
-                                            )
                                           ],
                                         ),
-                                      ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            KeepAliveWidgetWrapper(
+                              builder: (context) => Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -1034,7 +1215,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 12.0, 0.0, 0.0),
                                             child: Text(
-                                              'Past Due',
+                                              'Checked',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -1069,12 +1250,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                         )
                                                         .where(
                                                           'is_complete',
-                                                          isEqualTo: false,
-                                                        )
-                                                        .where(
-                                                          'complete_by',
-                                                          isLessThan:
-                                                              getCurrentTimestamp,
+                                                          isEqualTo: true,
                                                         ),
                                               ),
                                               builder: (context, snapshot) {
@@ -1123,55 +1299,16 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         logFirebaseEvent(
-                                                            'CALENDAR_PAGE_Container_nozn4eem_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'task_bottom_sheet');
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return GestureDetector(
-                                                              onTap: () {
-                                                                FocusScope.of(
-                                                                        context)
-                                                                    .unfocus();
-                                                                FocusManager
-                                                                    .instance
-                                                                    .primaryFocus
-                                                                    ?.unfocus();
-                                                              },
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    Container(
-                                                                  height: 400.0,
-                                                                  child:
-                                                                      DescriptionSheetWidget(
-                                                                    taskDoc:
-                                                                        listViewTaskRecord,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(
-                                                                () {}));
+                                                            'CALENDAR_PAGE_Container_93pjk6en_ON_TAP');
                                                       },
                                                       child: TaskWidget(
                                                         key: Key(
-                                                            'Keynoz_${listViewIndex}_of_${listViewTaskRecordList.length}'),
+                                                            'Key93p_${listViewIndex}_of_${listViewTaskRecordList.length}'),
                                                         taskDoc:
                                                             listViewTaskRecord,
                                                         checkAction: () async {
                                                           logFirebaseEvent(
-                                                              'CALENDAR_Container_nozn4eem_CALLBACK');
+                                                              'CALENDAR_Container_93pjk6en_CALLBACK');
                                                           logFirebaseEvent(
                                                               'task_backend_call');
 
@@ -1179,7 +1316,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                               .reference
                                                               .update(
                                                                   createTaskRecordData(
-                                                            isComplete: true,
+                                                            isComplete: false,
                                                           ));
                                                         },
                                                       ),
@@ -1193,142 +1330,6 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 12.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Checked',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMediumFamily),
-                                                ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 12.0, 0.0, 24.0),
-                                          child:
-                                              StreamBuilder<List<TaskRecord>>(
-                                            stream: queryTaskRecord(
-                                              queryBuilder: (taskRecord) =>
-                                                  taskRecord
-                                                      .where(
-                                                        'user',
-                                                        isEqualTo:
-                                                            currentUserReference,
-                                                      )
-                                                      .where(
-                                                        'is_complete',
-                                                        isEqualTo: true,
-                                                      ),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 25.0,
-                                                    height: 25.0,
-                                                    child: SpinKitRipple(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 25.0,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TaskRecord>
-                                                  listViewTaskRecordList =
-                                                  snapshot.data!;
-
-                                              return ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                itemCount:
-                                                    listViewTaskRecordList
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, listViewIndex) {
-                                                  final listViewTaskRecord =
-                                                      listViewTaskRecordList[
-                                                          listViewIndex];
-                                                  return InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'CALENDAR_PAGE_Container_93pjk6en_ON_TAP');
-                                                    },
-                                                    child: TaskWidget(
-                                                      key: Key(
-                                                          'Key93p_${listViewIndex}_of_${listViewTaskRecordList.length}'),
-                                                      taskDoc:
-                                                          listViewTaskRecord,
-                                                      checkAction: () async {
-                                                        logFirebaseEvent(
-                                                            'CALENDAR_Container_93pjk6en_CALLBACK');
-                                                        logFirebaseEvent(
-                                                            'task_backend_call');
-
-                                                        await listViewTaskRecord
-                                                            .reference
-                                                            .update(
-                                                                createTaskRecordData(
-                                                          isComplete: false,
-                                                        ));
-                                                      },
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
                                 ),
                               ),
                             ),

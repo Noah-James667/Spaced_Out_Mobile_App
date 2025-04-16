@@ -90,7 +90,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
         height: 70.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          borderRadius: BorderRadius.circular(24.0),
+          borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
             width: 2.0,
           ),
@@ -105,7 +105,9 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                 checkboxTheme: CheckboxThemeData(
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: CircleBorder(),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
                 unselectedWidgetColor: FlutterFlowTheme.of(context).alternate,
               ),

@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
+  ///  Local state fields for this component.
+
+  int? selectedDifficulty;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.

@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -85,70 +86,72 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        border: Border.all(
+          width: 4.0,
         ),
       ),
       child: Padding(
         padding: EdgeInsets.all(6.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FlutterFlowIconButton(
-                  borderRadius: 8.0,
-                  buttonSize: 40.0,
-                  fillColor: Color(0x004B39EF),
-                  icon: Icon(
-                    Icons.close,
-                    color: Colors.black,
-                    size: 24.0,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    buttonSize: 40.0,
+                    fillColor: Color(0x004B39EF),
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.black,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      logFirebaseEvent('EDIT_TASK_COMP_close_ICN_ON_TAP');
+                      logFirebaseEvent('IconButton_bottom_sheet');
+                      Navigator.pop(context);
+                    },
                   ),
-                  onPressed: () async {
-                    logFirebaseEvent('EDIT_TASK_COMP_close_ICN_ON_TAP');
-                    logFirebaseEvent('IconButton_bottom_sheet');
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 64.0,
-                  height: 64.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/check.gif',
-                      width: 200.0,
-                      height: 200.0,
-                      fit: BoxFit.cover,
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 64.0,
+                    height: 64.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/check.gif',
+                        width: 200.0,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Text(
-              'Edit task',
-              style: FlutterFlowTheme.of(context).bodyLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                    letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyLargeFamily),
-                  ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Container(
+                ],
+              ),
+              Text(
+                'Edit task',
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyLargeFamily),
+                    ),
+              ),
+              Container(
                 width: double.infinity,
                 child: TextFormField(
                   controller: _model.textController1,
@@ -178,30 +181,30 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,
-                        width: 1.0,
+                        width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(18.0),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0x00000000),
-                        width: 1.0,
+                        width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(18.0),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 1.0,
+                        width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(18.0),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 1.0,
+                        width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(18.0),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -220,61 +223,19 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       _model.textController1Validator.asValidator(context),
                 ),
               ),
-            ),
-            Stack(
-              children: [
-                FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('EDIT_TASK_COMP_timeDue_ON_TAP');
-                    logFirebaseEvent('timeDue_date_time_picker');
-                    final _datePicked1Date = await showDatePicker(
-                      context: context,
-                      initialDate: getCurrentTimestamp,
-                      firstDate: getCurrentTimestamp,
-                      lastDate: DateTime(2050),
-                      builder: (context, child) {
-                        return wrapInMaterialDatePickerTheme(
-                          context,
-                          child!,
-                          headerBackgroundColor:
-                              FlutterFlowTheme.of(context).primary,
-                          headerForegroundColor:
-                              FlutterFlowTheme.of(context).info,
-                          headerTextStyle: FlutterFlowTheme.of(context)
-                              .headlineLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineLargeFamily,
-                                fontSize: 32.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineLargeFamily),
-                              ),
-                          pickerBackgroundColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          pickerForegroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          selectedDateTimeBackgroundColor:
-                              FlutterFlowTheme.of(context).primary,
-                          selectedDateTimeForegroundColor:
-                              FlutterFlowTheme.of(context).info,
-                          actionButtonForegroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          iconSize: 24.0,
-                        );
-                      },
-                    );
-
-                    TimeOfDay? _datePicked1Time;
-                    if (_datePicked1Date != null) {
-                      _datePicked1Time = await showTimePicker(
+              Stack(
+                children: [
+                  FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('EDIT_TASK_COMP_timeDue_ON_TAP');
+                      logFirebaseEvent('timeDue_date_time_picker');
+                      final _datePicked1Date = await showDatePicker(
                         context: context,
-                        initialTime:
-                            TimeOfDay.fromDateTime(getCurrentTimestamp),
+                        initialDate: getCurrentTimestamp,
+                        firstDate: getCurrentTimestamp,
+                        lastDate: DateTime(2050),
                         builder: (context, child) {
-                          return wrapInMaterialTimePickerTheme(
+                          return wrapInMaterialDatePickerTheme(
                             context,
                             child!,
                             headerBackgroundColor:
@@ -307,123 +268,75 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           );
                         },
                       );
-                    }
 
-                    if (_datePicked1Date != null && _datePicked1Time != null) {
-                      safeSetState(() {
-                        _model.datePicked1 = DateTime(
-                          _datePicked1Date.year,
-                          _datePicked1Date.month,
-                          _datePicked1Date.day,
-                          _datePicked1Time!.hour,
-                          _datePicked1Time.minute,
+                      TimeOfDay? _datePicked1Time;
+                      if (_datePicked1Date != null) {
+                        _datePicked1Time = await showTimePicker(
+                          context: context,
+                          initialTime:
+                              TimeOfDay.fromDateTime(getCurrentTimestamp),
+                          builder: (context, child) {
+                            return wrapInMaterialTimePickerTheme(
+                              context,
+                              child!,
+                              headerBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              headerForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              headerTextStyle: FlutterFlowTheme.of(context)
+                                  .headlineLarge
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .headlineLargeFamily,
+                                    fontSize: 32.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .headlineLargeFamily),
+                                  ),
+                              pickerBackgroundColor:
+                                  FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              pickerForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              selectedDateTimeBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              selectedDateTimeForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              actionButtonForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              iconSize: 24.0,
+                            );
+                          },
                         );
-                      });
-                    } else if (_model.datePicked1 != null) {
-                      safeSetState(() {
-                        _model.datePicked1 = getCurrentTimestamp;
-                      });
-                    }
-                  },
-                  text: dateTimeFormat(
-                    "M/d h:mm a",
-                    _model.datePicked1,
-                    locale: FFLocalizations.of(context).languageCode,
-                  ),
-                  icon: Icon(
-                    Icons.timer_sharp,
-                    size: 20.0,
-                  ),
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: Colors.white,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.black,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 0.0,
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-                if (_model.switchValue ?? true)
-                  FFButtonWidget(
-                    onPressed: () async {
-                      logFirebaseEvent('EDIT_TASK_COMP_dayDue_ON_TAP');
-                      logFirebaseEvent('dayDue_date_time_picker');
+                      }
 
-                      final _datePicked2Time = await showTimePicker(
-                        context: context,
-                        initialTime:
-                            TimeOfDay.fromDateTime(getCurrentTimestamp),
-                        builder: (context, child) {
-                          return wrapInMaterialTimePickerTheme(
-                            context,
-                            child!,
-                            headerBackgroundColor:
-                                FlutterFlowTheme.of(context).primary,
-                            headerForegroundColor:
-                                FlutterFlowTheme.of(context).info,
-                            headerTextStyle: FlutterFlowTheme.of(context)
-                                .headlineLarge
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineLargeFamily,
-                                  fontSize: 32.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .headlineLargeFamily),
-                                ),
-                            pickerBackgroundColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            pickerForegroundColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            selectedDateTimeBackgroundColor: Color(0xFFFCFCFC),
-                            selectedDateTimeForegroundColor:
-                                FlutterFlowTheme.of(context).info,
-                            actionButtonForegroundColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            iconSize: 24.0,
-                          );
-                        },
-                      );
-                      if (_datePicked2Time != null) {
+                      if (_datePicked1Date != null &&
+                          _datePicked1Time != null) {
                         safeSetState(() {
-                          _model.datePicked2 = DateTime(
-                            getCurrentTimestamp.year,
-                            getCurrentTimestamp.month,
-                            getCurrentTimestamp.day,
-                            _datePicked2Time.hour,
-                            _datePicked2Time.minute,
+                          _model.datePicked1 = DateTime(
+                            _datePicked1Date.year,
+                            _datePicked1Date.month,
+                            _datePicked1Date.day,
+                            _datePicked1Time!.hour,
+                            _datePicked1Time.minute,
                           );
                         });
-                      } else if (_model.datePicked2 != null) {
+                      } else if (_model.datePicked1 != null) {
                         safeSetState(() {
-                          _model.datePicked2 = getCurrentTimestamp;
+                          _model.datePicked1 = getCurrentTimestamp;
                         });
                       }
                     },
                     text: dateTimeFormat(
-                      "jm",
-                      _model.datePicked2,
+                      "M/d h:mm a",
+                      _model.datePicked1,
                       locale: FFLocalizations.of(context).languageCode,
                     ),
                     icon: Icon(
-                      Icons.calendar_month,
+                      Icons.timer_sharp,
                       size: 20.0,
                     ),
                     options: FFButtonOptions(
@@ -435,13 +348,14 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: Colors.white,
                       textStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
+                          .titleSmall
                           .override(
                             fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                                FlutterFlowTheme.of(context).titleSmallFamily,
+                            color: Colors.black,
                             letterSpacing: 0.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
+                                FlutterFlowTheme.of(context).titleSmallFamily),
                           ),
                       elevation: 0.0,
                       borderSide: BorderSide(
@@ -451,29 +365,124 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
-              ],
-            ),
-            Text(
-              valueOrDefault<String>(
-                widget.dueDate?.toString(),
-                'Due date',
+                  if (_model.switchValue ?? true)
+                    FFButtonWidget(
+                      onPressed: () async {
+                        logFirebaseEvent('EDIT_TASK_COMP_dayDue_ON_TAP');
+                        logFirebaseEvent('dayDue_date_time_picker');
+
+                        final _datePicked2Time = await showTimePicker(
+                          context: context,
+                          initialTime:
+                              TimeOfDay.fromDateTime(getCurrentTimestamp),
+                          builder: (context, child) {
+                            return wrapInMaterialTimePickerTheme(
+                              context,
+                              child!,
+                              headerBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              headerForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              headerTextStyle: FlutterFlowTheme.of(context)
+                                  .headlineLarge
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .headlineLargeFamily,
+                                    fontSize: 32.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .headlineLargeFamily),
+                                  ),
+                              pickerBackgroundColor:
+                                  FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              pickerForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              selectedDateTimeBackgroundColor:
+                                  Color(0xFFFCFCFC),
+                              selectedDateTimeForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              actionButtonForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              iconSize: 24.0,
+                            );
+                          },
+                        );
+                        if (_datePicked2Time != null) {
+                          safeSetState(() {
+                            _model.datePicked2 = DateTime(
+                              getCurrentTimestamp.year,
+                              getCurrentTimestamp.month,
+                              getCurrentTimestamp.day,
+                              _datePicked2Time.hour,
+                              _datePicked2Time.minute,
+                            );
+                          });
+                        } else if (_model.datePicked2 != null) {
+                          safeSetState(() {
+                            _model.datePicked2 = getCurrentTimestamp;
+                          });
+                        }
+                      },
+                      text: dateTimeFormat(
+                        "jm",
+                        _model.datePicked2,
+                        locale: FFLocalizations.of(context).languageCode,
+                      ),
+                      icon: Icon(
+                        Icons.calendar_month,
+                        size: 20.0,
+                      ),
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 40.0,
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: Colors.white,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
+                              letterSpacing: 0.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
+                            ),
+                        elevation: 0.0,
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                ],
               ),
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                    fontSize: 1.0,
-                    letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyMediumFamily),
-                  ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (_model.switchValue ?? true)
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(2.0),
+              Text(
+                valueOrDefault<String>(
+                  widget.dueDate?.toString(),
+                  'Due date',
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      fontSize: 1.0,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                    ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (_model.switchValue ?? true)
+                    Expanded(
                       child: FlutterFlowChoiceChips(
                         options: [
                           ChipData('Sunday'),
@@ -503,6 +512,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           iconSize: 16.0,
                           elevation: 0.0,
                           borderColor: FlutterFlowTheme.of(context).primaryText,
+                          borderWidth: 2.0,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         unselectedChipStyle: ChipStyle(
@@ -537,47 +547,44 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         wrapped: true,
                       ),
                     ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      'Does the task repeat?',
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyLargeFamily),
+                          ),
+                    ),
                   ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text(
-                    'Does the task repeat?',
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyLargeFamily,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyLargeFamily),
-                        ),
+                  Icon(
+                    Icons.repeat_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 24.0,
                   ),
-                ),
-                Icon(
-                  Icons.repeat_rounded,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
-                ),
-                Switch.adaptive(
-                  value: _model.switchValue!,
-                  onChanged: (newValue) async {
-                    safeSetState(() => _model.switchValue = newValue);
-                  },
-                  activeColor: FlutterFlowTheme.of(context).primary,
-                  activeTrackColor: FlutterFlowTheme.of(context).alternate,
-                  inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
-                  inactiveThumbColor:
-                      FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: FlutterFlowDropDown<String>(
+                  Switch.adaptive(
+                    value: _model.switchValue!,
+                    onChanged: (newValue) async {
+                      safeSetState(() => _model.switchValue = newValue);
+                    },
+                    activeColor: FlutterFlowTheme.of(context).primary,
+                    activeTrackColor: FlutterFlowTheme.of(context).alternate,
+                    inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
+                    inactiveThumbColor:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                ],
+              ),
+              FlutterFlowDropDown<String>(
                 controller: _model.dropDownValueController ??=
                     FormFieldController<String>(null),
                 options: ['Personal', 'Assignment', 'Project'],
@@ -600,7 +607,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                 elevation: 2.0,
                 borderColor: Colors.black,
-                borderWidth: 1.0,
+                borderWidth: 2.0,
                 borderRadius: 8.0,
                 margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                 hidesUnderline: true,
@@ -608,10 +615,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 isSearchable: false,
                 isMultiSelect: false,
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(5.0),
+              Expanded(
                 child: Container(
                   width: double.infinity,
                   child: TextFormField(
@@ -643,30 +647,30 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black,
-                          width: 1.0,
+                          width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(18.0),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
-                          width: 1.0,
+                          width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(18.0),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
+                          width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(18.0),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
+                          width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(18.0),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
                       fillColor:
@@ -686,215 +690,118 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-              child: FlutterFlowChoiceChips(
-                options: [
-                  ChipData('Easy'),
-                  ChipData('Medium'),
-                  ChipData('Hard')
-                ],
-                onChanged: (val) => safeSetState(
-                    () => _model.choiceChipsValue2 = val?.firstOrNull),
-                selectedChipStyle: ChipStyle(
-                  backgroundColor: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                        color: FlutterFlowTheme.of(context).info,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                      ),
-                  iconColor: FlutterFlowTheme.of(context).info,
-                  iconSize: 16.0,
-                  elevation: 0.0,
-                  borderColor: FlutterFlowTheme.of(context).primaryText,
-                  borderRadius: BorderRadius.circular(8.0),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                child: FlutterFlowChoiceChips(
+                  options: [
+                    ChipData('Easy'),
+                    ChipData('Medium'),
+                    ChipData('Hard')
+                  ],
+                  onChanged: (val) => safeSetState(
+                      () => _model.choiceChipsValue2 = val?.firstOrNull),
+                  selectedChipStyle: ChipStyle(
+                    backgroundColor: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          color: FlutterFlowTheme.of(context).info,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                    iconColor: FlutterFlowTheme.of(context).info,
+                    iconSize: 16.0,
+                    elevation: 0.0,
+                    borderColor: FlutterFlowTheme.of(context).primaryText,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  unselectedChipStyle: ChipStyle(
+                    backgroundColor:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                    iconColor: FlutterFlowTheme.of(context).secondaryText,
+                    iconSize: 16.0,
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  chipSpacing: 8.0,
+                  rowSpacing: 8.0,
+                  multiselect: false,
+                  initialized: _model.choiceChipsValue2 != null,
+                  alignment: WrapAlignment.start,
+                  controller: _model.choiceChipsValueController2 ??=
+                      FormFieldController<List<String>>(
+                    [widget.taskDifficulty!],
+                  ),
+                  wrapped: true,
                 ),
-                unselectedChipStyle: ChipStyle(
-                  backgroundColor:
-                      FlutterFlowTheme.of(context).secondaryBackground,
-                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                      ),
-                  iconColor: FlutterFlowTheme.of(context).secondaryText,
-                  iconSize: 16.0,
-                  elevation: 0.0,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                chipSpacing: 8.0,
-                rowSpacing: 8.0,
-                multiselect: false,
-                initialized: _model.choiceChipsValue2 != null,
-                alignment: WrapAlignment.start,
-                controller: _model.choiceChipsValueController2 ??=
-                    FormFieldController<List<String>>(
-                  [widget.taskDifficulty!],
-                ),
-                wrapped: true,
               ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
-                      if (_model.switchValue == false) {
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
                         logFirebaseEvent('Button_backend_call');
                         unawaited(
                           () async {
-                            await widget.taskReference!.update({
-                              ...createTaskRecordData(
-                                taskName: _model.textController1.text,
-                                taskDescription: _model.textController2.text,
-                                completeBy: _model.datePicked1,
-                                isRepeating: false,
-                                completeDate: functions
-                                    .returnDayMonthPicker(_model.datePicked1),
-                                taskCategory: _model.dropDownValue,
-                              ),
-                              ...mapToFirestore(
-                                {
-                                  'days_repeating': FieldValue.delete(),
-                                  'complete_date_list': functions
-                                      .wrapDateInList(_model.datePicked1!),
-                                },
-                              ),
-                            });
+                            await widget.taskReference!
+                                .update(createTaskRecordData(
+                              user: currentUserReference,
+                              taskName: _model.textController1.text,
+                              taskDescription: _model.textController2.text,
+                              completeBy: _model.datePicked1,
+                              isRepeating: _model.switchValue,
+                              difficultyLvl: functions
+                                  .difficultyToInt(_model.choiceChipsValue2!),
+                              completeDate: functions
+                                  .returnDayMonthPicker(_model.datePicked1),
+                              taskCategory: _model.dropDownValue,
+                            ));
                           }(),
                         );
-                        if ((_model.choiceChipsValue2 != null &&
-                                _model.choiceChipsValue2 != '') ||
-                            (_model.choiceChipsValue2 == 'medium') ||
-                            (_model.choiceChipsValue2 == 'hard')) {
-                          logFirebaseEvent('Button_backend_call');
-
-                          await widget.taskReference!
-                              .update(createTaskRecordData(
-                            difficultyLvl: functions
-                                .difficultyToInt(_model.choiceChipsValue2!),
-                          ));
-                          logFirebaseEvent('Button_alert_dialog');
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('difficulty selected debug'),
-                                content: Text(widget.taskDifficulty!),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          logFirebaseEvent('Button_alert_dialog');
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('difficulty not selected debug'),
-                                content: Text(widget.taskDifficulty!),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      } else {
-                        logFirebaseEvent('Button_backend_call');
-                        unawaited(
-                          () async {
-                            await widget.taskReference!.update({
-                              ...createTaskRecordData(
-                                taskName: _model.textController1.text,
-                                taskDescription: _model.textController2.text,
-                                completeBy: functions.getNextCompleteDate(
-                                    _model.choiceChipsValues1!.toList(),
-                                    _model.datePicked2!),
-                                isRepeating: true,
-                                completeDate: functions.getNextMonthDayYear(
-                                    _model.choiceChipsValues1!.toList()),
-                                difficultyLvl: functions
-                                    .difficultyToInt(_model.choiceChipsValue2!),
-                                taskCategory: _model.dropDownValue,
-                              ),
-                              ...mapToFirestore(
-                                {
-                                  'days_repeating': _model.choiceChipsValues1,
-                                  'complete_date_list':
-                                      functions.getUpcomingWeekdays(
-                                          _model.choiceChipsValues1!.toList()),
-                                },
-                              ),
-                            });
-                          }(),
-                        );
-                        if (widget.taskDifficulty != null &&
-                            widget.taskDifficulty != '') {
-                          logFirebaseEvent('Button_backend_call');
-
-                          await widget.taskReference!
-                              .update(createTaskRecordData(
-                            difficultyLvl: functions
-                                .difficultyToInt(_model.choiceChipsValue2!),
-                          ));
-                        }
-                      }
-
-                      logFirebaseEvent('Button_bottom_sheet');
-                      Navigator.pop(context);
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: 100.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .bodyLarge
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
-                          ),
-                      elevation: 0.0,
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
+                        logFirebaseEvent('Button_bottom_sheet');
+                        Navigator.pop(context);
+                      },
+                      text: 'Save',
+                      options: FFButtonOptions(
+                        width: 100.0,
+                        height: 40.0,
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .bodyLarge
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyLargeFamily,
+                              letterSpacing: 0.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyLargeFamily),
+                            ),
+                        elevation: 0.0,
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: FFButtonWidget(
+                  FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('EDIT_TASK_COMP_DELETE_BTN_ON_TAP');
                       logFirebaseEvent('Button_alert_dialog');
@@ -945,28 +852,30 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFFED676C),
+                      color: FlutterFlowTheme.of(context).error,
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyLargeFamily,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             letterSpacing: 0.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                 FlutterFlowTheme.of(context).bodyLargeFamily),
                           ),
                       elevation: 0.0,
                       borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
+                        color: FlutterFlowTheme.of(context).black,
+                        width: 2.0,
                       ),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ].divide(SizedBox(height: 5.0)),
+          ),
         ),
       ),
     );

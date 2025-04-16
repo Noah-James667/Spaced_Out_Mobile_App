@@ -62,8 +62,8 @@ class _PurchaseLightBluePantsWidgetState
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(30.0),
-          topRight: Radius.circular(30.0),
+          topLeft: Radius.circular(8.0),
+          topRight: Radius.circular(8.0),
         ),
         border: Border.all(
           color: FlutterFlowTheme.of(context).shopText,

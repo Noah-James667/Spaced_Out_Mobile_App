@@ -50,8 +50,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        border: Border.all(
+          width: 4.0,
         ),
       ),
       child: Column(
@@ -101,7 +104,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 options: FFButtonOptions(
                   width: 175.0,
                   height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
@@ -114,7 +117,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).black,
+                    color: Colors.black,
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(8.0),
@@ -207,12 +210,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).error,
-                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                  textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                         fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         letterSpacing: 0.0,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(

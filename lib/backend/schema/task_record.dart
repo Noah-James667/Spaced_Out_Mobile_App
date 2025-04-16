@@ -75,6 +75,11 @@ class TaskRecord extends FirestoreRecord {
   List<DateTime> get completeDateList => _completeDateList ?? const [];
   bool hasCompleteDateList() => _completeDateList != null;
 
+  // "test_dfcty_lvl" field.
+  String? _testDfctyLvl;
+  String get testDfctyLvl => _testDfctyLvl ?? '';
+  bool hasTestDfctyLvl() => _testDfctyLvl != null;
+
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _taskName = snapshotData['task_name'] as String?;
@@ -88,6 +93,7 @@ class TaskRecord extends FirestoreRecord {
     _completeDate = snapshotData['complete_date'] as DateTime?;
     _taskCategory = snapshotData['task_category'] as String?;
     _completeDateList = getDataList(snapshotData['complete_date_list']);
+    _testDfctyLvl = snapshotData['test_dfcty_lvl'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -134,6 +140,7 @@ Map<String, dynamic> createTaskRecordData({
   int? xpWeight,
   DateTime? completeDate,
   String? taskCategory,
+  String? testDfctyLvl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -147,6 +154,7 @@ Map<String, dynamic> createTaskRecordData({
       'xp_weight': xpWeight,
       'complete_date': completeDate,
       'task_category': taskCategory,
+      'test_dfcty_lvl': testDfctyLvl,
     }.withoutNulls,
   );
 
@@ -170,7 +178,8 @@ class TaskRecordDocumentEquality implements Equality<TaskRecord> {
         listEquality.equals(e1?.daysRepeating, e2?.daysRepeating) &&
         e1?.completeDate == e2?.completeDate &&
         e1?.taskCategory == e2?.taskCategory &&
-        listEquality.equals(e1?.completeDateList, e2?.completeDateList);
+        listEquality.equals(e1?.completeDateList, e2?.completeDateList) &&
+        e1?.testDfctyLvl == e2?.testDfctyLvl;
   }
 
   @override
@@ -186,7 +195,8 @@ class TaskRecordDocumentEquality implements Equality<TaskRecord> {
         e?.daysRepeating,
         e?.completeDate,
         e?.taskCategory,
-        e?.completeDateList
+        e?.completeDateList,
+        e?.testDfctyLvl
       ]);
 
   @override

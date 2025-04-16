@@ -456,97 +456,101 @@ class _AstronautWidgetState extends State<AstronautWidget> {
                 ),
                 Align(
                   alignment: AlignmentDirectional(-19.82, -1.53),
-                  child: Container(
-                    width: 190.0,
-                    height: 190.0,
-                    decoration: BoxDecoration(
-                      color: Color(0x00FFFFFF),
-                    ),
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/shipStart.png',
-                            width: 200.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Opacity(
-                          opacity: FFAppState().redShipEquip.toDouble(),
-                          child: ClipRRect(
+                  child: Material(
+                    color: Colors.transparent,
+                    elevation: 0.0,
+                    child: Container(
+                      width: 190.0,
+                      height: 190.0,
+                      decoration: BoxDecoration(
+                        color: Color(0x00FFFFFF),
+                      ),
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
-                              'assets/images/shipRed.png',
+                              'assets/images/shipStart.png',
                               width: 200.0,
                               height: 200.0,
                               fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                        Opacity(
-                          opacity: FFAppState().blueShipEquip.toDouble(),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/shipDarkBlue.png',
-                              width: 200.0,
-                              height: 200.0,
-                              fit: BoxFit.cover,
+                          Opacity(
+                            opacity: FFAppState().redShipEquip.toDouble(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/shipRed.png',
+                                width: 200.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Opacity(
-                          opacity: FFAppState().greenShipEquip.toDouble(),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/shipGreen.png',
-                              width: 200.0,
-                              height: 200.0,
-                              fit: BoxFit.cover,
+                          Opacity(
+                            opacity: FFAppState().blueShipEquip.toDouble(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/shipDarkBlue.png',
+                                width: 200.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Opacity(
-                          opacity: FFAppState().yellowShipEquip.toDouble(),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/shipYellow.png',
-                              width: 200.0,
-                              height: 200.0,
-                              fit: BoxFit.cover,
+                          Opacity(
+                            opacity: FFAppState().greenShipEquip.toDouble(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/shipGreen.png',
+                                width: 200.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Opacity(
-                          opacity: FFAppState().purpleShipEquip.toDouble(),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/shipPurple.png',
-                              width: 200.0,
-                              height: 200.0,
-                              fit: BoxFit.cover,
+                          Opacity(
+                            opacity: FFAppState().yellowShipEquip.toDouble(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/shipYellow.png',
+                                width: 200.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Opacity(
-                          opacity: FFAppState().cyanShipEquip.toDouble(),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/shipBase.png',
-                              width: 200.0,
-                              height: 200.0,
-                              fit: BoxFit.cover,
+                          Opacity(
+                            opacity: FFAppState().purpleShipEquip.toDouble(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/shipPurple.png',
+                                width: 200.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          Opacity(
+                            opacity: FFAppState().cyanShipEquip.toDouble(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/shipBase.png',
+                                width: 200.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

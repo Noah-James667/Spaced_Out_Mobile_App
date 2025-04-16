@@ -221,7 +221,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -322,7 +322,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -423,7 +423,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -529,7 +529,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -630,7 +630,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -805,7 +805,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -906,7 +906,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -1007,7 +1007,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -1108,7 +1108,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -1209,7 +1209,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -1310,7 +1310,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -1411,7 +1411,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -1583,7 +1583,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x5C57636C),
-                                      borderRadius: BorderRadius.circular(24.0),
+                                      borderRadius: BorderRadius.circular(8.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
                                             .equipText,
@@ -1683,7 +1683,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x5C57636C),
-                                      borderRadius: BorderRadius.circular(24.0),
+                                      borderRadius: BorderRadius.circular(8.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
                                             .equipText,
@@ -1783,7 +1783,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x5C57636C),
-                                      borderRadius: BorderRadius.circular(24.0),
+                                      borderRadius: BorderRadius.circular(8.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
                                             .equipText,
@@ -1883,7 +1883,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x5C57636C),
-                                      borderRadius: BorderRadius.circular(24.0),
+                                      borderRadius: BorderRadius.circular(8.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
                                             .equipText,
@@ -1983,7 +1983,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x5C57636C),
-                                      borderRadius: BorderRadius.circular(24.0),
+                                      borderRadius: BorderRadius.circular(8.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
                                             .equipText,
@@ -2083,7 +2083,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                     height: 200.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x5C57636C),
-                                      borderRadius: BorderRadius.circular(24.0),
+                                      borderRadius: BorderRadius.circular(8.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
                                             .equipText,
@@ -2256,7 +2256,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -2356,7 +2356,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -2456,7 +2456,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -2562,7 +2562,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -2662,7 +2662,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
@@ -2762,7 +2762,7 @@ class _EquipPageWidgetState extends State<EquipPageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0x5C57636C),
                                         borderRadius:
-                                            BorderRadius.circular(24.0),
+                                            BorderRadius.circular(8.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .equipText,
