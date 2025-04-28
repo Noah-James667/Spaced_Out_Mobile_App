@@ -5,47 +5,64 @@ import '/components/task/task_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/calendar_page_walkthrough.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'calendar_model.dart';
-export 'calendar_model.dart';
+import 'package:provider/provider.dart';
+import 'calendar_page_model.dart';
+export 'calendar_page_model.dart';
 
-class CalendarWidget extends StatefulWidget {
-  const CalendarWidget({
+class CalendarPageWidget extends StatefulWidget {
+  const CalendarPageWidget({
     super.key,
     this.listcount,
   });
 
   final String? listcount;
 
-  static String routeName = 'calendar';
+  static String routeName = 'calendarPage';
   static String routePath = '/calendar';
 
   @override
-  State<CalendarWidget> createState() => _CalendarWidgetState();
+  State<CalendarPageWidget> createState() => _CalendarPageWidgetState();
 }
 
-class _CalendarWidgetState extends State<CalendarWidget>
+class _CalendarPageWidgetState extends State<CalendarPageWidget>
     with TickerProviderStateMixin {
-  late CalendarModel _model;
+  late CalendarPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CalendarModel());
+    _model = createModel(context, () => CalendarPageModel());
 
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'calendar'});
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'calendarPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('CALENDAR_PAGE_calendar_ON_INIT_STATE');
-      logFirebaseEvent('calendar_update_page_state');
+      logFirebaseEvent('CALENDAR_calendarPage_ON_INIT_STATE');
+      logFirebaseEvent('calendarPage_update_page_state');
       _model.selectedDate = getCurrentTimestamp;
       safeSetState(() {});
+      if (FFAppState().completedWalkthroughs.agendaPage == false) {
+        logFirebaseEvent('calendarPage_start_walkthrough');
+        safeSetState(() => _model.calendarPageWalkthroughController =
+            createPageWalkthrough(context));
+        _model.calendarPageWalkthroughController?.show(context: context);
+        logFirebaseEvent('calendarPage_update_app_state');
+        FFAppState().updateCompletedWalkthroughsStruct(
+          (e) => e..agendaPage = true,
+        );
+        safeSetState(() {});
+      } else {
+        return;
+      }
     });
 
     _model.tabBarController = TabController(
@@ -66,6 +83,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -99,14 +118,10 @@ class _CalendarWidgetState extends State<CalendarWidget>
                           useToggleButtonStyle: true,
                           isScrollable: true,
                           labelStyle: FlutterFlowTheme.of(context)
-                              .bodyMedium
+                              .bodyLarge
                               .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
+                                font: FlutterFlowTheme.of(context).bodyLarge,
                                 letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
                               ),
                           unselectedLabelStyle: TextStyle(),
                           labelColor: FlutterFlowTheme.of(context).primaryText,
@@ -127,12 +142,21 @@ class _CalendarWidgetState extends State<CalendarWidget>
                           tabs: [
                             Tab(
                               text: 'Agenda',
+                            ).addWalkthrough(
+                              tabFwhpiru7,
+                              _model.calendarPageWalkthroughController,
                             ),
                             Tab(
                               text: 'Past Due',
+                            ).addWalkthrough(
+                              tabKwyt5rmh,
+                              _model.calendarPageWalkthroughController,
                             ),
                             Tab(
                               text: 'Checked',
+                            ).addWalkthrough(
+                              tabRlu5sk6g,
+                              _model.calendarPageWalkthroughController,
                             ),
                           ],
                           controller: _model.tabBarController,
@@ -210,16 +234,11 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                     context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                  font: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMediumFamily,
+                                                                      .bodyMedium,
                                                                   letterSpacing:
                                                                       0.0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
                                                                 ),
                                                       ),
                                                     ),
@@ -235,17 +254,10 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
+                                                          font: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium,
                                                           letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                             ),
@@ -344,7 +356,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                     .transparent,
                                                             onTap: () async {
                                                               logFirebaseEvent(
-                                                                  'CALENDAR_PAGE_Container_p4eakhq6_ON_TAP');
+                                                                  'CALENDAR_Container_p4eakhq6_ON_TAP');
                                                               logFirebaseEvent(
                                                                   'Container_bottom_sheet');
                                                               await showModalBottomSheet(
@@ -418,7 +430,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                 onTap:
                                                                     () async {
                                                                   logFirebaseEvent(
-                                                                      'CALENDAR_PAGE_Row_iqe8g9pc_ON_TAP');
+                                                                      'CALENDAR_PAGE_PAGE_Row_iqe8g9pc_ON_TAP');
                                                                   logFirebaseEvent(
                                                                       'Row_bottom_sheet');
                                                                   await showModalBottomSheet(
@@ -489,9 +501,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                             textAlign:
                                                                                 TextAlign.start,
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  font: FlutterFlowTheme.of(context).bodyMedium,
                                                                                   letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                 ),
                                                                           ),
                                                                         ),
@@ -512,9 +523,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                               '[jm]',
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  font: FlutterFlowTheme.of(context).bodyMedium,
                                                                                   letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                 ),
                                                                           ),
                                                                         ),
@@ -532,9 +542,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyMedium
                                                                               .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                font: FlutterFlowTheme.of(context).bodyMedium,
                                                                                 letterSpacing: 0.0,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                               ),
                                                                         ),
                                                                       ),
@@ -694,9 +703,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              font: FlutterFlowTheme.of(context).bodyMedium,
                                                                               letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                             ),
                                                                       ),
                                                                     ),
@@ -714,15 +722,11 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                         context)
                                                                     .bodyMedium
                                                                     .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
+                                                                      font: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium,
                                                                       letterSpacing:
                                                                           0.0,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                     ),
                                                               ),
                                                             ),
@@ -810,36 +814,51 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                               ),
                                                                             ),
                                                                             child:
-                                                                                Column(
+                                                                                Row(
                                                                               mainAxisSize: MainAxisSize.max,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
-                                                                                Padding(
-                                                                                  padding: EdgeInsets.all(6.0),
-                                                                                  child: Text(
-                                                                                    listViewTaskRecord.taskName,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                          letterSpacing: 0.0,
-                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                  child: Text(
-                                                                                    dateTimeFormat(
-                                                                                      "jm",
-                                                                                      listViewTaskRecord.completeBy!,
-                                                                                      locale: FFLocalizations.of(context).languageCode,
+                                                                                Column(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Padding(
+                                                                                      padding: EdgeInsets.all(6.0),
+                                                                                      child: Text(
+                                                                                        listViewTaskRecord.taskName,
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                              font: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                              letterSpacing: 0.0,
+                                                                                            ),
+                                                                                      ),
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                          letterSpacing: 0.0,
-                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                    Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                      child: Text(
+                                                                                        dateTimeFormat(
+                                                                                          "jm",
+                                                                                          listViewTaskRecord.completeBy!,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
                                                                                         ),
-                                                                                  ),
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                              font: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                              letterSpacing: 0.0,
+                                                                                            ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
                                                                                 ),
+                                                                                if ((listViewTaskRecord.isComplete == true) && (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
+                                                                                  Padding(
+                                                                                    padding: EdgeInsets.all(10.0),
+                                                                                    child: Text(
+                                                                                      'Complete',
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            font: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                            letterSpacing: 0.0,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
                                                                               ],
                                                                             ),
                                                                           ),
@@ -870,7 +889,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                                 hoverColor: Colors.transparent,
                                                                                 highlightColor: Colors.transparent,
                                                                                 onTap: () async {
-                                                                                  logFirebaseEvent('CALENDAR_PAGE_Container_fq4ozqi1_ON_TAP');
+                                                                                  logFirebaseEvent('CALENDAR_Container_fq4ozqi1_ON_TAP');
                                                                                   logFirebaseEvent('Container_bottom_sheet');
                                                                                   await showModalBottomSheet(
                                                                                     isScrollControlled: true,
@@ -904,61 +923,6 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                                       color: Colors.black,
                                                                                       width: 2.0,
                                                                                     ),
-                                                                                  ),
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                    children: [
-                                                                                      Column(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                        children: [
-                                                                                          Padding(
-                                                                                            padding: EdgeInsets.all(6.0),
-                                                                                            child: Text(
-                                                                                              listViewTaskRecord.taskName.maybeHandleOverflow(
-                                                                                                maxChars: 25,
-                                                                                                replacement: '…',
-                                                                                              ),
-                                                                                              textAlign: TextAlign.start,
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                  ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                            child: Text(
-                                                                                              dateTimeFormat(
-                                                                                                "jm",
-                                                                                                listViewTaskRecord.completeBy!,
-                                                                                                locale: FFLocalizations.of(context).languageCode,
-                                                                                              ),
-                                                                                              maxLines: 1,
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                  ),
-                                                                                            ),
-                                                                                          ),
-                                                                                        ],
-                                                                                      ),
-                                                                                      if ((listViewTaskRecord.isComplete == true) && (functions.getNearestDate(listViewTaskRecord.completeDateList.toList()) == listViewTaskRecord.completeDate))
-                                                                                        Padding(
-                                                                                          padding: EdgeInsets.all(10.0),
-                                                                                          child: Text(
-                                                                                            'Complete',
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                    ],
                                                                                   ),
                                                                                 ),
                                                                               ),
@@ -1034,17 +998,10 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
+                                                          font: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium,
                                                           letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
                                                         ),
                                               ),
                                             ),
@@ -1117,7 +1074,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                             Colors.transparent,
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'CALENDAR_PAGE_Container_nozn4eem_ON_TAP');
+                                                              'CALENDAR_Container_nozn4eem_ON_TAP');
                                                           logFirebaseEvent(
                                                               'task_bottom_sheet');
                                                           await showModalBottomSheet(
@@ -1196,16 +1153,16 @@ class _CalendarWidgetState extends State<CalendarWidget>
                             KeepAliveWidgetWrapper(
                               builder: (context) => Padding(
                                 padding: EdgeInsets.all(12.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Column(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    child: SingleChildScrollView(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -1220,17 +1177,11 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
+                                                                .labelMedium,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMediumFamily),
                                                       ),
                                             ),
                                           ),
@@ -1299,7 +1250,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         logFirebaseEvent(
-                                                            'CALENDAR_PAGE_Container_93pjk6en_ON_TAP');
+                                                            'CALENDAR_Container_93pjk6en_ON_TAP');
                                                       },
                                                       child: TaskWidget(
                                                         key: Key(
@@ -1328,7 +1279,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                           ),
                                         ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -1346,4 +1297,15 @@ class _CalendarWidgetState extends State<CalendarWidget>
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.calendarPageWalkthroughController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

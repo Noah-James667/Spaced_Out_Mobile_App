@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'description_sheet_model.dart';
 export 'description_sheet_model.dart';
 
@@ -99,10 +98,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
             Text(
               'Task Details',
               style: FlutterFlowTheme.of(context).bodyLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                    font: FlutterFlowTheme.of(context).bodyLarge,
                     letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyLargeFamily),
                   ),
             ),
             Padding(
@@ -113,10 +110,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   'Task Title',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      font: FlutterFlowTheme.of(context).bodyMedium,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
               ),
             ),
@@ -141,11 +136,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                       'task description',
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          font: FlutterFlowTheme.of(context).bodyMedium,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                   ),
                 ),
@@ -160,11 +152,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   child: Text(
                     'difficulty: ',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          font: FlutterFlowTheme.of(context).bodyMedium,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                   ),
                 ),
@@ -172,11 +161,11 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   valueOrDefault<String>(
                     () {
                       if (widget.taskDoc?.difficultyLvl == 1) {
-                        return 'easy';
+                        return 'Easy';
                       } else if (widget.taskDoc?.difficultyLvl == 2) {
-                        return 'medium';
+                        return 'Medium';
                       } else if (widget.taskDoc?.difficultyLvl == 3) {
-                        return 'hard';
+                        return 'Hard';
                       } else {
                         return 'N/A';
                       }
@@ -184,12 +173,9 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                     '[diff lvl]',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        font: FlutterFlowTheme.of(context).bodyMedium,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.bold,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
                 ),
                 Padding(
@@ -197,11 +183,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                   child: Text(
                     'Type: ',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          font: FlutterFlowTheme.of(context).bodyMedium,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                   ),
                 ),
@@ -211,12 +194,9 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                     '[category]',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        font: FlutterFlowTheme.of(context).bodyMedium,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.bold,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
                 ),
               ],
@@ -233,11 +213,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                     child: Text(
                       'coins: ',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            font: FlutterFlowTheme.of(context).bodyMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                     ),
                   ),
@@ -257,12 +234,9 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                       '[diff lvl]',
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          font: FlutterFlowTheme.of(context).bodyMedium,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                   ),
                   Padding(
@@ -271,11 +245,8 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                     child: Text(
                       'XP: ',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            font: FlutterFlowTheme.of(context).bodyMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                     ),
                   ),
@@ -295,12 +266,9 @@ class _DescriptionSheetWidgetState extends State<DescriptionSheetWidget> {
                       '[diff lvl]',
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          font: FlutterFlowTheme.of(context).bodyMedium,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                   ),
                 ],

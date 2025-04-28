@@ -1,9 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'health_upgrade_display_widget.dart' show HealthUpgradeDisplayWidget;
+import 'terms_of_service_widget.dart' show TermsOfServiceWidget;
 import 'package:flutter/material.dart';
 
-class HealthUpgradeDisplayModel
-    extends FlutterFlowModel<HealthUpgradeDisplayWidget> {
+class TermsOfServiceModel extends FlutterFlowModel<TermsOfServiceWidget> {
   @override
   void initState(BuildContext context) {}
 

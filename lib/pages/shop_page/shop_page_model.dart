@@ -1,9 +1,11 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'shop_widget.dart' show ShopWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
+import 'shop_page_widget.dart' show ShopPageWidget;
 import 'package:flutter/material.dart';
 
-class ShopModel extends FlutterFlowModel<ShopWidget> {
+class ShopPageModel extends FlutterFlowModel<ShopPageWidget> {
   ///  Local state fields for this page.
   /// default state
   int baseAstroState = 1;
@@ -16,6 +18,7 @@ class ShopModel extends FlutterFlowModel<ShopWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? shopPageWalkthroughController;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController1;
   int carouselCurrentIndex1 = 1;
@@ -36,5 +39,7 @@ class ShopModel extends FlutterFlowModel<ShopWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    shopPageWalkthroughController?.finish();
+  }
 }

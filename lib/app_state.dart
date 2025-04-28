@@ -22,6 +22,18 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     secureStorage = FlutterSecureStorage();
     await _safeInitAsync(() async {
+      if (await secureStorage.read(key: 'ff_completedWalkthroughs') != null) {
+        try {
+          final serializedData =
+              await secureStorage.getString('ff_completedWalkthroughs') ?? '{}';
+          _completedWalkthroughs = WalkthroughsStruct.fromSerializableMap(
+              jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+    await _safeInitAsync(() async {
       if (await secureStorage.read(key: 'ff_appEnemy') != null) {
         try {
           final serializedData =
@@ -345,6 +357,32 @@ class FFAppState extends ChangeNotifier {
       _cyanShipAvail =
           await secureStorage.getDouble('ff_cyanShipAvail') ?? _cyanShipAvail;
     });
+    await _safeInitAsync(() async {
+      _batVis = await secureStorage.getInt('ff_batVis') ?? _batVis;
+    });
+    await _safeInitAsync(() async {
+      _wormVis = await secureStorage.getInt('ff_wormVis') ?? _wormVis;
+    });
+    await _safeInitAsync(() async {
+      _eyeVis = await secureStorage.getInt('ff_eyeVis') ?? _eyeVis;
+    });
+    await _safeInitAsync(() async {
+      _defaultTime = await secureStorage.read(key: 'ff_defaultTime') != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (await secureStorage.getInt('ff_defaultTime'))!)
+          : _defaultTime;
+    });
+    await _safeInitAsync(() async {
+      _enemyType = await secureStorage.getInt('ff_enemyType') ?? _enemyType;
+    });
+    await _safeInitAsync(() async {
+      _DmgBtnOpacity =
+          await secureStorage.getDouble('ff_DmgBtnOpacity') ?? _DmgBtnOpacity;
+    });
+    await _safeInitAsync(() async {
+      _ArmrBtnOpacity =
+          await secureStorage.getDouble('ff_ArmrBtnOpacity') ?? _ArmrBtnOpacity;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -353,6 +391,25 @@ class FFAppState extends ChangeNotifier {
   }
 
   late FlutterSecureStorage secureStorage;
+
+  WalkthroughsStruct _completedWalkthroughs =
+      WalkthroughsStruct.fromSerializableMap(jsonDecode('{}'));
+  WalkthroughsStruct get completedWalkthroughs => _completedWalkthroughs;
+  set completedWalkthroughs(WalkthroughsStruct value) {
+    _completedWalkthroughs = value;
+    secureStorage.setString('ff_completedWalkthroughs', value.serialize());
+  }
+
+  void deleteCompletedWalkthroughs() {
+    secureStorage.delete(key: 'ff_completedWalkthroughs');
+  }
+
+  void updateCompletedWalkthroughsStruct(
+      Function(WalkthroughsStruct) updateFn) {
+    updateFn(_completedWalkthroughs);
+    secureStorage.setString(
+        'ff_completedWalkthroughs', _completedWalkthroughs.serialize());
+  }
 
   List<DateTime> _highlightedDates = [];
   List<DateTime> get highlightedDates => _highlightedDates;
@@ -381,33 +438,6 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInHighlightedDates(int index, DateTime value) {
     highlightedDates.insert(index, value);
-  }
-
-  /// Value to determine which hat is made visible in game page, equip page (on
-  /// the astronaught) and in the shop (on the astronaught) - each hat should be
-  /// tied to a different value
-  int _equippedHat = 0;
-  int get equippedHat => _equippedHat;
-  set equippedHat(int value) {
-    _equippedHat = value;
-  }
-
-  /// Value to determine which boot is made visible in game page, equip page (on
-  /// the astronaught) and in the shop (on the astronaught) - each boot should
-  /// be tied to a different value
-  int _equippedBoot = 0;
-  int get equippedBoot => _equippedBoot;
-  set equippedBoot(int value) {
-    _equippedBoot = value;
-  }
-
-  /// Value to determine which weapon is made visible in game page, equip page
-  /// (on the astronaught) and in the shop (on the astronaught) - each weapon
-  /// should be tied to a different value
-  int _equippedWeapon = 0;
-  int get equippedWeapon => _equippedWeapon;
-  set equippedWeapon(int value) {
-    _equippedWeapon = value;
   }
 
   EnemyStruct _appEnemy = EnemyStruct.fromSerializableMap(jsonDecode(
@@ -1251,6 +1281,91 @@ class FFAppState extends ChangeNotifier {
 
   void deleteCyanShipAvail() {
     secureStorage.delete(key: 'ff_cyanShipAvail');
+  }
+
+  int _batVis = 0;
+  int get batVis => _batVis;
+  set batVis(int value) {
+    _batVis = value;
+    secureStorage.setInt('ff_batVis', value);
+  }
+
+  void deleteBatVis() {
+    secureStorage.delete(key: 'ff_batVis');
+  }
+
+  int _wormVis = 1;
+  int get wormVis => _wormVis;
+  set wormVis(int value) {
+    _wormVis = value;
+    secureStorage.setInt('ff_wormVis', value);
+  }
+
+  void deleteWormVis() {
+    secureStorage.delete(key: 'ff_wormVis');
+  }
+
+  int _eyeVis = 0;
+  int get eyeVis => _eyeVis;
+  set eyeVis(int value) {
+    _eyeVis = value;
+    secureStorage.setInt('ff_eyeVis', value);
+  }
+
+  void deleteEyeVis() {
+    secureStorage.delete(key: 'ff_eyeVis');
+  }
+
+  DateTime? _defaultTime = DateTime.fromMillisecondsSinceEpoch(1745643540000);
+  DateTime? get defaultTime => _defaultTime;
+  set defaultTime(DateTime? value) {
+    _defaultTime = value;
+    value != null
+        ? secureStorage.setInt('ff_defaultTime', value.millisecondsSinceEpoch)
+        : secureStorage.remove('ff_defaultTime');
+  }
+
+  void deleteDefaultTime() {
+    secureStorage.delete(key: 'ff_defaultTime');
+  }
+
+  bool _gameNotRunning = true;
+  bool get gameNotRunning => _gameNotRunning;
+  set gameNotRunning(bool value) {
+    _gameNotRunning = value;
+  }
+
+  int _enemyType = 1;
+  int get enemyType => _enemyType;
+  set enemyType(int value) {
+    _enemyType = value;
+    secureStorage.setInt('ff_enemyType', value);
+  }
+
+  void deleteEnemyType() {
+    secureStorage.delete(key: 'ff_enemyType');
+  }
+
+  double _DmgBtnOpacity = 0.5;
+  double get DmgBtnOpacity => _DmgBtnOpacity;
+  set DmgBtnOpacity(double value) {
+    _DmgBtnOpacity = value;
+    secureStorage.setDouble('ff_DmgBtnOpacity', value);
+  }
+
+  void deleteDmgBtnOpacity() {
+    secureStorage.delete(key: 'ff_DmgBtnOpacity');
+  }
+
+  double _ArmrBtnOpacity = 0.5;
+  double get ArmrBtnOpacity => _ArmrBtnOpacity;
+  set ArmrBtnOpacity(double value) {
+    _ArmrBtnOpacity = value;
+    secureStorage.setDouble('ff_ArmrBtnOpacity', value);
+  }
+
+  void deleteArmrBtnOpacity() {
+    secureStorage.delete(key: 'ff_ArmrBtnOpacity');
   }
 }
 

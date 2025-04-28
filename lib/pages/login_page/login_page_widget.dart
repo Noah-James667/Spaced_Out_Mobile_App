@@ -1,5 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/privacy_policy/privacy_policy_widget.dart';
+import '/components/terms_of_service/terms_of_service_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -99,26 +101,17 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelLargeFamily,
+                                      font: FlutterFlowTheme.of(context)
+                                          .labelLarge,
                                       letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLargeFamily),
                                     ),
                                 unselectedLabelStyle:
                                     FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily,
+                                          font: FlutterFlowTheme.of(context)
+                                              .bodyLarge,
                                           letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLargeFamily),
                                         ),
                                 indicatorColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -191,34 +184,54 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily:
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMediumFamily),
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
                                                       ),
                                               hintText: 'Email...',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelLargeFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLargeFamily),
+                                                                .titleSmall
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -267,19 +280,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                       .secondaryBackground,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .labelMedium
+                                                .titleSmall
                                                 .override(
-                                                  fontFamily:
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMediumFamily),
+                                                          .titleSmall
+                                                          .fontStyle,
                                                 ),
                                             maxLength: 40,
                                             maxLengthEnforcement:
@@ -319,36 +337,39 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               isDense: true,
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
+                                                                .titleSmall,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMediumFamily),
+                                                        fontWeight:
+                                                            FontWeight.normal,
                                                       ),
                                               hintText: 'Password...',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelLargeFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLargeFamily),
+                                                                .titleSmall
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -418,19 +439,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .labelMedium
+                                                .titleMedium
                                                 .override(
-                                                  fontFamily:
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMediumFamily),
+                                                          .titleMedium
+                                                          .fontStyle,
                                                 ),
                                             maxLength: 100,
                                             maxLengthEnforcement:
@@ -468,36 +494,39 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               isDense: true,
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
+                                                                .titleSmall,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMediumFamily),
+                                                        fontWeight:
+                                                            FontWeight.normal,
                                                       ),
                                               hintText: 'Confirm Password...',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelLargeFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLargeFamily),
+                                                                .titleSmall
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -567,19 +596,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .labelMedium
+                                                .titleMedium
                                                 .override(
-                                                  fontFamily:
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMediumFamily),
+                                                          .titleMedium
+                                                          .fontStyle,
                                                 ),
                                             maxLength: 100,
                                             maxLengthEnforcement:
@@ -665,6 +699,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                             lightBlueShip: false,
                                           ));
                                           logFirebaseEvent(
+                                              'signup_backend_call');
+
+                                          await currentUserReference!
+                                              .update(createUserRecordData(
+                                            xp: 5.0,
+                                          ));
+                                          logFirebaseEvent(
                                               'signup_update_app_state');
                                           FFAppState().smallSwordBought = 1.0;
                                           FFAppState().bigSwordBought = 1.0;
@@ -739,10 +780,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           FFAppState().cyanPantsAvail = 0.5;
                                           FFAppState().cyanShipAvail = 0.5;
                                           logFirebaseEvent(
+                                              'signup_update_app_state');
+                                          FFAppState()
+                                              .updateCompletedWalkthroughsStruct(
+                                            (e) => e
+                                              ..tasksPage = false
+                                              ..equipPage = false
+                                              ..shopPage = false
+                                              ..gamePage = false
+                                              ..agendaPage = false,
+                                          );
+                                          FFAppState().ArmrBtnOpacity = 0.5;
+                                          FFAppState().DmgBtnOpacity = 0.5;
+                                          safeSetState(() {});
+                                          logFirebaseEvent(
                                               'signup_navigate_to');
 
                                           context.goNamedAuth(
-                                            TasksWidget.routeName,
+                                            LoadingPageWidget.routeName,
                                             context.mounted,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
@@ -770,16 +825,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                   context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily:
+                                                font:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
+                                                        .bodyMedium,
                                                 letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
                                               ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(
@@ -814,34 +863,35 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
+                                                                .labelMedium,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMediumFamily),
                                                       ),
                                               hintText: 'Email...',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelLargeFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLargeFamily),
+                                                                .titleSmall
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -888,19 +938,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                       .secondaryBackground,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .labelMedium
+                                                .titleSmall
                                                 .override(
-                                                  fontFamily:
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMediumFamily),
+                                                          .titleSmall
+                                                          .fontStyle,
                                                 ),
                                             maxLength: 40,
                                             buildCounter: (context,
@@ -938,34 +993,35 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
+                                                                .labelMedium,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMediumFamily),
                                                       ),
                                               hintText: 'Password...',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelLargeFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLargeFamily),
+                                                                .titleSmall
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -1035,19 +1091,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .labelMedium
+                                                .titleSmall
                                                 .override(
-                                                  fontFamily:
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMediumFamily),
+                                                          .titleSmall
+                                                          .fontStyle,
                                                 ),
                                             maxLength: 100,
                                             buildCounter: (context,
@@ -1118,17 +1179,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderSide: BorderSide(
@@ -1156,13 +1210,131 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                   child: Text(
                     'Spaced Out',
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyLargeFamily,
+                          font: FlutterFlowTheme.of(context).bodyLarge,
                           fontSize: 28.0,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyLargeFamily),
                         ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.97),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FFButtonWidget(
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'LOGIN_PAGE_PAGE_TERMS_BTN_ON_TAP');
+                              logFirebaseEvent('Button_bottom_sheet');
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                enableDrag: false,
+                                context: context,
+                                builder: (context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    },
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: Container(
+                                        height: 600.0,
+                                        child: TermsOfServiceWidget(
+                                          infoText:
+                                              'Spaced Out - Terms of ServiceLast updated: 4/22/2025Hey there! Welcome to Spaced Out, the to-do list that\'s as fun as it is productive! By using the app, you’re agreeing to these Terms of Service. If that’s cool with you, let’s get started!1. What’s Spaced Out All About?Spaced Out is a free, gamified to-do list app designed to help you tackle your tasks while having a little fun. Whether you\'re a teen trying to get things done or a productivity nerd trying to stay on top of your game, we’ve got you covered.2. Who Can Use Spaced Out?We’re not picky when it comes to age—Spaced Out is for anyone who wants to be more productive and have fun doing it! However, if you\'re under 13, we suggest you use the app with some parental guidance.3. Your Account, Your RulesTo get started, you’ll need an email and a password. We only store your email and the tasks you create—your password is encrypted, so it’s safe with us! Just make sure you keep your login info secret. You’re in charge of your account, so if anything funky happens, it’s on you to keep it safe.4. Your Tasks = Your StuffWe love that you can create your own tasks and reminders—after all, they’re yours! Spaced Out doesn’t peek into your tasks or use them for anything sneaky. We just store them securely so you can keep track of everything.But hey, please don’t use Spaced Out to store anything shady or illegal. We want this to be a safe, positive space for all!5. Your Privacy is ImportantWe totally get that privacy matters. We only collect your email, your encrypted password, and your tasks—nothing else. And just so you know, we’ll never sell your data to anyone. Your info stays with you.For more deets, check out our Privacy Policy.6. Updates and ChangesWe might make some changes to Spaced Out every now and then, whether it’s adding new features or tweaking the ones you love. Don’t worry, we’ll try to give you a heads-up if it’s something big! Small updates? Those might sneak by without notice.7. Can You Leave? Of Course!If you ever want to delete your account, no hard feelings! You can do that at any time. We also reserve the right to pause or end accounts if they’re breaking the rules or causing trouble.8. We’re Not Responsible for EverythingSpaced Out is provided “as is.” We do our best to keep everything running smoothly, but we’re not responsible for any data loss or random glitches that may pop up. Use the app at your own risk!9. Questions? Let’s Chat!Got any questions or just want to chat? Reach out to us at task.nova.dev@gmail.com. We’re always here to help!',
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).then((value) => safeSetState(() {}));
+                            },
+                            text: 'Terms',
+                            options: FFButtonOptions(
+                              height: 29.3,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: Color(0x0039DEEF),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    font:
+                                        FlutterFlowTheme.of(context).bodySmall,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 8.0,
+                                    letterSpacing: 0.0,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'LOGIN_PRIVACY_POLICY_BTN_ON_TAP');
+                              logFirebaseEvent('Button_bottom_sheet');
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                enableDrag: false,
+                                context: context,
+                                builder: (context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    },
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: Container(
+                                        height: 600.0,
+                                        child: PrivacyPolicyWidget(
+                                          infoText: '',
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).then((value) => safeSetState(() {}));
+                            },
+                            text: 'Privacy Policy',
+                            options: FFButtonOptions(
+                              height: 29.3,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: Color(0x0039DEEF),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    font:
+                                        FlutterFlowTheme.of(context).bodySmall,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 8.0,
+                                    letterSpacing: 0.0,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],

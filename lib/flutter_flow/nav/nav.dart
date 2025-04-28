@@ -10,6 +10,7 @@ import '/auth/base_auth_user_provider.dart';
 import '/backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
 import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -94,23 +95,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginPageWidget(),
         ),
         FFRoute(
-          name: ShopWidget.routeName,
-          path: ShopWidget.routePath,
-          builder: (context, params) =>
-              params.isEmpty ? NavBarPage(initialPage: 'shop') : ShopWidget(),
-        ),
-        FFRoute(
-          name: TasksWidget.routeName,
-          path: TasksWidget.routePath,
-          builder: (context, params) =>
-              params.isEmpty ? NavBarPage(initialPage: 'tasks') : TasksWidget(),
-        ),
-        FFRoute(
-          name: CalendarWidget.routeName,
-          path: CalendarWidget.routePath,
+          name: ShopPageWidget.routeName,
+          path: ShopPageWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'calendar')
-              : CalendarWidget(
+              ? NavBarPage(initialPage: 'shopPage')
+              : ShopPageWidget(),
+        ),
+        FFRoute(
+          name: TasksPageWidget.routeName,
+          path: TasksPageWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'tasksPage')
+              : TasksPageWidget(),
+        ),
+        FFRoute(
+          name: CalendarPageWidget.routeName,
+          path: CalendarPageWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'calendarPage')
+              : CalendarPageWidget(
                   listcount: params.getParam(
                     'listcount',
                     ParamType.String,
@@ -322,7 +325,7 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: Colors.transparent,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                   child: Image.asset(
                     'assets/images/check.gif',
                     fit: BoxFit.contain,

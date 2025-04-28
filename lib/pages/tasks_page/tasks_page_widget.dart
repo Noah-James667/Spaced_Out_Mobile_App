@@ -17,24 +17,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
-import 'tasks_model.dart';
-export 'tasks_model.dart';
+import 'package:provider/provider.dart';
+import 'tasks_page_model.dart';
+export 'tasks_page_model.dart';
 
-class TasksWidget extends StatefulWidget {
-  const TasksWidget({super.key});
+class TasksPageWidget extends StatefulWidget {
+  const TasksPageWidget({super.key});
 
-  static String routeName = 'tasks';
+  static String routeName = 'tasksPage';
   static String routePath = '/tasks';
 
   @override
-  State<TasksWidget> createState() => _TasksWidgetState();
+  State<TasksPageWidget> createState() => _TasksPageWidgetState();
 }
 
-class _TasksWidgetState extends State<TasksWidget>
+class _TasksPageWidgetState extends State<TasksPageWidget>
     with TickerProviderStateMixin {
-  late TasksModel _model;
+  late TasksPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -43,16 +43,25 @@ class _TasksWidgetState extends State<TasksWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TasksModel());
+    _model = createModel(context, () => TasksPageModel());
 
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'tasks'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'tasksPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('TASKS_PAGE_tasks_ON_INIT_STATE');
-      logFirebaseEvent('tasks_start_walkthrough');
-      safeSetState(() => _model.tasksPagesWalkthroughController =
-          createPageWalkthrough(context));
-      _model.tasksPagesWalkthroughController?.show(context: context);
+      logFirebaseEvent('TASKS_PAGE_PAGE_tasksPage_ON_INIT_STATE');
+      if (FFAppState().completedWalkthroughs.tasksPage == false) {
+        logFirebaseEvent('tasksPage_start_walkthrough');
+        safeSetState(() => _model.tasksPagesWalkthroughController =
+            createPageWalkthrough(context));
+        _model.tasksPagesWalkthroughController?.show(context: context);
+        logFirebaseEvent('tasksPage_update_app_state');
+        FFAppState().updateCompletedWalkthroughsStruct(
+          (e) => e..tasksPage = !FFAppState().completedWalkthroughs.tasksPage,
+        );
+        safeSetState(() {});
+      } else {
+        return;
+      }
     });
 
     _model.tabBarController = TabController(
@@ -121,6 +130,8 @@ class _TasksWidgetState extends State<TasksWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -131,7 +142,7 @@ class _TasksWidgetState extends State<TasksWidget>
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            logFirebaseEvent('TASKS_PAGE_createTaskBtn_ON_TAP');
+            logFirebaseEvent('TASKS_PAGE_PAGE_createTaskBtn_ON_TAP');
             logFirebaseEvent('createTaskBtn_bottom_sheet');
             await showModalBottomSheet(
               isScrollControlled: true,
@@ -147,7 +158,7 @@ class _TasksWidgetState extends State<TasksWidget>
                   child: Padding(
                     padding: MediaQuery.viewInsetsOf(context),
                     child: Container(
-                      height: 600.0,
+                      height: 650.0,
                       child: CreateTaskWidget(),
                     ),
                   ),
@@ -215,7 +226,7 @@ class _TasksWidgetState extends State<TasksWidget>
                           ),
                           onPressed: () async {
                             logFirebaseEvent(
-                                'TASKS_PAGE_login_rounded_ICN_ON_TAP');
+                                'TASKS_PAGE_PAGE_login_rounded_ICN_ON_TAP');
                             logFirebaseEvent('IconButton_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             await authManager.signOut();
@@ -242,7 +253,8 @@ class _TasksWidgetState extends State<TasksWidget>
                             size: 24.0,
                           ),
                           onPressed: () async {
-                            logFirebaseEvent('TASKS_PAGE_delete_ICN_ON_TAP');
+                            logFirebaseEvent(
+                                'TASKS_PAGE_PAGE_delete_ICN_ON_TAP');
                             logFirebaseEvent('IconButton_alert_dialog');
                             var confirmDialogResponse = await showDialog<bool>(
                                   context: context,
@@ -329,7 +341,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                   ),
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'TASKS_PAGE_person_ICN_ON_TAP');
+                                        'TASKS_PAGE_PAGE_person_ICN_ON_TAP');
                                     logFirebaseEvent('IconButton_bottom_sheet');
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
@@ -368,16 +380,12 @@ class _TasksWidgetState extends State<TasksWidget>
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLargeFamily,
-                                          color: Colors.white,
+                                          font: FlutterFlowTheme.of(context)
+                                              .labelLarge,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
                                           fontSize: 24.0,
                                           letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLargeFamily),
                                         ),
                                   ),
                                 ),
@@ -392,7 +400,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     logFirebaseEvent(
-                                        'TASKS_PAGE_Image_xaj78ly1_ON_TAP');
+                                        'TASKS_PAGE_PAGE_Image_xaj78ly1_ON_TAP');
                                     logFirebaseEvent('Image_widget_animation');
                                     if (animationsMap[
                                             'imageOnActionTriggerAnimation'] !=
@@ -448,14 +456,10 @@ class _TasksWidgetState extends State<TasksWidget>
                           style: FlutterFlowTheme.of(context)
                               .bodyLarge
                               .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                color: Colors.white,
+                                font: FlutterFlowTheme.of(context).bodyLarge,
+                                color: FlutterFlowTheme.of(context).alternate,
                                 fontSize: 20.0,
                                 letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
                               ),
                         ),
                       ],
@@ -484,26 +488,18 @@ class _TasksWidgetState extends State<TasksWidget>
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
+                                    font:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
                                   ),
                               unselectedLabelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
+                                    font:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
                                   ),
                               indicatorColor:
                                   FlutterFlowTheme.of(context).primary,
@@ -550,11 +546,6 @@ class _TasksWidgetState extends State<TasksWidget>
                                                       isEqualTo: false,
                                                     )
                                                     .where(
-                                                      'complete_by',
-                                                      isGreaterThan:
-                                                          getCurrentTimestamp,
-                                                    )
-                                                    .where(
                                                       'is_repeating',
                                                       isEqualTo: false,
                                                     ),
@@ -564,13 +555,13 @@ class _TasksWidgetState extends State<TasksWidget>
                                             if (!snapshot.hasData) {
                                               return Center(
                                                 child: SizedBox(
-                                                  width: 40.0,
-                                                  height: 40.0,
-                                                  child: SpinKitCubeGrid(
+                                                  width: 25.0,
+                                                  height: 25.0,
+                                                  child: SpinKitRipple(
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primary,
-                                                    size: 40.0,
+                                                    size: 25.0,
                                                   ),
                                                 ),
                                               );
@@ -601,7 +592,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                                       Colors.transparent,
                                                   onTap: () async {
                                                     logFirebaseEvent(
-                                                        'TASKS_PAGE_Container_39mto8a7_ON_TAP');
+                                                        'TASKS_Container_39mto8a7_ON_TAP');
                                                     logFirebaseEvent(
                                                         'task_bottom_sheet');
                                                     await showModalBottomSheet(
@@ -644,7 +635,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                                     taskDoc: listViewTaskRecord,
                                                     checkAction: () async {
                                                       logFirebaseEvent(
-                                                          'TASKS_PAGE_Container_39mto8a7_CALLBACK');
+                                                          'TASKS_Container_39mto8a7_CALLBACK');
                                                       logFirebaseEvent(
                                                           'task_backend_call');
 
@@ -692,11 +683,6 @@ class _TasksWidgetState extends State<TasksWidget>
                                                   .where(
                                                     'is_repeating',
                                                     isEqualTo: true,
-                                                  )
-                                                  .where(
-                                                    'complete_by',
-                                                    isGreaterThan:
-                                                        getCurrentTimestamp,
                                                   ),
                                         ),
                                         builder: (context, snapshot) {
@@ -738,7 +724,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'TASKS_PAGE_Container_kkqspky3_ON_TAP');
+                                                      'TASKS_Container_kkqspky3_ON_TAP');
                                                   logFirebaseEvent(
                                                       'duplicateTask_bottom_sheet');
                                                   await showModalBottomSheet(
@@ -779,7 +765,7 @@ class _TasksWidgetState extends State<TasksWidget>
                                                   taskDoc: listViewTaskRecord,
                                                   checkAction: () async {
                                                     logFirebaseEvent(
-                                                        'TASKS_PAGE_Container_kkqspky3_CALLBACK');
+                                                        'TASKS_Container_kkqspky3_CALLBACK');
                                                     logFirebaseEvent(
                                                         'duplicateTask_backend_call');
 

@@ -91,7 +91,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         color: Colors.black,
         contents: [
           TargetContent(
-            align: ContentAlign.top,
+            align: ContentAlign.bottom,
             builder: (context, __) => WalkthroughInfoWidget(
               infoText: 'Tap here to see and make changes to your account ',
             ),

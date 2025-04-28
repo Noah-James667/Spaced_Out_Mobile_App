@@ -27,29 +27,32 @@ import '/purchase_components/purchase_wizard_hat/purchase_wizard_hat_widget.dart
 import '/purchase_components/purchase_yellow_pants/purchase_yellow_pants_widget.dart';
 import '/purchase_components/purchase_yellow_ship/purchase_yellow_ship_widget.dart';
 import '/purchase_components/purchase_zapy_gun/purchase_zapy_gun_widget.dart';
+import '/walkthroughs/shop_page_walkthrough.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'shop_model.dart';
-export 'shop_model.dart';
+import 'shop_page_model.dart';
+export 'shop_page_model.dart';
 
-class ShopWidget extends StatefulWidget {
-  const ShopWidget({super.key});
+class ShopPageWidget extends StatefulWidget {
+  const ShopPageWidget({super.key});
 
-  static String routeName = 'shop';
+  static String routeName = 'shopPage';
   static String routePath = '/shop';
 
   @override
-  State<ShopWidget> createState() => _ShopWidgetState();
+  State<ShopPageWidget> createState() => _ShopPageWidgetState();
 }
 
-class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
-  late ShopModel _model;
+class _ShopPageWidgetState extends State<ShopPageWidget>
+    with TickerProviderStateMixin {
+  late ShopPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -58,15 +61,28 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ShopModel());
+    _model = createModel(context, () => ShopPageModel());
 
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'shop'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'shopPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('SHOP_PAGE_shop_ON_INIT_STATE');
-      logFirebaseEvent('shop_update_page_state');
+      logFirebaseEvent('SHOP_PAGE_PAGE_shopPage_ON_INIT_STATE');
+      logFirebaseEvent('shopPage_update_page_state');
       _model.baseImageTest = _model.baseImageTest;
       safeSetState(() {});
+      if (FFAppState().completedWalkthroughs.shopPage == false) {
+        logFirebaseEvent('shopPage_start_walkthrough');
+        safeSetState(() => _model.shopPageWalkthroughController =
+            createPageWalkthrough(context));
+        _model.shopPageWalkthroughController?.show(context: context);
+        logFirebaseEvent('shopPage_update_app_state');
+        FFAppState().updateCompletedWalkthroughsStruct(
+          (e) => e..shopPage = true,
+        );
+        safeSetState(() {});
+      } else {
+        return;
+      }
     });
 
     animationsMap.addAll({
@@ -187,6 +203,10 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                               height: 100.0,
                                               fit: BoxFit.cover,
                                             ),
+                                          ).addWalkthrough(
+                                            imageNdeol46e,
+                                            _model
+                                                .shopPageWalkthroughController,
                                           ),
                                         ),
                                         Container(
@@ -229,19 +249,17 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMediumFamily,
+                                                                .bodyMedium,
                                                         fontSize: 18.0,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
                                                       ),
+                                                ).addWalkthrough(
+                                                  textOcd5ynqh,
+                                                  _model
+                                                      .shopPageWalkthroughController,
                                                 ),
                                                 AuthUserStreamWidget(
                                                   builder: (context) => Text(
@@ -261,18 +279,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
+                                                          font: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium,
                                                           fontSize: 18.0,
                                                           letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
                                                         ),
                                                   ),
                                                 ),
@@ -326,20 +337,14 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
-                                                fontFamily:
+                                                font:
                                                     FlutterFlowTheme.of(context)
-                                                        .titleMediumFamily,
+                                                        .titleMedium,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .shopText,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.normal,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .titleMediumFamily),
                                               ),
                                         ),
                                       ),
@@ -397,7 +402,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -444,18 +449,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -501,7 +500,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -548,23 +547,21 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),
+                                          ).addWalkthrough(
+                                            buttonRcgsvgnn,
+                                            _model
+                                                .shopPageWalkthroughController,
                                           ),
                                         ],
                                       ),
@@ -611,7 +608,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'SHOP_PAGE__BTN_ON_TAP');
+                                                    'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Button_bottom_sheet');
                                                 await showModalBottomSheet(
@@ -660,18 +657,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
                                                         .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
+                                                          font: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .titleSmall,
                                                           color: Colors.white,
                                                           letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
                                                         ),
                                                 elevation: 0.0,
                                                 borderRadius:
@@ -718,7 +708,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -765,18 +755,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -822,7 +806,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -869,18 +853,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -933,17 +911,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMediumFamily,
+                                            font: FlutterFlowTheme.of(context)
+                                                .titleMedium,
                                             color: FlutterFlowTheme.of(context)
                                                 .shopText,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.normal,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleMediumFamily),
                                           ),
                                     ),
                                   ),
@@ -998,7 +971,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -1045,18 +1018,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -1107,7 +1074,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                               child: FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'SHOP_PAGE_BUTTON_BTN_ON_TAP');
+                                                      'SHOP_PAGE_PAGE_BUTTON_BTN_ON_TAP');
                                                   logFirebaseEvent(
                                                       'Button_bottom_sheet');
                                                   await showModalBottomSheet(
@@ -1154,24 +1121,17 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        font:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                   elevation: 0.0,
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -1219,7 +1179,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -1266,18 +1226,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -1323,7 +1277,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -1370,18 +1324,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -1427,7 +1375,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -1474,18 +1422,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -1531,7 +1473,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -1578,18 +1520,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -1635,7 +1571,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -1682,18 +1618,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -1746,17 +1676,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMediumFamily,
+                                            font: FlutterFlowTheme.of(context)
+                                                .titleMedium,
                                             color: FlutterFlowTheme.of(context)
                                                 .shopText,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.normal,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleMediumFamily),
                                           ),
                                     ),
                                   ),
@@ -1808,7 +1733,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE__BTN_ON_TAP');
+                                                'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_bottom_sheet');
                                             await showModalBottomSheet(
@@ -1856,18 +1781,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmallFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall,
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderRadius:
@@ -1912,7 +1830,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE__BTN_ON_TAP');
+                                                'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_bottom_sheet');
                                             await showModalBottomSheet(
@@ -1960,18 +1878,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmallFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall,
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderRadius:
@@ -2016,7 +1927,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE__BTN_ON_TAP');
+                                                'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_bottom_sheet');
                                             await showModalBottomSheet(
@@ -2064,18 +1975,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmallFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall,
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderRadius:
@@ -2120,7 +2024,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE__BTN_ON_TAP');
+                                                'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_bottom_sheet');
                                             await showModalBottomSheet(
@@ -2168,18 +2072,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmallFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall,
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderRadius:
@@ -2224,7 +2121,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE__BTN_ON_TAP');
+                                                'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_bottom_sheet');
                                             await showModalBottomSheet(
@@ -2272,18 +2169,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmallFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall,
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderRadius:
@@ -2328,7 +2218,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'SHOP_PAGE__BTN_ON_TAP');
+                                                'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_bottom_sheet');
                                             await showModalBottomSheet(
@@ -2376,18 +2266,11 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmallFamily,
+                                                      font: FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall,
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 0.0,
                                             borderRadius:
@@ -2441,20 +2324,13 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                         style: FlutterFlowTheme.of(context)
                                             .titleMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMediumFamily,
+                                              font: FlutterFlowTheme.of(context)
+                                                  .titleMedium,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .shopText,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleMediumFamily),
                                             ),
                                       ),
                                     ),
@@ -2507,7 +2383,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -2554,18 +2430,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -2607,7 +2477,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -2654,18 +2524,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -2707,7 +2571,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -2754,18 +2618,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -2807,7 +2665,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -2854,18 +2712,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -2907,7 +2759,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -2954,18 +2806,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -3007,7 +2853,7 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'SHOP_PAGE__BTN_ON_TAP');
+                                                  'SHOP_PAGE_PAGE__BTN_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_bottom_sheet');
                                               await showModalBottomSheet(
@@ -3054,18 +2900,12 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
-                                                        fontFamily:
+                                                        font:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmallFamily,
+                                                                .titleSmall,
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 0.0,
                                               borderRadius:
@@ -3109,4 +2949,15 @@ class _ShopWidgetState extends State<ShopWidget> with TickerProviderStateMixin {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.shopPageWalkthroughController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

@@ -375,9 +375,33 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
         safeSetState(() {});
       }
 
+      logFirebaseEvent('loadingPage_update_app_state');
+      FFAppState().updateAppEnemyStruct(
+        (e) => e
+          ..eHealth = 100.0
+          ..eDmg = 10.0
+          ..eArmr = 2.0
+          ..eLvl = 1,
+      );
+      FFAppState().updateAppPlayerStruct(
+        (e) => e
+          ..pHealth = 100.0
+          ..pDmg = 10.0
+          ..pArmr = 2.0,
+      );
+      FFAppState().updateAppUpgradeStruct(
+        (e) => e
+          ..uHlthCost = null
+          ..uArmrCost = null
+          ..uDmgCost = null
+          ..uHlthLvl = 1
+          ..uArmrLvl = 1
+          ..uDmgLvl = 1,
+      );
+      safeSetState(() {});
       logFirebaseEvent('loadingPage_navigate_to');
 
-      context.pushNamed(TasksWidget.routeName);
+      context.pushNamed(TasksPageWidget.routeName);
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

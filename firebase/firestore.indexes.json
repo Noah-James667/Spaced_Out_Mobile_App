@@ -9,28 +9,6 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "is_complete",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "is_repeating",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "complete_by",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "task",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "user",
-          "order": "ASCENDING"
-        },
-        {
           "fieldPath": "complete_date_list",
           "arrayConfig": "CONTAINS"
         },

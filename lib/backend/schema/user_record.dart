@@ -45,11 +45,6 @@ class UserRecord extends FirestoreRecord {
   int get coins => _coins ?? 0;
   bool hasCoins() => _coins != null;
 
-  // "xp" field.
-  int? _xp;
-  int get xp => _xp ?? 0;
-  bool hasXp() => _xp != null;
-
   // "display_name" field.
   String? _displayName;
   String get displayName => _displayName ?? '';
@@ -70,6 +65,11 @@ class UserRecord extends FirestoreRecord {
   int get taskAdded => _taskAdded ?? 0;
   bool hasTaskAdded() => _taskAdded != null;
 
+  // "xp" field.
+  double? _xp;
+  double get xp => _xp ?? 0.0;
+  bool hasXp() => _xp != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -77,11 +77,11 @@ class UserRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _coins = castToType<int>(snapshotData['coins']);
-    _xp = castToType<int>(snapshotData['xp']);
     _displayName = snapshotData['display_name'] as String?;
     _damage = castToType<double>(snapshotData['damage']);
     _damageUpCost = castToType<int>(snapshotData['damage_up_cost']);
     _taskAdded = castToType<int>(snapshotData['task_added']);
+    _xp = castToType<double>(snapshotData['xp']);
   }
 
   static CollectionReference get collection =>
@@ -124,11 +124,11 @@ Map<String, dynamic> createUserRecordData({
   DateTime? createdTime,
   String? phoneNumber,
   int? coins,
-  int? xp,
   String? displayName,
   double? damage,
   int? damageUpCost,
   int? taskAdded,
+  double? xp,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -138,11 +138,11 @@ Map<String, dynamic> createUserRecordData({
       'created_time': createdTime,
       'phone_number': phoneNumber,
       'coins': coins,
-      'xp': xp,
       'display_name': displayName,
       'damage': damage,
       'damage_up_cost': damageUpCost,
       'task_added': taskAdded,
+      'xp': xp,
     }.withoutNulls,
   );
 
@@ -160,11 +160,11 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.coins == e2?.coins &&
-        e1?.xp == e2?.xp &&
         e1?.displayName == e2?.displayName &&
         e1?.damage == e2?.damage &&
         e1?.damageUpCost == e2?.damageUpCost &&
-        e1?.taskAdded == e2?.taskAdded;
+        e1?.taskAdded == e2?.taskAdded &&
+        e1?.xp == e2?.xp;
   }
 
   @override
@@ -175,11 +175,11 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e?.createdTime,
         e?.phoneNumber,
         e?.coins,
-        e?.xp,
         e?.displayName,
         e?.damage,
         e?.damageUpCost,
-        e?.taskAdded
+        e?.taskAdded,
+        e?.xp
       ]);
 
   @override

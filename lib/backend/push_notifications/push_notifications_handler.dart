@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'serialization_util.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
   @override
   Widget build(BuildContext context) => _loading
       ? Container(
-          color: Colors.transparent,
+          color: FlutterFlowTheme.of(context).primaryBackground,
           child: Image.asset(
             'assets/images/check.gif',
             fit: BoxFit.contain,
@@ -111,9 +112,9 @@ class ParameterData {
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
   'loginPage': ParameterData.none(),
-  'shop': ParameterData.none(),
-  'tasks': ParameterData.none(),
-  'calendar': (data) async => ParameterData(
+  'shopPage': ParameterData.none(),
+  'tasksPage': ParameterData.none(),
+  'calendarPage': (data) async => ParameterData(
         allParams: {
           'listcount': getParameter<String>(data, 'listcount'),
         },

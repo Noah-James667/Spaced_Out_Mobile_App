@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'walkthrough_info_model.dart';
 export 'walkthrough_info_model.dart';
 
@@ -66,10 +65,8 @@ class _WalkthroughInfoWidgetState extends State<WalkthroughInfoWidget> {
               ),
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                    font: FlutterFlowTheme.of(context).bodyMedium,
                     letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyMediumFamily),
                   ),
             ),
           ],

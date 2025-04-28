@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'change_password_model.dart';
 export 'change_password_model.dart';
 
@@ -73,10 +72,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               Text(
                 'Change Password',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                      font: FlutterFlowTheme.of(context).bodyLarge,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
             ],
@@ -98,26 +95,18 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       obscureText: !_model.newPasswordVisibility,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
-                                ),
-                        hintText: 'Password...',
-                        hintStyle: FlutterFlowTheme.of(context)
-                            .labelLarge
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .labelMedium
                             .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).labelLargeFamily,
+                              font: FlutterFlowTheme.of(context).labelMedium,
                               letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .labelLargeFamily),
                             ),
+                        hintText: 'Password...',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  font: FlutterFlowTheme.of(context).labelLarge,
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
@@ -165,11 +154,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         ),
                       ),
                       style: FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelMediumFamily,
+                            font: FlutterFlowTheme.of(context).labelMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelMediumFamily),
                           ),
                       maxLength: 100,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -204,26 +190,18 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       obscureText: !_model.newPasswordConfirmVisibility,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
-                                ),
-                        hintText: 'Confirm Password...',
-                        hintStyle: FlutterFlowTheme.of(context)
-                            .labelLarge
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .labelMedium
                             .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).labelLargeFamily,
+                              font: FlutterFlowTheme.of(context).labelMedium,
                               letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .labelLargeFamily),
                             ),
+                        hintText: 'Confirm Password...',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  font: FlutterFlowTheme.of(context).labelLarge,
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
@@ -271,11 +249,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         ),
                       ),
                       style: FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelMediumFamily,
+                            font: FlutterFlowTheme.of(context).labelMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelMediumFamily),
                           ),
                       maxLength: 100,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -331,7 +306,25 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         );
                       },
                     );
+                    return;
                   }
+
+                  logFirebaseEvent('Button_show_snack_bar');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Password changed!',
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              font: FlutterFlowTheme.of(context).bodyLarge,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              letterSpacing: 0.0,
+                            ),
+                        textAlign: TextAlign.center,
+                      ),
+                      duration: Duration(milliseconds: 4000),
+                      backgroundColor: FlutterFlowTheme.of(context).success,
+                    ),
+                  );
                 },
                 text: 'Confirm',
                 options: FFButtonOptions(
@@ -342,11 +335,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        font: FlutterFlowTheme.of(context).bodyMedium,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(

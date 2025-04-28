@@ -7,11 +7,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'edit_task_model.dart';
 export 'edit_task_model.dart';
@@ -145,10 +143,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
               Text(
                 'Edit task',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                      font: FlutterFlowTheme.of(context).bodyLarge,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
               Container(
@@ -161,22 +157,15 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   decoration: InputDecoration(
                     isDense: true,
                     labelText: 'Task Name',
-                    labelStyle: FlutterFlowTheme.of(context)
-                        .labelMedium
-                        .override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).labelMediumFamily,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).labelMediumFamily),
-                        ),
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              font: FlutterFlowTheme.of(context).labelMedium,
+                              letterSpacing: 0.0,
+                            ),
                     hintText: 'Task Name',
                     hintStyle: FlutterFlowTheme.of(context).labelLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).labelLargeFamily,
+                          font: FlutterFlowTheme.of(context).labelLarge,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).labelLargeFamily),
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -210,11 +199,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
                   style: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).labelMediumFamily,
+                        font: FlutterFlowTheme.of(context).labelMedium,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).labelMediumFamily),
                       ),
                   maxLength: 30,
                   maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -245,14 +231,11 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                             headerTextStyle: FlutterFlowTheme.of(context)
                                 .headlineLarge
                                 .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineLargeFamily,
+                                  font: FlutterFlowTheme.of(context)
+                                      .headlineLarge,
                                   fontSize: 32.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .headlineLargeFamily),
                                 ),
                             pickerBackgroundColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -286,15 +269,11 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                               headerTextStyle: FlutterFlowTheme.of(context)
                                   .headlineLarge
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .headlineLargeFamily,
+                                    font: FlutterFlowTheme.of(context)
+                                        .headlineLarge,
                                     fontSize: 32.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .headlineLargeFamily),
                                   ),
                               pickerBackgroundColor:
                                   FlutterFlowTheme.of(context)
@@ -347,16 +326,12 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: Colors.white,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .titleSmall
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).titleSmallFamily,
-                            color: Colors.black,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).titleSmallFamily),
-                          ),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: FlutterFlowTheme.of(context).titleSmall,
+                                color: Colors.black,
+                                letterSpacing: 0.0,
+                              ),
                       elevation: 0.0,
                       borderSide: BorderSide(
                         color: Colors.black,
@@ -386,15 +361,11 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                               headerTextStyle: FlutterFlowTheme.of(context)
                                   .headlineLarge
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .headlineLargeFamily,
+                                    font: FlutterFlowTheme.of(context)
+                                        .headlineLarge,
                                     fontSize: 32.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .headlineLargeFamily),
                                   ),
                               pickerBackgroundColor:
                                   FlutterFlowTheme.of(context)
@@ -402,7 +373,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                               pickerForegroundColor:
                                   FlutterFlowTheme.of(context).primaryText,
                               selectedDateTimeBackgroundColor:
-                                  Color(0xFFFCFCFC),
+                                  FlutterFlowTheme.of(context).primary,
                               selectedDateTimeForegroundColor:
                                   FlutterFlowTheme.of(context).info,
                               actionButtonForegroundColor:
@@ -444,16 +415,11 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.white,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .bodyMedium
-                            .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
-                            ),
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  font: FlutterFlowTheme.of(context).bodyMedium,
+                                  letterSpacing: 0.0,
+                                ),
                         elevation: 0.0,
                         borderSide: BorderSide(
                           color: Colors.black,
@@ -470,11 +436,9 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                   'Due date',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      font: FlutterFlowTheme.of(context).bodyMedium,
                       fontSize: 1.0,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
               ),
               Row(
@@ -494,19 +458,15 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           ChipData('Saturday')
                         ],
                         onChanged: (val) =>
-                            safeSetState(() => _model.choiceChipsValues1 = val),
+                            safeSetState(() => _model.choiceChipsValues = val),
                         selectedChipStyle: ChipStyle(
                           backgroundColor: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
+                                font: FlutterFlowTheme.of(context).bodyMedium,
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
                               ),
                           iconColor: FlutterFlowTheme.of(context).info,
                           iconSize: 16.0,
@@ -521,14 +481,10 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           textStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
+                                font: FlutterFlowTheme.of(context).bodyMedium,
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
                                 letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
                               ),
                           iconColor: FlutterFlowTheme.of(context).secondaryText,
                           iconSize: 16.0,
@@ -538,9 +494,9 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         chipSpacing: 1.0,
                         rowSpacing: 8.0,
                         multiselect: true,
-                        initialized: _model.choiceChipsValues1 != null,
+                        initialized: _model.choiceChipsValues != null,
                         alignment: WrapAlignment.start,
-                        controller: _model.choiceChipsValueController1 ??=
+                        controller: _model.choiceChipsValueController ??=
                             FormFieldController<List<String>>(
                           [],
                         ),
@@ -558,11 +514,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     child: Text(
                       'Does the task repeat?',
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            font: FlutterFlowTheme.of(context).bodyLarge,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
                           ),
                     ),
                   ),
@@ -585,20 +538,50 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 ],
               ),
               FlutterFlowDropDown<String>(
-                controller: _model.dropDownValueController ??=
+                controller: _model.dropDownValueController1 ??=
                     FormFieldController<String>(null),
                 options: ['Personal', 'Assignment', 'Project'],
                 onChanged: (val) =>
-                    safeSetState(() => _model.dropDownValue = val),
+                    safeSetState(() => _model.dropDownValue1 = val),
                 width: double.infinity,
                 height: 40.0,
                 textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      font: FlutterFlowTheme.of(context).bodyMedium,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
                 hintText: 'Task Type',
+                icon: Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
+                ),
+                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                elevation: 2.0,
+                borderColor: Colors.black,
+                borderWidth: 2.0,
+                borderRadius: 8.0,
+                margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                hidesUnderline: true,
+                isOverButton: false,
+                isSearchable: false,
+                isMultiSelect: false,
+              ),
+              FlutterFlowDropDown<int>(
+                controller: _model.dropDownValueController2 ??=
+                    FormFieldController<int>(
+                  _model.dropDownValue2 ??= 1,
+                ),
+                options: List<int>.from([1, 2, 3]),
+                optionLabels: ['Easy ', 'Medium ', 'Hard'],
+                onChanged: (val) =>
+                    safeSetState(() => _model.dropDownValue2 = val),
+                width: double.infinity,
+                height: 40.0,
+                textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                      font: FlutterFlowTheme.of(context).bodyMedium,
+                      letterSpacing: 0.0,
+                    ),
+                hintText: 'Task Difficulty',
                 icon: Icon(
                   Icons.keyboard_arrow_down_rounded,
                   color: FlutterFlowTheme.of(context).secondaryText,
@@ -625,25 +608,17 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelStyle: FlutterFlowTheme.of(context)
-                          .labelMedium
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelMediumFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelMediumFamily),
-                          ),
+                      labelStyle:
+                          FlutterFlowTheme.of(context).labelMedium.override(
+                                font: FlutterFlowTheme.of(context).labelMedium,
+                                letterSpacing: 0.0,
+                              ),
                       hintText: 'Task Description',
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .labelLarge
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelLargeFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelLargeFamily),
-                          ),
+                      hintStyle:
+                          FlutterFlowTheme.of(context).labelLarge.override(
+                                font: FlutterFlowTheme.of(context).labelLarge,
+                                letterSpacing: 0.0,
+                              ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black,
@@ -677,71 +652,14 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).labelMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).labelMediumFamily,
+                          font: FlutterFlowTheme.of(context).labelMedium,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).labelMediumFamily),
                         ),
                     maxLines: 3,
                     cursorColor: FlutterFlowTheme.of(context).primaryText,
                     validator:
                         _model.textController2Validator.asValidator(context),
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                child: FlutterFlowChoiceChips(
-                  options: [
-                    ChipData('Easy'),
-                    ChipData('Medium'),
-                    ChipData('Hard')
-                  ],
-                  onChanged: (val) => safeSetState(
-                      () => _model.choiceChipsValue2 = val?.firstOrNull),
-                  selectedChipStyle: ChipStyle(
-                    backgroundColor: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                          color: FlutterFlowTheme.of(context).info,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                        ),
-                    iconColor: FlutterFlowTheme.of(context).info,
-                    iconSize: 16.0,
-                    elevation: 0.0,
-                    borderColor: FlutterFlowTheme.of(context).primaryText,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  unselectedChipStyle: ChipStyle(
-                    backgroundColor:
-                        FlutterFlowTheme.of(context).secondaryBackground,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                        ),
-                    iconColor: FlutterFlowTheme.of(context).secondaryText,
-                    iconSize: 16.0,
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  chipSpacing: 8.0,
-                  rowSpacing: 8.0,
-                  multiselect: false,
-                  initialized: _model.choiceChipsValue2 != null,
-                  alignment: WrapAlignment.start,
-                  controller: _model.choiceChipsValueController2 ??=
-                      FormFieldController<List<String>>(
-                    [widget.taskDifficulty!],
-                  ),
-                  wrapped: true,
                 ),
               ),
               Row(
@@ -754,23 +672,59 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       onPressed: () async {
                         logFirebaseEvent('EDIT_TASK_COMP_SAVE_BTN_ON_TAP');
                         logFirebaseEvent('Button_backend_call');
-                        unawaited(
-                          () async {
-                            await widget.taskReference!
-                                .update(createTaskRecordData(
-                              user: currentUserReference,
-                              taskName: _model.textController1.text,
-                              taskDescription: _model.textController2.text,
-                              completeBy: _model.datePicked1,
-                              isRepeating: _model.switchValue,
-                              difficultyLvl: functions
-                                  .difficultyToInt(_model.choiceChipsValue2!),
-                              completeDate: functions
-                                  .returnDayMonthPicker(_model.datePicked1),
-                              taskCategory: _model.dropDownValue,
-                            ));
-                          }(),
-                        );
+
+                        await widget.taskReference!
+                            .update(createTaskRecordData(
+                          user: currentUserReference,
+                          taskName: _model.textController1.text,
+                          taskDescription: _model.textController2.text,
+                          isRepeating: _model.switchValue,
+                          difficultyLvl: _model.dropDownValue2,
+                          taskCategory: _model.dropDownValue1,
+                        ));
+                        if (_model.switchValue == false) {
+                          if (_model.datePicked1 != null) {
+                            logFirebaseEvent('Button_backend_call');
+
+                            await widget.taskReference!.update({
+                              ...createTaskRecordData(
+                                completeBy: _model.datePicked1,
+                                completeDate: functions
+                                    .returnDayMonthPicker(_model.datePicked1),
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'complete_date_list': functions
+                                      .wrapDateInList(_model.datePicked1!),
+                                  'days_repeating': FieldValue.delete(),
+                                },
+                              ),
+                            });
+                          }
+                        } else {
+                          if (_model.datePicked2 != null) {
+                            logFirebaseEvent('Button_backend_call');
+
+                            await widget.taskReference!.update({
+                              ...createTaskRecordData(
+                                completeBy: functions.getNextCompleteDate(
+                                    _model.choiceChipsValues!.toList(),
+                                    _model.datePicked2!),
+                                completeDate: functions.getNextMonthDayYear(
+                                    _model.choiceChipsValues!.toList()),
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'days_repeating': _model.choiceChipsValues,
+                                  'complete_date_list':
+                                      functions.getUpcomingWeekdays(
+                                          _model.choiceChipsValues!.toList()),
+                                },
+                              ),
+                            });
+                          }
+                        }
+
                         logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
                       },
@@ -783,15 +737,11 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .bodyLarge
-                            .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
-                            ),
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyLarge.override(
+                                  font: FlutterFlowTheme.of(context).bodyLarge,
+                                  letterSpacing: 0.0,
+                                ),
                         elevation: 0.0,
                         borderSide: BorderSide(
                           color: Colors.black,
@@ -856,13 +806,10 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            font: FlutterFlowTheme.of(context).bodyLarge,
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
                           ),
                       elevation: 0.0,
                       borderSide: BorderSide(

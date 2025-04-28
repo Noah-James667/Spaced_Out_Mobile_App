@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'equip_light_blue_ship_model.dart';
 export 'equip_light_blue_ship_model.dart';
 
@@ -74,11 +74,9 @@ class _EquipLightBlueShipWidgetState extends State<EquipLightBlueShipWidget> {
           Text(
             'Equip the Cyan Ship?',
             style: FlutterFlowTheme.of(context).bodyLarge.override(
-                  fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                  font: FlutterFlowTheme.of(context).bodyLarge,
                   color: FlutterFlowTheme.of(context).equipText,
                   letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).bodyLargeFamily),
                 ),
           ),
 
@@ -123,8 +121,6 @@ class _EquipLightBlueShipWidgetState extends State<EquipLightBlueShipWidget> {
               return FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('EQUIP_LIGHT_BLUE_SHIP_EQUIP_BTN_ON_TAP');
-                  logFirebaseEvent('Button_bottom_sheet');
-                  Navigator.pop(context);
                   if (buttonShopItemsRecord!.lightBlueShip) {
                     logFirebaseEvent('Button_update_app_state');
                     FFAppState().cyanShipEquip = 1;
@@ -154,6 +150,18 @@ class _EquipLightBlueShipWidgetState extends State<EquipLightBlueShipWidget> {
                       },
                     );
                   }
+
+                  logFirebaseEvent('Button_bottom_sheet');
+                  Navigator.pop(context);
+                  logFirebaseEvent('Button_play_sound');
+                  _model.soundPlayer ??= AudioPlayer();
+                  if (_model.soundPlayer!.playing) {
+                    await _model.soundPlayer!.stop();
+                  }
+                  _model.soundPlayer!.setVolume(1.0);
+                  _model.soundPlayer!
+                      .setAsset('assets/audios/item-equip-6904-_1_.wav')
+                      .then((_) => _model.soundPlayer!.play());
                 },
                 text: 'Equip',
                 options: FFButtonOptions(
@@ -163,12 +171,9 @@ class _EquipLightBlueShipWidgetState extends State<EquipLightBlueShipWidget> {
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).success,
                   textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        font: FlutterFlowTheme.of(context).bodyLarge,
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                   elevation: 0.0,
                   borderRadius: BorderRadius.circular(8.0),
@@ -192,11 +197,9 @@ class _EquipLightBlueShipWidgetState extends State<EquipLightBlueShipWidget> {
               iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               color: FlutterFlowTheme.of(context).tertiary,
               textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                    font: FlutterFlowTheme.of(context).bodyLarge,
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyLargeFamily),
                   ),
               elevation: 0.0,
               borderRadius: BorderRadius.circular(8.0),
@@ -215,11 +218,9 @@ class _EquipLightBlueShipWidgetState extends State<EquipLightBlueShipWidget> {
               iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               color: FlutterFlowTheme.of(context).error,
               textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                    font: FlutterFlowTheme.of(context).bodyLarge,
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyLargeFamily),
                   ),
               elevation: 0.0,
               borderRadius: BorderRadius.circular(8.0),

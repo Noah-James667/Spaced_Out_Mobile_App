@@ -10,7 +10,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'create_task_model.dart';
 export 'create_task_model.dart';
 
@@ -54,6 +54,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return SafeArea(
       child: Container(
         width: double.infinity,
@@ -124,11 +126,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                 Text(
                   'Add task',
                   style: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        font: FlutterFlowTheme.of(context).bodyLarge,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                 ),
                 Padding(
@@ -143,26 +142,18 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                       decoration: InputDecoration(
                         isDense: true,
                         labelText: 'Task Name',
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
-                                ),
-                        hintText: 'Task Name',
-                        hintStyle: FlutterFlowTheme.of(context)
-                            .labelLarge
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .labelMedium
                             .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).labelLargeFamily,
+                              font: FlutterFlowTheme.of(context).labelMedium,
                               letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .labelLargeFamily),
                             ),
+                        hintText: 'Task Name',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  font: FlutterFlowTheme.of(context).labelLarge,
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.black,
@@ -196,11 +187,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelMediumFamily,
+                            font: FlutterFlowTheme.of(context).labelMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelMediumFamily),
                           ),
                       maxLength: 30,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -233,15 +221,11 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                               headerTextStyle: FlutterFlowTheme.of(context)
                                   .headlineLarge
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .headlineLargeFamily,
+                                    font: FlutterFlowTheme.of(context)
+                                        .headlineLarge,
                                     fontSize: 32.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .headlineLargeFamily),
                                   ),
                               pickerBackgroundColor:
                                   FlutterFlowTheme.of(context)
@@ -276,15 +260,11 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                                 headerTextStyle: FlutterFlowTheme.of(context)
                                     .headlineLarge
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .headlineLargeFamily,
+                                      font: FlutterFlowTheme.of(context)
+                                          .headlineLarge,
                                       fontSize: 32.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLargeFamily),
                                     ),
                                 pickerBackgroundColor:
                                     FlutterFlowTheme.of(context)
@@ -337,17 +317,12 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.white,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .titleSmall
-                            .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).titleSmallFamily,
-                              color: Colors.black,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .titleSmallFamily),
-                            ),
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  font: FlutterFlowTheme.of(context).titleSmall,
+                                  color: Colors.black,
+                                  letterSpacing: 0.0,
+                                ),
                         elevation: 0.0,
                         borderSide: BorderSide(
                           color: Colors.black,
@@ -365,7 +340,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           final _datePicked2Time = await showTimePicker(
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
-                                (_model.datePicked1 ?? DateTime.now())),
+                                (FFAppState().defaultTime ?? DateTime.now())),
                             builder: (context, child) {
                               return wrapInMaterialTimePickerTheme(
                                 context,
@@ -377,15 +352,11 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                                 headerTextStyle: FlutterFlowTheme.of(context)
                                     .headlineLarge
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .headlineLargeFamily,
+                                      font: FlutterFlowTheme.of(context)
+                                          .headlineLarge,
                                       fontSize: 32.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLargeFamily),
                                     ),
                                 pickerBackgroundColor:
                                     FlutterFlowTheme.of(context)
@@ -393,7 +364,7 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                                 pickerForegroundColor:
                                     FlutterFlowTheme.of(context).primaryText,
                                 selectedDateTimeBackgroundColor:
-                                    Color(0xFFFCFCFC),
+                                    FlutterFlowTheme.of(context).primary,
                                 selectedDateTimeForegroundColor:
                                     FlutterFlowTheme.of(context).info,
                                 actionButtonForegroundColor:
@@ -405,16 +376,19 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           if (_datePicked2Time != null) {
                             safeSetState(() {
                               _model.datePicked2 = DateTime(
-                                (_model.datePicked1 ?? DateTime.now()).year,
-                                (_model.datePicked1 ?? DateTime.now()).month,
-                                (_model.datePicked1 ?? DateTime.now()).day,
+                                (FFAppState().defaultTime ?? DateTime.now())
+                                    .year,
+                                (FFAppState().defaultTime ?? DateTime.now())
+                                    .month,
+                                (FFAppState().defaultTime ?? DateTime.now())
+                                    .day,
                                 _datePicked2Time.hour,
                                 _datePicked2Time.minute,
                               );
                             });
                           } else if (_model.datePicked2 != null) {
                             safeSetState(() {
-                              _model.datePicked2 = _model.datePicked1;
+                              _model.datePicked2 = FFAppState().defaultTime;
                             });
                           }
                         },
@@ -438,12 +412,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           textStyle: FlutterFlowTheme.of(context)
                               .bodyLarge
                               .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
+                                font: FlutterFlowTheme.of(context).bodyLarge,
                                 letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
                               ),
                           elevation: 0.0,
                           borderSide: BorderSide(
@@ -472,21 +442,17 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             ChipData('Saturday')
                           ],
                           onChanged: (val) => safeSetState(
-                              () => _model.choiceChipsValues1 = val),
+                              () => _model.choiceChipsValues = val),
                           selectedChipStyle: ChipStyle(
                             backgroundColor:
                                 FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
+                                  font: FlutterFlowTheme.of(context).bodyMedium,
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                   letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
                                 ),
                             iconColor: FlutterFlowTheme.of(context).info,
                             iconSize: 16.0,
@@ -502,14 +468,10 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
+                                  font: FlutterFlowTheme.of(context).bodyMedium,
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
                                   letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
                                 ),
                             iconColor:
                                 FlutterFlowTheme.of(context).secondaryText,
@@ -520,9 +482,9 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                           chipSpacing: 1.0,
                           rowSpacing: 8.0,
                           multiselect: true,
-                          initialized: _model.choiceChipsValues1 != null,
+                          initialized: _model.choiceChipsValues != null,
                           alignment: WrapAlignment.start,
-                          controller: _model.choiceChipsValueController1 ??=
+                          controller: _model.choiceChipsValueController ??=
                               FormFieldController<List<String>>(
                             [],
                           ),
@@ -540,11 +502,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                       child: Text(
                         'Does the task repeat?',
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
+                              font: FlutterFlowTheme.of(context).bodyLarge,
                               letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
                       ),
                     ),
@@ -568,21 +527,50 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                   ],
                 ),
                 FlutterFlowDropDown<String>(
-                  controller: _model.dropDownValueController ??=
+                  controller: _model.dropDownValueController1 ??=
                       FormFieldController<String>(null),
                   options: ['Personal', 'Assignment', 'Project'],
                   onChanged: (val) =>
-                      safeSetState(() => _model.dropDownValue = val),
+                      safeSetState(() => _model.dropDownValue1 = val),
                   width: double.infinity,
                   height: 40.0,
                   textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        font: FlutterFlowTheme.of(context).bodyMedium,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
                   hintText: 'Task Type',
+                  icon: Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 24.0,
+                  ),
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  elevation: 2.0,
+                  borderColor: Colors.black,
+                  borderWidth: 2.0,
+                  borderRadius: 8.0,
+                  margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                  hidesUnderline: true,
+                  isOverButton: false,
+                  isSearchable: false,
+                  isMultiSelect: false,
+                ),
+                FlutterFlowDropDown<int>(
+                  controller: _model.dropDownValueController2 ??=
+                      FormFieldController<int>(
+                    _model.dropDownValue2 ??= 1,
+                  ),
+                  options: List<int>.from([1, 2, 3]),
+                  optionLabels: ['Easy', 'Medium', 'Hard'],
+                  onChanged: (val) =>
+                      safeSetState(() => _model.dropDownValue2 = val),
+                  width: double.infinity,
+                  height: 40.0,
+                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                        font: FlutterFlowTheme.of(context).bodyMedium,
+                        letterSpacing: 0.0,
+                      ),
+                  hintText: 'Task Difficulty',
                   icon: Icon(
                     Icons.keyboard_arrow_down_rounded,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -609,26 +597,18 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
-                                ),
-                        hintText: 'Task Description',
-                        hintStyle: FlutterFlowTheme.of(context)
-                            .labelLarge
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .labelMedium
                             .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).labelLargeFamily,
+                              font: FlutterFlowTheme.of(context).labelMedium,
                               letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .labelLargeFamily),
                             ),
+                        hintText: 'Task Description',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  font: FlutterFlowTheme.of(context).labelLarge,
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).primaryText,
@@ -662,77 +642,14 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelMediumFamily,
+                            font: FlutterFlowTheme.of(context).labelMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelMediumFamily),
                           ),
                       maxLines: 5,
                       cursorColor: FlutterFlowTheme.of(context).primaryText,
                       validator:
                           _model.textController2Validator.asValidator(context),
                     ),
-                  ),
-                ),
-
-                // these should have values tied to them that reflect how many coins the user gets when task is complete. it must also know if it is part of a larger task which will give it more weight - 20, 30, 50 if it isnt part of a larger task and +5 more on each of those if it is.
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                  child: FlutterFlowChoiceChips(
-                    options: [
-                      ChipData('Easy'),
-                      ChipData('Medium'),
-                      ChipData('Hard')
-                    ],
-                    onChanged: (val) => safeSetState(
-                        () => _model.choiceChipsValue2 = val?.firstOrNull),
-                    selectedChipStyle: ChipStyle(
-                      backgroundColor: FlutterFlowTheme.of(context).primary,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
-                          ),
-                      iconColor: FlutterFlowTheme.of(context).info,
-                      iconSize: 16.0,
-                      elevation: 0.0,
-                      borderColor: FlutterFlowTheme.of(context).primaryText,
-                      borderWidth: 2.0,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    unselectedChipStyle: ChipStyle(
-                      backgroundColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
-                          ),
-                      iconColor: FlutterFlowTheme.of(context).secondaryText,
-                      iconSize: 16.0,
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    chipSpacing: 1.0,
-                    rowSpacing: 8.0,
-                    multiselect: false,
-                    alignment: WrapAlignment.start,
-                    controller: _model.choiceChipsValueController2 ??=
-                        FormFieldController<List<String>>(
-                      [],
-                    ),
-                    wrapped: true,
                   ),
                 ),
                 FFButtonWidget(
@@ -754,10 +671,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                               completeBy: _model.datePicked1,
                               completeDate: functions
                                   .returnDayMonthPicker(_model.datePicked1),
-                              difficultyLvl: functions
-                                  .difficultyToInt(_model.choiceChipsValue2!),
-                              taskCategory: _model.dropDownValue,
-                              testDfctyLvl: _model.choiceChipsValue2,
+                              difficultyLvl: _model.dropDownValue2,
+                              taskCategory: _model.dropDownValue1,
                             ),
                             ...mapToFirestore(
                               {
@@ -789,8 +704,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                         }
                       } else {
                         if ((_model.datePicked2 != null) &&
-                            (_model.choiceChipsValues1?.firstOrNull != null &&
-                                _model.choiceChipsValues1?.firstOrNull != '')) {
+                            (_model.choiceChipsValues?.firstOrNull != null &&
+                                _model.choiceChipsValues?.firstOrNull != '')) {
                           logFirebaseEvent('Button_backend_call');
 
                           firestoreBatch.set(TaskRecord.collection.doc(), {
@@ -801,21 +716,20 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                               isComplete: false,
                               isRepeating: _model.switchValue,
                               completeBy: functions.getNextCompleteDate(
-                                  _model.choiceChipsValues1!.toList(),
+                                  _model.choiceChipsValues!.toList(),
                                   _model.datePicked2!),
                               completeDate: functions.getNextMonthDayYear(
-                                  _model.choiceChipsValues1!.toList()),
-                              difficultyLvl: functions
-                                  .difficultyToInt(_model.choiceChipsValue2!),
-                              taskCategory: _model.dropDownValue,
+                                  _model.choiceChipsValues!.toList()),
+                              difficultyLvl: _model.dropDownValue2,
+                              taskCategory: _model.dropDownValue1,
                             ),
                             ...mapToFirestore(
                               {
                                 'days_repeating':
-                                    _model.choiceChipsValues1?.take(7).toList(),
+                                    _model.choiceChipsValues?.take(7).toList(),
                                 'complete_date_list':
                                     functions.getUpcomingWeekdays(
-                                        _model.choiceChipsValues1!.toList()),
+                                        _model.choiceChipsValues!.toList()),
                               },
                             ),
                           });
@@ -854,11 +768,8 @@ class _CreateTaskWidgetState extends State<CreateTaskWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyLargeFamily,
+                          font: FlutterFlowTheme.of(context).bodyLarge,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyLargeFamily),
                         ),
                     elevation: 0.0,
                     borderSide: BorderSide(

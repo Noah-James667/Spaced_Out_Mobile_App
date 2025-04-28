@@ -150,19 +150,6 @@ DateTime getNextMonthDayYear(List<String> daysRepeating) {
   return DateTime(nextDate.year, nextDate.month, nextDate.day);
 }
 
-int difficultyToInt(String difficulty) {
-  switch (difficulty.toLowerCase()) {
-    case 'easy':
-      return 1;
-    case 'medium':
-      return 2;
-    case 'hard':
-      return 3;
-    default:
-      return 0; // Return 0 if input is invalid
-  }
-}
-
 List<DateTime> getUpcomingWeekdays(List<String> repeatingDays) {
   final now = DateTime.now();
   // Dart's weekday starts from Monday = 1 to Sunday = 7

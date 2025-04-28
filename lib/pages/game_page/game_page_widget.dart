@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
+import '/components/alien/alien_widget.dart';
 import '/components/astronaut/astronaut_widget.dart';
 import '/components/game_lose/game_lose_widget.dart';
 import '/components/game_win/game_win_widget.dart';
@@ -8,10 +8,15 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/game_page/armor_upgrade_h_u_d/armor_upgrade_h_u_d_widget.dart';
+import '/game_page/damage_upgrade_h_u_d/damage_upgrade_h_u_d_widget.dart';
+import '/game_page/health_upgrade_h_u_d/health_upgrade_h_u_d_widget.dart';
+import '/walkthroughs/game_page_walkthrough.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'game_page_model.dart';
 export 'game_page_model.dart';
@@ -60,7 +65,49 @@ class _GamePageWidgetState extends State<GamePageWidget>
           ..pArmr = FFAppState().appPlayer.pArmr,
       );
       safeSetState(() {});
-      if (valueOrDefault(currentUserDocument?.damageUpCost, 0) <= 0) {
+      logFirebaseEvent('gamePage_update_page_state');
+      _model.stillArmPicOpacity = 1.0;
+      safeSetState(() {});
+      logFirebaseEvent('gamePage_update_page_state');
+      _model.pageEnemy = EnemyStruct(
+        eHealth: valueOrDefault<double>(
+          FFAppState().appEnemy.eHealth,
+          1.0,
+        ),
+        eDmg: valueOrDefault<double>(
+          FFAppState().appEnemy.eDmg,
+          1.0,
+        ),
+        eArmr: valueOrDefault<double>(
+          FFAppState().appEnemy.eArmr,
+          1.0,
+        ),
+      );
+      _model.pagePlayer = PlayerStruct(
+        pHealth: valueOrDefault<double>(
+          FFAppState().appPlayer.pHealth,
+          1.0,
+        ),
+        pDmg: valueOrDefault<double>(
+          FFAppState().appPlayer.pDmg,
+          1.0,
+        ),
+        pArmr: valueOrDefault<double>(
+          FFAppState().appPlayer.pArmr,
+          1.0,
+        ),
+      );
+      safeSetState(() {});
+      if (FFAppState().completedWalkthroughs.gamePage == false) {
+        logFirebaseEvent('gamePage_start_walkthrough');
+        safeSetState(() => _model.gamePageWalkthroughController =
+            createPageWalkthrough(context));
+        _model.gamePageWalkthroughController?.show(context: context);
+        logFirebaseEvent('gamePage_update_app_state');
+        FFAppState().updateCompletedWalkthroughsStruct(
+          (e) => e..gamePage = true,
+        );
+        safeSetState(() {});
       } else {
         return;
       }
@@ -160,50 +207,103 @@ class _GamePageWidgetState extends State<GamePageWidget>
           ),
         ],
       ),
-      'columnOnActionTriggerAnimation': AnimationInfo(
+      'containerOnActionTriggerAnimation3': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
         applyInitialState: true,
         effectsBuilder: () => [
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
+            duration: 1000.0.ms,
             begin: Offset(0.0, 0.0),
-            end: Offset(100.0, 0.0),
+            end: Offset(0.0, 100.0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
+            duration: 1000.0.ms,
             begin: Offset(0.0, 0.0),
-            end: Offset(100.0, 0.0),
+            end: Offset(0.0, 100.0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
+            duration: 1000.0.ms,
             begin: Offset(0.0, 0.0),
-            end: Offset(100.0, 0.0),
+            end: Offset(0.0, 100.0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
+            duration: 1000.0.ms,
             begin: Offset(0.0, 0.0),
-            end: Offset(100.0, 0.0),
+            end: Offset(0.0, 100.0),
           ),
         ],
       ),
-      'iconButtonOnActionTriggerAnimation': AnimationInfo(
+      'rowOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 100.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'rowOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 1.0,
+            end: 0.0,
+          ),
+        ],
+      ),
+      'iconButtonOnActionTriggerAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
         applyInitialState: true,
         effectsBuilder: () => [
           FadeEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            duration: 80.0.ms,
+            begin: 1.0,
+            end: 0.25,
+          ),
+        ],
+      ),
+      'iconButtonOnActionTriggerAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 80.0.ms,
+            begin: 1.0,
+            end: 0.25,
+          ),
+        ],
+      ),
+      'iconButtonOnActionTriggerAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 80.0.ms,
+            begin: 1.0,
+            end: 0.25,
           ),
         ],
       ),
@@ -238,7 +338,7 @@ class _GamePageWidgetState extends State<GamePageWidget>
         onWillPop: () async => false,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).alternate,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryText,
           body: SafeArea(
             top: true,
             child: Align(
@@ -253,87 +353,85 @@ class _GamePageWidgetState extends State<GamePageWidget>
                     ).image,
                   ),
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 450.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(8.0),
-                              bottomRight: Radius.circular(8.0),
-                              topLeft: Radius.circular(0.0),
-                              topRight: Radius.circular(0.0),
-                            ),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                            ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.0, -1.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 462.4,
+                        decoration: BoxDecoration(
+                          color: Color(0xD357636C),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8.0),
+                            bottomRight: Radius.circular(8.0),
+                            topLeft: Radius.circular(4.0),
+                            topRight: Radius.circular(4.0),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'XP: ',
+                          border: Border.all(
+                            color: Color(0xFF381212),
+                            width: 4.0,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'XP: ',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: FlutterFlowTheme.of(context)
+                                            .bodyLarge,
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ).addWalkthrough(
+                                  textRkfazhqq,
+                                  _model.gamePageWalkthroughController,
+                                ),
+                                AuthUserStreamWidget(
+                                  builder: (context) => Text(
+                                    formatNumber(
+                                      valueOrDefault(
+                                          currentUserDocument?.xp, 0.0),
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.automatic,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
+                                          font: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          fontSize: 16.0,
                                           letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
                                         ),
                                   ),
-                                  AuthUserStreamWidget(
-                                    builder: (context) => Text(
-                                      formatNumber(
-                                        valueOrDefault(
-                                            currentUserDocument?.xp, 0),
-                                        formatType: FormatType.decimal,
-                                        decimalType: DecimalType.automatic,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                width: 410.0,
-                                height: 292.01,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
+                              ],
+                            ),
+                            Container(
+                              width: MediaQuery.sizeOf(context).width * 1.0,
+                              height: 292.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
                                 child: Stack(
                                   children: [
                                     Align(
@@ -344,80 +442,80 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                                 1.0,
                                         height: 410.0,
                                         decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(0.0),
                                         ),
-                                        child: Stack(
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.asset(
-                                                'assets/images/scifi_wallpaper.png',
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.96, 0.86),
-                                              child: Container(
-                                                width: 100.0,
-                                                height: 100.0,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0x00FFFFFF),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                                child: Image.asset(
+                                                  'assets/images/scifi_wallpaper.png',
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          1.0,
+                                                  height: double.infinity,
+                                                  fit: BoxFit.cover,
                                                 ),
-                                                child: Visibility(
-                                                  visible: !_model.gameRunning,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/wiggleMonster.png',
-                                                      width: 200.0,
-                                                      height: 200.0,
-                                                      fit: BoxFit.cover,
+                                              ),
+                                              if (FFAppState().gameNotRunning)
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.96, 0.73),
+                                                  child: Container(
+                                                    width: 100.0,
+                                                    height: 100.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0x00FFFFFF),
                                                     ),
+                                                    child: wrapWithModel(
+                                                      model: _model.alienModel,
+                                                      updateCallback: () =>
+                                                          safeSetState(() {}),
+                                                      child: AlienWidget(),
+                                                    ),
+                                                  ).animateOnActionTrigger(
+                                                    animationsMap[
+                                                        'containerOnActionTriggerAnimation1']!,
                                                   ),
                                                 ),
-                                              ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'containerOnActionTriggerAnimation1']!,
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.11, 0.81),
-                                              child: Container(
-                                                width: 120.0,
-                                                height: 120.0,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0x00FFFFFF),
-                                                ),
-                                                child: Visibility(
-                                                  visible: _model.gameRunning,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/battle.gif',
-                                                      width: 200.0,
-                                                      height: 200.0,
-                                                      fit: BoxFit.cover,
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.11, 0.81),
+                                                child: Container(
+                                                  width: 120.0,
+                                                  height: 120.0,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x00FFFFFF),
+                                                  ),
+                                                  child: Visibility(
+                                                    visible: _model.gameRunning,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.asset(
+                                                        'assets/images/fight.gif',
+                                                        width: 210.0,
+                                                        height: 210.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
+                                                ).animateOnActionTrigger(
+                                                  animationsMap[
+                                                      'containerOnActionTriggerAnimation2']!,
                                                 ),
-                                              ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'containerOnActionTriggerAnimation2']!,
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -443,13 +541,17 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                             updateCallback: () =>
                                                 safeSetState(() {}),
                                             child: AstronautWidget(),
+                                          ).addWalkthrough(
+                                            containerKf3uj1hr,
+                                            _model
+                                                .gamePageWalkthroughController,
                                           ),
                                         ),
                                       ),
                                     ),
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-1.52, 0.96),
+                                          AlignmentDirectional(-1.52, 1.0),
                                       child: Container(
                                         width: 198.0,
                                         height: 198.0,
@@ -567,441 +669,358 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                   ],
                                 ),
                               ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Player',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.favorite,
-                                              color: Color(0xFFF0141E),
-                                              size: 24.0,
-                                            ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'iconOnActionTriggerAnimation1']!,
-                                                hasBeenTriggered:
-                                                    hasIconTriggered1),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  _model.pagePlayer?.pHealth,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ).animateOnActionTrigger(
-                                              animationsMap[
-                                                  'textOnActionTriggerAnimation1']!,
-                                            ),
-                                          ].divide(SizedBox(width: 2.0)),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons
-                                                  .local_fire_department_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
-                                              size: 24.0,
-                                            ).animateOnActionTrigger(
-                                              animationsMap[
-                                                  'iconOnActionTriggerAnimation2']!,
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  _model.pagePlayer?.pDmg,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(width: 2.0)),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.shield_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 24.0,
-                                            ).animateOnActionTrigger(
-                                              animationsMap[
-                                                  'iconOnActionTriggerAnimation3']!,
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  _model.pagePlayer?.pArmr,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(width: 2.0)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Flexible(
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      FlutterFlowIconButton(
-                                        borderRadius: 8.0,
-                                        buttonSize: 60.0,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                        disabledColor: Color(0x8FFCA311),
-                                        disabledIconColor:
+                                      Text(
+                                        'Player',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: FlutterFlowTheme.of(context)
+                                                  .bodyMedium,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.favorite,
+                                            color: Color(0xFFF0141E),
+                                            size: 24.0,
+                                          ).animateOnActionTrigger(
+                                              animationsMap[
+                                                  'iconOnActionTriggerAnimation1']!,
+                                              hasBeenTriggered:
+                                                  hasIconTriggered1),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              formatNumber(
+                                                _model.pagePlayer?.pHealth,
+                                                formatType: FormatType.custom,
+                                                format: '####.0#',
+                                                locale: '',
+                                              ),
+                                              '1',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'textOnActionTriggerAnimation1']!,
+                                          ),
+                                        ].divide(SizedBox(width: 2.0)),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.local_fire_department_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .tertiary,
+                                            size: 24.0,
+                                          ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'iconOnActionTriggerAnimation2']!,
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              formatNumber(
+                                                _model.pagePlayer?.pDmg,
+                                                formatType: FormatType.custom,
+                                                format: '####.0#',
+                                                locale: '',
+                                              ),
+                                              '1',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 2.0)),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.shield_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 24.0,
+                                          ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'iconOnActionTriggerAnimation3']!,
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              formatNumber(
+                                                _model.pagePlayer?.pArmr,
+                                                formatType: FormatType.custom,
+                                                format: '####.0#',
+                                                locale: '',
+                                              ),
+                                              '1',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 2.0)),
+                                      ),
+                                    ],
+                                  ).addWalkthrough(
+                                    column2u7j6lud,
+                                    _model.gamePageWalkthroughController,
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FlutterFlowIconButton(
+                                      borderColor:
+                                          FlutterFlowTheme.of(context).black,
+                                      borderRadius: 8.0,
+                                      borderWidth: 2.0,
+                                      buttonSize: 60.0,
+                                      fillColor:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      disabledColor: Color(0x8FFCA311),
+                                      disabledIconColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      icon: Icon(
+                                        Icons.local_fire_department_rounded,
+                                        color:
                                             FlutterFlowTheme.of(context).info,
-                                        icon: Icon(
-                                          Icons.local_fire_department_rounded,
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          size: 30.0,
-                                        ),
-                                        onPressed: (_model.gameRunning == true)
-                                            ? null
-                                            : () async {
+                                        size: 30.0,
+                                      ),
+                                      onPressed: (_model.gameRunning == true)
+                                          ? null
+                                          : () async {
+                                              logFirebaseEvent(
+                                                  'GAME_PAGE_PAGE_battleButton_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.gameRunning = true;
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_update_app_state');
+                                              FFAppState().gameNotRunning =
+                                                  false;
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_widget_animation');
+                                              if (animationsMap[
+                                                      'rowOnActionTriggerAnimation'] !=
+                                                  null) {
+                                                await animationsMap[
+                                                        'rowOnActionTriggerAnimation']!
+                                                    .controller
+                                                    .forward(from: 0.0);
+                                              }
+                                              logFirebaseEvent(
+                                                  'battleButton_widget_animation');
+                                              if (animationsMap[
+                                                      'containerOnActionTriggerAnimation3'] !=
+                                                  null) {
+                                                await animationsMap[
+                                                        'containerOnActionTriggerAnimation3']!
+                                                    .controller
+                                                    .forward(from: 0.0);
+                                              }
+                                              // Set temporary variables equal to player and enemy variables.
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.updatePageEnemyStruct(
+                                                (e) => e
+                                                  ..eHealth = FFAppState()
+                                                      .appEnemy
+                                                      .eHealth
+                                                  ..eDmg =
+                                                      FFAppState().appEnemy.eDmg
+                                                  ..eArmr = FFAppState()
+                                                      .appEnemy
+                                                      .eArmr,
+                                              );
+                                              _model.updatePagePlayerStruct(
+                                                (e) => e
+                                                  ..pHealth = FFAppState()
+                                                      .appPlayer
+                                                      .pHealth
+                                                  ..pDmg = FFAppState()
+                                                      .appPlayer
+                                                      .pDmg
+                                                  ..pArmr = FFAppState()
+                                                      .appPlayer
+                                                      .pArmr,
+                                              );
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_widget_animation');
+                                              if (animationsMap[
+                                                      'containerOnActionTriggerAnimation1'] !=
+                                                  null) {
+                                                await animationsMap[
+                                                        'containerOnActionTriggerAnimation1']!
+                                                    .controller
+                                                    .forward(from: 0.0);
+                                              }
+                                              while ((_model
+                                                          .pagePlayer!.pHealth >
+                                                      0.0) &&
+                                                  (_model.pageEnemy!.eHealth >
+                                                      0.0)) {
                                                 logFirebaseEvent(
-                                                    'GAME_PAGE_PAGE_battleButton_ON_TAP');
-                                                // Set temporary variables equal to player and enemy variables.
+                                                    'battleButton_wait__delay');
+                                                await Future.delayed(
+                                                    const Duration(
+                                                        milliseconds: 500));
                                                 logFirebaseEvent(
                                                     'battleButton_update_page_state');
                                                 _model.updatePageEnemyStruct(
                                                   (e) => e
-                                                    ..eHealth = FFAppState()
-                                                        .appEnemy
-                                                        .eHealth
-                                                    ..eDmg = FFAppState()
-                                                        .appEnemy
-                                                        .eDmg
-                                                    ..eArmr = FFAppState()
-                                                        .appEnemy
-                                                        .eArmr,
+                                                    ..eHealth = _model
+                                                            .pageEnemy!
+                                                            .eHealth -
+                                                        (FFAppState()
+                                                                .appPlayer
+                                                                .pDmg -
+                                                            _model.pageEnemy!
+                                                                .eArmr),
                                                 );
                                                 _model.updatePagePlayerStruct(
                                                   (e) => e
-                                                    ..pHealth = FFAppState()
-                                                        .appPlayer
-                                                        .pHealth
-                                                    ..pDmg = FFAppState()
-                                                        .appPlayer
-                                                        .pDmg
-                                                    ..pArmr = FFAppState()
-                                                        .appPlayer
-                                                        .pArmr,
+                                                    ..pHealth = _model
+                                                            .pagePlayer!
+                                                            .pHealth -
+                                                        (FFAppState()
+                                                                .appEnemy
+                                                                .eDmg -
+                                                            _model.pagePlayer!
+                                                                .pArmr),
                                                 );
                                                 safeSetState(() {});
                                                 logFirebaseEvent(
                                                     'battleButton_widget_animation');
                                                 if (animationsMap[
-                                                        'containerOnActionTriggerAnimation1'] !=
+                                                        'textOnActionTriggerAnimation1'] !=
                                                     null) {
-                                                  await animationsMap[
-                                                          'containerOnActionTriggerAnimation1']!
+                                                  animationsMap[
+                                                          'textOnActionTriggerAnimation1']!
                                                       .controller
                                                       .forward(from: 0.0);
                                                 }
                                                 logFirebaseEvent(
+                                                    'battleButton_widget_animation');
+                                                if (animationsMap[
+                                                        'textOnActionTriggerAnimation2'] !=
+                                                    null) {
+                                                  animationsMap[
+                                                          'textOnActionTriggerAnimation2']!
+                                                      .controller
+                                                      .forward(from: 0.0);
+                                                }
+                                              }
+                                              logFirebaseEvent(
+                                                  'battleButton_widget_animation');
+                                              if (animationsMap[
+                                                      'containerOnActionTriggerAnimation1'] !=
+                                                  null) {
+                                                animationsMap[
+                                                        'containerOnActionTriggerAnimation1']!
+                                                    .controller
+                                                    .reset();
+                                              }
+                                              if (_model.pagePlayer!.pHealth <=
+                                                  0.0) {
+                                                logFirebaseEvent(
                                                     'battleButton_update_page_state');
-                                                _model.gameRunning = true;
+                                                _model.playerWins = false;
                                                 safeSetState(() {});
-                                                while ((_model.pagePlayer!
-                                                            .pHealth >
-                                                        0.0) &&
-                                                    (_model.pageEnemy!.eHealth >
-                                                        0.0)) {
-                                                  logFirebaseEvent(
-                                                      'battleButton_wait__delay');
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 500));
-                                                  logFirebaseEvent(
-                                                      'battleButton_update_page_state');
-                                                  _model.updatePageEnemyStruct(
-                                                    (e) => e
-                                                      ..eHealth = _model
-                                                              .pageEnemy!
-                                                              .eHealth -
-                                                          (FFAppState()
-                                                                  .appPlayer
-                                                                  .pDmg -
-                                                              _model.pageEnemy!
-                                                                  .eArmr),
-                                                  );
-                                                  _model.updatePagePlayerStruct(
-                                                    (e) => e
-                                                      ..pHealth = _model
-                                                              .pagePlayer!
-                                                              .pHealth -
-                                                          (FFAppState()
-                                                                  .appEnemy
-                                                                  .eDmg -
-                                                              _model.pagePlayer!
-                                                                  .pArmr),
-                                                  );
-                                                  safeSetState(() {});
-                                                  logFirebaseEvent(
-                                                      'battleButton_widget_animation');
-                                                  if (animationsMap[
-                                                          'textOnActionTriggerAnimation1'] !=
-                                                      null) {
-                                                    animationsMap[
-                                                            'textOnActionTriggerAnimation1']!
-                                                        .controller
-                                                        .forward(from: 0.0);
-                                                  }
-                                                  logFirebaseEvent(
-                                                      'battleButton_widget_animation');
-                                                  if (animationsMap[
-                                                          'textOnActionTriggerAnimation2'] !=
-                                                      null) {
-                                                    animationsMap[
-                                                            'textOnActionTriggerAnimation2']!
-                                                        .controller
-                                                        .forward(from: 0.0);
-                                                  }
-                                                }
-                                                if (_model
-                                                        .pagePlayer!.pHealth <=
-                                                    0.0) {
-                                                  logFirebaseEvent(
-                                                      'battleButton_update_page_state');
-                                                  _model.playerWins = false;
-                                                  safeSetState(() {});
-                                                } else {
-                                                  logFirebaseEvent(
-                                                      'battleButton_update_page_state');
-                                                  _model.playerWins = true;
-                                                  safeSetState(() {});
-                                                }
+                                              } else {
+                                                logFirebaseEvent(
+                                                    'battleButton_update_page_state');
+                                                _model.playerWins = true;
+                                                safeSetState(() {});
+                                              }
 
-                                                if (_model.playerWins == true) {
-                                                  logFirebaseEvent(
-                                                      'battleButton_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                GameWinWidget(
-                                                              rewards: (5 +
-                                                                      (2 *
-                                                                          (FFAppState().appEnemy.eLvl -
-                                                                              1)))
-                                                                  .toDouble(),
-                                                            ),
+                                              if (_model.playerWins == true) {
+                                                logFirebaseEvent(
+                                                    'battleButton_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 300.0,
+                                                          child: GameWinWidget(
+                                                            rewards: 100.0,
                                                           ),
                                                         ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-
-                                                  logFirebaseEvent(
-                                                      'battleButton_update_page_state');
-                                                  _model.gameRunning = false;
-                                                  _model.pagePlayer =
-                                                      PlayerStruct(
-                                                    pHealth: FFAppState()
-                                                        .appPlayer
-                                                        .pHealth,
-                                                    pDmg: FFAppState()
-                                                        .appPlayer
-                                                        .pDmg,
-                                                    pArmr: FFAppState()
-                                                        .appPlayer
-                                                        .pArmr,
-                                                  );
-                                                  _model.pageEnemy =
-                                                      EnemyStruct(
-                                                    eHealth: FFAppState()
-                                                        .appEnemy
-                                                        .eHealth,
-                                                    eDmg: FFAppState()
-                                                        .appEnemy
-                                                        .eDmg,
-                                                    eArmr: FFAppState()
-                                                        .appEnemy
-                                                        .eArmr,
-                                                  );
-                                                  safeSetState(() {});
-                                                  logFirebaseEvent(
-                                                      'battleButton_update_app_state');
-                                                  FFAppState().appEnemy =
-                                                      EnemyStruct(
-                                                    eHealth: _model.pageEnemy!
-                                                            .eHealth +
-                                                        (5 *
-                                                            (FFAppState()
-                                                                    .appEnemy
-                                                                    .eLvl -
-                                                                1)),
-                                                    eDmg: _model
-                                                            .pageEnemy!.eDmg +
-                                                        (3 *
-                                                            (FFAppState()
-                                                                    .appEnemy
-                                                                    .eLvl -
-                                                                1)),
-                                                    eArmr: _model
-                                                            .pageEnemy!.eArmr +
-                                                        (0.25 *
-                                                            (FFAppState()
-                                                                    .appEnemy
-                                                                    .eLvl -
-                                                                1)),
-                                                    eLvl: FFAppState()
-                                                            .appEnemy
-                                                            .eLvl +
-                                                        1,
-                                                  );
-                                                  safeSetState(() {});
-                                                } else {
-                                                  logFirebaseEvent(
-                                                      'battleButton_bottom_sheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: 300.0,
-                                                            child:
-                                                                GameLoseWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                }
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
 
                                                 logFirebaseEvent(
                                                     'battleButton_update_page_state');
@@ -1031,695 +1050,627 @@ class _GamePageWidgetState extends State<GamePageWidget>
                                                 );
                                                 safeSetState(() {});
                                                 logFirebaseEvent(
-                                                    'battleButton_navigate_to');
-
-                                                context.goNamed(
-                                                  GamePageWidget.routeName,
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                      duration: Duration(
-                                                          milliseconds: 0),
-                                                    ),
-                                                  },
+                                                    'battleButton_update_app_state');
+                                                FFAppState().appEnemy =
+                                                    EnemyStruct(
+                                                  eHealth: _model
+                                                          .pageEnemy!.eHealth +
+                                                      (3 *
+                                                          (FFAppState()
+                                                                  .appEnemy
+                                                                  .eLvl -
+                                                              1)),
+                                                  eDmg: _model.pageEnemy!.eDmg +
+                                                      (2 *
+                                                          (FFAppState()
+                                                                  .appEnemy
+                                                                  .eLvl -
+                                                              1)),
+                                                  eArmr:
+                                                      _model.pageEnemy!.eArmr +
+                                                          (0.15 *
+                                                              (FFAppState()
+                                                                      .appEnemy
+                                                                      .eLvl -
+                                                                  1)),
+                                                  eLvl: FFAppState()
+                                                          .appEnemy
+                                                          .eLvl +
+                                                      1,
                                                 );
-                                              },
-                                      ),
-                                      Text(
-                                        'Attack',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                      ),
-                                    ].divide(SizedBox(height: 8.0)),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Enemy:',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  FFAppState()
-                                                      .appEnemy
-                                                      .eLvl
-                                                      .toString(),
-                                                  '1',
-                                                ),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
+                                                safeSetState(() {});
+                                                logFirebaseEvent(
+                                                    'battleButton_backend_call');
+
+                                                await currentUserReference!
+                                                    .update({
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'coins':
+                                                          FieldValue.increment(
+                                                              100),
+                                                    },
+                                                  ),
+                                                });
+                                                if (FFAppState().enemyType ==
+                                                    1) {
+                                                  logFirebaseEvent(
+                                                      'battleButton_update_app_state');
+                                                  FFAppState().enemyType =
+                                                      FFAppState().enemyType +
+                                                          1;
+                                                  FFAppState().wormVis = 0;
+                                                  FFAppState().batVis = 1;
+                                                  FFAppState().eyeVis = 0;
+                                                  safeSetState(() {});
+                                                } else {
+                                                  if (FFAppState().enemyType ==
+                                                      2) {
+                                                    logFirebaseEvent(
+                                                        'battleButton_update_app_state');
+                                                    FFAppState().enemyType =
+                                                        FFAppState().enemyType +
+                                                            1;
+                                                    FFAppState().eyeVis = 1;
+                                                    FFAppState().batVis = 0;
+                                                    FFAppState().wormVis = 0;
+                                                    safeSetState(() {});
+                                                  } else {
+                                                    if (FFAppState()
+                                                            .enemyType ==
+                                                        3) {
+                                                      logFirebaseEvent(
+                                                          'battleButton_update_app_state');
+                                                      FFAppState().enemyType =
+                                                          1;
+                                                      FFAppState().wormVis = 1;
+                                                      FFAppState().batVis = 0;
+                                                      FFAppState().eyeVis = 0;
+                                                      safeSetState(() {});
+                                                    }
+                                                  }
+                                                }
+                                              } else {
+                                                logFirebaseEvent(
+                                                    'battleButton_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 300.0,
+                                                          child:
+                                                              GameLoseWidget(),
                                                         ),
-                                              ),
-                                            ),
-                                          ].divide(SizedBox(width: 5.0)),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.favorite,
-                                              color: Color(0xFFF0141E),
-                                              size: 24.0,
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  _model.pageEnemy?.eHealth,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
                                                       ),
-                                            ).animateOnActionTrigger(
-                                              animationsMap[
-                                                  'textOnActionTriggerAnimation2']!,
-                                            ),
-                                          ].divide(SizedBox(width: 2.0)),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons
-                                                  .local_fire_department_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
-                                              size: 24.0,
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  _model.pageEnemy?.eDmg,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(width: 2.0)),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.shield_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 24.0,
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                formatNumber(
-                                                  _model.pageEnemy?.eArmr,
-                                                  formatType: FormatType.custom,
-                                                  format: '####.0#',
-                                                  locale: '',
-                                                ),
-                                                '1',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(width: 2.0)),
-                                        ),
-                                      ],
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              }
+
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.gameRunning = false;
+                                              _model.pagePlayer = PlayerStruct(
+                                                pHealth: FFAppState()
+                                                    .appPlayer
+                                                    .pHealth,
+                                                pDmg:
+                                                    FFAppState().appPlayer.pDmg,
+                                                pArmr: FFAppState()
+                                                    .appPlayer
+                                                    .pArmr,
+                                              );
+                                              _model.pageEnemy = EnemyStruct(
+                                                eHealth: FFAppState()
+                                                    .appEnemy
+                                                    .eHealth,
+                                                eDmg:
+                                                    FFAppState().appEnemy.eDmg,
+                                                eArmr:
+                                                    FFAppState().appEnemy.eArmr,
+                                              );
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_update_app_state');
+                                              FFAppState().gameNotRunning =
+                                                  true;
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_navigate_to');
+
+                                              context.goNamed(
+                                                GamePageWidget.routeName,
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                    duration: Duration(
+                                                        milliseconds: 0),
+                                                  ),
+                                                },
+                                              );
+
+                                              logFirebaseEvent(
+                                                  'battleButton_update_page_state');
+                                              _model.fistForwardGifOpacity =
+                                                  1.0;
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'battleButton_widget_animation');
+                                              if (animationsMap[
+                                                      'containerOnActionTriggerAnimation3'] !=
+                                                  null) {
+                                                await animationsMap[
+                                                        'containerOnActionTriggerAnimation3']!
+                                                    .controller
+                                                    .reverse();
+                                              }
+                                              logFirebaseEvent(
+                                                  'battleButton_widget_animation');
+                                              if (animationsMap[
+                                                      'rowOnActionTriggerAnimation'] !=
+                                                  null) {
+                                                await animationsMap[
+                                                        'rowOnActionTriggerAnimation']!
+                                                    .controller
+                                                    .reverse();
+                                              }
+                                            },
+                                    ).addWalkthrough(
+                                      iconButtonJ2uguik5,
+                                      _model.gamePageWalkthroughController,
                                     ),
+                                    Text(
+                                      'Attack',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(height: 8.0)),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Enemy:',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                FFAppState()
+                                                    .appEnemy
+                                                    .eLvl
+                                                    .toString(),
+                                                '1',
+                                              ),
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ),
+                                        ].divide(SizedBox(width: 5.0)),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.favorite,
+                                            color: Color(0xFFF0141E),
+                                            size: 24.0,
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              formatNumber(
+                                                _model.pageEnemy?.eHealth,
+                                                formatType: FormatType.custom,
+                                                format: '####.0#',
+                                                locale: '',
+                                              ),
+                                              '1',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'textOnActionTriggerAnimation2']!,
+                                          ),
+                                        ].divide(SizedBox(width: 2.0)),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.local_fire_department_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .tertiary,
+                                            size: 24.0,
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              formatNumber(
+                                                _model.pageEnemy?.eDmg,
+                                                formatType: FormatType.custom,
+                                                format: '####.0#',
+                                                locale: '',
+                                              ),
+                                              '1',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 2.0)),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.shield_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 24.0,
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              formatNumber(
+                                                _model.pageEnemy?.eArmr,
+                                                formatType: FormatType.custom,
+                                                format: '####.0#',
+                                                locale: '',
+                                              ),
+                                              '1',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 2.0)),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ].divide(SizedBox(height: 16.0)),
-                          ),
+                                ),
+                              ],
+                            ),
+                          ].divide(SizedBox(height: 16.0)),
                         ),
                       ),
-                      Container(
-                        height: 300.0,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: Image.asset(
-                              'assets/images/armTerminal.png',
-                            ).image,
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 300.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: Image.asset(
+                                'assets/images/armTerminal.png',
+                              ).image,
+                            ),
                           ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  59.0, 0.0, 0.0, 10.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: Image.asset(
-                                          'assets/images/heartButton.png',
-                                        ).image,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    59.0, 0.0, 0.0, 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FlutterFlowIconButton(
+                                      borderColor: Color(0xFFE95157),
+                                      borderRadius: 8.0,
+                                      borderWidth: 4.0,
+                                      buttonSize: 40.0,
+                                      fillColor: Color(0xFFF0141E),
+                                      disabledColor: Color(0x9536004D),
+                                      icon: Icon(
+                                        Icons.favorite_border,
+                                        color: Colors.white,
+                                        size: 24.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      shape: BoxShape.rectangle,
-                                    ),
-                                    child: Opacity(
-                                      opacity: 0.0,
+                                      onPressed: _model.gameRunning
+                                          ? null
+                                          : () async {
+                                              logFirebaseEvent(
+                                                  'GAME_PAGE_PAGE_upgHlthBtn_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'upgHlthBtn_bottom_sheet');
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                isDismissible: false,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 320.0,
+                                                        child:
+                                                            HealthUpgradeHUDWidget(
+                                                          xpCost:
+                                                              valueOrDefault<
+                                                                  double>(
+                                                            FFAppState()
+                                                                .appUpgrade
+                                                                .uHlthCost,
+                                                            0.0,
+                                                          ),
+                                                          playerHlth: _model
+                                                              .pagePlayer
+                                                              ?.pHealth,
+                                                          txt: 'Upgrade Health',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                    )
+                                        .addWalkthrough(
+                                          iconButtonG68umm1p,
+                                          _model.gamePageWalkthroughController,
+                                        )
+                                        .animateOnActionTrigger(
+                                          animationsMap[
+                                              'iconButtonOnActionTriggerAnimation1']!,
+                                        ),
+                                    Opacity(
+                                      opacity: FFAppState().DmgBtnOpacity,
                                       child: FlutterFlowIconButton(
+                                        borderColor: Color(0xFFF6B84C),
                                         borderRadius: 8.0,
+                                        borderWidth: 4.0,
                                         buttonSize: 40.0,
-                                        fillColor: Color(0xFFF0141E),
-                                        disabledColor:
-                                            FlutterFlowTheme.of(context).error,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                        disabledColor: Color(0x9536004D),
                                         icon: Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.white,
+                                          Icons.local_fire_department_outlined,
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
                                           size: 24.0,
                                         ),
                                         onPressed: _model.gameRunning
                                             ? null
                                             : () async {
                                                 logFirebaseEvent(
-                                                    'GAME_PAGE_PAGE_upgHlthBtn_ON_TAP');
-                                                if ((valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.xp,
-                                                            0) >
-                                                        0) &&
-                                                    (valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.xp,
-                                                            0) >=
-                                                        valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.damageUpCost,
-                                                            0))) {
-                                                  logFirebaseEvent(
-                                                      'upgHlthBtn_widget_animation');
-                                                  if (animationsMap[
-                                                          'iconOnActionTriggerAnimation1'] !=
-                                                      null) {
-                                                    safeSetState(() =>
-                                                        hasIconTriggered1 =
-                                                            true);
-                                                    SchedulerBinding.instance.addPostFrameCallback(
-                                                        (_) async => animationsMap[
-                                                                'iconOnActionTriggerAnimation1']!
-                                                            .controller
-                                                            .forward(from: 0.0)
-                                                            .whenComplete(
-                                                                animationsMap[
-                                                                        'iconOnActionTriggerAnimation1']!
-                                                                    .controller
-                                                                    .reverse));
-                                                  }
-                                                  logFirebaseEvent(
-                                                      'upgHlthBtn_update_app_state');
-                                                  FFAppState()
-                                                      .updateAppUpgradeStruct(
-                                                    (e) => e
-                                                      ..uHlthCost = FFAppState()
-                                                              .appUpgrade
-                                                              .uHlthCost +
-                                                          (5 *
-                                                              (FFAppState()
-                                                                      .appUpgrade
-                                                                      .uHlthLvl -
-                                                                  1))
-                                                      ..uHlthLvl = FFAppState()
-                                                              .appUpgrade
-                                                              .uHlthLvl +
-                                                          1,
-                                                  );
-                                                  FFAppState()
-                                                      .updateAppPlayerStruct(
-                                                    (e) => e
-                                                      ..pHealth = FFAppState()
-                                                              .appPlayer
-                                                              .pHealth +
-                                                          (5 *
-                                                              (FFAppState()
-                                                                      .appUpgrade
-                                                                      .uHlthLvl -
-                                                                  1)),
-                                                  );
-                                                  safeSetState(() {});
-                                                } else {
-                                                  logFirebaseEvent(
-                                                      'upgHlthBtn_alert_dialog');
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('!'),
-                                                        content: Text(
-                                                            'Not enough xp!'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('Ok'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                  return;
-                                                }
-
+                                                    'GAME_PAGE_PAGE_upgDmgBtn_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'upgHlthBtn_navigate_to');
-
-                                                context.goNamed(
-                                                  GamePageWidget.routeName,
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                      duration: Duration(
-                                                          milliseconds: 0),
-                                                    ),
+                                                    'upgDmgBtn_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  isDismissible: false,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 320.0,
+                                                          child:
+                                                              DamageUpgradeHUDWidget(
+                                                            txt:
+                                                                'Upgrade Damage',
+                                                            xpCost: FFAppState()
+                                                                .appUpgrade
+                                                                .uDmgCost,
+                                                            playerDmg: 0.0,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
                                                   },
-                                                );
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
                                               },
                                       ).animateOnActionTrigger(
                                         animationsMap[
-                                            'iconButtonOnActionTriggerAnimation']!,
+                                            'iconButtonOnActionTriggerAnimation2']!,
                                       ),
                                     ),
-                                  ),
-                                  FlutterFlowIconButton(
-                                    borderRadius: 8.0,
-                                    buttonSize: 40.0,
-                                    fillColor:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                    disabledColor: Color(0x9536004D),
-                                    icon: Icon(
-                                      Icons.add_outlined,
-                                      color: FlutterFlowTheme.of(context).info,
-                                      size: 24.0,
-                                    ),
-                                    onPressed: _model.gameRunning
-                                        ? null
-                                        : () async {
-                                            logFirebaseEvent(
-                                                'GAME_PAGE_PAGE_upgDmgBtn_ON_TAP');
-                                            if ((valueOrDefault(
-                                                        currentUserDocument?.xp,
-                                                        0) >
-                                                    0) &&
-                                                (valueOrDefault(
-                                                        currentUserDocument?.xp,
-                                                        0) >=
-                                                    valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.damageUpCost,
-                                                        0))) {
-                                              logFirebaseEvent(
-                                                  'upgDmgBtn_update_app_state');
-                                              FFAppState()
-                                                  .updateAppPlayerStruct(
-                                                (e) => e..incrementPDmg(1.0),
-                                              );
-                                              safeSetState(() {});
-                                              logFirebaseEvent(
-                                                  'upgDmgBtn_widget_animation');
-                                              if (animationsMap[
-                                                      'iconOnActionTriggerAnimation2'] !=
-                                                  null) {
-                                                animationsMap[
-                                                        'iconOnActionTriggerAnimation2']!
-                                                    .controller
-                                                    .forward(from: 0.0)
-                                                    .whenComplete(animationsMap[
-                                                            'iconOnActionTriggerAnimation2']!
-                                                        .controller
-                                                        .reverse);
-                                              }
-                                              logFirebaseEvent(
-                                                  'upgDmgBtn_update_app_state');
-                                              FFAppState()
-                                                  .updateAppUpgradeStruct(
-                                                (e) => e
-                                                  ..uDmgCost = FFAppState()
-                                                          .appUpgrade
-                                                          .uDmgCost +
-                                                      (5 *
-                                                          (FFAppState()
-                                                                  .appUpgrade
-                                                                  .uDmgLvl -
-                                                              1))
-                                                  ..uDmgLvl = FFAppState()
-                                                          .appUpgrade
-                                                          .uDmgLvl +
-                                                      1,
-                                              );
-                                              FFAppState()
-                                                  .updateAppPlayerStruct(
-                                                (e) => e
-                                                  ..pDmg = FFAppState()
-                                                          .appPlayer
-                                                          .pDmg +
-                                                      (5 *
-                                                          (FFAppState()
-                                                                  .appUpgrade
-                                                                  .uHlthLvl -
-                                                              1)),
-                                              );
-                                              safeSetState(() {});
-                                            } else {
-                                              logFirebaseEvent(
-                                                  'upgDmgBtn_alert_dialog');
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('!'),
-                                                    content:
-                                                        Text('Not enough xp!'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
+                                    Opacity(
+                                      opacity: FFAppState().ArmrBtnOpacity,
+                                      child: FlutterFlowIconButton(
+                                        borderColor: Color(0xFF79E3EE),
+                                        borderRadius: 8.0,
+                                        borderWidth: 4.0,
+                                        buttonSize: 40.0,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        disabledColor: Color(0x9536004D),
+                                        icon: Icon(
+                                          Icons.shield_outlined,
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
+                                          size: 24.0,
+                                        ),
+                                        onPressed: _model.gameRunning
+                                            ? null
+                                            : () async {
+                                                logFirebaseEvent(
+                                                    'GAME_PAGE_PAGE_upgArmrBtn_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'upgArmrBtn_bottom_sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  isDismissible: false,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 320.0,
+                                                          child:
+                                                              ArmorUpgradeHUDWidget(
+                                                            txt:
+                                                                'Upgrade Armor',
+                                                            xpCost: FFAppState()
+                                                                .appUpgrade
+                                                                .uArmrCost,
+                                                            playerArmor: 0.0,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                              return;
-                                            }
-
-                                            logFirebaseEvent(
-                                                'upgDmgBtn_navigate_to');
-
-                                            context.goNamed(
-                                              GamePageWidget.routeName,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
                                               },
-                                            );
-                                          },
-                                  ),
-                                  FlutterFlowIconButton(
-                                    borderRadius: 8.0,
-                                    buttonSize: 40.0,
-                                    fillColor: Color(0xFF39DEEF),
-                                    disabledColor: Color(0x9536004D),
-                                    icon: Icon(
-                                      Icons.add_outlined,
-                                      color: FlutterFlowTheme.of(context).info,
-                                      size: 24.0,
+                                      ).animateOnActionTrigger(
+                                        animationsMap[
+                                            'iconButtonOnActionTriggerAnimation3']!,
+                                      ),
                                     ),
-                                    onPressed: _model.gameRunning
-                                        ? null
-                                        : () async {
-                                            logFirebaseEvent(
-                                                'GAME_PAGE_PAGE_upgArmrBtn_ON_TAP');
-                                            if ((valueOrDefault(
-                                                        currentUserDocument?.xp,
-                                                        0) >
-                                                    0) &&
-                                                (valueOrDefault(
-                                                        currentUserDocument?.xp,
-                                                        0) >=
-                                                    valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.damageUpCost,
-                                                        0))) {
-                                              logFirebaseEvent(
-                                                  'upgArmrBtn_widget_animation');
-                                              if (animationsMap[
-                                                      'iconOnActionTriggerAnimation3'] !=
-                                                  null) {
-                                                animationsMap[
-                                                        'iconOnActionTriggerAnimation3']!
-                                                    .controller
-                                                    .forward(from: 0.0)
-                                                    .whenComplete(animationsMap[
-                                                            'iconOnActionTriggerAnimation3']!
-                                                        .controller
-                                                        .reverse);
-                                              }
-                                              logFirebaseEvent(
-                                                  'upgArmrBtn_update_app_state');
-                                              FFAppState()
-                                                  .updateAppUpgradeStruct(
-                                                (e) => e
-                                                  ..uArmrCost = FFAppState()
-                                                          .appUpgrade
-                                                          .uArmrCost +
-                                                      (5 *
-                                                          (FFAppState()
-                                                                  .appUpgrade
-                                                                  .uArmrLvl -
-                                                              1))
-                                                  ..uArmrLvl = FFAppState()
-                                                          .appUpgrade
-                                                          .uArmrLvl +
-                                                      1,
-                                              );
-                                              FFAppState()
-                                                  .updateAppPlayerStruct(
-                                                (e) => e
-                                                  ..pArmr = FFAppState()
-                                                          .appPlayer
-                                                          .pArmr +
-                                                      (5 *
-                                                          (FFAppState()
-                                                                  .appUpgrade
-                                                                  .uHlthLvl -
-                                                              1)),
-                                              );
-                                              safeSetState(() {});
-                                            } else {
-                                              logFirebaseEvent(
-                                                  'upgArmrBtn_alert_dialog');
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('!'),
-                                                    content:
-                                                        Text('Not enough xp!'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                              return;
-                                            }
-
-                                            logFirebaseEvent(
-                                                'upgArmrBtn_navigate_to');
-
-                                            context.goNamed(
-                                              GamePageWidget.routeName,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
-                                          },
-                                  ),
-                                ].divide(SizedBox(width: 10.0)),
+                                  ].divide(SizedBox(width: 10.0)),
+                                )
+                                    .animateOnPageLoad(animationsMap[
+                                        'rowOnPageLoadAnimation']!)
+                                    .animateOnActionTrigger(
+                                      animationsMap[
+                                          'rowOnActionTriggerAnimation']!,
+                                    ),
                               ),
-                            ),
-                          ].divide(SizedBox(height: 10.0)),
+                            ].divide(SizedBox(height: 10.0)),
+                          ),
                         ).animateOnActionTrigger(
-                          animationsMap['columnOnActionTriggerAnimation']!,
+                          animationsMap['containerOnActionTriggerAnimation3']!,
                         ),
-                      ),
-                      FlutterFlowIconButton(
-                        borderRadius: 8.0,
-                        buttonSize: 40.3,
-                        fillColor: FlutterFlowTheme.of(context).error,
-                        disabledColor: Color(0x83F0141E),
-                        disabledIconColor: FlutterFlowTheme.of(context).info,
-                        icon: Icon(
-                          Icons.restart_alt_sharp,
-                          color: FlutterFlowTheme.of(context).info,
-                          size: 20.0,
-                        ),
-                        onPressed: (_model.gameRunning == true)
-                            ? null
-                            : () async {
-                                logFirebaseEvent(
-                                    'GAME_PAGE_PAGE_battleButton_ON_TAP');
-                                logFirebaseEvent(
-                                    'battleButton_update_app_state');
-                                FFAppState().updateAppEnemyStruct(
-                                  (e) => e
-                                    ..eHealth = 100.0
-                                    ..eDmg = 10.0
-                                    ..eArmr = 2.0
-                                    ..eLvl = 1,
-                                );
-                                FFAppState().updateAppPlayerStruct(
-                                  (e) => e
-                                    ..pHealth = 100.0
-                                    ..pDmg = 10.0
-                                    ..pArmr = 2.0,
-                                );
-                                safeSetState(() {});
-                                logFirebaseEvent('battleButton_navigate_to');
-
-                                context.goNamed(
-                                  GamePageWidget.routeName,
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 0),
-                                    ),
-                                  },
-                                );
-                              },
-                      ),
-                    ].divide(SizedBox(height: 12.0)),
-                  ),
+                      ],
+                    ),
+                  ].divide(SizedBox(height: 12.0)),
                 ),
               ),
             ),
@@ -1728,4 +1679,15 @@ class _GamePageWidgetState extends State<GamePageWidget>
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.gamePageWalkthroughController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

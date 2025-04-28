@@ -1,8 +1,13 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'equip_yellow_pants_widget.dart' show EquipYellowPantsWidget;
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class EquipYellowPantsModel extends FlutterFlowModel<EquipYellowPantsWidget> {
+  ///  State fields for stateful widgets in this component.
+
+  AudioPlayer? soundPlayer;
+
   @override
   void initState(BuildContext context) {}
 

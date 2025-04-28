@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'game_lose_model.dart';
 export 'game_lose_model.dart';
 
@@ -66,11 +65,9 @@ class _GameLoseWidgetState extends State<GameLoseWidget> {
               Text(
                 'You lose!',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                      font: FlutterFlowTheme.of(context).bodyLarge,
                       fontSize: 24.0,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
             ],
@@ -83,11 +80,9 @@ class _GameLoseWidgetState extends State<GameLoseWidget> {
                 'Remember: \nCompleting tasks grants \nXP to level up your stats',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      font: FlutterFlowTheme.of(context).bodyMedium,
                       fontSize: 16.0,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
               ),
             ],
@@ -111,11 +106,8 @@ class _GameLoseWidgetState extends State<GameLoseWidget> {
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        font: FlutterFlowTheme.of(context).bodyMedium,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(

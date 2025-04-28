@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'task_model.dart';
 export 'task_model.dart';
 
@@ -127,7 +126,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                     }
                     logFirebaseEvent('Checkbox_execute_callback');
                     await widget.checkAction?.call();
-                    if (widget.taskDoc!.completeBy! < getCurrentTimestamp) {
+                    if (widget.taskDoc!.completeBy! > getCurrentTimestamp) {
                       if (widget.taskDoc?.difficultyLvl == 1) {
                         logFirebaseEvent('Checkbox_backend_call');
 
@@ -135,7 +134,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                           ...mapToFirestore(
                             {
                               'coins': FieldValue.increment(10),
-                              'xp': FieldValue.increment(10),
+                              'xp': FieldValue.increment(50.0),
                             },
                           ),
                         });
@@ -147,7 +146,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(20),
-                                'xp': FieldValue.increment(20),
+                                'xp': FieldValue.increment(75.0),
                               },
                             ),
                           });
@@ -158,7 +157,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(30),
-                                'xp': FieldValue.increment(30),
+                                'xp': FieldValue.increment(100.0),
                               },
                             ),
                           });
@@ -172,7 +171,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                           ...mapToFirestore(
                             {
                               'coins': FieldValue.increment(5),
-                              'xp': FieldValue.increment(5),
+                              'xp': FieldValue.increment(25.0),
                             },
                           ),
                         });
@@ -184,7 +183,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(10),
-                                'xp': FieldValue.increment(10),
+                                'xp': FieldValue.increment(40.0),
                               },
                             ),
                           });
@@ -195,7 +194,7 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(15),
-                                'xp': FieldValue.increment(15),
+                                'xp': FieldValue.increment(50.0),
                               },
                             ),
                           });
@@ -204,51 +203,6 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                     }
                   } else {
                     logFirebaseEvent('TASK_Checkbox_byo01zxd_ON_TOGGLE_OFF');
-                    logFirebaseEvent('Checkbox_widget_animation');
-                    if (animationsMap['containerOnActionTriggerAnimation'] !=
-                        null) {
-                      await animationsMap['containerOnActionTriggerAnimation']!
-                          .controller
-                          .forward(from: 0.0);
-                    }
-                    logFirebaseEvent('Checkbox_execute_callback');
-                    await widget.checkAction?.call();
-                    if (widget.taskDoc?.difficultyLvl == 1) {
-                      logFirebaseEvent('Checkbox_backend_call');
-
-                      await currentUserReference!.update({
-                        ...mapToFirestore(
-                          {
-                            'coins': FieldValue.increment(-(10)),
-                            'xp': FieldValue.increment(-(30)),
-                          },
-                        ),
-                      });
-                    } else {
-                      if (widget.taskDoc?.difficultyLvl == 2) {
-                        logFirebaseEvent('Checkbox_backend_call');
-
-                        await currentUserReference!.update({
-                          ...mapToFirestore(
-                            {
-                              'coins': FieldValue.increment(-(20)),
-                              'xp': FieldValue.increment(-(30)),
-                            },
-                          ),
-                        });
-                      } else {
-                        logFirebaseEvent('Checkbox_backend_call');
-
-                        await currentUserReference!.update({
-                          ...mapToFirestore(
-                            {
-                              'coins': FieldValue.increment(-(30)),
-                              'xp': FieldValue.increment(-(30)),
-                            },
-                          ),
-                        });
-                      }
-                    }
                   }
                 },
                 side: BorderSide(
@@ -273,11 +227,8 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                     replacement: '…',
                   ),
                   style: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        font: FlutterFlowTheme.of(context).bodyLarge,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                 ),
                 Row(
@@ -295,11 +246,8 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                         '[Md]',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            font: FlutterFlowTheme.of(context).bodyMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                     ),
                     Text(
@@ -309,11 +257,8 @@ class _TaskWidgetState extends State<TaskWidget> with TickerProviderStateMixin {
                         locale: FFLocalizations.of(context).languageCode,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            font: FlutterFlowTheme.of(context).bodyMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                     ),
                   ].divide(SizedBox(width: 5.0)),

@@ -2,11 +2,14 @@ import '/components/astronaut/astronaut_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'equip_page_widget.dart' show EquipPageWidget;
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class EquipPageModel extends FlutterFlowModel<EquipPageWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? equipPageWalkthroughController;
   // Model for astronaut component.
   late AstronautModel astronautModel;
   // State field(s) for Carousel widget.
@@ -32,6 +35,7 @@ class EquipPageModel extends FlutterFlowModel<EquipPageWidget> {
 
   @override
   void dispose() {
+    equipPageWalkthroughController?.finish();
     astronautModel.dispose();
   }
 }

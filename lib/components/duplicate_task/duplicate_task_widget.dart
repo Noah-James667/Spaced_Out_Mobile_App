@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'duplicate_task_model.dart';
 export 'duplicate_task_model.dart';
 
@@ -92,7 +91,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
         height: 70.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          borderRadius: BorderRadius.circular(24.0),
+          borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
             width: 2.0,
           ),
@@ -107,7 +106,9 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                 checkboxTheme: CheckboxThemeData(
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: CircleBorder(),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
                 unselectedWidgetColor: FlutterFlowTheme.of(context).alternate,
               ),
@@ -135,7 +136,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                           ...mapToFirestore(
                             {
                               'coins': FieldValue.increment(10),
-                              'xp': FieldValue.increment(10),
+                              'xp': FieldValue.increment(10.0),
                             },
                           ),
                         });
@@ -147,7 +148,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(20),
-                                'xp': FieldValue.increment(20),
+                                'xp': FieldValue.increment(20.0),
                               },
                             ),
                           });
@@ -158,7 +159,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(30),
-                                'xp': FieldValue.increment(30),
+                                'xp': FieldValue.increment(30.0),
                               },
                             ),
                           });
@@ -172,7 +173,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                           ...mapToFirestore(
                             {
                               'coins': FieldValue.increment(5),
-                              'xp': FieldValue.increment(5),
+                              'xp': FieldValue.increment(5.0),
                             },
                           ),
                         });
@@ -184,7 +185,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(10),
-                                'xp': FieldValue.increment(10),
+                                'xp': FieldValue.increment(10.0),
                               },
                             ),
                           });
@@ -195,7 +196,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                             ...mapToFirestore(
                               {
                                 'coins': FieldValue.increment(15),
-                                'xp': FieldValue.increment(15),
+                                'xp': FieldValue.increment(15.0),
                               },
                             ),
                           });
@@ -221,7 +222,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                         ...mapToFirestore(
                           {
                             'coins': FieldValue.increment(-(10)),
-                            'xp': FieldValue.increment(-(30)),
+                            'xp': FieldValue.increment(-(30.0)),
                           },
                         ),
                       });
@@ -233,7 +234,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                           ...mapToFirestore(
                             {
                               'coins': FieldValue.increment(-(20)),
-                              'xp': FieldValue.increment(-(30)),
+                              'xp': FieldValue.increment(-(30.0)),
                             },
                           ),
                         });
@@ -244,7 +245,7 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                           ...mapToFirestore(
                             {
                               'coins': FieldValue.increment(-(30)),
-                              'xp': FieldValue.increment(-(30)),
+                              'xp': FieldValue.increment(-(30.0)),
                             },
                           ),
                         });
@@ -269,13 +270,13 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                   valueOrDefault<String>(
                     widget.taskDoc?.taskName,
                     'Title',
+                  ).maybeHandleOverflow(
+                    maxChars: 19,
+                    replacement: '…',
                   ),
                   style: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        font: FlutterFlowTheme.of(context).bodyLarge,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                 ),
                 Row(
@@ -300,14 +301,10 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
+                                    font:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     fontSize: 10.0,
                                     letterSpacing: 1.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
                                   ),
                             ),
                           ),
@@ -328,12 +325,9 @@ class _DuplicateTaskWidgetState extends State<DuplicateTaskWidget>
                       'time unavailable',
                     ),
                     style: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodySmallFamily,
+                          font: FlutterFlowTheme.of(context).bodySmall,
                           fontSize: 11.0,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodySmallFamily),
                         ),
                   ),
                 ),

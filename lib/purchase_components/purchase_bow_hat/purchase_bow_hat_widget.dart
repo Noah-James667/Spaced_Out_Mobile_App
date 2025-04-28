@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'purchase_bow_hat_model.dart';
 export 'purchase_bow_hat_model.dart';
@@ -74,11 +73,9 @@ class _PurchaseBowHatWidgetState extends State<PurchaseBowHatWidget> {
           Text(
             'Confirm Purchase',
             style: FlutterFlowTheme.of(context).bodyLarge.override(
-                  fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                  font: FlutterFlowTheme.of(context).bodyLarge,
                   color: FlutterFlowTheme.of(context).shopText,
                   letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).bodyLargeFamily),
                 ),
           ),
           Container(
@@ -100,11 +97,9 @@ class _PurchaseBowHatWidgetState extends State<PurchaseBowHatWidget> {
           Text(
             'This item costs:',
             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                  font: FlutterFlowTheme.of(context).bodyMedium,
                   color: FlutterFlowTheme.of(context).shopText,
                   letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).bodyMediumFamily),
                 ),
           ),
           Row(
@@ -129,11 +124,9 @@ class _PurchaseBowHatWidgetState extends State<PurchaseBowHatWidget> {
                 '500',
                 textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      font: FlutterFlowTheme.of(context).bodyMedium,
                       fontSize: 18.0,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
               ),
             ],
@@ -156,12 +149,9 @@ class _PurchaseBowHatWidgetState extends State<PurchaseBowHatWidget> {
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).error,
                   textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        font: FlutterFlowTheme.of(context).bodyLarge,
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyLargeFamily),
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(
@@ -296,13 +286,10 @@ class _PurchaseBowHatWidgetState extends State<PurchaseBowHatWidget> {
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyLargeFamily,
+                            font: FlutterFlowTheme.of(context).bodyLarge,
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyLargeFamily),
                           ),
                       elevation: 0.0,
                       borderSide: BorderSide(
