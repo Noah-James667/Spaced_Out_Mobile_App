@@ -1,39 +1,20 @@
-## Name
-Choose a self-explaining name for your project.
+## Spaced Out
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Spaced Out is a productivity mobile app that encourages users to perform real life tasks. A user can set a task and schedule when they wish to complete it. Once the task has been finished they are rewarded with XP which the user can spend on their astronaut character on the game page. The more tasks the user completes the more upgrades their character can get. As the character becomes more powerful the user can win more battles, each victory gives the user a resource called gold. They can spend this resource on the shop page where there are several cosmetic items to choose from to make the game and their character look better. The user can equip these items on the equip page. This was a college project, we were able to complete this in a single semester.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+![image](https://github.com/user-attachments/assets/010823bc-7cad-45f4-9819-3b1bc8a08d83)
+![image](https://github.com/user-attachments/assets/2fd1e8a3-6aec-4eb5-bc92-65cfcf6eefdb)
+![image](https://github.com/user-attachments/assets/de6a6175-6901-40b5-8385-19c601bdd731)
+![image](https://github.com/user-attachments/assets/6fbb5dc9-bd35-43f1-90fc-b376251c8323)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Download the APK onto your android mobile device - please note: You are allowed to download for personal use / testing however you may not distribute or build onto it.
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Noah James, Tim Landers, Daniel York, Ian Mason, Jet Wilson
 
 ## License
-For open source projects, say how it is licensed.
+You are permitted to download but not redistribute or add to it. You may not claim any work as your own. We are only allowing others to view our work at this time.
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Completed.
